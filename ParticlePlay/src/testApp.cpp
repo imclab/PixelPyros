@@ -29,6 +29,10 @@ void testApp::setup(){
 	
 	//rocketsettings.brightness = 100;
 	//rocketsettings.brightnessVar = 80; 
+	rocketsettings.saturation = 50; 
+	rocketsettings.saturationVar = 50; 
+	rocketsettings.hue = 120; 
+	
 	rocketSystem.init(rocketsettings); 
 	rocketSystem.pos.set(ofGetWidth()/2, ofGetHeight()/2);
 	rocketSystem.enabled = false; 

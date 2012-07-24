@@ -28,10 +28,16 @@ void Particle::reset()
 	enabled = true; 
 	
 	fade = 0.0; 
-	alpha = 1.0; 
+	
 	sizeStart= 1; 
 	sizeEnd = 1; 
 	shimmerMin = 1; 
+	
+	alphaStart = alphaEnd = 255; 
+	
+	hueStart = hueEnd = 0;
+	brightnessStart = brightnessEnd = 255; 
+	saturationStart = saturationEnd = 0; 
 	
 	color.set(255,255,255);	
 	elapsedTime = 0; 
@@ -76,6 +82,14 @@ void Particle::draw()
 {
 	if(!enabled) return; 
 	ofFill(); 
+	
+	float hue = ofMap(elapsedTime, 0, lifeTime, hueStart, hueEnd);
+	float sat = ofMap(elapsedTime, 0, lifeTime, saturationStart, saturationEnd);
+	float bri = ofMap(elapsedTime, 0, lifeTime, brightnessStart, brightnessEnd);
+	float alpha = ofMap(elapsedTime, 0, lifeTime, alphaStart, alphaEnd);
+	
+	color.setHsb(hue, sat, bri, alpha);
+	
 	ofSetColor(color);
 	
 	// should make size easeable 
@@ -106,6 +120,10 @@ void Particle::draw()
 		ofRotateX(90); 
 		ofNoFill(); 
 		ofRect(-10, -10, 20, 20);
+		ofRotateY(90); 
+		ofRect(-10, -10, 20, 20);
+
+	
 	}
 	ofPopMatrix();
 }

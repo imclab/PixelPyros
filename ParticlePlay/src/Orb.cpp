@@ -35,6 +35,11 @@ Orb::Orb() {
 	//smokesettings.shimmerMin = 0.2; 
 	smokesettings.brightness = 35;
 	smokesettings.brightnessVar = 5; 
+	smokesettings.hue = 120; 
+	//smokesettings.hueVar = 10; 
+	smokesettings.saturation = 100; 
+	smokesettings.saturationVar = 50; 
+	
 	
 	smokeSystem.init(smokesettings); 
 	

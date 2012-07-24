@@ -33,11 +33,19 @@ class Particle {
 		bool	pointInDirection; 
 		
 
-		float alpha; 
 		float sizeStart;
 		float sizeEnd; 
 		float fade;
-		
+	
+		float hueStart; 
+		float hueEnd; 
+		float brightnessStart; 
+		float brightnessEnd; 
+		float saturationStart; 
+		float saturationEnd; 
+		float alphaStart; 
+		float alphaEnd; 
+
 		float shimmerMin; 
 		
 		float lifeTime; 
@@ -45,9 +53,6 @@ class Particle {
 		
 		ofColor color;  
 		ofImage	* image;
-	
-		// to make sure that the noise function isn't the same across all particles
-		//float noiseOffset; 
 	
 	
 };

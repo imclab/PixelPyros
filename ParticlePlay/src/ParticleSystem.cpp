@@ -151,12 +151,12 @@ void ParticleSystem::initParticle(Particle * p)
 	p->sizeEnd = p->sizeStart * s.sizeChange; 
 	p->shimmerMin = s.shimmerMin; 
 	
-	p->color.setHsb(ofRandom(s.hue - s.hueVar, 
-							 s.hue + s.hueVar), 
-					ofRandom(s.saturation - s.saturationVar, 
-							 s.saturation + s.saturationVar),
-					ofRandom(s.brightness - s.brightnessVar, 
-							 s.brightness + s.brightnessVar));
+	p->hueStart = p->hueEnd = ofRandom(s.hue - s.hueVar, s.hue + s.hueVar);
+						   
+						   
+	p->saturationStart = p->saturationEnd = ofRandom(s.saturation - s.saturationVar, s.saturation + s.saturationVar);
+	
+	p->brightnessStart = p->brightnessEnd = ofRandom(s.brightness - s.brightnessVar, s.brightness + s.brightnessVar);
 	
 	p->pointInDirection = s.pointInDirection; 
 
