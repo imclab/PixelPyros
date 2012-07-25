@@ -46,7 +46,7 @@ void testApp::setup(){
 	for(int i = 0; i<10; i++) { 
 		Orb orb = Orb(); 
 		
-		orb.pos.set(ofMap(i, 0, 9, ofGetWidth()*0.1, ofGetWidth()*0.9), ofGetHeight() * 0.8, 0); 
+		orb.pos.set(ofMap(i, 0, 9, ofGetWidth()/ APP_SCALE *0.1 , ofGetWidth()/ APP_SCALE *0.9), ofGetHeight()/ APP_SCALE * 0.8, 0); 
 		
 		orbs.push_back(orb);
 		
@@ -68,7 +68,7 @@ void testApp::update(){
 	
 	
 	
-	rocketSystem.pos.set(ofGetMouseX(), ofGetMouseY());
+	rocketSystem.pos.set(ofGetMouseX()/APP_SCALE, ofGetMouseY()/APP_SCALE);
 	rocketSystem.update(deltaTime); 
 	
 	for(int i = 0; i<orbs.size(); i++) {
@@ -82,6 +82,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	ofPushMatrix(); 
+	
+	ofScale(APP_SCALE, APP_SCALE, APP_SCALE );
 	
 	ofBackground(0, 0, 0);
 	ofPushStyle();
@@ -101,7 +105,7 @@ void testApp::draw(){
 
 	
 	ofPopStyle();
-
+	ofPopMatrix();
 
 }
 
