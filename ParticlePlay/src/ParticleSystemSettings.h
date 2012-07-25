@@ -1,6 +1,6 @@
 /*
  *  ParticleEmitterSettings.h
- *  HullaApp3
+ *  
  *
  *  Created by Seb Lee-Delisle on 02/04/2011.
  *  Copyright 2011 seb.ly. All rights reserved.
@@ -27,7 +27,8 @@ class ParticleSystemSettings
 	float speedVar; 
 	float direction; 
 	float directionVar; 
-	//float directionRotateY; 
+	float directionY; 
+	float directionYVar; 
 	
 	bool pointInDirection; 
 	
@@ -45,11 +46,14 @@ class ParticleSystemSettings
 	float saturationVar; 
 	float brightness; 
 	float brightnessVar; 
+	float brightnessEnd; 
+	float brightnessEndVar; 
 	
 	// if the particle is shimmering, this is the minimum size
 	// it'll be (0 - 1) 
 	float shimmerMin; 
 	
+	// pixels per second change in velocity
 	ofVec3f gravity; 
 	
 	float lifeTime; 

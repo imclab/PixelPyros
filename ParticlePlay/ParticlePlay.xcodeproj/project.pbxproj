@@ -10,6 +10,7 @@
 		968A08D115A98F9600FF1CA5 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968A08CA15A98F9600FF1CA5 /* Particle.cpp */; };
 		968A08D215A98F9600FF1CA5 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968A08CD15A98F9600FF1CA5 /* ParticleSystem.cpp */; };
 		968A08D315A98F9600FF1CA5 /* ParticleSystemSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968A08CF15A98F9600FF1CA5 /* ParticleSystemSettings.cpp */; };
+		96DCEC0415BEECAE00A417C7 /* Rocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96DCEC0215BEECAE00A417C7 /* Rocket.cpp */; };
 		96F6451F15BDC74300B50B24 /* Orb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96F6451D15BDC74300B50B24 /* Orb.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -68,6 +69,8 @@
 		968A08CE15A98F9600FF1CA5 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
 		968A08CF15A98F9600FF1CA5 /* ParticleSystemSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystemSettings.cpp; sourceTree = "<group>"; };
 		968A08D015A98F9600FF1CA5 /* ParticleSystemSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystemSettings.h; sourceTree = "<group>"; };
+		96DCEC0215BEECAE00A417C7 /* Rocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rocket.cpp; sourceTree = "<group>"; };
+		96DCEC0315BEECAE00A417C7 /* Rocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rocket.h; sourceTree = "<group>"; };
 		96F6451D15BDC74300B50B24 /* Orb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Orb.cpp; sourceTree = "<group>"; };
 		96F6451E15BDC74300B50B24 /* Orb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orb.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 		968A08C215A98F3D00FF1CA5 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				96DCEC0215BEECAE00A417C7 /* Rocket.cpp */,
+				96DCEC0315BEECAE00A417C7 /* Rocket.h */,
 				968A08CA15A98F9600FF1CA5 /* Particle.cpp */,
 				968A08CB15A98F9600FF1CA5 /* Particle.h */,
 				968A08CC15A98F9600FF1CA5 /* ParticleData.h */,
@@ -319,6 +324,7 @@
 				968A08D215A98F9600FF1CA5 /* ParticleSystem.cpp in Sources */,
 				968A08D315A98F9600FF1CA5 /* ParticleSystemSettings.cpp in Sources */,
 				96F6451F15BDC74300B50B24 /* Orb.cpp in Sources */,
+				96DCEC0415BEECAE00A417C7 /* Rocket.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +416,7 @@
 				GCC_MODEL_TUNING = G4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -494,6 +501,7 @@
 				GCC_MODEL_TUNING = G4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (

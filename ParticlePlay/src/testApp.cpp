@@ -23,7 +23,8 @@ void testApp::setup(){
 	
 	rocketsettings.direction = 0;
 	rocketsettings.directionVar = 0;
-	
+	rocketsettings.directionY = 0;
+	rocketsettings.directionYVar = 180;
 	
 	//rocketsettings.speedVar = 200; 
 	
@@ -63,14 +64,18 @@ void testApp::update(){
 	float deltaTime =  time - lastUpdateTime; 
 	
 	
-	rocketSystem.pos.set(ofGetMouseX(), ofGetMouseY());
+	rocket.update(deltaTime); 
 	
+	
+	
+	rocketSystem.pos.set(ofGetMouseX(), ofGetMouseY());
 	rocketSystem.update(deltaTime); 
 	
 	for(int i = 0; i<orbs.size(); i++) {
 		orbs.at(i).update(deltaTime); 
 	}
 	lastUpdateTime = time; 
+	
 	
 	
 }
@@ -83,6 +88,8 @@ void testApp::draw(){
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 
 	rocketSystem.draw(); 
+	
+	rocket.draw(); 
 	
 	
 	//();
@@ -121,6 +128,7 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
 	rocketSystem.enabled = true; 
+	rocket.reset(); 
 	
 }
 

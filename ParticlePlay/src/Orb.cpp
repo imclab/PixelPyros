@@ -77,7 +77,7 @@ void Orb:: draw() {
 	//ofFill();
 	//ofCircle(0,0,22); 
 	
-	ofSetColor(100);
+	ofSetColor(200);
 	ofSetLineWidth(1);
 	
 	ofPushMatrix(); 
@@ -121,7 +121,7 @@ void Orb:: draw() {
 	//ofCircle(0,0,22); 
 	
 	ofSetColor(20);
-	ofSetLineWidth(3);
+	ofSetLineWidth(5);
 	
 	ofPushMatrix(); 
 	ofRotateY(30);

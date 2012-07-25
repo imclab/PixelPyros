@@ -1,6 +1,6 @@
 /*
  *  ParticleEmitterSettings.cpp
- *  HullaApp3
+ *  
  *
  *  Created by Seb Lee-Delisle on 02/04/2011.
  *  Copyright 2011 seb.ly. All rights reserved.
@@ -18,6 +18,8 @@ ParticleSystemSettings :: ParticleSystemSettings()
 	speedVar = 50; 
 	direction = 0; 
 	directionVar = 180; 
+	directionY = 0; 
+	directionYVar = 0; 
 	
 	sizeStart = 1; 
 	sizeStartVar = 0; 
@@ -29,8 +31,9 @@ ParticleSystemSettings :: ParticleSystemSettings()
 	hueVar = 0; 
 	saturation = 0;  
 	saturationVar = 0; 
-	brightness = 255; 
-	brightnessVar = 0; 
+	brightness = brightnessEnd = 255; 
+	brightnessVar = brightnessEndVar = 0; 
+	
 	
 	shimmerMin = 1; 
 	

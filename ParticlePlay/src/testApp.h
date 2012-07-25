@@ -5,6 +5,7 @@
 #include "ParticleData.h"
 #include "ParticleSystemSettings.h"
 #include "Orb.h"
+#include "Rocket.h"
 
 class testApp : public ofBaseApp{
 
@@ -29,5 +30,6 @@ class testApp : public ofBaseApp{
 	vector <Orb> orbs; 
 	
 	float lastUpdateTime; 
+	Rocket rocket; 
 	
 };

@@ -141,7 +141,8 @@ void ParticleSystem::initParticle(Particle * p)
 	
 	p->vel.rotate(0, 0, ofRandom(s.direction - s.directionVar, 
 								 s.direction + s.directionVar));
-	p->vel.rotate(0,ofRandom(-180,180),0); 
+	p->vel.rotate(0,ofRandom(s.directionY - s.directionYVar, 
+							 s.directionY + s.directionYVar),0); 
 	
 	p->gravity = s.gravity;
 	p->drag = s.drag;
@@ -151,12 +152,14 @@ void ParticleSystem::initParticle(Particle * p)
 	p->sizeEnd = p->sizeStart * s.sizeChange; 
 	p->shimmerMin = s.shimmerMin; 
 	
-	p->hueStart = p->hueEnd = ofRandom(s.hue - s.hueVar, s.hue + s.hueVar);
+	p->hueStart = p->hueEnd = ofClamp(ofRandom(s.hue - s.hueVar, s.hue + s.hueVar), 0, 255);
 						   
 						   
-	p->saturationStart = p->saturationEnd = ofRandom(s.saturation - s.saturationVar, s.saturation + s.saturationVar);
+	p->saturationStart = p->saturationEnd = ofClamp(ofRandom(s.saturation - s.saturationVar, s.saturation + s.saturationVar), 0, 255);
 	
-	p->brightnessStart = p->brightnessEnd = ofRandom(s.brightness - s.brightnessVar, s.brightness + s.brightnessVar);
+	p->brightnessStart = ofClamp(ofRandom(s.brightness - s.brightnessVar, s.brightness + s.brightnessVar), 0, 255);
+	
+	p->brightnessEnd = ofClamp(ofRandom(s.brightnessEnd - s.brightnessEndVar, s.brightnessEnd + s.brightnessEndVar), 0, 255);
 	
 	p->pointInDirection = s.pointInDirection; 
 
