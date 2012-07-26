@@ -42,6 +42,6 @@ class ParticleSystem{
 	int particleCount; 
 	
 	bool enabled; 
-	int aliveParticlesCount; 
+	int aliveParticleCount; 
 	
 };

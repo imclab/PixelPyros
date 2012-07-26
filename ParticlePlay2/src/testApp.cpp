@@ -3,50 +3,18 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	ParticleSystemSettings rocketsettings;
-	
-	
-	rocketsettings.frequency = 3000; 
-	//rocketsettings.image = smokesettings.image;
-	rocketsettings.sizeStart = 1; 
-	rocketsettings.sizeChange = 0; 
-	rocketsettings.shimmerMin = 0.3;
-	//rocketsettings.frequency = 100;
-	//rocketsettings.pointInDirection = true;
-	
-	rocketsettings.gravity.y = 50; 
-	rocketsettings.drag = 0.959; 
-	rocketsettings.lifeTime = 1;
-	rocketsettings.lifeTimeVar = 0.8; 
-	rocketsettings.speed = 600; 
-	rocketsettings.speedVar = 300; 
-	
-	rocketsettings.direction = 0;
-	rocketsettings.directionVar = 0;
-	rocketsettings.directionY = 0;
-	rocketsettings.directionYVar = 180;
-	
-	//rocketsettings.speedVar = 200; 
-	
-	//rocketsettings.brightness = 100;
-	//rocketsettings.brightnessVar = 80; 
-	rocketsettings.saturation = 50; 
-	rocketsettings.saturationVar = 50; 
-	rocketsettings.hue = 120; 
-	
-	rocketSystem.init(rocketsettings); 
-	rocketSystem.pos.set(ofGetWidth()/2, ofGetHeight()/2);
-	rocketSystem.enabled = false; 
-	
+
 	
 	
 	ofSetFrameRate(60);
 	lastUpdateTime = ofGetElapsedTimef();
 	
-	for(int i = 0; i<10; i++) { 
+	//rockets.push_back(rocket); 
+	
+	for(int i = 0; i<14; i++) { 
 		Orb orb = Orb(); 
 		
-		orb.pos.set(ofMap(i, 0, 9, ofGetWidth()/ APP_SCALE *0.1 , ofGetWidth()/ APP_SCALE *0.9), ofGetHeight()/ APP_SCALE * 0.8, 0); 
+		orb.pos.set(ofMap(i, 0, 13, ofGetWidth()/ APP_SCALE *0.1 , ofGetWidth()/ APP_SCALE *0.9), ofGetHeight()/ APP_SCALE * 0.9, 0); 
 		
 		orbs.push_back(orb);
 		
@@ -62,15 +30,19 @@ void testApp::update(){
 
 	float time = ofGetElapsedTimef(); 
 	float deltaTime =  time - lastUpdateTime; 
+
+	//rocket.update(deltaTime); 
+	for(int i = 0; i<rockets.size(); i++) { 
+		Rocket & rocket = rockets[i]; 
+		if(!rocket.enabled) continue; 
+		rocket.update(deltaTime); 
+		if(!rocket.enabled) { 
+			spareRockets.push_back(&rocket); 
+		}
+		
+	}
 	
-	
-	rocket.update(deltaTime); 
-	
-	
-	
-	rocketSystem.pos.set(ofGetMouseX()/APP_SCALE, ofGetMouseY()/APP_SCALE);
-	rocketSystem.update(deltaTime); 
-	
+	if(ofRandom(10)<1) makeRocket(); 
 	for(int i = 0; i<orbs.size(); i++) {
 		orbs.at(i).update(deltaTime); 
 	}
@@ -91,10 +63,12 @@ void testApp::draw(){
 	ofPushStyle();
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 
-	rocketSystem.draw(); 
-	
-	rocket.draw(); 
-	
+//	rocket.draw(); 
+	for(int i = 0; i<rockets.size(); i++) {
+		Rocket & rocket = rockets[i]; 
+		if(!rocket.enabled) continue; 
+		rocket.draw(); 
+	}
 	
 	//();
 	//ofEnableBlendMode(OF_BLENDMODE_ADD);
@@ -131,16 +105,41 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-	rocketSystem.enabled = true; 
+
+	
+	
+		
+//	}
+		
+		
+		
+}
+
+
+void testApp::makeRocket() { 
+	
 	Orb& orb = orbs.at(ofRandom(orbs.size())); 
-	rocket.reset(orb.pos); 
+	
+	if(spareRockets.size()>0) { 
+		Rocket* rocket;
+		rocket = spareRockets.back(); 
+		spareRockets.pop_back(); 
+		rocket->reset(orb.pos); 
+		
+	} else { 
+		rockets.push_back(Rocket());	
+		
+		Rocket* r = &rockets.back();;
+		r->reset(orb.pos); 
+	}
+	
+	cout << "rocket count : " << rockets.size() << "\n"; 
 	
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-	rocketSystem.enabled = false; 
-	
+		
 }
 
 //--------------------------------------------------------------

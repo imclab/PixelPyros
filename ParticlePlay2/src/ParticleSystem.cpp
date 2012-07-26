@@ -15,7 +15,7 @@ ParticleSystem :: ParticleSystem()
 	elapsedTime = 0; 
 	particleCount = 0;
 	enabled = true; 
-	aliveParticlesCount = 0; 
+	aliveParticleCount = 0; 
 }
 
 
@@ -34,29 +34,37 @@ void ParticleSystem :: init(ParticleSystemSettings& settingsRef)
 void ParticleSystem::update(float deltaTime)
 {
 	
-	
-	
 	Particle * p;
 	
-	aliveParticlesCount = 0; 
+	aliveParticleCount = 0; 
 	
 	for(int i=0; i< particles.size(); i++)
 	{
 		p = &particles[i]; 
-		if(!p->enabled) continue; 
+		
+		//cout << "particles length : " << particles.size() << " " << i << " " << p << "\n"; 
+		if((!p) || (!p->enabled)) continue; 
 		
 		p->update(deltaTime); 
 		if(!p->enabled) spareParticles.push_back(p); 
-		else aliveParticlesCount++;
+		else aliveParticleCount++;
 	}
 	
 	if(enabled) elapsedTime+=deltaTime; 
 
-	while(particleCount< elapsedTime*settings.frequency ) {
-		makeParticle();
+	if((settings.spawnMode == PARTICLE_SPAWN_BURST) && enabled){ 
+		particleCount = 0;
+		while(particleCount< settings.frequency ) {
+			makeParticle();
+		}
+		enabled = false;
+		
+	} else if((settings.spawnMode == PARTICLE_SPAWN_CONTINUOUS) && enabled) { 
+		while(particleCount< elapsedTime*settings.frequency ) {
+			makeParticle();
 	
+		}
 	}
-	
 	//cout << particleCount<<" " << elapsedTime << " " << settings.frequency << " " << (elapsedTime*settings.frequency) << " " << deltaTime << "\n";
 } 
 

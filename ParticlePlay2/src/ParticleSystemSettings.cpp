@@ -34,6 +34,7 @@ ParticleSystemSettings :: ParticleSystemSettings()
 	brightness = brightnessEnd = 255; 
 	brightnessVar = brightnessEndVar = 0; 
 	
+	spawnMode = PARTICLE_SPAWN_CONTINUOUS; 
 	
 	shimmerMin = 1; 
 	

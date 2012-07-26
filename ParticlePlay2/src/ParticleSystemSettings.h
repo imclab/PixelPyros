@@ -10,6 +10,9 @@
 #pragma once
 #include "ofMain.h"
 
+#define PARTICLE_SPAWN_CONTINUOUS 0
+#define PARTICLE_SPAWN_BURST 1
+
 class ParticleSystemSettings
 {
 	public : 
@@ -18,6 +21,8 @@ class ParticleSystemSettings
 	~ParticleSystemSettings(); 
 	
 	ofImage * image; 
+	
+	int spawnMode; 
 	
 	// number of particles per second
 	float frequency; 

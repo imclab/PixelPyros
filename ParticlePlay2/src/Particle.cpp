@@ -11,17 +11,15 @@
 //#include "ofMain.h"
 
 
-Particle::Particle()
-{	
+Particle::Particle() {	
 	reset(); 
 }
 
 
-void Particle::reset()
-{
-	pos.set(0,0);
-	vel.set(0,0);
-	gravity.set(0,0); 
+void Particle::reset() {
+	pos.set(0,0,0);
+	vel.set(0,0,0);
+	gravity.set(0,0,0); 
 	
 	lifeTime = 100; 
 	drag = 1.0;
@@ -51,8 +49,7 @@ void Particle::reset()
 	
 }
 
-void Particle::update(float deltaTime)
-{
+void Particle::update(float deltaTime) {
 	if(!enabled) return; 
 	
 	// note that this will be somewhat affected by framerate
@@ -78,8 +75,7 @@ void Particle::update(float deltaTime)
 
 }
 
-void Particle::draw()
-{
+void Particle::draw() {
 	if(!enabled) return; 
 	ofFill(); 
 	
@@ -120,8 +116,8 @@ void Particle::draw()
 		ofRotateX(90); 
 		ofNoFill(); 
 		ofRect(-10, -10, 20, 20);
-		ofRotateY(90); 
-		ofRect(-10, -10, 20, 20);
+		//ofRotateY(90); 
+		//ofRect(-10, -10, 20, 20);
 
 	
 	}

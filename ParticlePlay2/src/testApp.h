@@ -8,7 +8,7 @@
 #include "Rocket.h"
 
 
-#define APP_SCALE 1 
+#define APP_SCALE 0.65 
 
 class testApp : public ofBaseApp{
 
@@ -27,11 +27,12 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 	
-	ParticleSystem rocketSystem;
-	
+		void makeRocket() ; 
 	vector <Orb> orbs; 
+	vector <Rocket> rockets; 
+	vector <Rocket *> spareRockets; 
 	
 	float lastUpdateTime; 
-	Rocket rocket; 
+	//Rocket rocket; 
 	
 };

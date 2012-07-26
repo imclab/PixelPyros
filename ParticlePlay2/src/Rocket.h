@@ -8,21 +8,26 @@
 
 #pragma once
 #include "ParticleSystem.h"
+//#include "testApp.h"
 
 class Rocket : public Particle { 
 	
 	public: 
 
-	Rocket(); 
+	Rocket() ; 
 	
 	void reset(ofVec3f& newpos); 
 	
 	void update(float deltaTime); 
 	void draw(); 
 
-	vector <ParticleSystem> particleSystems; 
+	ParticleSystem * makeRocketTrail(ParticleSystem * rocket); 
+	ParticleSystem * makeExplosionBurst(ParticleSystem * ps);
 	
+	vector <ParticleSystem *> particleSystems; 
 	
+	ParticleSystem * rocketTrail; 
+	ParticleSystem * explosionBurst; 
 	
 	
 	
