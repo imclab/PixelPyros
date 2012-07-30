@@ -10,10 +10,9 @@
 
 #include "ofMain.h"
 #include "Particle.h"
-#include "ParticleData.h"
 #include "ParticleSystemSettings.h"
 
-class ParticleSystem{
+class ParticleSystem : public Effect {
 
 	public : 
 	
@@ -23,25 +22,28 @@ class ParticleSystem{
 	
 	void init(ParticleSystemSettings& settings); 
 	
-	void update(float deltaTime); 
-	void draw(); 
+	bool update(float deltaTime); 
+	bool draw(); 
+	
 	//void makeParticles(vector<ParticleData>* particleData); 
 	void makeParticles(int count); 
 	Particle * makeParticle(); 
 	
 	virtual void initParticle(Particle * p); 
 	
-	vector<Particle> particles; 
-	vector<Particle*> spareParticles; 
+	void reset();
+	bool setFrequency(float f); 	
+	bool setSpawnMode(int m); 
+	bool spawning; 
+	
+//	vector<Particle> particles; 
+//	vector<Particle*> spareParticles; 
 	
 	ParticleSystemSettings settings;
 	
 	ofImage * image; 
 	
-	float elapsedTime; 
-	int particleCount; 
 	
-	bool enabled; 
-	int aliveParticleCount; 
+	int particleCount; 
 	
 };

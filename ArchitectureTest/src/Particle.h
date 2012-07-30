@@ -10,14 +10,15 @@
 
 #include "ofVec2f.h"
 #include "ofMain.h"
+#include "Effect.h"
 
-class Particle {
+class Particle : public Effect {
 	
 	public:
 	
 		Particle(); 
-		void update(float deltaTime); 
-		void draw();
+		bool update(float deltaTime); 
+		bool draw();
 		void reset(); 
 		
 		
@@ -25,7 +26,6 @@ class Particle {
 		ofVec3f vel; 
 		ofVec3f gravity; 
 		
-		bool	enabled; 
 		float	drag; 
 		int		dragApplyCount; 
 		float	dragFrequency; 

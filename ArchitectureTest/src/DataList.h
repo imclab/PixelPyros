@@ -6,9 +6,27 @@
 //  Copyright (c) 2012 seb.ly. All rights reserved.
 //
 
-#ifndef ArchitectureTest_DataList_h
-#define ArchitectureTest_DataList_h
+#pragma once
+
+define CB_VALUE_NOT_SET,
+CB_VALUE_INT,
+CB_VALUE_FLOAT,
+CB_VALUE_STRING
+
+class DataList { 
+
+	public : 
+	string name; 
+	void * data; 
+	int dataType; 
+	
 
 
 
-#endif
+
+
+
+
+
+}; 
+

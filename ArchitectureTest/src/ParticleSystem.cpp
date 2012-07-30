@@ -14,8 +14,9 @@ ParticleSystem :: ParticleSystem()
 	image = NULL; 
 	elapsedTime = 0; 
 	particleCount = 0;
-	enabled = true; 
-	aliveParticleCount = 0; 
+	spawning = true; 
+	Effect::Effect(); 
+	
 }
 
 
@@ -31,102 +32,64 @@ void ParticleSystem :: init(ParticleSystemSettings& settingsRef)
 	
 }
 
-void ParticleSystem::update(float deltaTime)
-{
+bool ParticleSystem::update(float deltaTime) {
+	
 	
 	Particle * p;
 	
-	aliveParticleCount = 0; 
+	if(!active) return false; 
 	
-	for(int i=0; i< particles.size(); i++)
-	{
-		p = &particles[i]; 
-		
-		//cout << "particles length : " << particles.size() << " " << i << " " << p << "\n"; 
-		if((!p) || (!p->enabled)) continue; 
-		
-		p->update(deltaTime); 
-		if(!p->enabled) spareParticles.push_back(p); 
-		else aliveParticleCount++;
-	}
 	
-	if(enabled) elapsedTime+=deltaTime; 
-
-	if((settings.spawnMode == PARTICLE_SPAWN_BURST) && enabled){ 
+	if((settings.spawnMode == PARTICLE_SPAWN_BURST) && spawning){ 
 		particleCount = 0;
 		while(particleCount< settings.frequency ) {
 			makeParticle();
 		}
-		enabled = false;
+		spawning = false;
 		
-	} else if((settings.spawnMode == PARTICLE_SPAWN_CONTINUOUS) && enabled) { 
+	} else if((settings.spawnMode == PARTICLE_SPAWN_CONTINUOUS) && spawning) { 
 		while(particleCount< elapsedTime*settings.frequency ) {
 			makeParticle();
 	
 		}
 	}
+	
+	Effect:: update(deltaTime); 
+	
+	//active = (numActiveEffects>0); 
+
+	
+
+	return active; 
 	//cout << particleCount<<" " << elapsedTime << " " << settings.frequency << " " << (elapsedTime*settings.frequency) << " " << deltaTime << "\n";
 } 
 
-void ParticleSystem::draw()
+bool ParticleSystem::draw()
 {
-	
-	for(int i=0; i< particles.size(); i++)
-	{
-		particles[i].draw(); 
-	}
-	
+	return Effect::draw(); 
 }
 
-//void ParticleSystem::makeParticles(vector<ParticleData>* particleData)
-//{
-//	for(int i=0; i<particleData->size(); i++)
-//	{
-//		
-//		//if(frequency<ofRandom(1)) continue; 
-//		ParticleData  pd = particleData->at(i); 
-//		
-//		Particle * p = makeParticle();
-//		p->pos.set(pd.x, pd.y); 
-//		p->size *= pd.strength; 
-//		p->vel*= pd.strength;
-//		
-//		particleCount++; 
-//	
-//	}	
-//} 
 void ParticleSystem::makeParticles(int count)
 {
+	
+	
 	for(int i=0; i<count; i++)
 	{
-		
-		//if(frequency<ofRandom(1)) continue; 
-		//ParticleData  pd = particleData->at(i); 
-		
+				
 		Particle * p = makeParticle();
-//		p->pos.set(pd.x, pd.y); 
-//		p->size *= pd.strength; 
-//		p->vel*= pd.strength;
-//		
+
 	
 	}	
 } 
 Particle * ParticleSystem::makeParticle()
 {
 	
-	Particle * p;
-	
-	if(spareParticles.size()>0)
-	{
-		p = spareParticles.back(); 
-		spareParticles.pop_back(); 
-		p->enabled = true; 
-		
-	}
-	else 
-	{
-		particles.push_back(Particle());	
-		p = &particles.back(); 
+	Particle * p = NULL;
+
+	p = (Particle * ) getSpareEffect(); 
+	if(!p) {
+		p = new Particle(); 
+		addEffect(p); 
 	}
 	
 	initParticle(p); 
@@ -170,13 +133,37 @@ void ParticleSystem::initParticle(Particle * p)
 	p->brightnessEnd = ofClamp(ofRandom(s.brightnessEnd - s.brightnessEndVar, s.brightnessEnd + s.brightnessEndVar), 0, 255);
 	
 	p->pointInDirection = s.pointInDirection; 
+	
+	//cout << "point in direction " << p->pointInDirection << endl; 
 
 	// setting the image to this image. Note that NULL will 
 	// passed through
 	p->image = image; 
 	
-	
-	   
-
 		
+}
+
+
+bool ParticleSystem::setFrequency(float f) { 
+	
+	if(f!=settings.frequency) { 
+		settings.frequency= f; 
+		particleCount = elapsedTime*f;
+		return true;
+	} else { 
+		return false; 
+	}
+}
+
+bool ParticleSystem::setSpawnMode(int m) { 	
+	cout << "setting spawn mode " << m << endl; 
+	settings.spawnMode= m; 
+	return true;
+}
+
+void ParticleSystem::reset() { 
+	particleCount = 0; 
+	elapsedTime = 0; 
+	Effect::reset(); 
+	spawning = true; 
 }

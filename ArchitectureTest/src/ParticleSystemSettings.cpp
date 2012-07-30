@@ -46,6 +46,7 @@ ParticleSystemSettings :: ParticleSystemSettings()
 	
 	pointInDirection = false; 
 	
+		
 	
 	
 }

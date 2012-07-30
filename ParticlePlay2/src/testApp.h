@@ -1,8 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ParticleSystem.h"
-#include "ParticleData.h"
+#include "ParticleSystem.h"¤
 #include "ParticleSystemSettings.h"
 #include "Orb.h"
 #include "Rocket.h"

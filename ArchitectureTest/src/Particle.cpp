@@ -23,7 +23,6 @@ void Particle::reset() {
 	
 	lifeTime = 100; 
 	drag = 1.0;
-	enabled = true; 
 	
 	fade = 0.0; 
 	
@@ -49,8 +48,9 @@ void Particle::reset() {
 	
 }
 
-void Particle::update(float deltaTime) {
-	if(!enabled) return; 
+bool Particle::update(float deltaTime) {
+	if(!active) return false; 
+	
 	
 	// note that this will be somewhat affected by framerate
 	vel+=gravity * deltaTime; 
@@ -58,7 +58,6 @@ void Particle::update(float deltaTime) {
 	pos+=vel * deltaTime; 
 	
 	elapsedTime+=deltaTime;
-	if(elapsedTime>=lifeTime) enabled = false; 
 	
 	//float hue = color.getHue();
 	//hue = fmod((hue+1.0), 255.0);
@@ -71,12 +70,14 @@ void Particle::update(float deltaTime) {
 		
 	}
 
+	Effect::update(deltaTime); 
+	if((elapsedTime>=lifeTime) && (numActiveEffects==0) )  active = false; 
 	
-
+	return active; 
 }
 
-void Particle::draw() {
-	if(!enabled) return; 
+bool Particle::draw() {
+	if(!active) return false; 
 	ofFill(); 
 	
 	float hue = ofMap(elapsedTime, 0, lifeTime, hueStart, hueEnd);
@@ -89,7 +90,7 @@ void Particle::draw() {
 	ofSetColor(color);
 	
 	// should make size easeable 
-	float psize = ofMap(elapsedTime, 0, lifeTime, sizeStart, sizeEnd);
+	float psize = ofMap(elapsedTime, 0, lifeTime, sizeStart, sizeEnd, true);
 	
 	if(shimmerMin<1)  psize*=ofRandom(shimmerMin, 1.0);//ofNoise((noiseOffset + elapsedTime)*100); //ofMap(ofNoise(lifeTime*10), 0, 1, shimmerMin, 1);  //ofRandom(shimmerMin, 1.0);
 	
@@ -97,8 +98,8 @@ void Particle::draw() {
 	ofTranslate(pos);
 	
 	if(pointInDirection) { 
-		
-		ofRotate(ofRadToDeg(atan2(vel.y, vel.x)));
+		//cout << "POINT IN DIRECTION " << endl; 
+		ofRotateZ(ofRadToDeg(atan2(vel.y, vel.x)));
 		
 	}
 	
@@ -122,4 +123,6 @@ void Particle::draw() {
 	
 	}
 	ofPopMatrix();
+	
+	return active | Effect::draw(); 
 }
