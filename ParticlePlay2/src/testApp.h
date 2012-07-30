@@ -8,7 +8,7 @@
 #include "Rocket.h"
 
 
-#define APP_SCALE 0.65 
+#define APP_SCALE 0.7 
 
 class testApp : public ofBaseApp{
 

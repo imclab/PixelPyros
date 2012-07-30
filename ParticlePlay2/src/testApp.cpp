@@ -3,8 +3,6 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-
-	
 	
 	ofSetFrameRate(60);
 	lastUpdateTime = ofGetElapsedTimef();

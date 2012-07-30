@@ -160,7 +160,6 @@
 		9647DAEF15C0129900E908BC /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		968A08CA15A98F9600FF1CA5 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		968A08CB15A98F9600FF1CA5 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
-		968A08CC15A98F9600FF1CA5 /* ParticleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleData.h; sourceTree = "<group>"; };
 		968A08CD15A98F9600FF1CA5 /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
 		968A08CE15A98F9600FF1CA5 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
 		968A08CF15A98F9600FF1CA5 /* ParticleSystemSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystemSettings.cpp; sourceTree = "<group>"; };
@@ -329,7 +328,6 @@
 				96DCEC0315BEECAE00A417C7 /* Rocket.h */,
 				968A08CA15A98F9600FF1CA5 /* Particle.cpp */,
 				968A08CB15A98F9600FF1CA5 /* Particle.h */,
-				968A08CC15A98F9600FF1CA5 /* ParticleData.h */,
 				968A08CD15A98F9600FF1CA5 /* ParticleSystem.cpp */,
 				968A08CE15A98F9600FF1CA5 /* ParticleSystem.h */,
 				968A08CF15A98F9600FF1CA5 /* ParticleSystemSettings.cpp */,

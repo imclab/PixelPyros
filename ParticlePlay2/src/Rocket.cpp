@@ -58,6 +58,8 @@ void Rocket :: update(float deltaTime) {
 		enabled = true;
 	}
 	rocketTrail->settings.sizeChange*=0.98;
+	rocketTrail->settings.lifeTime*=0.95;
+	
 	//cout << "vel.y " << vel.y  << " " << rocketTrail->enabled << "\n"; 
 	if((rocketTrail->enabled) && (vel.y>200)) {
 		//cout << "BURST ----------------- \n"; 
