@@ -97,8 +97,8 @@ void Particle::draw() {
 	ofTranslate(pos);
 	
 	if(pointInDirection) { 
-		
-		ofRotate(ofRadToDeg(atan2(vel.y, vel.x)));
+		//cout << "POINT IN DIRECTION " << endl; 
+		ofRotateZ(ofRadToDeg(atan2(vel.y, vel.x)));
 		
 	}
 	

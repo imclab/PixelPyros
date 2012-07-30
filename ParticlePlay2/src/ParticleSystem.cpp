@@ -170,13 +170,37 @@ void ParticleSystem::initParticle(Particle * p)
 	p->brightnessEnd = ofClamp(ofRandom(s.brightnessEnd - s.brightnessEndVar, s.brightnessEnd + s.brightnessEndVar), 0, 255);
 	
 	p->pointInDirection = s.pointInDirection; 
+	
+	//cout << "point in direction " << p->pointInDirection << endl; 
 
 	// setting the image to this image. Note that NULL will 
 	// passed through
 	p->image = image; 
 	
-	
-	   
-
 		
+}
+
+
+bool ParticleSystem::setFrequency(float f) { 
+	
+	if(f!=settings.frequency) { 
+		settings.frequency= f; 
+		particleCount = elapsedTime*f;
+		return true;
+	} else { 
+		return false; 
+	}
+}
+
+bool ParticleSystem::setSpawnMode(int m) { 	
+	cout << "setting spawn mode " << m << endl; 
+	settings.spawnMode= m; 
+	return true;
+}
+
+void ParticleSystem::reset() { 
+	particleCount = 0; 
+	elapsedTime = 0; 
+	enabled = true; 
+	
 }

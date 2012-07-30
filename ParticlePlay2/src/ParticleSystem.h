@@ -10,7 +10,6 @@
 
 #include "ofMain.h"
 #include "Particle.h"
-#include "ParticleData.h"
 #include "ParticleSystemSettings.h"
 
 class ParticleSystem{
@@ -30,6 +29,11 @@ class ParticleSystem{
 	Particle * makeParticle(); 
 	
 	virtual void initParticle(Particle * p); 
+	
+	void reset();
+	bool setFrequency(float f); 	
+	bool setSpawnMode(int m); 
+	
 	
 	vector<Particle> particles; 
 	vector<Particle*> spareParticles; 
