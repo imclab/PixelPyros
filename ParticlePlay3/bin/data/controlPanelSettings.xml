@@ -1,0 +1,33 @@
+<BG_THRESHOLD>
+    <val_0>16.5278</val_0>
+</BG_THRESHOLD>
+<GRAB_BACKGROUND>
+    <val_0>0</val_0>
+</GRAB_BACKGROUND>
+<SPAWN_TYPE>
+    <val_0>0</val_0>
+</SPAWN_TYPE>
+<FREQUENCY>
+    <val_0>10</val_0>
+</FREQUENCY>
+<SPEED>
+    <val_0>200</val_0>
+</SPEED>
+<SPEED_VAR>
+    <val_0>50</val_0>
+</SPEED_VAR>
+<DIRECTION>
+    <val_0>270</val_0>
+</DIRECTION>
+<DIRECTION_VAR>
+    <val_0>22</val_0>
+</DIRECTION_VAR>
+<POINT_IN_DIRECTION>
+    <val_0>1</val_0>
+</POINT_IN_DIRECTION>
+<GRAVITY>
+    <val_0>0</val_0>
+</GRAVITY>
+<SPAWN_MODE>
+    <val_0>1</val_0>
+</SPAWN_MODE>
