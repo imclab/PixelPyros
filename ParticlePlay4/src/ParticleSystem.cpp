@@ -22,6 +22,7 @@ void ParticleSystem::reset(){
 	
 	life.reset(); 
 	numParticlesCreated = 0; 
+	finished = false; 
 }
 
 
@@ -48,6 +49,8 @@ bool ParticleSystem::update(float deltaTime) {
 	
 	}
 	
+	int activeParticleCount = 0; 
+	
 	for(int i = 0; i<particles.size(); i++) { 
 		Particle &p = *(particles[i]); 
 		if(!p.enabled) continue; 
@@ -57,8 +60,10 @@ bool ParticleSystem::update(float deltaTime) {
 			spareParticles.push_back(&p);
 		}
 		
+		activeParticleCount++;
 	}
-	
+	finished = ((activeParticleCount ==0) && (life.isFinished())); 
+	return finished; 
 }
 
 bool ParticleSystem::draw() { 

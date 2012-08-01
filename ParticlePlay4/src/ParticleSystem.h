@@ -36,7 +36,7 @@ class ParticleSystem {
 	ofVec3f pos ; 
 	int numParticlesCreated; 
 	
-	
+	bool finished; 
 	
 	LifeCycle life; 
 	

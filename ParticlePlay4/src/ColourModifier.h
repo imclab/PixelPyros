@@ -18,7 +18,8 @@ class ColourModifier {
 		hueEnd = 0; 
 		brightnessStart = 255; 
 		brightnessEnd = 255; 
-		saturation = 255; 
+		saturationStart = 255;
+		saturationEnd = 255;
 				
 	}; 
 	
@@ -27,7 +28,7 @@ class ColourModifier {
 		while (hue<0) hue+=255;
 		while (hue>255) hue-=255; 
 		
-		colour.setHsb(hue, saturation, ofMap(unitLifeTime, 0, 1, brightnessStart, brightnessEnd, true));
+		colour.setHsb(hue, ofMap(unitLifeTime, 0, 1, saturationStart, saturationEnd, true), ofMap(unitLifeTime, 0, 1, brightnessStart, brightnessEnd, true));
 		
 	}
 	
@@ -38,7 +39,8 @@ class ColourModifier {
 	float hueEnd; 
 	float brightnessStart; 
 	float brightnessEnd; 
-	float saturation; 
+	float saturationStart; 	
+	float saturationEnd; 
 	
 	
 }; 

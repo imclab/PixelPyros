@@ -42,7 +42,7 @@ class ParticleSystemSettings {
 		// COLOUR
 		hueStartMin = hueStartMax = hueChange = 0; 
 		brightnessStartMin = brightnessStartMax = brightnessEnd = 255; 
-		saturationMin = saturationMax = 0; 
+		saturationMin = saturationMax = saturationEnd = 0; 
 		
 		shimmerMin = 1; 
 		
@@ -86,7 +86,8 @@ class ParticleSystemSettings {
 		c->brightnessStart = ofRandom(brightnessStartMin, brightnessStartMax); 
 		c->brightnessEnd = brightnessEnd; 
 		
-		c->saturation = ofRandom(saturationMin, saturationMax); 
+		c->saturationStart = ofRandom(saturationMin, saturationMax); 
+		c->saturationEnd = saturationEnd; 
 		
 	}
 	
@@ -121,6 +122,7 @@ class ParticleSystemSettings {
 	
 	float saturationMin; 
 	float saturationMax; 
+	float saturationEnd; 
 	
 	float shimmerMin; 
 	

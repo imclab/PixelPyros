@@ -27,6 +27,7 @@ class PhysicsObject {
 	virtual void reset() { 
 		dragApplyCount = 0; 
 		elapsedTime = 0; 
+		enabled = true; 
 	};
 	
 	virtual bool update(float deltaTime) { 
@@ -52,6 +53,6 @@ class PhysicsObject {
 	int dragApplyCount;
 	float dragApplyFrequency; 
 	float elapsedTime;
-	
+	bool enabled; 
 	
 };
