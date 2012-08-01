@@ -10,7 +10,7 @@
 #pragma once
 #include "Particle.h"
 #include "ParticleSettings.h"
-#include "ParticleEmitterSettings.h"
+#include "ParticleSystemSettings.h"
 #include "LifeCycle.h"
 
 class ParticleSystem { 
@@ -20,7 +20,7 @@ class ParticleSystem {
 	ParticleSystem();
 	
 	void reset();
-	void init(ParticleEmitterSettings& pes); 
+	void init(ParticleSystemSettings& pes); 
 	
 	bool update(float deltaTime) ;
 	

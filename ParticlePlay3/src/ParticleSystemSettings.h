@@ -14,13 +14,13 @@
 #include "ParticleSettings.h"
 
 
-class ParticleEmitterSettings{
+class ParticleSystemSettings{
 	
 	
 	
 	public : 
 	
-	ParticleEmitterSettings() { 
+	ParticleSystemSettings() { 
 		
 		speedMin = speedMax = 0; 
 		rotationZ = rotationZVar = 0; 

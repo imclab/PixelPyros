@@ -115,7 +115,7 @@ void ParticleSystem :: addParticles(int count) {
 }
 
 
-void ParticleSystem:: init(ParticleEmitterSettings& pes) {
+void ParticleSystem:: init(ParticleSystemSettings& pes) {
 
 	life.delay = ofRandom(pes.delayMin, pes.delayMax); 
 	life.lifeTime = ofRandom(pes.lifeTimeMin, pes.lifeTimeMax); 

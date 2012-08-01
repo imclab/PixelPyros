@@ -25,9 +25,9 @@ class ParticleSettings {
 		
 		// PHYSICS
 		speedMin = speedMax = 200; 
-		rotationZ = 0; 
-		rotationZVar = 180;
-		rotationY = rotationYVar = 0; 
+		directionZ = 0; 
+		directionZVar = 180;
+		directionY = directionYVar = 0; 
 	
 		drag = 1; 
 		gravity.set(0,0,0); 
@@ -51,8 +51,8 @@ class ParticleSettings {
 	void initVelocity(ofVec3f& vel) { 
 		
 		vel.set(ofRandom(speedMin, speedMax), 0); 
-		vel.rotate(0,0,ofRandom(rotationZ-rotationZVar, rotationZ+rotationZVar)); 
-		vel.rotate(0,ofRandom(rotationY-rotationYVar, rotationY+rotationYVar), 0 ); 
+		vel.rotate(0,0,ofRandom(directionZ-directionZVar, directionZ+directionZVar)); 
+		vel.rotate(0,ofRandom(directionY-directionYVar, directionY+directionYVar), 0 ); 
 		
 	};
 	
@@ -71,10 +71,10 @@ class ParticleSettings {
 	float speedMin; 
 	float speedMax; 
 	
-	float rotationZ; 
-	float rotationZVar; 
-	float rotationY; 
-	float rotationYVar; 
+	float directionZ; 
+	float directionZVar; 
+	float directionY; 
+	float directionYVar; 
 
 	float drag; 
 	ofVec3f gravity; 

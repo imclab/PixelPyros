@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxAutoControlPanel.h"
+
 #include "Rocket.h"
-#include "ParticleEmitterSettings.h"
+#include "ParticleSystemSettings.h"
 #include "ParticleSettings.h"
 
 
@@ -26,11 +26,6 @@ class testApp : public ofBaseApp{
 	
 	ParticleSystem psystem; 
 	
-	void eventsIn(guiCallbackData & data);
-	
 	float lastUpdateTime; 
-	
-	
-	//ofxAutoControlPanel gui; 
 	
 };
