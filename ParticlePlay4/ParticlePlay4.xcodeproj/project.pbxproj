@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		961E975915CA8D3D0056F458 /* Trigger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 961E975815CA8D3D0056F458 /* Trigger.cpp */; };
 		963C40F615C842F400AD5B0E /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 963C40F515C842F400AD5B0E /* Particle.cpp */; };
 		966C865C15C7274E00D5A853 /* Back.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864515C7274E00D5A853 /* Back.cpp */; };
 		966C865D15C7274E00D5A853 /* Bounce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864715C7274E00D5A853 /* Bounce.cpp */; };
@@ -71,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketSettings.h; sourceTree = "<group>"; };
+		961E975715CA8CB70056F458 /* Trigger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trigger.h; sourceTree = "<group>"; };
+		961E975815CA8D3D0056F458 /* Trigger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trigger.cpp; sourceTree = "<group>"; };
 		963C40F515C842F400AD5B0E /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		966C864215C7000000D5A853 /* PhysicsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
 		966C864315C7008400D5A853 /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -151,6 +154,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		961E975A15CA96A50056F458 /* Triggers */ = {
+			isa = PBXGroup;
+			children = (
+				961E975715CA8CB70056F458 /* Trigger.h */,
+				961E975815CA8D3D0056F458 /* Trigger.cpp */,
+				961E974C15C99D580056F458 /* RocketSettings.h */,
+			);
+			name = Triggers;
+			sourceTree = "<group>";
+		};
 		966C864415C7274E00D5A853 /* PennerEasing */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,12 +277,12 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				961E975A15CA96A50056F458 /* Triggers */,
 				966C867B15C82B5300D5A853 /* Particles */,
 				966C864415C7274E00D5A853 /* PennerEasing */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
-				961E974C15C99D580056F458 /* RocketSettings.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -385,6 +398,7 @@
 				966C866615C7274E00D5A853 /* Sine.cpp in Sources */,
 				966C867915C7ECF600D5A853 /* ParticleSystem.cpp in Sources */,
 				963C40F615C842F400AD5B0E /* Particle.cpp in Sources */,
+				961E975915CA8D3D0056F458 /* Trigger.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +488,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -560,7 +574,7 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;

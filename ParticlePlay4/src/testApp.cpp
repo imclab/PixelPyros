@@ -4,7 +4,7 @@
 void testApp::setup(){
 	
 	
-	ofSetFrameRate(60);
+	ofSetFrameRate(120);
 	lastUpdateTime = ofGetElapsedTimef();
 	
 	//setupControlPanel();
@@ -28,29 +28,7 @@ void testApp::update(){
 
 	lastUpdateTime = time;
 	
-	for(int i = 0; i<physicsObjects.size(); i++) { 
-		PhysicsObject * rocket = physicsObjects[i]; 
-		if(!rocket->enabled) continue; 
-		rocket->update(deltaTime); 
-		
-		if(rocket->pos.y>ofGetHeight()) { 
-			sparePhysicsObjects.push_back(rocket); 
-			rocket->enabled = false; 
-		}
-		
-	}
-	for(int i = 0; i<particleSystems.size(); i++) { 
-		
-		ParticleSystem * ps = particleSystems[i];
-		if(ps->finished) continue; 
-		ps->update(deltaTime); 
-		if(ps->finished) { 
-			spareParticleSystems.push_back(ps); 
-		}
-		
-	}
-	
-	
+	trigger.update(deltaTime); 
 	
 }
 
@@ -59,34 +37,18 @@ void testApp::draw(){
 
 	ofPushMatrix(); 
 	
+	// change perspective so we're looking up
 	ofTranslate(0,ofGetHeight()*0.9); 
 	ofRotateX(5); 
 	ofTranslate(0,ofGetHeight()*-0.9);
 
-	for(int i = 0; i<particleSystems.size(); i++) { 
-		particleSystems[i]->draw(); 
-	}
-	
-	
-	for(int i = 0; i<physicsObjects.size(); i++) { 
-		//ofCircle(physicsObjects[i]->pos, 2); 
-		
-		//update(deltaTime); 
-	}
+	trigger.draw();
 	
 	ofPopMatrix(); 
 }
 
 void testApp:: mousePressed(int x, int y, int button ) { 
-//	psystem.reset(); 
-//	rocket.reset(); 
-//	rocket.vel.set(0,-800,0);
-//	rocket.gravity.y = 500;
-//	rocket.vel.rotate(0,0,ofRandom(-10,10));
-//	
-//	rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
-
-	makeRocket(rocketSettings); 
+	trigger.makeRocket();
 }
 
 void testApp:: setupScenes() { 
@@ -236,7 +198,7 @@ void testApp:: setupScenes() {
 	// startRotationZ / var 
 	// Probably doesn't need RotationY ?
 	// then it just needs some particleSystemSettings, right? 
-	
+	RocketSettings rocketSettings; 
 		
 	rocketSettings.startSpeedMin = 600;
 	rocketSettings.startSpeedMax = 700; 
@@ -247,58 +209,13 @@ void testApp:: setupScenes() {
 	rocketSettings.addParticleSystemSetting(ps); 
 	rocketSettings.addParticleSystemSetting(ps2); 
 	
+	trigger.rocketSettings = rocketSettings; 
+	
 	
 
 }
 
 
-void testApp::makeRocket(RocketSettings rs) { 
-	
-	
-	PhysicsObject *rocket; 
-	
-	if(sparePhysicsObjects.size()>0) {
-		rocket = sparePhysicsObjects.back();
-		sparePhysicsObjects.pop_back();
-		rocket->reset();
-	} else {
-		rocket = new PhysicsObject();
-		physicsObjects.push_back(rocket); 
-		
-	}
-
-	rocket->vel.set(ofRandom(rs.startSpeedMin, rs.startSpeedMax),0,0); 
-	rocket->vel.rotate(0,0,ofRandom(rs.direction - rs.directionVar, rs.direction+rs.directionVar)); 
-	rocket->gravity = rs.gravity; 
-	rocket->drag = rs.drag; 
-	rocket->pos.set((ofGetWidth()/2), ofGetHeight() *0.9); 
-	
-	
-	
-	for(int i = 0; i<rs.particleSystemSettings.size(); i++) { 
-		ParticleSystemSettings pss = rs.particleSystemSettings[i]; 
-		
-		ParticleSystem* ps; 
-		if(spareParticleSystems.size()>0) { 
-			ps = spareParticleSystems.back(); 
-			spareParticleSystems.pop_back(); 
-			ps->reset();
-		} else {
-			ps = new ParticleSystem(); 
-			particleSystems.push_back(ps); 
-			
-		}
-		
-		
-	
-		//pss.hueStartMin = pss.hueStartMax = ofRandom(255); 
-		ps->init(pss);
-		ps->attachedPhysicsObject = rocket; 
-	}
-	
-	
-	
-}
 
 void testApp::exit() { 
 
