@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Scene.h"
+#include "ParticleSystemManager.h"
 #include "ParticleSystemSettings.h"
 #include "RocketSettings.h"
 
@@ -21,9 +22,11 @@ class testApp : public ofBaseApp{
 	
 	void setupScenes(); 
 	
+	ParticleSystemManager particleSystemManager; 
+	
+	
 	float lastUpdateTime; 
 	
- 
 	vector <Scene*> scenes; 
 	
 };

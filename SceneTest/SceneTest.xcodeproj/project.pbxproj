@@ -109,6 +109,7 @@
 		966C867715C7E6D500D5A853 /* ParticleSystemSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleSystemSettings.h; sourceTree = "<group>"; };
 		966C867815C7ECF600D5A853 /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
 		966C867C15C82B7900D5A853 /* ColourModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColourModifier.h; sourceTree = "<group>"; };
+		96A99AFD15CC398E006F676E /* ParticleSystemManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleSystemManager.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -209,6 +210,7 @@
 				966C867615C7D17900D5A853 /* LifeCycle.h */,
 				966C867C15C82B7900D5A853 /* ColourModifier.h */,
 				966C864215C7000000D5A853 /* PhysicsObject.h */,
+				96A99AFD15CC398E006F676E /* ParticleSystemManager.h */,
 			);
 			name = Particles;
 			sourceTree = "<group>";

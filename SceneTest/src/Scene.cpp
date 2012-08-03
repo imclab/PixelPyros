@@ -9,6 +9,13 @@
 #include "Scene.h"
 
 
+
+Scene::Scene(ParticleSystemManager & psm) : particleSystemManager(psm) { 
+	
+	
+}
+
+
 void Scene :: start() { 
 	
 	

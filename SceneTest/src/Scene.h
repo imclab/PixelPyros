@@ -9,11 +9,14 @@
 #pragma once 
 
 #include "Trigger.h"
+#include "ParticleSystemManager.h"
 
 class Scene { 
 
 
 	public : 
+	
+	Scene(ParticleSystemManager& psm); 
 	
 	void start(); 
 	void stop();
@@ -27,7 +30,7 @@ class Scene {
 	
 	vector <Trigger*> triggers; 
 	
+	ParticleSystemManager& particleSystemManager; 
 	
-
 
 };

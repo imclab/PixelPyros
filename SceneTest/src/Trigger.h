@@ -11,6 +11,7 @@
 #include "ParticleSystem.h"
 #include "PhysicsObject.h"
 #include "RocketSettings.h"
+#include "ParticleSystemManager.h"
 
 typedef enum { 
 	TRIGGER_TYPE_ONE_SHOT, 
@@ -22,6 +23,8 @@ typedef enum {
 class Trigger { 
 
 	public : 
+	
+	Trigger(ParticleSystemManager & psm); 
 	bool update(float deltaTime); 
 	void draw(); 
 	
@@ -31,11 +34,8 @@ class Trigger {
 	ofVec3f pos; 
 	
 	RocketSettings rocketSettings; 
-	
-	vector <ParticleSystem*> particleSystems; 
-	vector <ParticleSystem*> spareParticleSystems; 
-	vector <PhysicsObject*> physicsObjects; 	
-	vector <PhysicsObject*> sparePhysicsObjects; 
+		
+	ParticleSystemManager & particleSystemManager; 
 
 
 };

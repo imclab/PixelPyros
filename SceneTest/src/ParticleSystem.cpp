@@ -68,6 +68,7 @@ bool ParticleSystem::update(float deltaTime) {
 
 bool ParticleSystem::draw() { 
 	ofPushStyle(); 
+	ofSetCircleResolution(5);
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	for(int i = 0; i<particles.size(); i++) { 
 		Particle &p = *(particles[i]); 
@@ -148,6 +149,8 @@ void ParticleSystem :: addParticles(int count) {
 
 void ParticleSystem:: init(ParticleSystemSettings& pes) {
 
+	reset(); 
+	
 	life.delay = pes.emitDelay; 
 	life.lifeTime = pes.emitLifeTime; 
 	//attachedPhysicsObject = pes.emitAttachedPhysicsObject;

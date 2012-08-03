@@ -31,6 +31,8 @@ void testApp::update(){
 	for(int i = 0; i<scenes.size(); i++) {	
 		scenes[i]->update(deltaTime); 
 	}
+	
+	particleSystemManager.update(deltaTime);
 }
 
 //--------------------------------------------------------------
@@ -47,10 +49,12 @@ void testApp::draw(){
 	for(int i = 0; i<scenes.size(); i++) {	
 		scenes[i]->draw(); 
 	}
-	
+	particleSystemManager.draw();
 	ofPopMatrix(); 
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20); 
+	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35); 
+	
 	
 }
 
@@ -199,11 +203,11 @@ void testApp:: setupScenes() {
 	rocketSettings.addParticleSystemSetting(ps); 
 	rocketSettings.addParticleSystemSetting(ps2); 
 	
-	Trigger trigger; 
+	Trigger trigger(particleSystemManager); 
 	
 	trigger.rocketSettings = rocketSettings; 
 	
-	Scene* scene1 = new Scene(); 
+	Scene* scene1 = new Scene(particleSystemManager); 
 	
 	scene1->addTriggers(trigger, 8);
 	
