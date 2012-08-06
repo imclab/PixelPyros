@@ -68,7 +68,8 @@ bool ParticleSystem::update(float deltaTime) {
 
 bool ParticleSystem::draw() { 
 	ofPushStyle(); 
-	ofSetCircleResolution(5);
+	ofSetCircleResolution(7);
+	
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	for(int i = 0; i<particles.size(); i++) { 
 		Particle &p = *(particles[i]); 

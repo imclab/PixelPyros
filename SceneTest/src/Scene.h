@@ -24,9 +24,10 @@ class Scene {
 	bool update(float deltaTime); 
 	void draw(); 
 	
-	void addTriggers(Trigger trigger, int numTriggers); 
+	void addTriggers(Trigger trigger, int numTriggers, float x, float y, float width); 
 	
 	bool active; 
+	bool stopping; 
 	
 	vector <Trigger*> triggers; 
 	

@@ -14,9 +14,8 @@
 #include "ParticleSystemManager.h"
 
 typedef enum { 
-	TRIGGER_TYPE_ONE_SHOT, 
-	TRIGGER_TYPE_CONTINUOUS, 
-	TRIGGER_TYPE_POWERED
+	TRIGGER_TYPE_FIRE_ON_MOTION, 
+	TRIGGER_TYPE_FIRE_ON_CHARGE
 	
 } TriggerType;
 
@@ -28,7 +27,41 @@ class Trigger {
 	bool update(float deltaTime); 
 	void draw(); 
 	
-	void makeRocket(); 
+	void start(); 
+	void stop(); 
+	
+	void registerMotion(float unitValue); 
+	
+	bool makeRocket(); 
+	
+	TriggerType type; 
+	
+	bool active; 
+	bool stopping; 
+	
+	
+	// to create a trigger that is one shot, set restoreSpeed
+	// to 0. If you want a trigger that needs charging up, 
+	// set motionDecay to 0, fireOnCharge to true
+	
+	// activityLevel is the accumulated motion
+	float motionLevel; 
+	
+	//amount per second to take away from the accumulated motion
+	float motionDecay; 
+	// triggerLevel is the amount of motion needed to make something happen
+	float triggerLevel; 
+	
+	float chargeOnMotion;
+	float chargeAmount; 
+	
+	float minTimeBetweenRockets; 
+	float restoreSpeed; 
+	float lastRocketTime; 
+
+
+	float scale; 
+	float targetScale; 
 	
 	
 	ofVec3f pos; 
@@ -37,5 +70,9 @@ class Trigger {
 		
 	ParticleSystemManager & particleSystemManager; 
 
-
+	float unitPower;
+	float rocketPower; 
+	
+	float elapsedTime;
+	
 };

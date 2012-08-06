@@ -11,34 +11,58 @@
 
 
 Scene::Scene(ParticleSystemManager & psm) : particleSystemManager(psm) { 
-	
+	active = false; 
+	stopping = false; 
 	
 }
 
 
 void Scene :: start() { 
+	for(int i=0; i<triggers.size(); i++) { 
+		
+		//if(ofRandom(100)<2) triggers[i]->makeRocket(); 
+		
+		triggers[i]->start();
+		
+		
+		
+	}
 	
+	active = true;
 	
 }
 
 
 void Scene :: stop() { 
 	
-	
+	for(int i=0; i<triggers.size(); i++) { 
+		
+		//if(ofRandom(100)<2) triggers[i]->makeRocket(); 
+		
+		triggers[i]->stop();
+		
+		
+		
+	}
+	stopping = true; 
 	
 }
 
 bool Scene :: update(float deltaTime) {
 
+	if(!active) return false; 
+	int activeTriggers = 0; 
+	
 	for(int i=0; i<triggers.size(); i++) { 
 	
-		if(ofRandom(100)<1) triggers[i]->makeRocket(); 
-		
-		triggers[i]->update(deltaTime);
-		
-		
+		if( triggers[i]->update(deltaTime)) activeTriggers++;
 		
 	}
+	if((stopping) && (activeTriggers==0) ) {
+		active = false;
+	}
+
+	return active; 
 	
 	
 }
@@ -56,10 +80,10 @@ void Scene:: draw() {
 
 }
 
-void Scene:: addTriggers(Trigger trigger, int numTriggers) {
+void Scene:: addTriggers(Trigger trigger, int numTriggers, float x, float y, float width) {
 	
-	float spacing = ofGetWidth()/(numTriggers+1);
-	float x = spacing; 
+	float spacing = width/(numTriggers -1);
+	 
 	
 	for(int i = 0; i<numTriggers; i++) { 
 	
@@ -67,7 +91,7 @@ void Scene:: addTriggers(Trigger trigger, int numTriggers) {
 		triggers.push_back(newtrigger); 
 		
 		// TODO make this height adjustable somehow 
-		newtrigger->pos.set(x, ofGetHeight()*0.9); 
+		newtrigger->pos.set(x, y); 
 		x+=spacing; 
 		
 		
