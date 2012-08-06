@@ -1,14 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOpenCv.h"
-#include "ofxXmlSettings.h"
 #include "ofxSimpleGuiToo.h"
-#include "ofxSimpleGuiContent.h"
-#include "TrackedBlob.h"
-#include "PhoneTracker.h"
-#include "CommsManager.h"
-#include "PhoneRenderer.h"
 #include "CameraManager.h"
 
 class testApp : public ofBaseApp{
@@ -51,11 +44,7 @@ class testApp : public ofBaseApp{
 	ofPoint warpPoints[4];
 
 	
-	PhoneTracker phoneTracker;
-	CommsManager commsManager; 
-	PhoneRenderer phoneRenderer; 
-
-	
+	CameraManager cameraManager;	
 	
 	
 	
