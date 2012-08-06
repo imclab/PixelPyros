@@ -11,6 +11,8 @@ void testApp::setup(){
 	ofBackground(0);
 	
 	cameraManager.init(); 
+	
+	cameraManager.shutter = 35; 
 
 	
 
@@ -24,6 +26,12 @@ void testApp::update(){
 	float deltaTime =  time - lastUpdateTime; 
 
 	lastUpdateTime = time;
+	
+	
+//	cameraManager.gain = 100; 
+//	cameraManager.gamma = 12;
+//	cameraManager.brightness = 20; 
+
 	
 	cameraManager.update(); 
 	

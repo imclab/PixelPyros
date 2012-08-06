@@ -28,7 +28,7 @@ bool CameraFirewire::setup(string _name, int width, int height, int framerate){
 	//camera.setExposureRaw(1);
     //camera.setFeatureAbs(<#dc1394feature_t feature#>, <#float value#>)tBayerMode(DC1394_COLOR_FILTER_GBRG);
     //camera.setGainRaw(10); 
-    //camera.setShutterRaw(130); 
+    setShutter(framerate); 
     name = _name; 
     frameNum = 0; 
 	
