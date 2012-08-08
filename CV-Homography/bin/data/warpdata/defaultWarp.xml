@@ -1,0 +1,36 @@
+<srcvec>
+    <x>101</x>
+    <y>139</y>
+</srcvec>
+<srcvec>
+    <x>911</x>
+    <y>173</y>
+</srcvec>
+<srcvec>
+    <x>32</x>
+    <y>714</y>
+</srcvec>
+<srcvec>
+    <x>981</x>
+    <y>692</y>
+</srcvec>
+<dstvec>
+    <x>0</x>
+    <y>0</y>
+</dstvec>
+<dstvec>
+    <x>1024</x>
+    <y>0</y>
+</dstvec>
+<dstvec>
+    <x>0</x>
+    <y>768</y>
+</dstvec>
+<dstvec>
+    <x>1024</x>
+    <y>768</y>
+</dstvec>
+<srcWidth>1024</srcWidth>
+<srcHeight>768</srcHeight>
+<dstWidth>1024</dstWidth>
+<dstHeight>768</dstHeight>

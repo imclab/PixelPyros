@@ -23,12 +23,12 @@ void CameraManager::init() {
 	if(cameraFirewire->setup("Firewire", 1024, 768, 60)) {
 		cameras.push_back(cameraFirewire); 
 	}; 
-//	if(cameraVidGrabber->setup("USB", 640, 480, 60)){
-//		cameras.push_back(cameraVidGrabber); 
-//	}; 
-//	if(cameraVidPlayer->setup("Video", 1024, 768, 60)) {
-//		cameras.push_back(cameraVidPlayer); 
-//	}; 
+	if(cameraVidGrabber->setup("USB", 640, 480, 60)){
+		cameras.push_back(cameraVidGrabber); 
+	}; 
+	if(cameraVidPlayer->setup("Video", 1024, 768, 60)) {
+		cameras.push_back(cameraVidPlayer); 
+	}; 
 	cameraFirewire->setGain(700); 
 	if(cameras.size()==0) { 
 		ofLog(OF_LOG_ERROR, "No cameras initialised!");
