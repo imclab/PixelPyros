@@ -40,6 +40,10 @@ void Warper :: update() {
 		homography = findHomography(Mat(srcPoints), Mat(dstPoints));
 		
 		warpPerspective(*srcImage, warpedImage, homography, CV_INTER_LINEAR);
+		
+		perspectiveTransform(srcVecs, srcVecs, homography);
+		
+		
 		warpedImage.update();
 		changed = false; 
 		
