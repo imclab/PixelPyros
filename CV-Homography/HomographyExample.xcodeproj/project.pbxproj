@@ -158,8 +158,8 @@
 		964A37DF15D176AB004D2BE7 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
 		964A37E015D176AB004D2BE7 /* Wrappers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wrappers.cpp; sourceTree = "<group>"; };
 		964A37EA15D17764004D2BE7 /* Flow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flow.h; sourceTree = "<group>"; };
-		964A37FB15D1C3FF004D2BE7 /* Warper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warper.h; sourceTree = "<group>"; };
-		964A380515D24D0C004D2BE7 /* Warper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Warper.cpp; sourceTree = "<group>"; };
+		964A37FB15D1C3FF004D2BE7 /* Warper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Warper.h; path = ../../SharedCode/Homography/Warper.h; sourceTree = "<group>"; };
+		964A380515D24D0C004D2BE7 /* Warper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Warper.cpp; path = ../../SharedCode/Homography/Warper.cpp; sourceTree = "<group>"; };
 		964A380E15D289B5004D2BE7 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		964A380F15D289B5004D2BE7 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		964A381015D289B5004D2BE7 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };

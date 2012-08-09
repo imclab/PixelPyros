@@ -14,7 +14,7 @@ bool CameraVidPlayer::setup(string _name, int width, int height, int framerate){
 	//vidPlayer.initGrabber(width, height);
 	//vidPlayer.setDesiredFrameRate(framerate); 
 	
-    if(!vidPlayer.loadMovie("/Users/seb/Desktop/BTPlay/BTPlayFootage.mov")) return false;
+    if(!vidPlayer.loadMovie("TestPyrosCamCropped.mov")) return false;
     
     name = _name; 
     frameNum = 0; 
