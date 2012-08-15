@@ -21,15 +21,31 @@ Warper :: Warper() {
 	ofAddListener(ofEvents().mouseReleased, this, &Warper::mouseReleased);
 	settingsFileLabel = "defaultWarp"; 
 	
-	loadSettings();
+	
+	// create defaults if there is no saved setting yet. 
+	if(!loadSettings()){
+		for(int i = 0; i<4;i++) { 
+			
+			if(srcVecs.size()==i) srcVecs.push_back(ofVec2f()); 
+			
+			srcVecs[i].set( (i%2)*ofGetWidth(), floor(i/2)*ofGetHeight());
+			
+		}
+		for(int i = 0; i<4;i++) { 
+			
+			if(dstVecs.size()==i) dstVecs.push_back(ofVec2f()); 
+			dstVecs[i].set( (i%2)*ofGetWidth(), floor(i/2)*ofGetHeight());
+			
+		}		
+	}
 	
 	warpedImage.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR); 
 	autoSave =true; 
 	
 };
 
-void Warper :: update() { 
-	if(!srcImage) return; 
+bool Warper :: update() { 
+	if(!srcImage) return false; 
 	
 	if(changed) { 
 		// update points
@@ -41,16 +57,25 @@ void Warper :: update() {
 		}			
 		
 		homography = findHomography(Mat(srcPoints), Mat(dstPoints));
+		inverseHomography = findHomography(Mat(dstPoints), Mat(srcPoints));
+		
+		changed = false; 
+	
 		
 		warpPerspective(*srcImage, warpedImage, homography, CV_INTER_LINEAR);
-		
-		//perspectiveTransform(srcVecs, srcVecs, homography);
-		
-		
 		warpedImage.update();
-		changed = false; 
 		
+		return true; 
 	}
+	
+	
+		
+	//perspectiveTransform(srcVecs, srcVecs, homography);
+		
+		
+	//warpedImage.update();
+		
+	return false; 
 	
 };
 
@@ -127,7 +152,7 @@ void Warper :: setSourceImage(ofImage& img) {
 bool Warper:: loadSettings() { 
 	
 	ofxXmlSettings settings;
-	settings.loadFile("warpdata/"+settingsFileLabel+".xml");
+	if(!settings.loadFile("warpdata/"+settingsFileLabel+".xml")) return false;
 	if(settings.getNumTags("srcvec")!=4) return false; 
 	if(settings.getNumTags("dstvec")!=4) return false; 
 	
@@ -138,8 +163,8 @@ bool Warper:: loadSettings() {
 
 		
 		settings.pushTag("srcvec", i); 
-		srcVecs[i].set(settings.getValue("x", 0),
-						 settings.getValue("y", 0));
+		srcVecs[i].set(settings.getValue("x", (i%2)*ofGetWidth()),
+						 settings.getValue("y", floor(i/2)*ofGetHeight()));
 
 		settings.popTag();
 	}
@@ -150,8 +175,8 @@ bool Warper:: loadSettings() {
 		
 		settings.pushTag("dstvec", i); 
 		
-		dstVecs[i].set(settings.getValue("x", 0),
-					   settings.getValue("y", 0));
+		dstVecs[i].set(settings.getValue("x", (i%2)*ofGetWidth()),
+					   settings.getValue("y", floor(i/2)*ofGetHeight()	));
 		
 		settings.popTag();
 	}	
@@ -160,6 +185,9 @@ bool Warper:: loadSettings() {
 
 
 bool Warper:: saveSettings() {
+	
+	ofDirectory dir("warpdata"); 
+	if(!dir.exists()) dir.create();
 	
 	ofxXmlSettings positions; 
 
@@ -220,6 +248,7 @@ bool Warper :: hitTestPoints ( vector<ofVec2f>& points, ofVec2f& point) {
 void Warper :: showGui() { 
 	if(!guiVisible) { 
 		guiVisible = true; 
+		changed = true;
 	}
 	
 }
@@ -248,10 +277,9 @@ void Warper :: mousePressed(ofMouseEventArgs &e) {
 	
 	ofVec2f cur(e.x, e.y);
 	
-	hitTestPoints(srcVecs, cur); 
 	hitTestPoints(dstVecs, cur); 
+	hitTestPoints(srcVecs, cur); 
 	
-	cout << "MousePressed" << endl; 
 };
 
 
@@ -266,7 +294,7 @@ void Warper :: mouseDragged(ofMouseEventArgs &e) {
 		changed = true;
 	
 	}
-	cout << "MouseDragged" << endl; 
+	
 };
 
 
@@ -278,7 +306,7 @@ void Warper :: mouseReleased(ofMouseEventArgs &e) {
 		movingPoint = false; 
 		changed = true; 
 	}
-	cout << "MouseDragged" << endl; 
+	
 	
 	saveSettings(); 
 	//loadSettings(); 

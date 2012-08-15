@@ -13,15 +13,18 @@
 class CameraVidPlayer : public CameraWrapper { 
     
 	public :
-	virtual bool setup(string _name, int width = 640, int height = 480, int framerate =30);
-	virtual bool update();  // returns true if frame is new
+	bool setup(string _name, string filename, int width = 640, int height = 480, int framerate =30);
+	bool update();  // returns true if frame is new
 	
-	virtual ofPixelsRef getPixelsRef();	
-	virtual void draw(float x, float y); 
-	virtual int getWidth();	
-	virtual int getHeight();
-	virtual bool videoSettings(); 
-	virtual void close(); 
+	ofPixelsRef getPixelsRef();	
+	//ofImage * getImage(); 
+	
+	void draw(float x, float y); 
+	void draw(float x, float y, float w, float h); 
+	float getWidth();	
+	float getHeight();
+	bool videoSettings(); 
+	void close(); 
     
 	ofVideoPlayer vidPlayer; 
     

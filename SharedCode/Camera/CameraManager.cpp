@@ -15,7 +15,6 @@ CameraManager::CameraManager() {
 	cameraFirewire		= new CameraFirewire(); 
 	cameraVidPlayer		= new CameraVidPlayer(); 
     cameraVidGrabber	= new CameraVidGrabber(); 
-
 }
 
 void CameraManager::init() { 
@@ -26,16 +25,18 @@ void CameraManager::init() {
 	if(cameraVidGrabber->setup("USB", 640, 480, 60)){
 		cameras.push_back(cameraVidGrabber); 
 	}; 
-	if(cameraVidPlayer->setup("Video", 1024, 768, 60)) {
+	if(cameraVidPlayer->setup("Video", "../../../TestMovies/TestPyrosCamCropped.mov", 1024, 768, 60)) {
 		cameras.push_back(cameraVidPlayer); 
 	}; 
-	cameraFirewire->setGain(700); 
+	//cameraFirewire->setGain(700); 
 	if(cameras.size()==0) { 
 		ofLog(OF_LOG_ERROR, "No cameras initialised!");
-		camera = new CameraWrapper(); 
+		//camera = new CameraWrapper(); 
 	} else { 
 		camera = cameras[0]; 
 	}
+	
+//	cameraPreview->vid = ofBaseDraws(camera->getPixelsRef());
 		
 	
 	
@@ -43,11 +44,26 @@ void CameraManager::init() {
 
 
 bool CameraManager::update() { 
+	if(!camera) {
+		ofLog(OF_LOG_ERROR, "CameraManager not initialised"); 
+		return false; 
+	}; 
 	
-	if(camera->getGain()!=gain) camera->setGain(gain); 
-	if(camera->getGamma()!=gamma) camera->setGamma(gamma); 
-	if(camera->getShutter()!=shutter) camera->setShutter(shutter); 
-	if(camera->getBrightness()!=brightness) camera->setBrightness(brightness); 
+//	cout << toggleShowUSBControls->value.getValueB() << endl; 
+//	
+	if(toggleShowUSBControls->value.getValueB()){
+		
+		cameraVidGrabber->videoSettings(); 
+		toggleShowUSBControls->value.setValue(0); 
+		toggleShowUSBControls->update();
+	}
+	
+	
+	
+//	if(camera->getGain()!=gain) camera->setGain(gain); 
+//	if(camera->getGamma()!=gamma) camera->setGamma(gamma); 
+//	if(camera->getShutter()!=shutter) camera->setShutter(shutter); 
+//	if(camera->getBrightness()!=brightness) camera->setBrightness(brightness); 
 	
 	return camera->update();
 
@@ -60,16 +76,22 @@ void CameraManager::draw(float x, float y) {
 	
 }
 
+void CameraManager::draw(float x, float y, float w, float h){
+	
+	camera->draw(x,y,w,h);
+	
+}
+
 ofPixelsRef CameraManager::getPixelsRef() { 
 	return camera->getPixelsRef();
 
 }
 
-int CameraManager::getWidth() { 
+float CameraManager::getWidth() { 
 	return camera->getWidth(); 
 }
 
-int CameraManager::getHeight() { 
+float CameraManager::getHeight() { 
 	return camera->getHeight(); 
 }
 
@@ -94,10 +116,101 @@ void CameraManager::next() {
 	}
 }
 
+void CameraManager:: initControlPanel(ofxAutoControlPanel &gui){
+	
+	gui.addPanel("Cameras");
+	
+	cameraPreview = gui.addDrawableRect("video", this, 400, 300);
+	
+	gui.addLabel("USB camera");
+	toggleShowUSBControls = gui.addToggle("Show controls", "USB_SHOW_CONTROLS", false);
+
+	
+	cameraFirewire->initControlPanel(gui, 400); 
+	
+	
+	ofAddListener(gui.guiEvent, this, &CameraManager::guiEventsIn);
+	
+	
+}
+
+void CameraManager::guiEventsIn(guiCallbackData & data){
+
+	if (data.getXmlName() == "USB_SHOW_CONTROLS") {
+		
+	
+	} else if (data.getXmlName() == "FW_SHUTTER") { 
+		
+		cameraFirewire->setShutter(data.getInt(0));
+		
+	} else if (data.getXmlName() == "FW_GAIN") { 
+		cameraFirewire->setGain(data.getInt(0));
+		
+	} else if (data.getXmlName() == "FW_BRIGHTNESS") { 
+		cameraFirewire->setBrightness(data.getInt(0));
+		
+	} else if (data.getXmlName() == "FW_GAMMA") { 
+		cameraFirewire->setGamma(data.getInt(0));
+		
+	} 
+	
+	
+	
+//	else if (data.getXmlName() ==  "SPEED" )
+//		ps.settings.speed = data.getFloat(0); 
+//	else if(data.getXmlName() ==  "SPEED_VAR") 
+//		ps.settings.speedVar = data.getFloat(0); 
+//	else if (data.getXmlName() ==  "DIRECTION" )
+//		ps.settings.direction = data.getFloat(0); 
+//	else if(data.getXmlName() ==  "DIRECTION_VAR") 
+//		ps.settings.directionVar = data.getFloat(0); 
+//	else if(data.getXmlName() ==  "POINT_IN_DIRECTION") 
+//		ps.settings.pointInDirection = (data.getInt(0)==1); 
+//	else if(data.getXmlName() ==  "GRAVITY") 
+//		ps.settings.gravity.y = data.getInt(0); 
+//	else if(data.getXmlName() ==  "SPAWN_MODE") {
+//		ps.setSpawnMode(data.getInt(0)); 
+//		ps.reset(); 
+//	}
+//
+	
+	
+}
+
+
 void CameraManager::close() { 
 	for(int i = 0; i<cameras.size(); i++) {
 		cameras[i]->close();
 		delete cameras[i]; 
 	}
-	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

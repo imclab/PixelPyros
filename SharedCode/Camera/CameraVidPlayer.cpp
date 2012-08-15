@@ -8,14 +8,18 @@
 
 #include "CameraVidPlayer.h"
 
-bool CameraVidPlayer::setup(string _name, int width, int height, int framerate){
+bool CameraVidPlayer::setup(string _name, string filename, int width, int height, int framerate){
     
     
 	//vidPlayer.initGrabber(width, height);
 	//vidPlayer.setDesiredFrameRate(framerate); 
 	
-    if(!vidPlayer.loadMovie("TestPyrosCamCropped.mov")) return false;
-    
+    if(!vidPlayer.loadMovie(filename)) {
+	
+		ofLog(OF_LOG_ERROR, "video file didn't load! ("+filename+")"); 
+		return false;
+    	
+	}
     name = _name; 
     frameNum = 0; 
     vidPlayer.play();
@@ -34,15 +38,20 @@ bool CameraVidPlayer::update() {
 void CameraVidPlayer::draw(float x, float y) {
 	vidPlayer.draw(x, y); 
 }
+
+void CameraVidPlayer::draw(float x, float y, float w, float h) {
+	vidPlayer.draw(x, y, w, h); 
+}
+
 ofPixelsRef CameraVidPlayer::getPixelsRef(){
 	return vidPlayer.getPixelsRef();
-    
 }
-int CameraVidPlayer::getWidth(){
+
+float CameraVidPlayer::getWidth(){
 	return vidPlayer.getWidth(); 
     
 }
-int CameraVidPlayer::getHeight(){
+float CameraVidPlayer::getHeight(){
 	return vidPlayer.getHeight(); 
     
 }

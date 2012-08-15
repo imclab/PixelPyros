@@ -15,24 +15,38 @@
 #include "CameraFirewire.h"
 #include "CameraVidPlayer.h"
 
-class CameraManager { 
+#include "ofxAutoControlPanel.h"
+
+class CameraManager : public ofBaseDraws{ 
 	public : 
 	
 	CameraManager(); 
 	void init(); 
 	bool update(); 
 	void draw(float x, float y); 
-
+	void draw(float x, float y, float w, float h); 
 	ofPixelsRef getPixelsRef();
 	
-	int getWidth(); 
-	int getHeight(); 
+	void setAnchorPercent(float xPct, float yPct){};
+	void setAnchorPoint(float x, float y){};
+	void resetAnchor(){};
+	
+	
+	float getWidth(); 
+	float getHeight(); 
 	
 	void videoSettings(); 
 	
 	void close(); 
 	
 	void next(); 
+	
+	void initControlPanel(ofxAutoControlPanel& gui); 
+	void guiEventsIn(guiCallbackData & data);
+	
+	guiTypeToggle* toggleShowUSBControls;
+	guiTypeDrawable* cameraPreview; 
+	
 
 	CameraWrapper* camera; 
 	vector <CameraWrapper*> cameras; 	

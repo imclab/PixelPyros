@@ -24,11 +24,13 @@ bool CameraFirewire::setup(string _name, int width, int height, int framerate){
 	
 	unsigned int min, max; 
 	camera.getBrightnessRawRange(&min, &max);
+	camera.getGammaRawRange(&min, &max);
+
 	cout << "min " << min << " max " << max << endl; 
 	//camera.setExposureRaw(1);
     //camera.setFeatureAbs(<#dc1394feature_t feature#>, <#float value#>)tBayerMode(DC1394_COLOR_FILTER_GBRG);
-    //camera.setGainRaw(10); 
-    setShutter(framerate); 
+   // setGain(500); 
+   // setShutter(framerate); 
     name = _name; 
     frameNum = 0; 
 	
@@ -38,15 +40,18 @@ bool CameraFirewire::setup(string _name, int width, int height, int framerate){
 	
 }
 bool CameraFirewire::update() {
+	//setShutter(50); 
+	//setGain(100); 
+	camera.setExposureRaw(20);
 	if(camera.grabVideo(curFrame)) {
 		curFrame.update();
-        
-        cout << camera.getFrameRate() << " " << 
-                camera.getGainRaw() << " " << 
-                camera.getShutterRaw() << " " << 
-                camera.getBrightnessRaw() << " " << 
-                camera.getExposureRaw() << " " << 
-                camera.getGammaRaw() << "\n"; 
+//        
+//        cout << camera.getFrameRate() << " " << 
+//                camera.getGainRaw() << " " << 
+//                camera.getShutterRaw() << " " << 
+//                camera.getBrightnessRaw() << " " << 
+//                camera.getExposureRaw() << " " << 
+//                camera.getGammaRaw() << "\n"; 
                 
         return true;
 	}	
@@ -56,15 +61,20 @@ bool CameraFirewire::update() {
 void CameraFirewire::draw(float x, float y) {
 	curFrame.draw(x, y); 
 }
+
+void CameraFirewire::draw(float x, float y, float w, float h) {
+	curFrame.draw(x, y, w, h); 
+}
+
 ofPixelsRef CameraFirewire::getPixelsRef(){
 	return curFrame.getPixelsRef();
     
 }
-int CameraFirewire::getWidth(){
+float CameraFirewire::getWidth(){
 	return camera.getWidth(); 
     
 }
-int CameraFirewire::getHeight(){
+float CameraFirewire::getHeight(){
 	return camera.getHeight(); 
     
 }
@@ -75,6 +85,25 @@ bool CameraFirewire::videoSettings(){
 void CameraFirewire::close() { 
 	
 }
+
+void CameraFirewire :: initControlPanel(ofxAutoControlPanel &gui, float w) { 
+	
+	gui.addLabel("Firewire camera");
+	
+	unsigned int min, max; 
+	
+	
+	gui.addSlider("Shutter", "FW_SHUTTER", getShutter(), 1, 500, true)->setDimensions(400, 10); // actual top limit is 4000
+	
+	gui.addSlider("Brightness", "FW_BRIGHTNESS", getBrightness(), 0, 255, true)->setDimensions(400, 10); ;
+	
+	gui.addSlider("Gain", "FW_GAIN", getGain(), 180, 1023, true)->setDimensions(400, 10); ;
+	
+	gui.addSlider("Gamma", "FW_GAMMA", getGamma(), 10, 22, true)->setDimensions(400, 10); ;	
+
+	
+}
+
 
 int CameraFirewire::getGain() { 
 	return camera.getGainRaw(); 

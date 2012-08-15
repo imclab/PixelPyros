@@ -11,7 +11,7 @@
 
 //#include "ofMain.h"
 
-class CameraWrapper { 
+class CameraWrapper :public ofBaseDraws{ 
 
 	public : 
 	
@@ -19,9 +19,13 @@ class CameraWrapper {
 	virtual bool update(){};  // returns true if frame is new
 	
 	virtual ofPixelsRef getPixelsRef(){};	
+	//virtual ofImage* getImage(); 
+	
 	virtual void draw(float x, float y){}; 
-	virtual int getWidth(){};	
-	virtual int getHeight(){};
+	virtual void draw(float x, float y, float w, float h){}; 
+	
+
+	
 	virtual bool videoSettings(){}; 
 	virtual void close(){}; 
     

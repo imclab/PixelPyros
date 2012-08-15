@@ -30,22 +30,37 @@ bool CameraVidGrabber::update() {
 void CameraVidGrabber::draw(float x, float y) {
 	vidGrabber.draw(x, y); 
 }
+void CameraVidGrabber::draw(float x, float y, float w, float h) {
+	vidGrabber.draw(x, y,w,h); 
+}
+
 ofPixelsRef CameraVidGrabber::getPixelsRef(){
 	return vidGrabber.getPixelsRef();
 
 }
-int CameraVidGrabber::getWidth(){
+
+ofImage* CameraVidGrabber::getImage(){
+	//return &vidGrabber.getGrabber();
+	
+}
+float CameraVidGrabber::getWidth(){
 	return vidGrabber.getWidth(); 
 
 }
-int CameraVidGrabber::getHeight(){
+float CameraVidGrabber::getHeight(){
 	return vidGrabber.getHeight(); 
 
 }
+
+
+
 bool CameraVidGrabber::videoSettings(){
 	vidGrabber.videoSettings(); 
 	
 }
+
+
+
 void CameraVidGrabber::close() { 
 	vidGrabber.close(); 
 	

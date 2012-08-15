@@ -24,7 +24,7 @@ class Warper {
 	
 	Warper() ;
 	
-	void update();
+	bool update();
 	
 	
 	void setSourceImage(ofImage& img) ;
@@ -52,6 +52,7 @@ class Warper {
 	vector <ofVec2f> srcVecs, dstVecs; 
 
 	cv::Mat homography;
+	cv::Mat inverseHomography;
 	
 	bool guiVisible; 
 	bool changed; 

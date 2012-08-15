@@ -11,32 +11,36 @@
 #include "ofMain.h"
 #include "CameraWrapper.h"
 #include "ofxLibdc.h"
+#include "ofxAutoControlPanel.h"
 
 class CameraFirewire : public CameraWrapper{ 
 
 
     public :
-	virtual bool setup(string _name, int width = 640, int height = 480, int framerate =30);
-	virtual bool update();  // returns true if frame is new
+	bool setup(string _name, int width = 640, int height = 480, int framerate =30);
+	bool update();  // returns true if frame is new
 	
 	virtual ofPixelsRef getPixelsRef();	
-	virtual void draw(float x, float y); 
-	virtual int getWidth();	
-	virtual int getHeight();
-	virtual bool videoSettings(); 
-	virtual void close(); 
+	
+	void draw(float x, float y);
+	void draw(float x, float y, float w, float h); 
+	float getWidth();	
+	float getHeight();
+	
+	bool videoSettings(); 
+	void close(); 
     
-	virtual void setGain(int value); 
-	virtual int getGain();
-	virtual void setShutter(int value); 
-	virtual int getShutter(); 
+	void setGain(int value); 
+	int getGain();
+	void setShutter(int value); 
+	int getShutter(); 
 	
 	int getGamma();
 	void setGamma(int value); 
 	int getBrightness();
 	void setBrightness(int value); 
 
-	
+	void initControlPanel(ofxAutoControlPanel& gui, float w); 
 	
     ofxLibdc::Camera camera;	
 	
