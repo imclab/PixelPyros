@@ -15,46 +15,55 @@ class CameraManagerWarped : public CameraManager {
 
 	public :
 	
+	
 	CameraManagerWarped() : CameraManager() { 
 		
-	
-		testImage.allocate(1024, 768, OF_IMAGE_GRAYSCALE);
 		
-		testImage.loadImage("JubileeLibrary.jpg");
-		// check camera exists! 
-		
-		warper.setSourceImage(testImage);
-		
-		warper.guiVisible = true; 
+		warper.guiVisible = false; 
 
-		
-	}
+	};
 	
-	bool update()  { 
+	void init() { 
+		CameraManager::init(); 
+		warper.init(getWidth(), getHeight(), APP_WIDTH, APP_HEIGHT, camera->name);
+	};
+	
+	bool update()  {
 	
 		
 		if( CameraManager::update()) { 
 			
-			testImage.setFromPixels(camera->getPixelsRef());
-			warper.update(); 		
+			
+			warper.update(camera->getPixelsRef()); 		
 			return true;
 		} else { 
 			return false; 
 			
 		}
 		
-	}
-	void draw(float x,float y)  { 
-		if(!warper.guiVisible) CameraManager::draw(x,y);
-		warper.draw(); 
+	};
+	bool changeCamera(CameraWrapper* cam){
+		
+		CameraManager::changeCamera(cam); 
+		cout << "CameraWarped change camera"<< camera->name << " " << getWidth() << " " << getHeight() << endl;
+		warper.init(getWidth(), getHeight(), APP_WIDTH, APP_HEIGHT, camera->name);
+		
 		
 	}
+	
+	void draw(float x,float y)  { 
+		if(!warper.guiVisible) ;//CameraManager::draw(x,y);
+		else warper.draw(camera->getPixelsRef()); 
+		
+	};
 
+	bool toggleWarperGui() { 
+		return warper.toggleGui(); 	
+		
+	};
+	
 	
 	Warper warper; 
-	ofImage testImage; 
-	
-	
 	
 
 

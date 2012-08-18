@@ -9,49 +9,20 @@
 
 #include "CameraVidGrabber.h"
 
-bool CameraVidGrabber::setup(string _name, int width, int height, int framerate){
+bool CameraVidGrabber::setup(string _name, int width, int height, int framerate) {
+	
+	CameraWrapper::setup(_name, width, height, framerate);	
 	
 	if(!vidGrabber.initGrabber(width, height)) return false;
 	vidGrabber.setDesiredFrameRate(framerate); 
 	name = _name; 
     frameNum = 0; 
 	
+	baseVideo = &vidGrabber;
+	
 	return true;
    
 }
-bool CameraVidGrabber::update() {
-	vidGrabber.update(); 
-    bool newFrame = vidGrabber.isFrameNew();
-    
-   	return newFrame; 
-	
-}
-
-void CameraVidGrabber::draw(float x, float y) {
-	vidGrabber.draw(x, y); 
-}
-void CameraVidGrabber::draw(float x, float y, float w, float h) {
-	vidGrabber.draw(x, y,w,h); 
-}
-
-ofPixelsRef CameraVidGrabber::getPixelsRef(){
-	return vidGrabber.getPixelsRef();
-
-}
-
-ofImage* CameraVidGrabber::getImage(){
-	//return &vidGrabber.getGrabber();
-	
-}
-float CameraVidGrabber::getWidth(){
-	return vidGrabber.getWidth(); 
-
-}
-float CameraVidGrabber::getHeight(){
-	return vidGrabber.getHeight(); 
-
-}
-
 
 
 bool CameraVidGrabber::videoSettings(){
@@ -60,9 +31,3 @@ bool CameraVidGrabber::videoSettings(){
 }
 
 
-
-void CameraVidGrabber::close() { 
-	vidGrabber.close(); 
-	
-	
-}

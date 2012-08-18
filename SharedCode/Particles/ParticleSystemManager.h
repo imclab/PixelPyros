@@ -15,10 +15,15 @@ class ParticleSystemManager {
 
 public:
 	
+    ParticleSystemManager() {
+    
+        activeParticleCount = 0;
+        
+    }
 	
-	void update(float deltaTime) { 
+	void update(float deltaTime) {
 		
-	
+        activeParticleCount  =0 ; 
 		
 		for(int i = 0; i<physicsObjects.size(); i++) { 
 			
@@ -41,7 +46,8 @@ public:
 			ParticleSystem* ps = particleSystems[i]; 
 			if(ps->finished) continue; 
 			
-			ps->update(deltaTime); 
+			ps->update(deltaTime);
+            activeParticleCount+=ps->activeParticleCount;
 			
 			if(ps->finished) { 
 				spareParticleSystems.push_back(ps); 
@@ -129,7 +135,7 @@ public:
 	vector <PhysicsObject *> physicsObjects; 
 	vector <PhysicsObject *> sparePhysicsObjects; 
 
-
+    int activeParticleCount; 
 
 
 };

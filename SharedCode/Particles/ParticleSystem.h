@@ -10,6 +10,7 @@
 #pragma once
 #include "Particle.h"
 #include "ParticleSystemSettings.h"
+#include "ParticleRendererBase.h"
 #include "LifeCycle.h"
 
 class ParticleSystem { 
@@ -40,11 +41,12 @@ class ParticleSystem {
 	
 	LifeCycle life; 
 	
-	ParticleSystemSettings settings; 
+	ParticleSystemSettings settings;
+	ParticleRendererBase* renderer; 
 	
 	PhysicsObject * attachedPhysicsObject; 
 	
-	
+	int activeParticleCount;
 	
 
 }; 

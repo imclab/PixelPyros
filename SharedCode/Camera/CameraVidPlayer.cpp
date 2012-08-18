@@ -8,7 +8,9 @@
 
 #include "CameraVidPlayer.h"
 
-bool CameraVidPlayer::setup(string _name, string filename, int width, int height, int framerate){
+bool CameraVidPlayer::setup(string _name, string filename, int width, int height, int framerate) {
+	
+	CameraWrapper::setup(_name, width, height, framerate);
     
     
 	//vidPlayer.initGrabber(width, height);
@@ -20,48 +22,17 @@ bool CameraVidPlayer::setup(string _name, string filename, int width, int height
 		return false;
     	
 	}
-    name = _name; 
+    
     frameNum = 0; 
     vidPlayer.play();
+	
+	baseVideo = &vidPlayer; 
 
     return true; 
 	
 }
-bool CameraVidPlayer::update() {
-	vidPlayer.update(); 
-    bool newFrame = vidPlayer.isFrameNew();
-    
-   	return newFrame; 
-	
-}
-
-void CameraVidPlayer::draw(float x, float y) {
-	vidPlayer.draw(x, y); 
-}
-
-void CameraVidPlayer::draw(float x, float y, float w, float h) {
-	vidPlayer.draw(x, y, w, h); 
-}
-
-ofPixelsRef CameraVidPlayer::getPixelsRef(){
-	return vidPlayer.getPixelsRef();
-}
-
-float CameraVidPlayer::getWidth(){
-	return vidPlayer.getWidth(); 
-    
-}
-float CameraVidPlayer::getHeight(){
-	return vidPlayer.getHeight(); 
-    
-}
 bool CameraVidPlayer::videoSettings(){
 	//vidPlayer.videoSettings(); 
     vidPlayer.setPosition(0); 
-	
-}
-void CameraVidPlayer::close() { 
-	vidPlayer.close(); 
-	
 	
 }

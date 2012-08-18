@@ -14,20 +14,12 @@ class CameraVidPlayer : public CameraWrapper {
     
 	public :
 	bool setup(string _name, string filename, int width = 640, int height = 480, int framerate =30);
-	bool update();  // returns true if frame is new
 	
-	ofPixelsRef getPixelsRef();	
-	//ofImage * getImage(); 
 	
-	void draw(float x, float y); 
-	void draw(float x, float y, float w, float h); 
-	float getWidth();	
-	float getHeight();
 	bool videoSettings(); 
-	void close(); 
-    
+   
 	ofVideoPlayer vidPlayer; 
-    
+
     
     
 	

@@ -9,82 +9,29 @@
 
 #include "CameraFirewire.h"
 
-bool CameraFirewire::setup(string _name, int width, int height, int framerate){
+bool CameraFirewire::setup(string _name, int width, int height, int framerate)  {
 	
-    //camera.setBayerMode(DC1394_COLOR_FILTER_GBRG);
-//    camera.set1394b(true); 
-
+	CameraWrapper::setup(_name, width, height, framerate);
     
 	// setup() will pick the first camera. Or if there are multiple cameras you
 	// can use the number, or the GUID of the camera.
     if(!camera.setup()) return false;
 	
     camera.setBayerMode(DC1394_COLOR_FILTER_GBRG);
-    
-	
-	unsigned int min, max; 
-	camera.getBrightnessRawRange(&min, &max);
-	camera.getGammaRawRange(&min, &max);
-
-	cout << "min " << min << " max " << max << endl; 
-	//camera.setExposureRaw(1);
-    //camera.setFeatureAbs(<#dc1394feature_t feature#>, <#float value#>)tBayerMode(DC1394_COLOR_FILTER_GBRG);
-   // setGain(500); 
-   // setShutter(framerate); 
+	//    camera.set1394b(true); 
+   
     name = _name; 
-    frameNum = 0; 
-	
-	//curFrame.allocate(width, height, OF_IMAGE_COLOR);
+	baseVideo = &camera;
 	
 	return true; 
 	
 }
-bool CameraFirewire::update() {
-	//setShutter(50); 
-	//setGain(100); 
-	camera.setExposureRaw(20);
-	if(camera.grabVideo(curFrame)) {
-		curFrame.update();
-//        
-//        cout << camera.getFrameRate() << " " << 
-//                camera.getGainRaw() << " " << 
-//                camera.getShutterRaw() << " " << 
-//                camera.getBrightnessRaw() << " " << 
-//                camera.getExposureRaw() << " " << 
-//                camera.getGammaRaw() << "\n"; 
-                
-        return true;
-	}	
-    return false; 
-}
 
-void CameraFirewire::draw(float x, float y) {
-	curFrame.draw(x, y); 
-}
-
-void CameraFirewire::draw(float x, float y, float w, float h) {
-	curFrame.draw(x, y, w, h); 
-}
-
-ofPixelsRef CameraFirewire::getPixelsRef(){
-	return curFrame.getPixelsRef();
-    
-}
-float CameraFirewire::getWidth(){
-	return camera.getWidth(); 
-    
-}
-float CameraFirewire::getHeight(){
-	return camera.getHeight(); 
-    
-}
 bool CameraFirewire::videoSettings(){
 	//camera.videoSettings(); 
 	
 }
-void CameraFirewire::close() { 
-	
-}
+
 
 void CameraFirewire :: initControlPanel(ofxAutoControlPanel &gui, float w) { 
 	

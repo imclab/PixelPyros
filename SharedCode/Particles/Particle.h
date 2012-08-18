@@ -10,7 +10,6 @@
 
 #include "PhysicsObject.h"
 #include "Quint.h"
-#include "ParticleRendererBase.h"
 #include "LifeCycle.h"
 #include "ColourModifier.h"
 
@@ -24,9 +23,12 @@ class Particle : public PhysicsObject{
 	void reset();
 	
 	bool update(float deltaTime) ;
+    ofColor& getColour();
 	
-	bool draw();	
+//	bool draw();
 	
+    float size;
+    
 	float sizeStart; 
 	float sizeEnd; 
 	float shimmerMin; 
@@ -34,8 +36,12 @@ class Particle : public PhysicsObject{
 	bool	enabled; 
 	
 	LifeCycle life; 
-	ParticleRendererBase * renderer; 
-	ColourModifier * colourModifier; 
+	//ParticleRendererBase * renderer;
+	ColourModifier * colourModifier;
+	
+	ofVec3f startPos;
+	
+	float rotateAroundStartPos;
 	
 };
 

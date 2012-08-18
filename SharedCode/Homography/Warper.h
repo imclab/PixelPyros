@@ -17,19 +17,18 @@ using namespace cv;
 
 class Warper { 
 
-	
-	
 	public : 
 	
+	Warper();
 	
-	Warper() ;
+	bool init(float srcwidth, float srcheight, float dstwidth, float dstheight, string label="defaultWarp"); 
 	
-	bool update();
+	bool update(ofPixels& pix);
 	
 	
-	void setSourceImage(ofImage& img) ;
+	//void setSourceImage(ofImage& img) ;
 	
-	void draw();
+	void draw(ofPixels& pix);
 	
 	void mousePressed(ofMouseEventArgs &e);
 	void mouseDragged(ofMouseEventArgs &e);
@@ -43,11 +42,18 @@ class Warper {
 	
 	void showGui(); 
 	void hideGui(); 
-	void toggleGui(); 
-	
-	ofImage* srcImage; 
+	bool toggleGui(); 
+		
+	//ofImage* srcImage; 
 	ofImage warpedImage; 
 	string  settingsFileLabel; 
+	
+	float srcWidth; 
+	float srcHeight; 
+	float dstWidth; 
+	float dstHeight; 
+	
+	float dstPreviewScale; 
 	
 	vector <ofVec2f> srcVecs, dstVecs; 
 

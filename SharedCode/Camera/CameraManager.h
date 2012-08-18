@@ -40,6 +40,8 @@ class CameraManager : public ofBaseDraws{
 	void close(); 
 	
 	void next(); 
+	bool changeCamera(string camname);
+	virtual bool changeCamera(CameraWrapper* cam);
 	
 	void initControlPanel(ofxAutoControlPanel& gui); 
 	void guiEventsIn(guiCallbackData & data);

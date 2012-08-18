@@ -4,7 +4,7 @@
 void testApp::setup(){
 	
 	
-	ofSetFrameRate(50);
+	//ofSetFrameRate(50);
 	lastUpdateTime = ofGetElapsedTimef();
 	
 	
@@ -16,6 +16,7 @@ void testApp::setup(){
 	
 	cameraManager.init();
 	//cameraManager.shutter = 35; 
+	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight()); 
 	
 	
 	setupControlPanel();
@@ -37,7 +38,7 @@ void testApp::update(){
 		//motionManager.setHomography(cameraManager.warper.inverseHomography);
 		motionManager.update(cameraManager.getPixelsRef());
 		
-		scenes[currentSceneIndex]->updateMotion(motionManager); 
+		scenes[currentSceneIndex]->updateMotion(motionManager, cameraManager.warper.inverseHomography ); 
 		
 	}
 	
@@ -58,9 +59,11 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
+	//float motion = 	motionManager.getMotionAtPosition(ofVec2f(ofGetMouseX(), ofGetMouseY()), 10);
+
 	ofSetColor(255); 
 	cameraManager.draw(0,0);
-	//motionManager.diff.draw(0,0, 1024,768);
+	motionManager.draw();
 
 	ofPushMatrix(); 
 	
@@ -70,24 +73,29 @@ void testApp::draw(){
 	ofTranslate(0,ofGetHeight()*-0.9);
 
 	
-	for(int i = 0; i<scenes.size(); i++) {	
-		scenes[i]->draw(); 
-	}
+
 	particleSystemManager.draw();
 	ofPopMatrix(); 
 	
-	
+	for(int i = 0; i<scenes.size(); i++) {	
+		scenes[i]->draw(); 
+	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20); 
-	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35); 
+	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
+	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	
-	float motion = 	motionManager.getMotionAtPosition(ofVec2f(ofGetMouseX(), ofGetMouseY()), 10);
-	ofDrawBitmapString(ofToString(motion),20,50); 
+	//ofDrawBitmapString(ofToString(motion),20,50); 
 	
 	
 	ofDisableBlendMode();
-	ofSetColor(255); 
-	
+	ofSetColor(255);
+    ofNoFill();
+    ofRect(0,0,768*2,1024);
+	ofFill();
+    
+    
+    
 }
 
 void testApp::keyPressed(int key){
@@ -97,6 +105,8 @@ void testApp::keyPressed(int key){
 		nextScene(); 
 	} else if(key=='c') { 
 		cameraManager.next(); 
+	} else if(key=='w') { 
+		cameraManager.toggleWarperGui(); 
 	}
 
 }
@@ -107,13 +117,14 @@ void testApp:: mousePressed(int x, int y, int button ) {
 
 void testApp:: setupScenes() { 
 	
+	scenes.push_back(new SceneTest(particleSystemManager));
 	scenes.push_back(new Scene1(particleSystemManager));
+	scenes.push_back(new Scene2(particleSystemManager)); 
 	
 	scenes[0]->start();
 	
 	currentSceneIndex = 0; 
 	
-	scenes.push_back(new Scene2(particleSystemManager)); 
 
 }
 
@@ -149,9 +160,9 @@ bool testApp::prevScene(){
 void testApp::mouseMoved( int x, int y ){
 	for(int j = 0 ; j<scenes.size(); j++ ) { 
 		Scene* scene1 = scenes[j];
-		vector <Trigger*> triggers = scene1->triggers; 
+		vector <TriggerBase*> triggers = scene1->triggers; 
 		for(int i = 0; i<triggers.size(); i++) { 
-			Trigger * trigger = triggers[i]; 
+			TriggerBase * trigger = triggers[i]; 
 			float distance = trigger->pos.distance(ofVec3f(x,y));
 			if(distance<20) { 
 				trigger->registerMotion(1.0f-(distance/20.0f)); 
@@ -166,15 +177,25 @@ void testApp::mouseMoved( int x, int y ){
 void testApp::setupControlPanel() { 
 
 	
-	gui.setup(ofGetWidth(), ofGetHeight());
+	gui.setup(900, ofGetHeight());
 	
 
 	ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 60, 200));
 	ofxControlPanel::setTextColor(simpleColor(240, 50, 50, 255));
 	
-	gui.loadFont("Andale Mono.ttf", 8);		
-
+//	gui.loadFont("Andale Mono.ttf", 8);		
+	gui.bIgnoreLayout = true;
+	gui.addPanel("Cameras");
+	
+	
 	cameraManager.initControlPanel(gui);
+	//gui.getPanelInstance(gui.getCurrentPanelName())->addColumn();
+	gui.setWhichColumn(1);
+	gui.addPanel("Motion");
+	
+	motionManager.initControlPanel(gui);
+	
+	
 //	gui.addPanel(" Test Settings");
 //	
 //	gui.addToggle("Test toggle", "TEST_TOGGLE", false);

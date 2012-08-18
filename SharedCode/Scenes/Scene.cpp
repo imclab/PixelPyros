@@ -25,8 +25,6 @@ void Scene :: start() {
 		
 		triggers[i]->start();
 		
-		
-		
 	}
 	
 	active = true;
@@ -80,35 +78,36 @@ void Scene:: draw() {
 
 
 }
+//
+//template <typename T> 
+//void Scene:: addTriggers(T trigger, int numTriggers, float x, float y, float width) {
+//	
+//	float spacing = width/(numTriggers -1);
+//	 
+//	
+//	for(int i = 0; i<numTriggers; i++) { 
+//	
+//		T * newtrigger = new T(trigger);
+//		triggers.push_back(newtrigger); 
+//		
+//		// TODO make this height adjustable somehow 
+//		newtrigger->pos.set(x, y); 
+//		x+=spacing; 
+//		
+//		
+//	}
+//	
+//	
+//}
 
-void Scene:: addTriggers(Trigger trigger, int numTriggers, float x, float y, float width) {
-	
-	float spacing = width/(numTriggers -1);
-	 
-	
-	for(int i = 0; i<numTriggers; i++) { 
-	
-		Trigger * newtrigger = new Trigger(trigger);
-		triggers.push_back(newtrigger); 
-		
-		// TODO make this height adjustable somehow 
-		newtrigger->pos.set(x, y); 
-		x+=spacing; 
-		
-		
-	}
-	
-	
-}
 
-
-void Scene :: updateMotion(MotionManager& motionManager){
+void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
 	for(int i = 0; i<triggers.size(); i++) { 
 		
-		Trigger * trigger = triggers[i]; 
+		TriggerBase * trigger = triggers[i]; 
 		
-		float motion = motionManager.getMotionAtPosition(trigger->pos, 10); 
+		float motion = motionManager.getMotionAtPosition(trigger->pos, trigger->radius*2, homography); 
 		trigger->registerMotion(motion/255);
 		
 		//cout << motion << endl; 

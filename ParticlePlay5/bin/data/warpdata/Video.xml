@@ -1,0 +1,36 @@
+<srcvec>
+    <x>0</x>
+    <y>0</y>
+</srcvec>
+<srcvec>
+    <x>1536</x>
+    <y>0</y>
+</srcvec>
+<srcvec>
+    <x>0</x>
+    <y>1024</y>
+</srcvec>
+<srcvec>
+    <x>1536</x>
+    <y>1024</y>
+</srcvec>
+<dstvec>
+    <x>0</x>
+    <y>0</y>
+</dstvec>
+<dstvec>
+    <x>1536</x>
+    <y>0</y>
+</dstvec>
+<dstvec>
+    <x>0</x>
+    <y>1024</y>
+</dstvec>
+<dstvec>
+    <x>1536</x>
+    <y>1024</y>
+</dstvec>
+<srcWidth>1024</srcWidth>
+<srcHeight>768</srcHeight>
+<dstWidth>1536</dstWidth>
+<dstHeight>1024</dstHeight>

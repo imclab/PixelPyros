@@ -12,7 +12,8 @@ ParticleSystem::ParticleSystem (){
 
 	life.lifeTime = 10; 
 	life.delay = 0; 
-	reset(); 
+	reset();
+	renderer = new ParticleRendererBase();
 
 	attachedPhysicsObject = NULL; 
 
@@ -49,7 +50,7 @@ bool ParticleSystem::update(float deltaTime) {
 	
 	}
 	
-	int activeParticleCount = 0; 
+    activeParticleCount = 0; 
 	
 	for(int i = 0; i<particles.size(); i++) { 
 		Particle &p = *(particles[i]); 
@@ -70,7 +71,14 @@ bool ParticleSystem::draw() {
 	
 	
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
-	ofPushStyle(); 
+	
+    ofMesh mesh;
+	
+	renderer->renderParticles(particles, mesh);
+	 mesh.draw();
+    
+    /*
+    ofPushStyle();
 	ofSetCircleResolution(7);
 	
 	for(int i = 0; i<particles.size(); i++) { 
@@ -79,7 +87,8 @@ bool ParticleSystem::draw() {
 		particles[i]->draw(); 
 		
 	}
-	ofPopStyle(); 
+	ofPopStyle(); */
+    
 	ofDisableBlendMode();
 	
 }
@@ -137,7 +146,9 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 	settings.initColourModifier(p->colourModifier, life); 	
 	p->shimmerMin = settings.shimmerMin; 
 	
+	p->startPos = pos;
 	
+	p->rotateAroundStartPos = 50;
 	
 	return p;
 	

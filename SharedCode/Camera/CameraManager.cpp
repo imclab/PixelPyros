@@ -106,19 +106,35 @@ void CameraManager::next() {
 		CameraWrapper * currentCamera = cameras[i]; 
 		if(currentCamera == camera) {
 			if(i==cameras.size()-1) {
-				camera = cameras[0];
+				changeCamera(cameras[0]);
 			} else { 
-				camera = cameras[i+1]; 
+				changeCamera(cameras[i+1]); 
 			}
 			break; 
-
 		}
 	}
 }
 
+bool CameraManager:: changeCamera(string camname) { 
+	for(int i = 0; i<cameras.size(); i++) { 
+		CameraWrapper * cam = cameras[i]; 
+		if(cam->name == camname) { 
+			changeCamera(cam); 
+			return true; 
+		}
+	}
+	return false; 
+	
+}
+
+bool CameraManager :: changeCamera(CameraWrapper* cam) { 
+	camera = cam; 
+	cout << "changed camera to " << camera->name << endl; 
+	return true; 
+}
+
 void CameraManager:: initControlPanel(ofxAutoControlPanel &gui){
 	
-	gui.addPanel("Cameras");
 	
 	cameraPreview = gui.addDrawableRect("video", this, 400, 300);
 	
@@ -153,27 +169,6 @@ void CameraManager::guiEventsIn(guiCallbackData & data){
 		cameraFirewire->setGamma(data.getInt(0));
 		
 	} 
-	
-	
-	
-//	else if (data.getXmlName() ==  "SPEED" )
-//		ps.settings.speed = data.getFloat(0); 
-//	else if(data.getXmlName() ==  "SPEED_VAR") 
-//		ps.settings.speedVar = data.getFloat(0); 
-//	else if (data.getXmlName() ==  "DIRECTION" )
-//		ps.settings.direction = data.getFloat(0); 
-//	else if(data.getXmlName() ==  "DIRECTION_VAR") 
-//		ps.settings.directionVar = data.getFloat(0); 
-//	else if(data.getXmlName() ==  "POINT_IN_DIRECTION") 
-//		ps.settings.pointInDirection = (data.getInt(0)==1); 
-//	else if(data.getXmlName() ==  "GRAVITY") 
-//		ps.settings.gravity.y = data.getInt(0); 
-//	else if(data.getXmlName() ==  "SPAWN_MODE") {
-//		ps.setSpawnMode(data.getInt(0)); 
-//		ps.reset(); 
-//	}
-//
-	
 	
 }
 

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "BasicRocket.h"
 
 class Scene1 : public Scene {
 	
@@ -185,7 +186,7 @@ class Scene1 : public Scene {
 		
 		
 		
-		RocketSettings rocketSettings; 
+		RocketSettings rocketSettings;
 		
 		rocketSettings.startSpeedMin = 600;
 		rocketSettings.startSpeedMax = 700; 
@@ -197,7 +198,7 @@ class Scene1 : public Scene {
 		rocketSettings.addParticleSystemSetting(ps2); 
 		rocketSettings.addParticleSystemSetting(ps3); 
 		
-		Trigger trigger(particleSystemManager); 
+		TriggerBase trigger(particleSystemManager); 
 		
 		trigger.rocketSettings = rocketSettings; 
 		

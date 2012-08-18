@@ -8,27 +8,88 @@
  */
 
 #pragma once
-
-//#include "ofMain.h"
+#include "ofMain.h"
+#include "ofxCv.h"
 
 class CameraWrapper :public ofBaseDraws{ 
 
 	public : 
+	CameraWrapper() { 
+		flipX = flipY = false; 
+		greyScale = true; 
+		
+		
+	};
+	virtual bool setup(string _name, int width = 640, int height = 480, int framerate =30){
+		greyImage.allocate(width, height, OF_IMAGE_GRAYSCALE); 
+		name = _name;
 	
-	virtual bool setup(string _name, int width = 640, int height = 480, int framerate =30){};
-	virtual bool update(){};  // returns true if frame is new
+	};
+	virtual bool update(){
+
+		baseVideo->update(); 
+		bool newFrame = baseVideo->isFrameNew();
+		
+		if(newFrame) { 
+			
+			
+			cv::Mat camMat = ofxCv::toCv(baseVideo->getPixelsRef()); 
+			
+			if(flipX||flipY) { 
+				int code; 
+				if(flipX && flipY) 
+					code = -1; 
+				else if(flipX) 
+					code = 1; 
+				else 
+					code = 0; 
+				
+				cv::flip(camMat, camMat, code);
+				
+			}
+			
+			if(greyScale) { 
+				cv::Mat greyMat = ofxCv::toCv(greyImage); 
+				ofxCv::convertColor(camMat, greyMat, CV_RGB2GRAY); 
+				greyImage.update();
+			}
+		}
+		
+		return newFrame; 
+		
+	};  // returns true if frame is new
 	
-	virtual ofPixelsRef getPixelsRef(){};	
-	//virtual ofImage* getImage(); 
+	virtual ofPixelsRef getPixelsRef(){
+		return greyScale ? greyImage.getPixelsRef() : baseVideo->getPixelsRef(); 
+	};	
 	
-	virtual void draw(float x, float y){}; 
-	virtual void draw(float x, float y, float w, float h){}; 
-	
+	virtual void draw(float x, float y){
+		ofBaseDraws * output = greyScale ? (ofBaseDraws*)&greyImage : (ofBaseDraws*)baseVideo; 
+		
+		output->draw(x, y); 
+	}; 
+	virtual void draw(float x, float y, float w, float h){
+		
+		ofBaseDraws * output = greyScale ? (ofBaseDraws*)&greyImage : (ofBaseDraws*)baseVideo; 
+
+		output->draw(x, y, w, h);
+	}; 
 
 	
 	virtual bool videoSettings(){}; 
-	virtual void close(){}; 
+	virtual void close(){
+		
+		baseVideo->close(); 
+	}; 
     
+	
+	virtual float getWidth(){ 
+		return baseVideo->getWidth();
+	};
+	virtual float getHeight(){ 
+		return baseVideo->getHeight();
+	};
+	
   	virtual void setGain(int value){}; 
 	virtual int getGain(){};
 	virtual void setShutter(int value){}; 
@@ -39,12 +100,20 @@ class CameraWrapper :public ofBaseDraws{
 	virtual int getBrightness(){};
 	virtual void setBrightness(int value){}; 
 
-	
+	bool flipX; 
+	bool flipY; 
+	bool greyScale;
 	
 	int frameNum; 
 	
 
 	string name; 
+	
+	ofImage greyImage; 
+	
+	
+	
+    ofBaseVideoDraws* baseVideo; 
 
 
 };
