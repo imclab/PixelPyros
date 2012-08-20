@@ -20,7 +20,7 @@ class Scene2 : public Scene {
 		
 		TriggerBase trigger(particleSystemManager); 
 		
-		trigger.rocketSettings = rocketSettings; 
+		trigger.addRocket(rocketSettings);
 		// makes one shot type
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger.triggerLevel = 1;
@@ -29,7 +29,7 @@ class Scene2 : public Scene {
 		
 		trigger.chargeAmount = 2; 
 	
-		addTriggers(trigger, 50, 100,ofGetHeight()*0.85, ofGetWidth()-160);
+		//addTriggers(trigger, 50, 100,ofGetHeight()*0.85, ofGetWidth()-160);
 		
 		
 	}

@@ -9,9 +9,12 @@
 #include "TriggerBase.h"
 
 
-TriggerBase :: TriggerBase (ParticleSystemManager& psm) : particleSystemManager(psm) { 
+TriggerBase :: TriggerBase (ParticleSystemManager& psm) : particleSystemManager(psm){
 	
-	unitPower =1; 
+	
+	// the power level for the trigger
+	unitPower =1;
+	// the amount of power a rocket takes away
 	rocketPower = 0.2; 
 	elapsedTime = 0; 
 	lastRocketTime = 0; 
@@ -72,7 +75,7 @@ bool TriggerBase::update(float deltaTime) {
 			return false; 
 		}
 	} else { 
-		scale+= (1-scale)*0.05; 
+		scale+= (1-scale)*0.1;
 	}
 
 	
@@ -138,7 +141,7 @@ void TriggerBase::draw() {
     
     ofSetColor(ofColor::white);
     
-	if((unitPower>rocketPower) || (fmodf(elapsedTime,0.16) < 0.08)) {
+	if((unitPower>rocketPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
 		
 		ofCircle(0, 0, radius*unitPower); 
 		ofNoFill(); 
@@ -167,7 +170,10 @@ bool TriggerBase::makeRocket() {
 	if(unitPower<=rocketPower) return false; 
 	else if (elapsedTime - lastRocketTime < minTimeBetweenRockets) return false; 
 	
-	RocketSettings & rs = rocketSettings; 
+	if(rocketSettings.size()==0) return false;
+	
+	
+	RocketSettings & rs = rocketSettings[0];
 	
 	PhysicsObject *rocket = particleSystemManager.getPhysicsObject(); 
 	
@@ -175,7 +181,8 @@ bool TriggerBase::makeRocket() {
 	rocket->vel.rotate(0,0,ofRandom(rs.direction - rs.directionVar, rs.direction+rs.directionVar)); 
 	rocket->gravity = rs.gravity; 
 	rocket->drag = rs.drag; 
-	rocket->pos.set(pos); 
+	rocket->pos.set(pos);
+	rocket->lastPos.set(pos);
 	
 	for(int i = 0; i<rs.particleSystemSettings.size(); i++) { 
 		ParticleSystemSettings pss = rs.particleSystemSettings[i]; 
@@ -191,4 +198,9 @@ bool TriggerBase::makeRocket() {
 	return true; 
 }
 
-
+void TriggerBase:: addRocket(RocketSettings rocket) {
+	
+	rocketSettings.push_back(rocket);
+	
+	
+}

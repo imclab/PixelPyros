@@ -8,16 +8,18 @@
 
 
 #pragma once
+
 #include "Particle.h"
 #include "ParticleSystemSettings.h"
 #include "ParticleRendererBase.h"
 #include "LifeCycle.h"
+#include "SoundPlayer.h"
 
 class ParticleSystem { 
 
 	public : 
 	
-	ParticleSystem();
+	ParticleSystem(SoundPlayer& soundPlayer);
 	
 	void reset();
 	void init(ParticleSystemSettings& pes); 
@@ -42,11 +44,14 @@ class ParticleSystem {
 	LifeCycle life; 
 	
 	ParticleSystemSettings settings;
-	ParticleRendererBase* renderer; 
+	ParticleRendererBase renderer; 
 	
 	PhysicsObject * attachedPhysicsObject; 
 	
 	int activeParticleCount;
+	
+	//string startSound;
+	SoundPlayer& soundPlayer;
 	
 
 }; 

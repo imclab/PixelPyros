@@ -18,29 +18,20 @@ Scene::Scene(ParticleSystemManager & psm) : particleSystemManager(psm) {
 }
 
 
-void Scene :: start() { 
-	for(int i=0; i<triggers.size(); i++) { 
-		
-		//if(ofRandom(100)<2) triggers[i]->makeRocket(); 
-		
-		triggers[i]->start();
-		
-	}
+void Scene :: start() {
 	
-	active = true;
+	if (startArrangement(0)) active = true;
 	
 }
 
 
 void Scene :: stop() { 
 	
-	for(int i=0; i<triggers.size(); i++) { 
+	for(int i=0; i<arrangements.size(); i++) {
 		
 		//if(ofRandom(100)<2) triggers[i]->makeRocket(); 
 		
-		triggers[i]->stop();
-		
-		
+		arrangements[i]->stop();
 		
 	}
 	stopping = true; 
@@ -50,14 +41,14 @@ void Scene :: stop() {
 bool Scene :: update(float deltaTime) {
 
 	if(!active) return false; 
-	int activeTriggers = 0; 
+	int activeArrangements = 0;
 	
-	for(int i=0; i<triggers.size(); i++) { 
+	for(int i=0; i<arrangements.size(); i++) {
 	
-		if( triggers[i]->update(deltaTime)) activeTriggers++;
+		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		
 	}
-	if((stopping) && (activeTriggers==0) ) {
+	if((stopping) && (activeArrangements==0) ) {
 		active = false;
 	}
 
@@ -69,46 +60,25 @@ bool Scene :: update(float deltaTime) {
 void Scene:: draw() { 
 
 	
-	for(int i=0; i<triggers.size(); i++) { 
+	for(int i=0; i<arrangements.size(); i++) {
 		
-		triggers[i]->draw();
+		arrangements[i]->draw();
 		
 	}
 	
 
 
 }
-//
-//template <typename T> 
-//void Scene:: addTriggers(T trigger, int numTriggers, float x, float y, float width) {
-//	
-//	float spacing = width/(numTriggers -1);
-//	 
-//	
-//	for(int i = 0; i<numTriggers; i++) { 
-//	
-//		T * newtrigger = new T(trigger);
-//		triggers.push_back(newtrigger); 
-//		
-//		// TODO make this height adjustable somehow 
-//		newtrigger->pos.set(x, y); 
-//		x+=spacing; 
-//		
-//		
-//	}
-//	
-//	
-//}
-
-
 void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
-	for(int i = 0; i<triggers.size(); i++) { 
+	for(int i = 0; i<arrangements.size(); i++) {
 		
-		TriggerBase * trigger = triggers[i]; 
+		Arrangement * arrangement = arrangements[i];
+
+		arrangement->updateMotion(motionManager, homography);
 		
-		float motion = motionManager.getMotionAtPosition(trigger->pos, trigger->radius*2, homography); 
-		trigger->registerMotion(motion/255);
+//		float motion = motionManager.getMotionAtPosition(trigger->pos, trigger->radius*2, homography); 
+//		trigger->registerMotion(motion/255);
 		
 		//cout << motion << endl; 
 		
@@ -117,4 +87,11 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
 }
 
+bool Scene :: startArrangement(int num) {
+	if(num>=arrangements.size()) return false;
+	arrangements[num]->start(); 
+	return true;
+	
+	
+}
 

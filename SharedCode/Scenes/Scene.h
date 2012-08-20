@@ -8,7 +8,7 @@
 
 #pragma once 
 
-#include "TriggerBase.h"
+#include "Arrangement.h"
 #include "ParticleSystemManager.h"
 #include "MotionManager.h"
 #include "ofxCV.h"
@@ -22,39 +22,21 @@ class Scene {
 	
 	Scene(ParticleSystemManager& psm); 
 	
-	void start(); 
-	void stop();
+	virtual void start();
+	virtual void stop();
 	
-	bool update(float deltaTime); 
-	void draw(); 
+	virtual bool update(float deltaTime); 
+	virtual void draw(); 
 	
-	void updateMotion(MotionManager& motionManager, cv::Mat homography);
+	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
 	
-	template <typename T>  
-	void addTriggers(T trigger, int numTriggers, float x, float y, float width){
-		
-		float spacing = width/(numTriggers -1);
-		
-		
-		for(int i = 0; i<numTriggers; i++) { 
-			
-			T * newtrigger = new T(trigger);
-			triggers.push_back(newtrigger); 
-			
-			// TODO make this height adjustable somehow 
-			newtrigger->pos.set(x, y); 
-			x+=spacing; 
-			
-			
-		}
-		
-		
-	}; 
+	bool startArrangement(int num);
+	
 	
 	bool active; 
 	bool stopping; 
 	
-	vector <TriggerBase*> triggers; 
+	vector <Arrangement*> arrangements;
 	
 	ParticleSystemManager& particleSystemManager; 
 	

@@ -23,7 +23,7 @@ class TriggerBase {
 
 	public : 
 	
-	TriggerBase(ParticleSystemManager & psm); 
+	TriggerBase(ParticleSystemManager & psm);
 	virtual bool update(float deltaTime); 
 	virtual void draw(); 
 	
@@ -31,8 +31,10 @@ class TriggerBase {
 	virtual void stop(); 
 	
 	virtual void registerMotion(float unitValue); 
+	virtual void addRocket(RocketSettings rocket);
 	
-	bool makeRocket(); 
+	
+	virtual bool makeRocket();
 	
 	TriggerType type; 
 	
@@ -67,7 +69,7 @@ class TriggerBase {
 	
 	ofVec3f pos; 
 	
-	RocketSettings rocketSettings; 
+	vector <RocketSettings> rocketSettings;
 		
 	ParticleSystemManager & particleSystemManager; 
 

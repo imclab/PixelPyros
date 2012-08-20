@@ -9,7 +9,8 @@
 #include "ofMain.h"
 
 #include "ColourModifier.h"
-
+#include "VelocityModifierSettings.h"
+#include "ParticleRendererBase.h"
 
 typedef enum {
 	PARTICLE_EMIT_BURST, 
@@ -64,7 +65,7 @@ class ParticleSystemSettings {
 		//emitAttachedPhysicsObject = NULL; 
 		emitInheritVelocity = 0; 
 		
-		
+		velocityModifierSettings = 0; 
 		
 	};
 
@@ -130,7 +131,7 @@ class ParticleSystemSettings {
 	// ParticleSystem, right? Possibly add vector of renderers in the 
 	// future? For multiple renders. All particles in the same system
 	// should share the same renderer for future optimisations
-	//ParticleRenderer renderer; 
+	ParticleRendererBase renderer;
 
 	//EMISSION LIFE CYCLE
 	float emitLifeTime; 
@@ -147,9 +148,13 @@ class ParticleSystemSettings {
 	float emitSpeedModifier; 
 	float emitHueModifierOffset; 
 	//PhysicsObject * emitAttachedPhysicsObject; 
-	float emitInheritVelocity; 
+	float emitInheritVelocity;
+	
+	string startSound;
 
 
+
+	VelocityModifierSettings * velocityModifierSettings; 
 
 };
 

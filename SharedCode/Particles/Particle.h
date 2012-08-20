@@ -12,7 +12,7 @@
 #include "Quint.h"
 #include "LifeCycle.h"
 #include "ColourModifier.h"
-
+#include "VelocityModifier.h"
 
 class Particle : public PhysicsObject{
 	
@@ -35,13 +35,14 @@ class Particle : public PhysicsObject{
 	
 	bool	enabled; 
 	
-	LifeCycle life; 
-	//ParticleRendererBase * renderer;
+	LifeCycle life;
+	
 	ColourModifier * colourModifier;
+	VelocityModifier velocityModifier;
 	
 	ofVec3f startPos;
 	
-	float rotateAroundStartPos;
+	
 	
 };
 

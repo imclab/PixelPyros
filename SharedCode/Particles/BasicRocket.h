@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ParticleSystemSettings.h"
+#include "ParticleRendererSquare.h"
 
 class BasicRocket : public RocketSettings {
 
@@ -87,6 +88,7 @@ class BasicRocket : public RocketSettings {
 		//ps.emitAttachedPhysicsObject = &rocket;
 		ps.emitInheritVelocity = -0.5;
 		
+		ps.startSound = "SynthThud";
 		//psystem.init(ps);
 				
 		// optional colour modifier
@@ -123,7 +125,7 @@ class BasicRocket : public RocketSettings {
 		ps2.saturationMax = 100;
 		ps2.saturationEnd = 500;
 		
-		//ps.shimmerMin = 0.1;
+		ps2.shimmerMin = 0.1;
 		
 		// but also :
 		// lifeExpectancy
@@ -135,9 +137,12 @@ class BasicRocket : public RocketSettings {
 		ps2.emitDelay = 2;
 		ps2.emitLifeTime= 0.05;
 		
+		ps2.startSound = "ExplosionSynth1";
 		
+		//ps2.renderer = ParticleRendererSquare();
 		
-        
+		//ps2.velocityModifierSettings = new VelocityModifierSettings(10,-10);
+		
         startSpeedMin = 600;
 		startSpeedMax = 700;
 		direction = -90;

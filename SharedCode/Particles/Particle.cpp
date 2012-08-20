@@ -11,22 +11,24 @@
 Particle::Particle() : PhysicsObject() {
 	reset(); 
 	//renderer = new ParticleRendererBase();
-	colourModifier = new ColourModifier(); 
+	colourModifier = new ColourModifier();
+	//velocityModifier = new VelocityModifier();
 }
 
 
 void Particle::reset() { 
 	life.reset();
 	
-	PhysicsObject::reset(); 
+	PhysicsObject::reset();
 	
 	sizeStart = 10; 
 	sizeEnd = 0; 
-	shimmerMin = 0.2; 
+	shimmerMin = 0.2;
+	
+	velocityModifier.reset(); 
 	
 	enabled = true;
 	
-	rotateAroundStartPos = 0;
 }
 
 
@@ -45,13 +47,8 @@ bool Particle :: update(float deltaTime) {
     
 	colourModifier->update(life.unitLifeProgress);
 	
-	if(rotateAroundStartPos!=0) {
+	velocityModifier.update(deltaTime, this, startPos);
 		
-		pos.rotate(rotateAroundStartPos*deltaTime, startPos, ofVec3f(0,1,0));
-		vel.rotate(rotateAroundStartPos*deltaTime, ofVec3f(0,1,0));
-		
-	}
-	
 	if(life.isFinished()) enabled = false; 
 	return enabled; 
 }

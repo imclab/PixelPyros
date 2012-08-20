@@ -18,7 +18,7 @@ class ParticleRendererBase {
 	
 	ParticleRendererBase() {
 		
-				
+		shape.clear();
 		shape.push_back(ofVec3f(    0, -0.5 ));
 		shape.push_back(ofVec3f(  -0.5,  0 ));
 		shape.push_back(ofVec3f(  0.5,  0 ));
@@ -26,8 +26,9 @@ class ParticleRendererBase {
 		shape.push_back(ofVec3f(  -0.5,  0 ));
 		shape.push_back(ofVec3f(  0.5,  0 ));
 		shape.push_back(ofVec3f( 0,  0.5 ));
-		//	shape.push_back(ofVec3f( -0.5,  0.5 ));
-		//	shape.push_back(ofVec3f(    0, -0.5 ));
+		
+
+		meshMode  = OF_PRIMITIVE_TRIANGLES;
 		
 	}
     
@@ -35,14 +36,14 @@ class ParticleRendererBase {
         
         // BASIC TRIANGLE RENDERER
         
-		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+		mesh.setMode(meshMode);
 		
 		//ofMatrix4x4 mat;
 		
 		for(std::vector<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
 			
 			Particle& p = **it; // *(particles[i]);
-			if(!p.enabled) continue;
+			if((!p.enabled) || (p.size<1)) continue;
 			
 			for(int i = 0; i<shape.size(); i++) {
 				ofVec3f v = shape[i];
@@ -60,9 +61,9 @@ class ParticleRendererBase {
     	        
         
     }
-    
+	
 	vector <ofVec3f> shape;
-
+	ofPrimitiveMode meshMode; 
     
 
 

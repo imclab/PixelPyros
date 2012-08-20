@@ -12,7 +12,7 @@ class SceneTest : public Scene {
 		
 		TriggerTest trigger(psm); 
 		
-		addTriggers(trigger, 50, 0, ofGetHeight()*0.85, ofGetWidth());
+		//addTriggers(trigger, 50, 0, ofGetHeight()*0.85, ofGetWidth());
 		
 			
 		

@@ -8,14 +8,16 @@
 
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem (){ 
+ParticleSystem::ParticleSystem (SoundPlayer& sp) : soundPlayer(sp){
 
+		
 	life.lifeTime = 10; 
 	life.delay = 0; 
 	reset();
-	renderer = new ParticleRendererBase();
-
-	attachedPhysicsObject = NULL; 
+	
+	attachedPhysicsObject = NULL;
+	
+	
 
 }
 
@@ -32,11 +34,31 @@ bool ParticleSystem::update(float deltaTime) {
 	
 	life.update(deltaTime); 
 	
+
+	
 	if(attachedPhysicsObject!=NULL) { 
 		
 		pos = attachedPhysicsObject->pos; 
 		
 	}
+	
+	if(life.active && (life.elapsedTime-deltaTime <= life.delay)){
+		
+		if(settings.startSound!="") {
+			float pan = (pos.x - ofGetWidth()/2)/ (ofGetWidth()/2);
+		
+			//cout << "pan " << pan << endl;
+			float volume = 1;
+			if(attachedPhysicsObject!=NULL) {
+				volume = ofMap(attachedPhysicsObject->vel.length(), 200,3000,0,1,true);
+				//cout << "volume "<< volume << " " << attachedPhysicsObject->vel.length() << endl;
+				
+			}
+			soundPlayer.playSound(settings.startSound, volume , pan);
+		}
+		
+	}
+	
 	
 	if(life.active) {
 		while(numParticlesCreated<(life.elapsedTime-life.delay)*settings.emitCount){
@@ -74,8 +96,9 @@ bool ParticleSystem::draw() {
 	
     ofMesh mesh;
 	
-	renderer->renderParticles(particles, mesh);
-	 mesh.draw();
+	renderer.renderParticles(particles, mesh);
+	
+	mesh.draw();
     
     /*
     ofPushStyle();
@@ -118,7 +141,9 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 	
 	p->reset(); 
 	
-	p->pos = pos; 
+	p->pos = pos;
+	p->startPos = pos;
+
 	
 	settings.initVelocity(p->vel); 
 	
@@ -126,8 +151,12 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 		p->vel *= ofMap(life.unitLifeProgress, 0, 1, 1, settings.emitSpeedModifier);
 	}
 	
-	if((attachedPhysicsObject!=NULL) && (settings.emitInheritVelocity!=0)) {
-		p->vel += (attachedPhysicsObject->vel*settings.emitInheritVelocity); 
+	if(attachedPhysicsObject!=NULL){
+		
+		if(settings.emitInheritVelocity!=0) {
+			p->vel += (attachedPhysicsObject->vel*settings.emitInheritVelocity);
+		}
+			
 	}
 	
 	p->drag = settings.drag; 
@@ -146,9 +175,12 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 	settings.initColourModifier(p->colourModifier, life); 	
 	p->shimmerMin = settings.shimmerMin; 
 	
-	p->startPos = pos;
 	
-	p->rotateAroundStartPos = 50;
+	p->velocityModifier.reset();
+	
+	if(settings.velocityModifierSettings!=NULL) {
+		p->velocityModifier.init(settings.velocityModifierSettings);
+	}
 	
 	return p;
 	
@@ -171,7 +203,9 @@ void ParticleSystem:: init(ParticleSystemSettings& pes) {
 	
 	//physics.drag = pes.drag; 
 	//physics.gravity = pes.gravity; 
-	settings = pes; 
+	settings = pes;
+	
+	renderer = pes.renderer;
 	
 	
 }

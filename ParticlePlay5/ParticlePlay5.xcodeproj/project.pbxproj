@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
+		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		966C865C15C7274E00D5A853 /* Back.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864515C7274E00D5A853 /* Back.cpp */; };
@@ -125,7 +126,18 @@
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* BasicRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicRocket.h; path = ../../SharedCode/Particles/BasicRocket.h; sourceTree = "<group>"; };
+		1285CE4715E25AA300019B65 /* TriggerPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerPattern.h; sourceTree = "<group>"; };
+		1285CE4815E25C9D00019B65 /* ScenePatternTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScenePatternTest.h; sourceTree = "<group>"; };
+		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
+		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
+		129C0DD115E0111D00388811 /* ParticleRendererSquare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererSquare.h; sourceTree = "<group>"; };
+		129C0DD215E0F7D400388811 /* SoundPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
+		129C0DF315E1134100388811 /* Sound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		12CF6DBF15DEEC040065C690 /* BasicRocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicRocket.h; sourceTree = "<group>"; };
+		12D7CD5C15DFDB270089AA4D /* VelocityModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VelocityModifier.h; sourceTree = "<group>"; };
+		12D7CD5D15DFE1D10089AA4D /* VelocityModifierSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VelocityModifierSettings.h; sourceTree = "<group>"; };
+		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
+		12D7CD6015DFF0B90089AA4D /* SceneFountains.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneFountains.h; sourceTree = "<group>"; };
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RocketSettings.h; path = ../../SharedCode/Particles/RocketSettings.h; sourceTree = "<group>"; };
 		964A382715D2C207004D2BE7 /* ColourModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColourModifier.h; path = ../../SharedCode/Particles/ColourModifier.h; sourceTree = "<group>"; };
 		964A382815D2C207004D2BE7 /* LifeCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LifeCycle.h; path = ../../SharedCode/Particles/LifeCycle.h; sourceTree = "<group>"; };
@@ -351,8 +363,8 @@
 		961E975A15CA96A50056F458 /* Triggers */ = {
 			isa = PBXGroup;
 			children = (
-				968E4DE615DD124300D91D6E /* TriggerBase.cpp */,
 				968E4DE715DD124300D91D6E /* TriggerBase.h */,
+				968E4DE615DD124300D91D6E /* TriggerBase.cpp */,
 				968E4DE815DD124300D91D6E /* TriggerTest.h */,
 			);
 			name = Triggers;
@@ -404,12 +416,16 @@
 			isa = PBXGroup;
 			children = (
 				121E540715DFA6AB005014DB /* BasicRocket.h */,
-				964A382715D2C207004D2BE7 /* ColourModifier.h */,
+				12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */,
 				961E974C15C99D580056F458 /* RocketSettings.h */,
+				964A382715D2C207004D2BE7 /* ColourModifier.h */,
 				964A382815D2C207004D2BE7 /* LifeCycle.h */,
 				964A382915D2C207004D2BE7 /* Particle.cpp */,
 				964A382A15D2C207004D2BE7 /* Particle.h */,
 				964A382B15D2C207004D2BE7 /* ParticleRendererBase.h */,
+				129C0DD115E0111D00388811 /* ParticleRendererSquare.h */,
+				12D7CD5C15DFDB270089AA4D /* VelocityModifier.h */,
+				12D7CD5D15DFE1D10089AA4D /* VelocityModifierSettings.h */,
 				964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */,
 				964A382D15D2C207004D2BE7 /* ParticleSystem.h */,
 				964A382E15D2C207004D2BE7 /* ParticleSystemManager.h */,
@@ -422,11 +438,16 @@
 		967E720515D3B206008D7EF3 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1285CE4915E2616900019B65 /* Arrangement.h */,
+				1285CE4A15E2642200019B65 /* Arrangement.cpp */,
 				967E720615D3B206008D7EF3 /* Scene.cpp */,
 				967E720715D3B206008D7EF3 /* Scene.h */,
 				9697511315DAD0BE00707C61 /* Scene1.h */,
+				12D7CD6015DFF0B90089AA4D /* SceneFountains.h */,
 				9697511715DAD2F400707C61 /* Scene2.h */,
+				1285CE4815E25C9D00019B65 /* ScenePatternTest.h */,
 				968E4DE315DD104800D91D6E /* SceneTest.h */,
+				1285CE4715E25AA300019B65 /* TriggerPattern.h */,
 			);
 			name = Scenes;
 			path = ../../SharedCode/Scenes;
@@ -819,6 +840,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
+				129C0DD215E0F7D400388811 /* SoundPlayer.h */,
+				129C0DF315E1134100388811 /* Sound.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -984,6 +1007,7 @@
 				969750ED15DA509100707C61 /* simpleLogger.cpp in Sources */,
 				968E4DE915DD124300D91D6E /* TriggerBase.cpp in Sources */,
 				121E540615DFA697005014DB /* MotionManager.cpp in Sources */,
+				1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

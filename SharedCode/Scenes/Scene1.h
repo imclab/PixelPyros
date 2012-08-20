@@ -183,9 +183,8 @@ class Scene1 : public Scene {
 		ps3.emitDelay = 1.95; 
 		ps3.emitLifeTime= 0.05;
 		
-		
-		
-		
+		ps3.startSound = "ExplosionSynth1";
+				
 		RocketSettings rocketSettings;
 		
 		rocketSettings.startSpeedMin = 600;
@@ -200,18 +199,18 @@ class Scene1 : public Scene {
 		
 		TriggerBase trigger(particleSystemManager); 
 		
-		trigger.rocketSettings = rocketSettings; 
+		trigger.addRocket(rocketSettings);
 		
 		
-		addTriggers(trigger, 4, 20,ofGetHeight()*0.85, ofGetWidth()-160);
+		//addTriggers(trigger, 4, 20,ofGetHeight()*0.85, ofGetWidth()-160);
 		
 		
 		// makes chargeable trigger
 		trigger.type = TRIGGER_TYPE_FIRE_ON_CHARGE;
 		trigger.triggerLevel = 1; 
-		trigger.chargeAmount = 2; 
+		trigger.chargeAmount = 5;
 		
-		addTriggers(trigger, 4, 100,ofGetHeight()*0.85, ofGetWidth()-160);
+		//addTriggers(trigger, 4, 100,ofGetHeight()*0.85, ofGetWidth()-160);
 		
 		
 		// makes one shot type
@@ -220,7 +219,7 @@ class Scene1 : public Scene {
 		trigger.restoreSpeed = 0; 
 		trigger.rocketPower = 0.9; 
 		
-		addTriggers(trigger, 4, 180,ofGetHeight()*0.85, ofGetWidth()-160);
+		//addTriggers(trigger, 4, 180,ofGetHeight()*0.85, ofGetWidth()-160);
 		
 		
 		

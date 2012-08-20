@@ -15,9 +15,10 @@ class ParticleSystemManager {
 
 public:
 	
-    ParticleSystemManager() {
+    ParticleSystemManager(SoundPlayer& sp) : soundPlayer(sp) {
     
         activeParticleCount = 0;
+
         
     }
 	
@@ -25,19 +26,7 @@ public:
 		
         activeParticleCount  =0 ; 
 		
-		for(int i = 0; i<physicsObjects.size(); i++) { 
-			
-			PhysicsObject* po = physicsObjects[i]; 
-			if(!po->enabled) continue; 
-			
-			po->update(deltaTime); 
-			
-			if(!po->enabled) { 
-				sparePhysicsObjects.push_back(po); 
-			}
-			
-			
-		}
+		
 
 		
 		
@@ -46,7 +35,14 @@ public:
 			ParticleSystem* ps = particleSystems[i]; 
 			if(ps->finished) continue; 
 			
+			
+			
+			// SOMEHOW... the ParticleSystem has to report what sounds to make...
+			// maybe just pass in a reference to the soundPLayer into all ParticleSystems? 
 			ps->update(deltaTime);
+			
+			
+			
             activeParticleCount+=ps->activeParticleCount;
 			
 			if(ps->finished) { 
@@ -55,6 +51,21 @@ public:
 			
 			
 		}
+		
+		for(int i = 0; i<physicsObjects.size(); i++) {
+			
+			PhysicsObject* po = physicsObjects[i];
+			if(!po->enabled) continue;
+			
+			po->update(deltaTime);
+			
+			if(!po->enabled) {
+				sparePhysicsObjects.push_back(po);
+			}
+			
+			
+		}
+		
 		
 		
 	}
@@ -99,10 +110,10 @@ public:
 			spareParticleSystems.pop_back(); 
 		} else { 
 			
-			ps = new ParticleSystem(); 
+			ps = new ParticleSystem(soundPlayer); 
 			particleSystems.push_back(ps); 
 		
-		} 
+		}
 		
 		return ps; 
 		
@@ -135,7 +146,9 @@ public:
 	vector <PhysicsObject *> physicsObjects; 
 	vector <PhysicsObject *> sparePhysicsObjects; 
 
-    int activeParticleCount; 
+    int activeParticleCount;
+	
+	SoundPlayer& soundPlayer;
 
 
 };
