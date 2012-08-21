@@ -11,9 +11,11 @@
 
 
 
-Scene::Scene(ParticleSystemManager & psm) : particleSystemManager(psm) { 
+Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
 	active = false; 
-	stopping = false; 
+	stopping = false;
+	setTriggerArea(triggerarea);
+	currentArrangementIndex = -1; 
 	
 }
 
@@ -28,9 +30,7 @@ void Scene :: start() {
 void Scene :: stop() { 
 	
 	for(int i=0; i<arrangements.size(); i++) {
-		
-		//if(ofRandom(100)<2) triggers[i]->makeRocket(); 
-		
+
 		arrangements[i]->stop();
 		
 	}
@@ -46,6 +46,7 @@ bool Scene :: update(float deltaTime) {
 	for(int i=0; i<arrangements.size(); i++) {
 	
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
+		else if (i==currentArrangementIndex) next(); 
 		
 	}
 	if((stopping) && (activeArrangements==0) ) {
@@ -87,11 +88,62 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
 }
 
+void Scene :: setTriggerArea(ofRectangle rect){
+	
+	triggerArea = rect;
+	for(int i = 0; i<arrangements.size() ; i++) {
+		arrangements[i]->setTriggerArea(rect);
+	}
+
+}
+
+
+
+Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
+	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea));
+	arrangements.back()->setTriggerArea(triggerArea);
+	arrangements.back()->setPattern(pattern);
+	
+	
+}
+
+
 bool Scene :: startArrangement(int num) {
+	
 	if(num>=arrangements.size()) return false;
-	arrangements[num]->start(); 
+	if(currentArrangementIndex>=0) {
+		arrangements[currentArrangementIndex]->stop();
+	}
+	
+	arrangements[num]->start();
+	currentArrangementIndex = num; 
 	return true;
 	
 	
 }
 
+
+bool Scene :: next() {
+	if(arrangements.size()==0) return false;
+	
+	int nextArrangement = currentArrangementIndex+1;
+	if(nextArrangement>=arrangements.size())
+		nextArrangement = 0;
+	
+	startArrangement(nextArrangement);
+	
+	
+}
+
+bool Scene :: previous() {
+
+	if(arrangements.size()==0) return false;
+	
+	int prevArrangement = currentArrangementIndex-1;
+	if(prevArrangement<0)
+		prevArrangement = arrangements.size();
+	
+	startArrangement(prevArrangement);
+
+
+}

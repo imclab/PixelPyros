@@ -92,27 +92,7 @@ bool ParticleSystem::update(float deltaTime) {
 bool ParticleSystem::draw() { 
 	
 	
-	ofEnableBlendMode(OF_BLENDMODE_ADD);
-	
-    ofMesh mesh;
-	
-	renderer.renderParticles(particles, mesh);
-	
-	mesh.draw();
-    
-    /*
-    ofPushStyle();
-	ofSetCircleResolution(7);
-	
-	for(int i = 0; i<particles.size(); i++) { 
-		Particle &p = *(particles[i]); 
-		if(!p.enabled) continue; 
-		particles[i]->draw(); 
-		
-	}
-	ofPopStyle(); */
-    
-	ofDisableBlendMode();
+	settings.renderer.renderParticles(particles);
 	
 }
 
@@ -205,7 +185,7 @@ void ParticleSystem:: init(ParticleSystemSettings& pes) {
 	//physics.gravity = pes.gravity; 
 	settings = pes;
 	
-	renderer = pes.renderer;
+	
 	
 	
 }

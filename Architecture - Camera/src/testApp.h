@@ -15,7 +15,7 @@
 #include "ofxAutoControlPanel.h"
 #include "Scene1.h"
 #include "Scene2.h"
-
+#include "SoundPlayer.h"
 #include "SceneTest.h"
 
 
@@ -23,6 +23,9 @@
 class testApp : public ofBaseApp{
 	
 public:
+	
+	testApp():particleSystemManager(soundPlayer) {};
+
 	void setup();
 	void update();
 	void draw();
@@ -42,6 +45,7 @@ public:
 	ParticleSystemManager particleSystemManager; 
 	CameraManagerWarped cameraManager; 
 	MotionManager		motionManager; 
+	SoundPlayer			soundPlayer;
 	
 	ofxAutoControlPanel gui; 
 	

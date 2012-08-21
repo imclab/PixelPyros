@@ -14,7 +14,7 @@ class Scene2 : public Scene {
 	
 	public : 
 	
-	Scene2(ParticleSystemManager& psm) : Scene(psm){	
+	Scene2(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
 		BasicRocket rocketSettings(100,10, 120);
 		

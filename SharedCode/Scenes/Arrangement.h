@@ -20,7 +20,7 @@ class Arrangement {
 	
 	public :
 	
-	Arrangement(ParticleSystemManager& psm);
+	Arrangement(ParticleSystemManager& psm, ofRectangle triggerarea);
 	
 	virtual void start();
 	virtual void stop();
@@ -35,6 +35,10 @@ class Arrangement {
 	template <typename T>
 	T* addTrigger(T trigger);
 	
+	void setTriggerArea(ofRectangle area);
+
+	
+	
 	
 	bool active;
 	bool stopping;
@@ -42,6 +46,9 @@ class Arrangement {
 	vector <TriggerBase*> triggers;
 	
 	ParticleSystemManager& particleSystemManager;
+	ofRectangle triggerArea;
+		
+	TriggerPattern* triggerPattern;
 
 	
 };

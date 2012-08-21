@@ -16,7 +16,7 @@ class SceneFountains : public Scene {
 	
 	public :
 	
-	SceneFountains(ParticleSystemManager& psm) : Scene(psm){
+	SceneFountains(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
 		TriggerBase trigger(psm);
 		

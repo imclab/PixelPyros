@@ -110,27 +110,44 @@ void testApp::draw(){
 }
 
 void testApp::keyPressed(int key){
-	if(key==OF_KEY_LEFT) { 
-		prevScene(); 
+	
+	
+	if(key==OF_KEY_LEFT) {
+		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+			prevScene();
+		else
+			scenes[currentSceneIndex]->previous();
 	} else if(key==OF_KEY_RIGHT) { 
-		nextScene(); 
-	} else if(key=='c') { 
+		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+			nextScene();
+		else
+			scenes[currentSceneIndex]->next();
+	} else if(key=='c') {
 		cameraManager.next(); 
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
 	}
 
 }
+//
+//void testApp:keyReleased(int key){
+//	
+//	
+//	
+//}
 
 void testApp:: mousePressed(int x, int y, int button ) { 
-	//trigger.makeRocket();
+
 }
 
 void testApp:: setupScenes() { 
 	
-//	scenes.push_back(new SceneTest(particleSystemManager));
 
-	scenes.push_back(new ScenePatternTest(particleSystemManager));
+	ofRectangle triggerarea(APP_WIDTH*0.05 ,APP_HEIGHT*0.85,APP_WIDTH*0.9,10);
+	
+	
+	scenes.push_back(new SceneTest(particleSystemManager, triggerarea));
+	scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 //
 //	scenes.push_back(new SceneFountains(particleSystemManager));
 //
@@ -178,16 +195,20 @@ bool testApp::prevScene(){
 void testApp::mouseMoved( int x, int y ){
 	for(int j = 0 ; j<scenes.size(); j++ ) { 
 		Scene* scene1 = scenes[j];
-//		vector <TriggerBase*> triggers = scene1->triggers; 
-//		for(int i = 0; i<triggers.size(); i++) { 
-//			TriggerBase * trigger = triggers[i]; 
-//			float distance = trigger->pos.distance(ofVec3f(x,y));
-//			if(distance<20) { 
-//				trigger->registerMotion(1.0f-(distance/20.0f)); 
-//				
-//			}
-//			
-//		}
+		vector<Arrangement*> * arrangements = &scene1->arrangements;
+		for(int k = 0; k<arrangements->size(); k++)
+		{
+			vector <TriggerBase*> triggers = arrangements->at(k)->triggers;
+			for(int i = 0; i<triggers.size(); i++) { 
+				TriggerBase * trigger = triggers[i]; 
+				float distance = trigger->pos.distance(ofVec3f(x,y));
+				if(distance<20) { 
+					trigger->registerMotion(1.0f-(distance/20.0f)); 
+					
+				}
+				
+			}
+		}
 	}
 }
 

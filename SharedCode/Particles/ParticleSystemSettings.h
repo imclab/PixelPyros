@@ -18,13 +18,14 @@ typedef enum {
 } ParticleEmitMode;
 
 
-class ParticleSystemSettings { 
+class ParticleSystemSettings{
 
 	public : 
 
-	ParticleSystemSettings() { 
+	ParticleSystemSettings() {
 		
-		// PHYSICS
+		
+	// PHYSICS
 		speedMin = speedMax = 200; 
 		directionZ = 0; 
 		directionZVar = 180;
@@ -65,7 +66,8 @@ class ParticleSystemSettings {
 		//emitAttachedPhysicsObject = NULL; 
 		emitInheritVelocity = 0; 
 		
-		velocityModifierSettings = 0; 
+		velocityModifierSettings = 0;
+		
 		
 	};
 
@@ -126,11 +128,8 @@ class ParticleSystemSettings {
 	float saturationEnd; 
 	
 	float shimmerMin; 
-	
-	// ADD PARTICLE RENDERER - probably should be a property of the
-	// ParticleSystem, right? Possibly add vector of renderers in the 
-	// future? For multiple renders. All particles in the same system
-	// should share the same renderer for future optimisations
+
+	// only way to get polymorphism with a pointer?
 	ParticleRendererBase renderer;
 
 	//EMISSION LIFE CYCLE
@@ -151,8 +150,6 @@ class ParticleSystemSettings {
 	float emitInheritVelocity;
 	
 	string startSound;
-
-
 
 	VelocityModifierSettings * velocityModifierSettings; 
 

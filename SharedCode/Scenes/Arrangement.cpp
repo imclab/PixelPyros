@@ -8,9 +8,11 @@
 
 #include "Arrangement.h"
 
-Arrangement :: Arrangement(ParticleSystemManager & psm) : particleSystemManager(psm) {
+Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
 	active = false;
 	stopping = false;
+	setTriggerArea(triggerarea);
+	triggerPattern = NULL;
 	
 }
 
@@ -21,7 +23,7 @@ void Arrangement :: start() {
 	for(int i=0; i<triggers.size(); i++) {
 		
 		//if(ofRandom(100)<2) triggers[i]->makeRocket();
-		cout << "start trigger " << i <<endl;
+		//cout << "start trigger " << i <<endl;
 		
 		triggers[i]->start();
 		
@@ -57,7 +59,7 @@ bool Arrangement :: update(float deltaTime) {
 		if( triggers[i]->update(deltaTime)) activeTriggers++;
 		
 	}
-	if((stopping) && (activeTriggers==0) ) {
+	if (activeTriggers==0)  {
 		active = false;
 	}
 	
@@ -83,9 +85,13 @@ void Arrangement:: draw() {
 
 void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
+	if(!active) return;
+	
 	for(int i = 0; i<triggers.size(); i++) {
 		
 		TriggerBase * trigger = triggers[i];
+		
+		if(!trigger->active) continue;
 		
 		float motion = motionManager.getMotionAtPosition(trigger->pos, trigger->radius*2, homography);
 		trigger->registerMotion(motion/255);
@@ -99,12 +105,34 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 
 void Arrangement :: setPattern(TriggerPattern tp) {
 	
-	for(int i =0; i<tp.triggers.size(); i++) {
+	// MAKE A FUNCTION that lays out all the triggers. 
+	float minSpacing = 50;
+	int numPerPattern = tp.triggers.size();
+	int numPatterns = triggerArea.width/ (numPerPattern* minSpacing);
+	int spacing = triggerArea.width / (numPatterns*numPerPattern);
 	
-		TriggerBase* trigger = addTrigger(*tp.triggers[i]);
-		trigger->pos.x = i*100;
+	float xPos = triggerArea.x;
+	
+	for(int j = 0; j<numPatterns; j++ ) {
+		for(int i =0; i<tp.triggers.size(); i++) {
+		
+			TriggerBase* trigger = addTrigger(*tp.triggers[i]);
+			trigger->pos.x = xPos;
+			trigger->pos.y = triggerArea.y+(triggerArea.height/2);
+			xPos+=spacing; 
+			
+		}
+	}
+}
+
+void Arrangement:: setTriggerArea(ofRectangle rect) {
+	triggerArea = rect;
+	for(int i=0; i<triggers.size(); i++) {
+		
+		triggers[i]->pos.y = triggerArea.y+(triggerArea.width/2);
 		
 	}
+	
 	
 }
 

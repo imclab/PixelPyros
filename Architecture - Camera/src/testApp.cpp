@@ -4,18 +4,13 @@
 void testApp::setup(){
 	
 	
-	//ofSetFrameRate(50);
 	lastUpdateTime = ofGetElapsedTimef();
-	
 	
 	ofBackground(0);
 
-	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
 	
-	
 	cameraManager.init();
-	//cameraManager.shutter = 35; 
 	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight()); 
 	
 	
@@ -66,13 +61,7 @@ void testApp::draw(){
 	motionManager.draw();
 
 	ofPushMatrix(); 
-	
-	// change perspective so we're looking up
-	ofTranslate(0,ofGetHeight()*0.9); 
-	ofRotateX(5); 
-	ofTranslate(0,ofGetHeight()*-0.9);
 
-	
 
 	particleSystemManager.draw();
 	ofPopMatrix(); 
@@ -116,10 +105,9 @@ void testApp:: mousePressed(int x, int y, int button ) {
 }
 
 void testApp:: setupScenes() { 
+	ofRectangle rect(APP_WIDTH * 0.1, APP_HEIGHT * 0.9, APP_WIDTH*0.8, APP_HEIGHT *0.05);
 	
-	scenes.push_back(new SceneTest(particleSystemManager));
-	scenes.push_back(new Scene1(particleSystemManager));
-	scenes.push_back(new Scene2(particleSystemManager)); 
+	scenes.push_back(new SceneTest(particleSystemManager,rect));
 	
 	scenes[0]->start();
 	
@@ -158,19 +146,19 @@ bool testApp::prevScene(){
 
 
 void testApp::mouseMoved( int x, int y ){
-	for(int j = 0 ; j<scenes.size(); j++ ) { 
-		Scene* scene1 = scenes[j];
-		vector <TriggerBase*> triggers = scene1->triggers; 
-		for(int i = 0; i<triggers.size(); i++) { 
-			TriggerBase * trigger = triggers[i]; 
-			float distance = trigger->pos.distance(ofVec3f(x,y));
-			if(distance<20) { 
-				trigger->registerMotion(1.0f-(distance/20.0f)); 
-				
-			}
-			
-		}
-	}
+//	for(int j = 0 ; j<scenes.size(); j++ ) { 
+//		Scene* scene1 = scenes[j];
+//		vector <TriggerBase*> triggers = scene1->triggers; 
+//		for(int i = 0; i<triggers.size(); i++) { 
+//			TriggerBase * trigger = triggers[i]; 
+//			float distance = trigger->pos.distance(ofVec3f(x,y));
+//			if(distance<20) { 
+//				trigger->registerMotion(1.0f-(distance/20.0f)); 
+//				
+//			}
+//			
+//		}
+//	}
 }
 
 

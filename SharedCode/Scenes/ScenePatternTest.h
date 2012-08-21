@@ -20,7 +20,7 @@ class ScenePatternTest : public Scene {
 	
 	public :
 
-	ScenePatternTest(ParticleSystemManager& psm) : Scene(psm){
+	ScenePatternTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 	
 		BasicRocket rocketSettings(100,10, 120);
 		
@@ -30,21 +30,34 @@ class ScenePatternTest : public Scene {
 		// makes one shot type
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger.triggerLevel = 1;
-		trigger.restoreSpeed = 0.5;
+		trigger.restoreSpeed = 0.0;
 		trigger.rocketPower = 0.99;
 		
 		trigger.chargeAmount = 2;
 		
+		TriggerBase trigger2(particleSystemManager);
+		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
+		trigger2.restoreSpeed = 0.0;
+		//trigger.triggerLevel = 1;
+		
+		trigger2.addRocket(RocketFountain()); 
+		
 		TriggerPattern pattern;
-		trigger.radius = 20;
+		trigger.radius = 10;
 		pattern.addTrigger(trigger,0.5);
-		trigger.radius = 10; 
-		pattern.addTrigger(trigger,0.5);
-		pattern.addTrigger(trigger,0.5);
-		pattern.addTrigger(trigger,0.5);
+		trigger2.radius = 5;
+		pattern.addTrigger(trigger2,0.5);
+		pattern.addTrigger(trigger2,0.5);
+		pattern.addTrigger(trigger2,0.5);
 	
-		arrangements.push_back(new Arrangement(psm));
-		arrangements.back()->setPattern(pattern);
+		addArrangement(pattern);
+		
+		TriggerPattern pattern2;
+		trigger.radius = 10;
+		pattern2.addTrigger(trigger,0.5);
+		trigger2.radius = 5;
+		pattern2.addTrigger(trigger2,0.5);
+		addArrangement(pattern2); 
 	
 	}
 

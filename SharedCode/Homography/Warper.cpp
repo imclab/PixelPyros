@@ -20,7 +20,8 @@ Warper :: Warper() {
 
 	dstPreviewScale = 1;
 	
-	autoSave =true; 
+	autoSave =true;
+	verbose = false; 
 	
 };
 
@@ -51,7 +52,7 @@ bool Warper :: init (float srcwidth, float srcheight, float dstwidth, float dsth
 	
 	warpedImage.allocate(dstwidth * dstPreviewScale, dstheight * dstPreviewScale, OF_IMAGE_GRAYSCALE); 
 	
-	changed = true; 
+	changed = true;
 }
 
 
@@ -164,10 +165,12 @@ void Warper :: draw(ofPixels& pix) {
 bool Warper:: loadSettings() { 
 	
 	ofxXmlSettings settings;
+	if(verbose) cout << "Loading warpdata/"+settingsFileLabel+".xml" << endl;
 	if(!settings.loadFile("warpdata/"+settingsFileLabel+".xml")) return false;
+	
 	if(settings.getNumTags("srcvec")!=4) return false; 
 	if(settings.getNumTags("dstvec")!=4) return false; 
-	
+	if(verbose) cout << "Success!";
 	
 	float dstwidth = settings.getValue("dstWidth", dstWidth);
 	float dstheight = settings.getValue("dstHeight", dstHeight); 
@@ -179,8 +182,8 @@ bool Warper:: loadSettings() {
 	
 	ofVec2f srcScale(srcWidth/srcwidth, srcHeight/srcheight);
 	
-	cout << "dstScale " << dstScale << endl;
-	cout << "srcScale " << srcScale << endl;
+	if(verbose) cout << "dstScale " << dstScale << endl;
+	if(verbose) cout << "srcScale " << srcScale << endl;
     
     //srcWidth = srcwidth;
     //srcHeight = srcheight;
@@ -202,6 +205,8 @@ bool Warper:: loadSettings() {
 		srcVecs[i].set(settings.getValue("x", (i%2)*dstwidth),
 						 settings.getValue("y", floor(i/2)*dstheight));
 		
+		if(verbose) cout << "src" << i << " " << srcVecs[i] << endl;
+		
 		srcVecs[i] *= dstScale;
 		
 		settings.popTag();
@@ -216,13 +221,16 @@ bool Warper:: loadSettings() {
 		dstVecs[i].set(settings.getValue("x", (i%2)*dstwidth),
 					   settings.getValue("y", floor(i/2)*dstheight));
 		
-		dstVecs[i]*=dstScale; 
+
+		if(verbose) cout << "dstc" << i << " " << srcVecs[i] << endl;
+
+		dstVecs[i]*=dstScale;
 		
 		settings.popTag();
 	}
 	
    
-	
+	return true; 
 		
 }
 

@@ -64,7 +64,9 @@ class Warper {
 	bool changed; 
 	bool movingPoint; 
 	bool autoSave; 
-	ofVec2f *curPoint; 
+	ofVec2f *curPoint;
+	
+	bool verbose; 
 	
 
 };

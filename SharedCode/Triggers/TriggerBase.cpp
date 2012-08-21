@@ -68,14 +68,14 @@ bool TriggerBase::update(float deltaTime) {
 	
 	// scale up / down on start stop
 	if(stopping) {
-		scale-=deltaTime;
-		if(scale<=0) {
+		scale-=deltaTime*1;
+		if(scale<=0.0) {
 			scale = 0;
 			active = false;
 			return false; 
 		}
 	} else { 
-		scale+= (1-scale)*0.1;
+		scale+= (1-scale)*0.01;
 	}
 
 	

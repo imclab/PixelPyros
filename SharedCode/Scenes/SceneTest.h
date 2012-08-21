@@ -7,8 +7,7 @@ class SceneTest : public Scene {
 	
 	public : 
 	
-	SceneTest(ParticleSystemManager& psm) : Scene(psm){ 
-		
+	SceneTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){		
 		
 		TriggerTest trigger(psm); 
 		

@@ -126,15 +126,16 @@
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* BasicRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicRocket.h; path = ../../SharedCode/Particles/BasicRocket.h; sourceTree = "<group>"; };
+		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
+		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
+		1278BA9415E38A6E0076753F /* VelocityModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VelocityModifier.h; path = ../../SharedCode/Particles/VelocityModifier.h; sourceTree = "<group>"; };
+		1278BA9515E38A6E0076753F /* VelocityModifierSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VelocityModifierSettings.h; path = ../../SharedCode/Particles/VelocityModifierSettings.h; sourceTree = "<group>"; };
+		1278BA9C15E38AB00076753F /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		1278BA9D15E38AB00076753F /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		1285CE4715E25AA300019B65 /* TriggerPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerPattern.h; sourceTree = "<group>"; };
 		1285CE4815E25C9D00019B65 /* ScenePatternTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScenePatternTest.h; sourceTree = "<group>"; };
 		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
 		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
-		129C0DD115E0111D00388811 /* ParticleRendererSquare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererSquare.h; sourceTree = "<group>"; };
-		129C0DD215E0F7D400388811 /* SoundPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
-		129C0DF315E1134100388811 /* Sound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
-		12D7CD5C15DFDB270089AA4D /* VelocityModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VelocityModifier.h; sourceTree = "<group>"; };
-		12D7CD5D15DFE1D10089AA4D /* VelocityModifierSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VelocityModifierSettings.h; sourceTree = "<group>"; };
 		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
 		12D7CD6015DFF0B90089AA4D /* SceneFountains.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneFountains.h; sourceTree = "<group>"; };
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RocketSettings.h; path = ../../SharedCode/Particles/RocketSettings.h; sourceTree = "<group>"; };
@@ -351,6 +352,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1278BA9B15E38AB00076753F /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				1278BA9C15E38AB00076753F /* Sound.h */,
+				1278BA9D15E38AB00076753F /* SoundPlayer.h */,
+			);
+			name = Sound;
+			path = ../../SharedCode/Sound;
+			sourceTree = "<group>";
+		};
 		961E975A15CA96A50056F458 /* Triggers */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +375,7 @@
 		964A383315D2C210004D2BE7 /* SharedCode */ = {
 			isa = PBXGroup;
 			children = (
+				1278BA9B15E38AB00076753F /* Sound */,
 				969989A315D3BA1F00647A18 /* Camera */,
 				969989AD15D3BA1F00647A18 /* Homography */,
 				967E720515D3B206008D7EF3 /* Scenes */,
@@ -406,6 +418,8 @@
 		966C867B15C82B5300D5A853 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				1278BA9415E38A6E0076753F /* VelocityModifier.h */,
+				1278BA9515E38A6E0076753F /* VelocityModifierSettings.h */,
 				121E540715DFA6AB005014DB /* BasicRocket.h */,
 				12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */,
 				961E974C15C99D580056F458 /* RocketSettings.h */,
@@ -414,9 +428,8 @@
 				964A382915D2C207004D2BE7 /* Particle.cpp */,
 				964A382A15D2C207004D2BE7 /* Particle.h */,
 				964A382B15D2C207004D2BE7 /* ParticleRendererBase.h */,
-				129C0DD115E0111D00388811 /* ParticleRendererSquare.h */,
-				12D7CD5C15DFDB270089AA4D /* VelocityModifier.h */,
-				12D7CD5D15DFE1D10089AA4D /* VelocityModifierSettings.h */,
+				1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */,
+				1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */,
 				964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */,
 				964A382D15D2C207004D2BE7 /* ParticleSystem.h */,
 				964A382E15D2C207004D2BE7 /* ParticleSystemManager.h */,
@@ -830,8 +843,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
-				129C0DD215E0F7D400388811 /* SoundPlayer.h */,
-				129C0DF315E1134100388811 /* Sound.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

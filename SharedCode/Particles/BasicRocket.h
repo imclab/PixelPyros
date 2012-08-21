@@ -9,7 +9,8 @@
 #pragma once
 
 #include "ParticleSystemSettings.h"
-#include "ParticleRendererSquare.h"
+//#include "ParticleRendererSquare.h"
+#include "ParticleRendererBitmap.h"
 
 class BasicRocket : public RocketSettings {
 
@@ -17,6 +18,7 @@ class BasicRocket : public RocketSettings {
     
     BasicRocket(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 20) : RocketSettings() {
         
+		whiteImage.loadImage("img/ParticleWhite.png"); 
         
         // ParticleData
 		// size range
@@ -89,6 +91,9 @@ class BasicRocket : public RocketSettings {
 		ps.emitInheritVelocity = -0.5;
 		
 		ps.startSound = "SynthThud";
+		
+		// DANGEROUS :/ 
+		
 		//psystem.init(ps);
 				
 		// optional colour modifier
@@ -139,7 +144,7 @@ class BasicRocket : public RocketSettings {
 		
 		ps2.startSound = "ExplosionSynth1";
 		
-		//ps2.renderer = ParticleRendererSquare();
+		ps2.renderer = ParticleRendererBitmap(&whiteImage);
 		
 		//ps2.velocityModifierSettings = new VelocityModifierSettings(10,-10);
 		
@@ -161,7 +166,7 @@ class BasicRocket : public RocketSettings {
 
 
 
-
+	ofImage whiteImage; 
 
 
 

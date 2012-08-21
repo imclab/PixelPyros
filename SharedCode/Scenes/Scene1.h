@@ -14,7 +14,7 @@ class Scene1 : public Scene {
 	
 	public : 
 	
-	Scene1(ParticleSystemManager& psm) : Scene(psm){ 
+	Scene1(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
 		// ParticleData
 		// size range
