@@ -9,6 +9,7 @@
 
 #include "Scene.h"
 #include "BasicRocket.h"
+#include "TriggerSimple.h"
 
 class Scene1 : public Scene {
 	
@@ -197,7 +198,7 @@ class Scene1 : public Scene {
 		rocketSettings.addParticleSystemSetting(ps2); 
 		rocketSettings.addParticleSystemSetting(ps3); 
 		
-		TriggerBase trigger(particleSystemManager); 
+		TriggerSimple trigger(particleSystemManager);
 		
 		trigger.addRocket(rocketSettings);
 		

@@ -102,7 +102,7 @@ void Scene :: setTriggerArea(ofRectangle rect){
 Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
 	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea));
 	arrangements.back()->setTriggerArea(triggerArea);
-	arrangements.back()->setPattern(pattern);
+	arrangements.back()->initialiseFromPattern(pattern);
 	
 	
 }

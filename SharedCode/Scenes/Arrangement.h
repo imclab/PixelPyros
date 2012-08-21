@@ -10,6 +10,7 @@
 #pragma once
 
 #include "TriggerBase.h"
+#include "TriggerSimple.h"
 #include "TriggerPattern.h"
 
 #include "ParticleSystemManager.h"
@@ -30,7 +31,7 @@ class Arrangement {
 	
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
 	
-	virtual void setPattern(TriggerPattern tp);
+	virtual void initialiseFromPattern(TriggerPattern tp);
 	
 	template <typename T>
 	T* addTrigger(T trigger);
@@ -43,7 +44,7 @@ class Arrangement {
 	bool active;
 	bool stopping;
 	
-	vector <TriggerBase*> triggers;
+	vector <TriggerSimple*> triggers;
 	
 	ParticleSystemManager& particleSystemManager;
 	ofRectangle triggerArea;

@@ -8,7 +8,7 @@
 
 #pragma once;
 
-#include "TriggerBase.h";
+#include "TriggerSimple.h";
 
 class TriggerPattern  {
 
@@ -29,7 +29,7 @@ class TriggerPattern  {
 
 
 
-	vector <TriggerBase * > triggers;
+	vector <TriggerSimple* > triggers;
 	vector <float> verticalPositions;
 
 

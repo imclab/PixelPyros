@@ -89,7 +89,7 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 	for(int i = 0; i<triggers.size(); i++) {
 		
-		TriggerBase * trigger = triggers[i];
+		TriggerSimple * trigger = triggers[i];
 		
 		if(!trigger->active) continue;
 		
@@ -103,7 +103,7 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 }
 
-void Arrangement :: setPattern(TriggerPattern tp) {
+void Arrangement :: initialiseFromPattern(TriggerPattern tp) {
 	
 	// MAKE A FUNCTION that lays out all the triggers. 
 	float minSpacing = 50;
@@ -116,7 +116,7 @@ void Arrangement :: setPattern(TriggerPattern tp) {
 	for(int j = 0; j<numPatterns; j++ ) {
 		for(int i =0; i<tp.triggers.size(); i++) {
 		
-			TriggerBase* trigger = addTrigger(*tp.triggers[i]);
+			TriggerSimple* trigger = addTrigger(*tp.triggers[i]);
 			trigger->pos.x = xPos;
 			trigger->pos.y = triggerArea.y+(triggerArea.height/2);
 			xPos+=spacing; 

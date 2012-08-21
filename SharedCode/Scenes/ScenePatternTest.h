@@ -9,10 +9,12 @@
 #pragma once
 
 #include "Scene.h"
+#include "TriggerSimple.h"
 #include "BasicRocket.h"
 #include "Arrangement.h"
 
 #include "TriggerPattern.h"
+
 
 
 class ScenePatternTest : public Scene {
@@ -24,7 +26,7 @@ class ScenePatternTest : public Scene {
 	
 		BasicRocket rocketSettings(100,10, 120);
 		
-		TriggerBase trigger(particleSystemManager);
+		TriggerSimple trigger(particleSystemManager);
 		
 		trigger.addRocket(rocketSettings);
 		// makes one shot type
@@ -35,7 +37,7 @@ class ScenePatternTest : public Scene {
 		
 		trigger.chargeAmount = 2;
 		
-		TriggerBase trigger2(particleSystemManager);
+		TriggerSimple trigger2(particleSystemManager);
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger2.restoreSpeed = 0.0;
 		//trigger.triggerLevel = 1;

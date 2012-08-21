@@ -198,9 +198,9 @@ void testApp::mouseMoved( int x, int y ){
 		vector<Arrangement*> * arrangements = &scene1->arrangements;
 		for(int k = 0; k<arrangements->size(); k++)
 		{
-			vector <TriggerBase*> triggers = arrangements->at(k)->triggers;
+			vector <TriggerSimple*> triggers = arrangements->at(k)->triggers;
 			for(int i = 0; i<triggers.size(); i++) { 
-				TriggerBase * trigger = triggers[i]; 
+				TriggerSimple * trigger = triggers[i]; 
 				float distance = trigger->pos.distance(ofVec3f(x,y));
 				if(distance<20) { 
 					trigger->registerMotion(1.0f-(distance/20.0f)); 

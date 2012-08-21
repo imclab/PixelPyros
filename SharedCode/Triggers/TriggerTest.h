@@ -6,17 +6,17 @@
 //  Copyright (c) 2012 seb.ly. All rights reserved.
 //
 
-#include "TriggerBase.h"
+#include "TriggerSimple.h"
 
-class TriggerTest : public TriggerBase { 
+class TriggerTest : public TriggerSimple {
 	
 	public : 
 	
-	TriggerTest(ParticleSystemManager& psm): TriggerBase (psm) { 
+	TriggerTest(ParticleSystemManager& psm): TriggerSimple (psm) {
 		
-		motionDecay = 100; 
+		//motionDecay = 100;
 		type = TRIGGER_TYPE_FIRE_ON_MOTION; 
-		triggerLevel = 0.01; 
+		//triggerLevel = 0.01;
 		motionValueCount = 20;
 		lastUpdate = 0; 
 	
@@ -47,10 +47,7 @@ class TriggerTest : public TriggerBase {
 			motionValues.pop_front(); 
 		}
 		
-		if (TriggerBase :: update(deltaTime)){
-			
-			
-			
+		if (TriggerSimple :: update(deltaTime)){
 			return true;
 		} else { 
 			return false; 
@@ -59,11 +56,15 @@ class TriggerTest : public TriggerBase {
 		
 	};
 	
-	void draw() { 
+	void draw() {
+		
+		cout << "trigger test draw" << endl;
+		
 		// draw trigger and motion bitmap 
-		TriggerBase::draw();
+		TriggerSimple::draw();
         
         if(!active) return;
+		
 		
 		ofPushMatrix(); 
 		ofTranslate(pos);

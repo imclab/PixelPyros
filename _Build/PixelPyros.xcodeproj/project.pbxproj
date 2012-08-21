@@ -39,7 +39,7 @@
 		967E72F315D3B4F3008D7EF3 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E72E015D3B4F3008D7EF3 /* tinyxmlerror.cpp */; };
 		967E72F415D3B4F3008D7EF3 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E72E115D3B4F3008D7EF3 /* tinyxmlparser.cpp */; };
 		967E72F515D3B4F3008D7EF3 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E72E315D3B4F3008D7EF3 /* ofxXmlSettings.cpp */; };
-		968E4DE915DD124300D91D6E /* TriggerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968E4DE615DD124300D91D6E /* TriggerBase.cpp */; };
+		968E4DE915DD124300D91D6E /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968E4DE615DD124300D91D6E /* TriggerSimple.cpp */; };
 		969750D315DA509100707C61 /* guiBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9697509815DA509100707C61 /* guiBaseObject.cpp */; };
 		969750D415DA509100707C61 /* guiCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9697509A15DA509100707C61 /* guiCallback.cpp */; };
 		969750D515DA509100707C61 /* guiCallbackValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9697509C15DA509100707C61 /* guiCallbackValue.cpp */; };
@@ -127,6 +127,7 @@
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* BasicRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicRocket.h; path = ../../SharedCode/Particles/BasicRocket.h; sourceTree = "<group>"; };
 		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
+		126119DC15E4330000DD04DD /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
 		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
 		1278BA9415E38A6E0076753F /* VelocityModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VelocityModifier.h; path = ../../SharedCode/Particles/VelocityModifier.h; sourceTree = "<group>"; };
 		1278BA9515E38A6E0076753F /* VelocityModifierSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VelocityModifierSettings.h; path = ../../SharedCode/Particles/VelocityModifierSettings.h; sourceTree = "<group>"; };
@@ -224,8 +225,8 @@
 		967E72E315D3B4F3008D7EF3 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		967E72E415D3B4F3008D7EF3 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		968E4DE315DD104800D91D6E /* SceneTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneTest.h; sourceTree = "<group>"; };
-		968E4DE615DD124300D91D6E /* TriggerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TriggerBase.cpp; path = ../../SharedCode/Triggers/TriggerBase.cpp; sourceTree = "<group>"; };
-		968E4DE715DD124300D91D6E /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
+		968E4DE615DD124300D91D6E /* TriggerSimple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TriggerSimple.cpp; path = ../../SharedCode/Triggers/TriggerSimple.cpp; sourceTree = "<group>"; };
+		968E4DE715DD124300D91D6E /* TriggerSimple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerSimple.h; path = ../../SharedCode/Triggers/TriggerSimple.h; sourceTree = "<group>"; };
 		968E4DE815DD124300D91D6E /* TriggerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerTest.h; path = ../../SharedCode/Triggers/TriggerTest.h; sourceTree = "<group>"; };
 		9697509815DA509100707C61 /* guiBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guiBaseObject.cpp; sourceTree = "<group>"; };
 		9697509915DA509100707C61 /* guiBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guiBaseObject.h; sourceTree = "<group>"; };
@@ -365,8 +366,9 @@
 		961E975A15CA96A50056F458 /* Triggers */ = {
 			isa = PBXGroup;
 			children = (
-				968E4DE715DD124300D91D6E /* TriggerBase.h */,
-				968E4DE615DD124300D91D6E /* TriggerBase.cpp */,
+				126119DC15E4330000DD04DD /* TriggerBase.h */,
+				968E4DE715DD124300D91D6E /* TriggerSimple.h */,
+				968E4DE615DD124300D91D6E /* TriggerSimple.cpp */,
 				968E4DE815DD124300D91D6E /* TriggerTest.h */,
 			);
 			name = Triggers;
@@ -1006,7 +1008,7 @@
 				969750EB15DA509100707C61 /* simpleColor.cpp in Sources */,
 				969750EC15DA509100707C61 /* simpleFileLister.cpp in Sources */,
 				969750ED15DA509100707C61 /* simpleLogger.cpp in Sources */,
-				968E4DE915DD124300D91D6E /* TriggerBase.cpp in Sources */,
+				968E4DE915DD124300D91D6E /* TriggerSimple.cpp in Sources */,
 				121E540615DFA697005014DB /* MotionManager.cpp in Sources */,
 				1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */,
 			);

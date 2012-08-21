@@ -9,6 +9,7 @@
 
 #include "Scene.h"
 #include "RocketFountain.h"
+#include "TriggerSimple.h"
 
 
 
@@ -18,7 +19,7 @@ class SceneFountains : public Scene {
 	
 	SceneFountains(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
-		TriggerBase trigger(psm);
+		TriggerSimple trigger(psm);
 		
 		
 		RocketFountain rocket(0,0,0);
