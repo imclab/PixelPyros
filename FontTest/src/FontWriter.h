@@ -25,16 +25,31 @@ class FontWriter {
 
 	void writeText(string text) {
 		
+		text = ofToUpper(text); 
+		ofPushStyle();
+		ofEnableSmoothing();
+		ofEnableAlphaBlending();
+		ofSetLineWidth(2); 
+		
+		float xpos = 0;
+		float ypos = 0; 
+		
 		map <int, Letter>& letters = font.letters;
 			
 		
 		for(int i = 0; i<text.size(); i++) {
-			
+			ofSetColor(255,ofRandom(150,180));
 			int character = text.at(i);
-			drawLetter(letters[character], 20 + i*30, 20);
-			
+			if(character == '\n'){
+				ypos+=40;
+				xpos=0; 
+			} else {
+				drawLetter(letters[character], xpos, ypos);
+				xpos+=30;
+			}
 		}
-				
+		
+		ofPopStyle();
 		
 	}
 	
@@ -43,13 +58,13 @@ class FontWriter {
 		
 		ofMesh mesh;
 		mesh.setMode(OF_PRIMITIVE_LINES);
-		float randomness = 1;
+		float randomness = 0.3;
 		
 		ofVec2f offset(x,y);
 		
 		for(int i = 0; i<letter.points.size(); i++) {
 			ofVec2f random(ofRandom(-randomness,randomness),ofRandom(-randomness,randomness));
-			mesh.addVertex(letter.points[i]*5+offset);
+			mesh.addVertex(letter.points[i]*5+offset+random);
 				
 		}
 		mesh.draw();

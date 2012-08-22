@@ -240,88 +240,88 @@ class VectorFont {
         
         letters['Z'] = Z;
         
-        //        Letter 0;
-        //        0.addLine(0, 0, 4, 0);
-        //        0.addLine(4, 0, 4, 6);
-        //        0.addLine(4, 6, 0, 6);
-        //        0.addLine(0, 6, 0, 0);
-        //        0.addLine(4, 0, 0, 6);
-        //        
-        //        letters['0'] = 0;
-        //        
-        //        Letter 1;
-        //        1.addLine(2, 0, 2, 6);
-        //      
-        //        letters['1'] = 1;
+        Letter l0;
+        l0.addLine(0, 0, 4, 0);
+        l0.addLine(4, 0, 4, 6);
+        l0.addLine(4, 6, 0, 6);
+        l0.addLine(0, 6, 0, 0);
+        l0.addLine(4, 0, 0, 6);
         
-        //        Letter 2;
-        //        2.addLine(0, 0, 4, 0);
-        //        2.addLine(4, 0, 4, 3);
-        //        2.addLine(4, 3, 0, 3);
-        //        2.addLine(0, 3, 0, 6);
-        //        2.addLine(0, 6, 4, 6);
-        //        
-        //        letters['2'] = 2;
-        //
-        //        
-        //        Letter 3;
-        //        3.addLine(0, 0, 4, 0);
-        //        3.addLine(4, 0, 4, 6);
-        //        3.addLine(4, 6, 0, 6);
-        //        3.addLine(0, 4, 4, 3);
-        //        
-        //        letters['3'] = 3;
-        //        
-        //        Letter 4;
-        //        4.addLine(0, 0, 0, 3);
-        //        4.addLine(0, 3, 4, 3);
-        //        4.addLine(4, 3, 4, 6);
-        //        4.addLine(4, 6, 0, 6);
-        //        
-        //        letters['4'] = 4;
-        //        
-        //        Letter 5;
-        //        5.addLine(4, 0, 0, 0);
-        //        5.addLine(0, 0, 0, 3);
-        //        5.addLine(0, 3, 4, 3);
-        //        5.addLine(4, 3, 4, 6);
-        //        5.addLine(4, 6, 0, 6);
-        //        
-        //        letters['5'] = 5;
-        //        
-        //        Letter 6;
-        //        6.addLine(0, 0, 0, 6);
-        //        6.addLine(0, 6, 4, 6);
-        //        6.addLine(4, 6, 4, 3);
-        //        6.addLine(4, 3, 0, 3);
-        //        
-        //        letters['6'] = 6;
-        //        
-        //        
-        //        Letter 7;
-        //        7.addLine(0, 0, 4, 0);
-        //        7.addLine(4, 0, 4, 6);
-        //               
-        //        letters['7'] = 7;
-        //        
-        //        Letter 8;
-        //        8.addLine(0, 0, 4, 0);
-        //        8.addLine(4, 0, 4, 6);
-        //        8.addLine(4, 6, 0, 6);
-        //        8.addLine(0, 6, 0, 0);
-        //        8.addLine(0, 3, 4, 3);
-        //        
-        //        letters['8'] = 8;
-        //        
-        //        
-        //        Letter 9;
-        //        9.addLine(4, 3, 0, 3);
-        //        9.addLine(0, 3, 0, 0);
-        //        9.addLine(4, 6, 0, 6);
-        //        9.addLine(0, 0, 4, 0);
-        //        9.addLine(4, 0, 4, 6);
-        //        
-        //        letters['9'] = 9;
+        letters['0'] = l0;
+        
+        Letter l1;
+        l1.addLine(2, 0, 2, 6);
+      
+        letters['1'] = l1;
+
+        Letter l2;
+        l2.addLine(0, 0, 4, 0);
+        l2.addLine(4, 0, 4, 3);
+        l2.addLine(4, 3, 0, 3);
+        l2.addLine(0, 3, 0, 6);
+        l2.addLine(0, 6, 4, 6);
+        
+        letters['2'] = l2;
+
+        
+        Letter l3;
+        l3.addLine(0, 0, 4, 0);
+        l3.addLine(4, 0, 4, 6);
+        l3.addLine(4, 6, 0, 6);
+        l3.addLine(0, 4, 4, 3);
+        
+        letters['3'] = l3;
+        
+        Letter l4;
+        l4.addLine(0, 0, 0, 3);
+        l4.addLine(0, 3, 4, 3);
+        l4.addLine(4, 3, 4, 6);
+        l4.addLine(4, 6, 0, 6);
+        
+        letters['4'] = l4;
+        
+        Letter l5;
+        l5.addLine(4, 0, 0, 0);
+        l5.addLine(0, 0, 0, 3);
+        l5.addLine(0, 3, 4, 3);
+        l5.addLine(4, 3, 4, 6);
+        l5.addLine(4, 6, 0, 6);
+        
+        letters['5'] = l5;
+        
+        Letter l6;
+        l6.addLine(0, 0, 0, 6);
+        l6.addLine(0, 6, 4, 6);
+        l6.addLine(4, 6, 4, 3);
+        l6.addLine(4, 3, 0, 3);
+        
+        letters['6'] = l6;
+        
+        
+        Letter l7;
+        l7.addLine(0, 0, 4, 0);
+        l7.addLine(4, 0, 4, 6);
+               
+        letters['7'] = l7;
+        
+        Letter l8;
+        l8.addLine(0, 0, 4, 0);
+        l8.addLine(4, 0, 4, 6);
+        l8.addLine(4, 6, 0, 6);
+        l8.addLine(0, 6, 0, 0);
+        l8.addLine(0, 3, 4, 3);
+        
+        letters['8'] = l8;
+        
+        
+        Letter l9;
+        l9.addLine(4, 3, 0, 3);
+        l9.addLine(0, 3, 0, 0);
+        l9.addLine(4, 6, 0, 6);
+        l9.addLine(0, 0, 4, 0);
+        l9.addLine(4, 0, 4, 6);
+        
+        letters['9'] = l9;
 
 		
 	}

@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	
+	ofSetFrameRate(50); 
 }
 
 //--------------------------------------------------------------
@@ -15,8 +15,12 @@ void testApp::update(){
 void testApp::draw(){
 	ofBackground(0);
 	
-	fontWriter.writeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
-    fontWriter.writeText("1234567890"); 
+	ofTranslate(20,20); 
+	fontWriter.writeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	ofTranslate(0,40);
+    fontWriter.writeText("1234567890");
+	ofTranslate(0,40);
+    fontWriter.writeText("OMG What a freaking awesome \nvector font!");
 	
 	
 }
