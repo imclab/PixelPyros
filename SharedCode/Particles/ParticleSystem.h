@@ -44,7 +44,6 @@ class ParticleSystem {
 	LifeCycle life; 
 	
 	ParticleSystemSettings settings;
-	//ParticleRendererBase renderer;
 	
 	PhysicsObject * attachedPhysicsObject; 
 	

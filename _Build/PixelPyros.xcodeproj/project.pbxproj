@@ -124,6 +124,8 @@
 
 /* Begin PBXFileReference section */
 		1209A8CE15E5018000D5E526 /* Starfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Starfield.h; sourceTree = "<group>"; };
+		1209A8CF15E50B3C00D5E526 /* StretchyNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StretchyNet.h; sourceTree = "<group>"; };
+		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StretchyNetPoint.h; sourceTree = "<group>"; };
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* BasicRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicRocket.h; path = ../../SharedCode/Particles/BasicRocket.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		1285CE4815E25C9D00019B65 /* ScenePatternTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScenePatternTest.h; sourceTree = "<group>"; };
 		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
 		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
+		12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererShape.h; sourceTree = "<group>"; };
 		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
 		12D7CD6015DFF0B90089AA4D /* SceneFountains.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneFountains.h; sourceTree = "<group>"; };
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RocketSettings.h; path = ../../SharedCode/Particles/RocketSettings.h; sourceTree = "<group>"; };
@@ -431,6 +434,7 @@
 				964A382915D2C207004D2BE7 /* Particle.cpp */,
 				964A382A15D2C207004D2BE7 /* Particle.h */,
 				964A382B15D2C207004D2BE7 /* ParticleRendererBase.h */,
+				12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */,
 				1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */,
 				1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */,
 				964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */,
@@ -846,6 +850,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
+				1209A8CF15E50B3C00D5E526 /* StretchyNet.h */,
+				1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */,
 				1209A8CE15E5018000D5E526 /* Starfield.h */,
 			);
 			path = src;
@@ -1102,7 +1108,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1179,7 +1185,9 @@
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = PixelPyrosDebug;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1195,7 +1203,7 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1272,7 +1280,9 @@
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = PixelPyros;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

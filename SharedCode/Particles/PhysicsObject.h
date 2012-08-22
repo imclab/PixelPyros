@@ -7,6 +7,7 @@
 //
 #pragma once
 #include "ofMain.h"
+#include "LifeCycle.h"
 
 class PhysicsObject { 
 
@@ -20,17 +21,22 @@ class PhysicsObject {
 		lastPos.set(0,0,0); 
 		vel.set(0,0,0); 
 		drag = 1; 
-		gravity.set(0,0,0); 
+		gravity.set(0,0,0);
+		
 		
 	}; 
 	
 	virtual void reset() { 
 		dragApplyCount = 0; 
 		elapsedTime = 0; 
-		enabled = true; 
+		enabled = true;
+		life.reset();
 	};
 	
-	virtual bool update(float deltaTime) { 
+	virtual bool update(float deltaTime) {
+		
+		life.update(deltaTime);
+		
 		lastPos = pos; 
 		vel+=gravity*deltaTime; 
 		pos+=vel*deltaTime; 
@@ -40,7 +46,10 @@ class PhysicsObject {
 			vel*=drag; 
 			dragApplyCount++; 
 		}
-		return true; 
+		
+		if(life.isFinished()) enabled = false;
+		
+		return enabled; 
 	};
 	
 	ofVec3f pos; 
@@ -48,6 +57,8 @@ class PhysicsObject {
 	ofVec3f vel; 
 	float drag; 
 	ofVec3f	gravity; 
+	
+	LifeCycle life;
 	
 	
 	int dragApplyCount;

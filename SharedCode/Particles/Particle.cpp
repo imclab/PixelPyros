@@ -17,7 +17,7 @@ Particle::Particle() : PhysicsObject() {
 
 
 void Particle::reset() { 
-	life.reset();
+	//life.reset();
 	
 	PhysicsObject::reset();
 	
@@ -35,9 +35,8 @@ void Particle::reset() {
 bool Particle :: update(float deltaTime) { 
 	if(!enabled) return false;
 	
-	life.update(deltaTime); 
 	
-	PhysicsObject::update(deltaTime);
+	enabled = PhysicsObject::update(deltaTime);
 	
     size = ofMap(life.unitLifeProgress, 0, 1, sizeStart, sizeEnd, true);
     
@@ -49,7 +48,7 @@ bool Particle :: update(float deltaTime) {
 	
 	velocityModifier.update(deltaTime, this, startPos);
 		
-	if(life.isFinished()) enabled = false; 
+	
 	return enabled; 
 }
 

@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "BasicRocket.h"
 #include "TriggerSimple.h"
+#include "StretchyNet.h"
 
 class Scene2 : public Scene {
 	
@@ -34,10 +35,34 @@ class Scene2 : public Scene {
 		TriggerPattern pattern;
 		pattern.addTrigger(trigger);
 		addArrangement(pattern);
+		
+		stretchyNet.init(ofRectangle(0,0,APP_WIDTH, APP_HEIGHT));
+						
 
 		
 	}
 	
+	
+	bool update(float deltaTime) {
+		if(!Scene::update(deltaTime)) return false;
+		
+		stretchyNet.update(deltaTime, particleSystemManager);
+		
+		
+	}
+	
+	bool draw() {
+		if(!Scene::draw()) return false;
+		   
+		ofPushStyle();
+		//ofEnableSmoothing();
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
+		stretchyNet.draw();
+		ofPopStyle(); 
+		
+	}
+	
+	StretchyNet stretchyNet; 
 	
 	
 };

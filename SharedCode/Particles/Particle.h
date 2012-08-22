@@ -10,7 +10,6 @@
 
 #include "PhysicsObject.h"
 #include "Quint.h"
-#include "LifeCycle.h"
 #include "ColourModifier.h"
 #include "VelocityModifier.h"
 
@@ -35,7 +34,6 @@ class Particle : public PhysicsObject{
 	
 	bool	enabled; 
 	
-	LifeCycle life;
 	
 	ColourModifier * colourModifier;
 	VelocityModifier velocityModifier;

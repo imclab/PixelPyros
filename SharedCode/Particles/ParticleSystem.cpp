@@ -74,9 +74,11 @@ bool ParticleSystem::update(float deltaTime) {
 	
     activeParticleCount = 0; 
 	
-	for(int i = 0; i<particles.size(); i++) { 
-		Particle &p = *(particles[i]); 
-		if(!p.enabled) continue; 
+	for(std::vector<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
+		
+		Particle& p = **it; // *(particles[i]);
+		
+		if(!p.enabled) continue;
 		p.update(deltaTime); 
 		if(!p.enabled) {
 			// add to spares... 
@@ -91,8 +93,8 @@ bool ParticleSystem::update(float deltaTime) {
 
 bool ParticleSystem::draw() { 
 	
-	
-	settings.renderer.renderParticles(particles);
+	if(settings.renderer!=NULL)
+		settings.renderer->renderParticles(particles);
 	
 }
 

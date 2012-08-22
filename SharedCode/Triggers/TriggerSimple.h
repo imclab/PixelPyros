@@ -15,7 +15,8 @@
 
 #include "TriggerBase.h"
 
-class TriggerSimple {
+//template <typename Derived>
+class TriggerSimple : public TriggerBase {
 
 	public : 
 	
@@ -29,48 +30,17 @@ class TriggerSimple {
 	virtual void registerMotion(float unitValue); 
 	virtual void addRocket(RocketSettings rocket);
 	
-	
 	virtual bool makeRocket();
 	
+	
+	virtual TriggerSimple* clone() const{
+		cout << "clone TriggerSimple"<< endl; 
+		return new TriggerSimple( *this );
+	}
+	
+	
+	
 	TriggerType type; 
-	
-	bool active; 
-	bool stopping; 
-	
-	
-	// to create a trigger that is one shot, set restoreSpeed
-	// to 0. If you want a trigger that needs charging up, 
-	// set motionDecay to 0, fireOnCharge to true
-	
-	// activityLevel is the accumulated motion
-	float motionLevel; 
-	
-	//amount per second to take away from the accumulated motion
-	float motionDecay; 
-	// triggerLevel is the amount of motion needed to make something happen
-	float triggerLevel; 
-	
-	float chargeOnMotion;
-	float chargeAmount; 
-	
-	float minTimeBetweenRockets; 
-	float restoreSpeed; 
-	float lastRocketTime; 
-
-
-	float scale; 
-	float radius;
-	float targetScale; 
-	
-	
-	ofVec3f pos; 
-	
-	vector <RocketSettings> rocketSettings;
-		
-	ParticleSystemManager & particleSystemManager; 
-
-	float unitPower;
-	float rocketPower; 
 	
 	float elapsedTime;
 	

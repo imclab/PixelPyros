@@ -18,6 +18,7 @@ class Scene1 : public Scene {
 	
 	Scene1(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
+		renderer = new ParticleRendererShape(); 
 		// ParticleData
 		// size range
 		// size modifier
@@ -88,6 +89,7 @@ class Scene1 : public Scene {
 		//ps.emitAttachedPhysicsObject = &rocket;
 		ps.emitInheritVelocity = -0.5; 
 		
+		ps.renderer = renderer;
 		//psystem.init(ps); 
 		
 		
@@ -138,6 +140,7 @@ class Scene1 : public Scene {
 		ps2.emitDelay = 2; 
 		ps2.emitLifeTime= 0.05;
 		
+		ps2.renderer = renderer;
 		
 		// optional colour modifier
 		
@@ -186,6 +189,9 @@ class Scene1 : public Scene {
 		ps3.emitLifeTime= 0.05;
 		
 		ps3.startSound = "ExplosionSynth1";
+		
+		ps3.renderer = renderer;
+		
 				
 		RocketSettings rocketSettings;
 		
@@ -231,7 +237,12 @@ class Scene1 : public Scene {
 		addArrangement(pattern);
 		
 		
+	}
+	
+	bool update(float deltaTime) {
+		if(!Scene::update(deltaTime)) return false;
 		
+		starfield.update(deltaTime); 
 		
 	}
 	
@@ -245,6 +256,8 @@ class Scene1 : public Scene {
 		
 	}
 	
+	
+	ParticleRendererShape* renderer;
 	
 	Starfield starfield; 
 	

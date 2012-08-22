@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ParticleSystemSettings.h"
+#include "ParticleRendererShape.h"
 
 class RocketFountain : public RocketSettings {
 	
@@ -16,7 +17,8 @@ class RocketFountain : public RocketSettings {
     
     RocketFountain(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 160) : RocketSettings() {
         
-        
+        renderer = new ParticleRendererShape();
+		
         // ParticleData
 		// size range
 		// size modifier
@@ -142,6 +144,7 @@ class RocketFountain : public RocketSettings {
 		ps2.emitDelay = 0;
 		ps2.emitLifeTime= 0.5;
 		
+		ps2.renderer = ps.renderer = renderer; 
 		//ps2.velocityModifierSettings = new VelocityModifierSettings(200,300);
 		
 		
@@ -152,6 +155,7 @@ class RocketFountain : public RocketSettings {
 		directionVar = 5;
 		gravity.y = 300;
 		drag = 0.9;
+		lifeTime = 1; 
 		
 		addParticleSystemSetting(ps);
 		addParticleSystemSetting(ps2);
@@ -163,7 +167,7 @@ class RocketFountain : public RocketSettings {
 	
 	
 	
-	
+	ParticleRendererBase * renderer;
 	
 	
 	

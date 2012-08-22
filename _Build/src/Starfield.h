@@ -15,19 +15,35 @@ class Starfield {
 	
 	Starfield() {
 	
-		for(int i = 0; i<500; i++) {
-			stars.push_back(ofVec3f(ofRandom(0,APP_WIDTH), ofRandom(0,APP_HEIGHT)));
+		for(int i = 0; i<5000; i++) {
+			stars.push_back(ofVec3f(ofRandom(-200,APP_WIDTH+200), ofRandom(-200,APP_HEIGHT+200), ofRandom(-2000,2000)));
 			
 			
 			
 		}
 		
-	
+		elapsedTime = 0; 
 	}
 	
+	void update(float deltaTime) {
+		
+		for(std::vector<ofVec3f>::iterator it = stars.begin(); it != stars.end(); ++it) {
+			ofVec3f& s = *it;
+			//mesh.addVertex(s);
+			//mesh.addColor(ofColor(ofRandom(200,255)));
+			s.z+=deltaTime*50;
+			if(s.z>2000) s.z-=4000;
+			
+		}
+		elapsedTime+=deltaTime;
+		
+		
+	}
 	
 	void draw() {
 		
+		ofPushMatrix();
+		//ofRotateY(sin(elapsedTime)*5);
 		ofMesh mesh ;
 		mesh.setMode(OF_PRIMITIVE_POINTS);
 		
@@ -35,14 +51,14 @@ class Starfield {
 		for(std::vector<ofVec3f>::iterator it = stars.begin(); it != stars.end(); ++it) {
 			ofVec3f& s = *it;
 			mesh.addVertex(s);
-			//mesh.addColor(ofColor(ofRandom(200,255)));
+			mesh.addColor(ofColor(ofMap(s.z,0,-2000,255,10,true )));
 			
 		
 		}
 		
 		mesh.draw();
 		
-		
+		ofPopMatrix();
 		
 	}
 	
@@ -50,7 +66,7 @@ class Starfield {
 	
 	vector <ofVec3f> stars;
 	
-	
+				 float elapsedTime; 
 	
 	
 	

@@ -68,6 +68,8 @@ class ParticleSystemSettings{
 		
 		velocityModifierSettings = 0;
 		
+		renderer = NULL; 
+		
 		
 	};
 
@@ -129,8 +131,7 @@ class ParticleSystemSettings{
 	
 	float shimmerMin; 
 
-	// only way to get polymorphism with a pointer?
-	ParticleRendererBase renderer;
+	ParticleRendererBase* renderer;
 
 	//EMISSION LIFE CYCLE
 	float emitLifeTime; 

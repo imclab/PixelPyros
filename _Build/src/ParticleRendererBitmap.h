@@ -65,7 +65,7 @@ class ParticleRendererBitmap : public ParticleRendererBase {
 				v+=p.pos;
 				mesh.addVertex(v);
 				mesh.addColor(p.getColour());
-				//mesh.addTexCoord(ofVec2f(i%2, floor(i/2)));
+				mesh.addTexCoord(ofVec2f(i%2, floor(i/2)));
 				
 				
 			}
@@ -76,20 +76,19 @@ class ParticleRendererBitmap : public ParticleRendererBase {
 			
 			
 		}
-		
+		image->bind();
         mesh.draw();
+		image->unbind();
+		
 		ofDisableBlendMode();
 
 		
         
     }
 
-	
-	
-	ofImage* image;
-	
-	
-	
+
+	vector <ofVec3f> shape;
+	ofPrimitiveMode meshMode;
 
 
 

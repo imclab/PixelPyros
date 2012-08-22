@@ -9,12 +9,12 @@
 #include "TriggerSimple.h"
 
 
-TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : particleSystemManager(psm){
+TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	
-	
+	typeLabel = "TriggerSimple"; 
 	// the power level for the trigger
 	unitPower =1;
-	// the amount of power a rocket takes away
+	// the amount typename = "TriggerSimple"; of power a rocket takes away
 	rocketPower = 0.2; 
 	elapsedTime = 0; 
 	lastRocketTime = 0; 
@@ -125,6 +125,7 @@ void TriggerSimple::draw() {
 	ofTranslate(pos); 
 	ofScale(scale, scale); 
 	ofEnableSmoothing();
+	ofDisableBlendMode();
     
 //    
 //	ofSetColor(ofColor::red);
@@ -183,6 +184,7 @@ bool TriggerSimple::makeRocket() {
 	rocket->drag = rs.drag; 
 	rocket->pos.set(pos);
 	rocket->lastPos.set(pos);
+	rocket->life.lifeTime = rs.lifeTime;
 	
 	for(int i = 0; i<rs.particleSystemSettings.size(); i++) { 
 		ParticleSystemSettings pss = rs.particleSystemSettings[i]; 

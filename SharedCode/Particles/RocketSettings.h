@@ -19,7 +19,8 @@ class RocketSettings {
 		direction = -90; 
 		directionVar = 10; 
 		gravity.set(0,0,0); 
-		drag = 1; 
+		drag = 1;
+		lifeTime = 2; 
 		
 		
 	};
@@ -35,7 +36,8 @@ class RocketSettings {
 	float startSpeedMin; 
 	float startSpeedMax; 
 	float direction; 
-	float directionVar; 
+	float directionVar;
+	float lifeTime; 
 	
 	ofVec3f gravity; 
 	float	drag; 

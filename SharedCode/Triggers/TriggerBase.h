@@ -23,7 +23,14 @@ class TriggerBase {
 	
 	public :
 	
-	TriggerBase(ParticleSystemManager & psm);
+	TriggerBase(ParticleSystemManager & psm) : particleSystemManager(psm){
+		typeLabel = "TriggerBase";
+	};
+	
+	
+	virtual TriggerBase* clone() const=0;
+	
+	
 	virtual bool update(float deltaTime) =0;
 	virtual void draw() = 0;
 	
@@ -33,7 +40,7 @@ class TriggerBase {
 	virtual void registerMotion(float unitValue) = 0;
 	virtual void addRocket(RocketSettings rocket) = 0;
 	
-	
+	//virtual TriggerBase* clone() const = 0;
 	virtual bool makeRocket() = 0;
 	
 	TriggerType type;
@@ -77,5 +84,8 @@ class TriggerBase {
 	float rocketPower;
 	
 	float elapsedTime;
+	
+	
+	string typeLabel;
 	
 };

@@ -16,7 +16,7 @@ class TriggerPattern  {
 	public :
 	
 	template <typename T>
-	T* addTrigger(T trigger, float verticalPos = 0.5, float verticalPosVariation = 0, float horizSpacing = 1){
+	T* addTrigger(T& trigger, float verticalPos = 0.5, float verticalPosVariation = 0, float horizSpacing = 1){
 		
 		
 		triggers.push_back(new T(trigger));
@@ -29,7 +29,7 @@ class TriggerPattern  {
 
 
 
-	vector <TriggerSimple* > triggers;
+	vector <TriggerBase* > triggers;
 	vector <float> verticalPositions;
 
 

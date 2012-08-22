@@ -34,7 +34,7 @@ class Arrangement {
 	virtual void initialiseFromPattern(TriggerPattern tp);
 	
 	template <typename T>
-	T* addTrigger(T trigger);
+	T* addTrigger(T* trigger);
 	
 	void setTriggerArea(ofRectangle area);
 
@@ -44,7 +44,7 @@ class Arrangement {
 	bool active;
 	bool stopping;
 	
-	vector <TriggerSimple*> triggers;
+	vector <TriggerBase*> triggers;
 	
 	ParticleSystemManager& particleSystemManager;
 	ofRectangle triggerArea;

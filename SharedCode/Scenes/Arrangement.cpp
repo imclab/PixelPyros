@@ -90,7 +90,7 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 	for(int i = 0; i<triggers.size(); i++) {
 		
-		TriggerSimple * trigger = triggers[i];
+		TriggerBase * trigger = triggers[i];
 		
 		if(!trigger->active) continue;
 		
@@ -117,10 +117,16 @@ void Arrangement :: initialiseFromPattern(TriggerPattern tp) {
 	for(int j = 0; j<numPatterns; j++ ) {
 		for(int i =0; i<tp.triggers.size(); i++) {
 		
-			TriggerSimple* trigger = addTrigger(*tp.triggers[i]);
+			//TriggerBase* trigger = addTrigger(tp.triggers[i]);
+			TriggerBase* trigger = tp.triggers[i]->clone();
+			triggers.push_back(trigger); 
 			trigger->pos.x = xPos;
 			trigger->pos.y = triggerArea.y+(triggerArea.height/2);
-			xPos+=spacing; 
+			xPos+=spacing;
+			
+//			cout << "original : "<< tp.triggers[i]->typeLabel << " copy : " << trigger->typeLabel << endl;
+//			tp.triggers[i]->typeLabel+="****";
+//			cout << "original : "<< tp.triggers[i]->typeLabel << " copy : " << trigger->typeLabel << endl;
 			
 		}
 	}
@@ -131,16 +137,14 @@ void Arrangement:: setTriggerArea(ofRectangle rect) {
 	for(int i=0; i<triggers.size(); i++) {
 		
 		triggers[i]->pos.y = triggerArea.y+(triggerArea.width/2);
-		
 	}
-	
 	
 }
 
 template <typename T>
-T* Arrangement :: addTrigger(T trigger) {
+T* Arrangement :: addTrigger(T* trigger) {
 	
-	T* newtrigger = new T(trigger);
+	T* newtrigger = trigger->clone();
 	triggers.push_back(newtrigger);
 	return newtrigger;
 	

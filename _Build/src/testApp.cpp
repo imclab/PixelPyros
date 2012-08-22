@@ -113,15 +113,15 @@ void testApp::draw(){
 
 	if(useFbo) {
 		fbo.end();
-		//ofEnableBlendMode(OF_BLENDMODE_ADD);
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		fbo.draw(0,0);
-		//ofDisableBlendMode();
+		ofDisableBlendMode();
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
 	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
-	
+	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
 	
@@ -135,15 +135,15 @@ void testApp::draw(){
 		activeSceneArrangements += ofToString(scene->activeArrangements)+" ";
 		activeArrangementNumbers += ofToString(scene->currentArrangementIndex)+" ";
 	}
-	ofDrawBitmapString(activeSceneMap,20,65); ;
-	ofDrawBitmapString(activeSceneArrangements,20,80); ;
-	ofDrawBitmapString(activeArrangementNumbers,20,95); ;
+	ofDrawBitmapString(activeSceneMap,20,85); ;
+	ofDrawBitmapString(activeSceneArrangements,20,100); ;
+	ofDrawBitmapString(activeArrangementNumbers,20,115); ;
 	
 	
 	ofDisableBlendMode();
-	ofSetColor(255);
-    ofNoFill();
-    ofRect(0,0,768*2,1024);
+	//ofSetColor(255);
+    //ofNoFill();
+    //ofRect(0,0,768*2,1024);
 	ofFill();
     
     
@@ -195,7 +195,7 @@ void testApp:: setupScenes() {
 	scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 
 	scenes.push_back(new Scene1(particleSystemManager, triggerarea));
-	scenes.push_back(new Scene2(particleSystemManager, triggerarea)); 
+	scenes.push_back(new Scene2(particleSystemManager, triggerarea));
 	
 	
 	currentSceneIndex = 0;
@@ -239,9 +239,9 @@ void testApp::mouseMoved( int x, int y ){
 		vector<Arrangement*> * arrangements = &scene1->arrangements;
 		for(int k = 0; k<arrangements->size(); k++)
 		{
-			vector <TriggerSimple*> triggers = arrangements->at(k)->triggers;
+			vector <TriggerBase*> triggers = arrangements->at(k)->triggers;
 			for(int i = 0; i<triggers.size(); i++) { 
-				TriggerSimple * trigger = triggers[i]; 
+				TriggerBase * trigger = triggers[i]; 
 				float distance = trigger->pos.distance(ofVec3f(x,y));
 				if(distance<20) { 
 					trigger->registerMotion(1.0f-(distance/20.0f)); 

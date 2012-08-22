@@ -18,7 +18,7 @@ Warper :: Warper() {
 	ofAddListener(ofEvents().mouseDragged, this, &Warper::mouseDragged);
 	ofAddListener(ofEvents().mouseReleased, this, &Warper::mouseReleased);
 
-	dstPreviewScale = 1;
+	dstPreviewScale = 0.2;
 	
 	autoSave =true;
 	verbose = false; 

@@ -18,7 +18,7 @@ public:
     ParticleSystemManager(SoundPlayer& sp) : soundPlayer(sp) {
     
         activeParticleCount = 0;
-
+		activePhysicsObjectCount = 0; 
         
     }
 	
@@ -27,7 +27,8 @@ public:
         activeParticleCount  =0 ; 
 		
 		
-
+		activePhysicsObjectCount = 0;
+		
 		
 		
 		for(int i = 0; i<particleSystems.size(); i++) { 
@@ -56,6 +57,7 @@ public:
 			
 			PhysicsObject* po = physicsObjects[i];
 			if(!po->enabled) continue;
+			activePhysicsObjectCount++;
 			
 			po->update(deltaTime);
 			
@@ -107,7 +109,8 @@ public:
 		ParticleSystem * ps; 
 		if(spareParticleSystems.size()>0) {
 			ps = spareParticleSystems.back(); 
-			spareParticleSystems.pop_back(); 
+			spareParticleSystems.pop_back();
+			ps->reset();
 		} else { 
 			
 			ps = new ParticleSystem(soundPlayer); 
@@ -147,6 +150,7 @@ public:
 	vector <PhysicsObject *> sparePhysicsObjects; 
 
     int activeParticleCount;
+	int activePhysicsObjectCount;
 	
 	SoundPlayer& soundPlayer;
 

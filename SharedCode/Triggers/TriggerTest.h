@@ -13,8 +13,8 @@ class TriggerTest : public TriggerSimple {
 	public : 
 	
 	TriggerTest(ParticleSystemManager& psm): TriggerSimple (psm) {
-		
-		//motionDecay = 100;
+		typeLabel = "TriggerTest"; 
+		motionDecay = 100;
 		type = TRIGGER_TYPE_FIRE_ON_MOTION; 
 		//triggerLevel = 0.01;
 		motionValueCount = 20;
@@ -22,6 +22,11 @@ class TriggerTest : public TriggerSimple {
 	
 	};
 	
+	TriggerTest* clone() const{
+		cout << "clone TriggerTest"<< endl;
+		
+		return new TriggerTest( *this );
+	}
 	
 	bool update(float deltaTime) { 
 		// update bitmap
@@ -58,7 +63,7 @@ class TriggerTest : public TriggerSimple {
 	
 	void draw() {
 		
-		cout << "trigger test draw" << endl;
+		//cout << "trigger test draw" << endl;
 		
 		// draw trigger and motion bitmap 
 		TriggerSimple::draw();
@@ -66,7 +71,8 @@ class TriggerTest : public TriggerSimple {
         if(!active) return;
 		
 		
-		ofPushMatrix(); 
+		ofPushMatrix();
+		ofPushStyle(); 
 		ofTranslate(pos);
         ofScale(1, scale);
 		ofTranslate(0, motionValueCount*-2); 
@@ -109,7 +115,8 @@ class TriggerTest : public TriggerSimple {
             ofPopMatrix();
         }
 		
-		ofPopMatrix(); 
+		ofPopMatrix();
+		ofPopStyle(); 
 		
 	};
 	

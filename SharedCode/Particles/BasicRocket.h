@@ -9,8 +9,8 @@
 #pragma once
 
 #include "ParticleSystemSettings.h"
-//#include "ParticleRendererSquare.h"
-#include "ParticleRendererBitmap.h"
+#include "ParticleRendererShape.h"
+//#include "ParticleRendererBitmap.h"
 
 class BasicRocket : public RocketSettings {
 
@@ -18,6 +18,9 @@ class BasicRocket : public RocketSettings {
     
     BasicRocket(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 20) : RocketSettings() {
         
+		
+		particleRenderer = new ParticleRendererShape(); 
+		
 		whiteImage.loadImage("img/ParticleWhite.png"); 
         
         // ParticleData
@@ -92,11 +95,9 @@ class BasicRocket : public RocketSettings {
 		
 		ps.startSound = "SynthThud";
 		
-		// DANGEROUS :/ 
+		ps.renderer = particleRenderer;
 		
-		//psystem.init(ps);
-				
-		// optional colour modifier
+		
 		
 		ParticleSystemSettings ps2;
 		// PHYSICS
@@ -144,22 +145,19 @@ class BasicRocket : public RocketSettings {
 		
 		ps2.startSound = "ExplosionSynth1";
 		
-		//ps2.renderer = ParticleRendererBitmap(&whiteImage);
+		ps2.renderer = particleRenderer;
 		
-		//ps2.velocityModifierSettings = new VelocityModifierSettings(10,-10);
 		
         startSpeedMin = 600;
 		startSpeedMax = 700;
 		direction = -90;
 		directionVar = 5;
 		gravity.y = 400;
+		lifeTime =3; 
 		
 		addParticleSystemSetting(ps);
 		addParticleSystemSetting(ps2);
-		//rocketSettings.addParticleSystemSetting(ps3);
-        
-        
-        
+		        
         
     };
 
@@ -169,8 +167,7 @@ class BasicRocket : public RocketSettings {
 	ofImage whiteImage; 
 
 
-
-
+	ParticleRendererShape* particleRenderer; 
 
 
 
