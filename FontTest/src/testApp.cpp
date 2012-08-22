@@ -15,7 +15,8 @@ void testApp::update(){
 void testApp::draw(){
 	ofBackground(0);
 	
-	fontWriter.writeText("ABCDEFG"); 
+	fontWriter.writeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
+    fontWriter.writeText("1234567890"); 
 	
 	
 }

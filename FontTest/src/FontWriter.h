@@ -49,7 +49,7 @@ class FontWriter {
 		
 		for(int i = 0; i<letter.points.size(); i++) {
 			ofVec2f random(ofRandom(-randomness,randomness),ofRandom(-randomness,randomness));
-			mesh.addVertex(letter.points[i]*5+offset + random);
+			mesh.addVertex(letter.points[i]*5+offset);
 				
 		}
 		mesh.draw();
