@@ -15,13 +15,14 @@ Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSys
 	active = false; 
 	stopping = false;
 	setTriggerArea(triggerarea);
-	currentArrangementIndex = -1; 
+	currentArrangementIndex = -1;
+	activeArrangements = 0; 
 	
 }
 
 
 void Scene :: start() {
-	
+	stopping = false; 
 	if (startArrangement(0)) active = true;
 	
 }
@@ -41,12 +42,12 @@ void Scene :: stop() {
 bool Scene :: update(float deltaTime) {
 
 	if(!active) return false; 
-	int activeArrangements = 0;
+	activeArrangements = 0;
 	
 	for(int i=0; i<arrangements.size(); i++) {
 	
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
-		else if (i==currentArrangementIndex) next(); 
+		else if ((!stopping) && (i==currentArrangementIndex)) next();
 		
 	}
 	if((stopping) && (activeArrangements==0) ) {
@@ -58,16 +59,16 @@ bool Scene :: update(float deltaTime) {
 	
 }
 
-void Scene:: draw() { 
+bool Scene:: draw() {
 
-	
+	if(!active) return false; 
 	for(int i=0; i<arrangements.size(); i++) {
 		
 		arrangements[i]->draw();
 		
 	}
 	
-
+	return true; 
 
 }
 void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
@@ -110,7 +111,7 @@ Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
 
 bool Scene :: startArrangement(int num) {
 	
-	if(num>=arrangements.size()) return false;
+	if((num>=arrangements.size())|| (stopping))  return false;
 	if(currentArrangementIndex>=0) {
 		arrangements[currentArrangementIndex]->stop();
 	}

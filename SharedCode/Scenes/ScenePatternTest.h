@@ -59,7 +59,7 @@ class ScenePatternTest : public Scene {
 		pattern2.addTrigger(trigger,0.5);
 		trigger2.radius = 5;
 		pattern2.addTrigger(trigger2,0.5);
-		addArrangement(pattern2); 
+		addArrangement(pattern2);
 	
 	}
 

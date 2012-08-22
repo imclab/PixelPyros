@@ -144,7 +144,7 @@ class BasicRocket : public RocketSettings {
 		
 		ps2.startSound = "ExplosionSynth1";
 		
-		ps2.renderer = ParticleRendererBitmap(&whiteImage);
+		//ps2.renderer = ParticleRendererBitmap(&whiteImage);
 		
 		//ps2.velocityModifierSettings = new VelocityModifierSettings(10,-10);
 		

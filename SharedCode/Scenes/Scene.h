@@ -26,7 +26,7 @@ class Scene {
 	virtual void stop();
 	
 	virtual bool update(float deltaTime); 
-	virtual void draw(); 
+	virtual bool draw();
 	
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
 	
@@ -43,7 +43,8 @@ class Scene {
 	bool stopping; 
 	
 	vector <Arrangement*> arrangements;
-	int currentArrangementIndex; 
+	int currentArrangementIndex;
+	int activeArrangements; 
 	
 	ParticleSystemManager& particleSystemManager; 
 	

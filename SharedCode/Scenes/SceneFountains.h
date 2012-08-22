@@ -31,6 +31,10 @@ class SceneFountains : public Scene {
 		
 		trigger.rocketPower = 0.5;
 		
+		TriggerPattern pattern;
+		pattern.addTrigger(trigger);
+		addArrangement(pattern); 
+		
 		//addTriggers(trigger, 30, 20,ofGetHeight()*0.85, ofGetWidth()-160);
 		
 	}

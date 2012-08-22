@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "BasicRocket.h"
 #include "TriggerSimple.h"
+#include "Starfield.h"
 
 class Scene1 : public Scene {
 	
@@ -202,6 +203,8 @@ class Scene1 : public Scene {
 		
 		trigger.addRocket(rocketSettings);
 		
+		TriggerPattern pattern;
+		pattern.addTrigger(trigger);
 		
 		//addTriggers(trigger, 4, 20,ofGetHeight()*0.85, ofGetWidth()-160);
 		
@@ -212,6 +215,7 @@ class Scene1 : public Scene {
 		trigger.chargeAmount = 5;
 		
 		//addTriggers(trigger, 4, 100,ofGetHeight()*0.85, ofGetWidth()-160);
+		pattern.addTrigger(trigger);
 		
 		
 		// makes one shot type
@@ -221,14 +225,27 @@ class Scene1 : public Scene {
 		trigger.rocketPower = 0.9; 
 		
 		//addTriggers(trigger, 4, 180,ofGetHeight()*0.85, ofGetWidth()-160);
+		pattern.addTrigger(trigger);
 		
 		
+		addArrangement(pattern);
 		
 		
 		
 		
 	}
 	
+	bool draw() {
+		
+		if(!Scene::draw()) return false;
+		
+		starfield.draw();
+		
+		return true;
+		
+	}
 	
+	
+	Starfield starfield; 
 	
 };

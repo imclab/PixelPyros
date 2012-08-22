@@ -53,6 +53,9 @@ public:
 	MotionManager		motionManager;
 	SoundPlayer			soundPlayer;
 	
+	ofFbo	fbo; 
+	bool useFbo; 
+	
 	ofxAutoControlPanel gui; 
 	
 	

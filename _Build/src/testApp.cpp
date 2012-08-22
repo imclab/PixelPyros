@@ -3,8 +3,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	
-	//ofSetFrameRate(50);
+	useFbo = true;
+	ofSetFrameRate(50);
 	lastUpdateTime = ofGetElapsedTimef();
 	
 	
@@ -31,6 +31,13 @@ void testApp::setup(){
 	soundPlayer.globalVolume = 1;
 	
 	gui.hide();
+	
+	fbo.allocate(APP_WIDTH, APP_HEIGHT);
+	fbo.begin();
+	ofClear(0,0,0);
+	fbo.end(); 
+	
+	
 	
 
 }
@@ -65,11 +72,24 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
+	ofBackground(0);
 	ofSetColor(255); 
 	cameraManager.draw(0,0);
 	motionManager.draw();
 
-	ofPushMatrix(); 
+	if(useFbo) {
+		fbo.begin();
+		
+//		FOR TRAILS :
+//		ofEnableAlphaBlending();
+//		ofSetColor(0, 100);
+//		ofRect(0,0,APP_WIDTH,APP_HEIGHT);
+//		ofDisableAlphaBlending();
+//		
+		ofClear(0);
+		//ofSetColor(255);
+	}
+	ofPushMatrix();
 	
 	// change perspective so we're looking up
 	// THIS SHOULD BE MOVED INTO PARTICLE SYSTEMS I THINK
@@ -91,12 +111,33 @@ void testApp::draw(){
 		scenes[i]->draw(); 
 	}
 
+	if(useFbo) {
+		fbo.end();
+		//ofEnableBlendMode(OF_BLENDMODE_ADD);
+		fbo.draw(0,0);
+		//ofDisableBlendMode();
+	}
 	
-	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20); 
+	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
 	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	
-	//ofDrawBitmapString(ofToString(motion),20,50); 
+	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
+	// Should probably put this in a GUI or something... :) 
+	
+	string activeSceneMap = "";
+	string activeSceneArrangements = "";
+	string activeArrangementNumbers = ""; 
+	for(int i = 0; i<scenes.size(); i++) {
+		Scene* scene = scenes[i];
+
+		activeSceneMap += (scene->active ? "1 " : "0 ");
+		activeSceneArrangements += ofToString(scene->activeArrangements)+" ";
+		activeArrangementNumbers += ofToString(scene->currentArrangementIndex)+" ";
+	}
+	ofDrawBitmapString(activeSceneMap,20,65); ;
+	ofDrawBitmapString(activeSceneArrangements,20,80); ;
+	ofDrawBitmapString(activeArrangementNumbers,20,95); ;
 	
 	
 	ofDisableBlendMode();
@@ -108,6 +149,8 @@ void testApp::draw(){
     
     
 }
+
+
 
 void testApp::keyPressed(int key){
 	
@@ -148,19 +191,17 @@ void testApp:: setupScenes() {
 	
 	scenes.push_back(new SceneTest(particleSystemManager, triggerarea));
 	scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
-//
-//	scenes.push_back(new SceneFountains(particleSystemManager));
-//
-//	scenes.push_back(new Scene1(particleSystemManager));
-//	scenes.push_back(new Scene2(particleSystemManager)); 
-//	
+
+	scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
+
+	scenes.push_back(new Scene1(particleSystemManager, triggerarea));
+	scenes.push_back(new Scene2(particleSystemManager, triggerarea)); 
+	
 	
 	currentSceneIndex = 0;
 
 	scenes[currentSceneIndex]->start();
 	
-		
-
 }
 
 bool testApp::nextScene(){ 

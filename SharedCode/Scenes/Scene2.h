@@ -31,7 +31,10 @@ class Scene2 : public Scene {
 		trigger.chargeAmount = 2; 
 	
 		//addTriggers(trigger, 50, 100,ofGetHeight()*0.85, ofGetWidth()-160);
-		
+		TriggerPattern pattern;
+		pattern.addTrigger(trigger);
+		addArrangement(pattern);
+
 		
 	}
 	

@@ -18,7 +18,7 @@ Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea)
 
 
 void Arrangement :: start() {
-	
+	stopping = false; 
 	cout << "start arrangement" << endl; 
 	for(int i=0; i<triggers.size(); i++) {
 		
@@ -70,6 +70,7 @@ bool Arrangement :: update(float deltaTime) {
 
 void Arrangement:: draw() {
 	
+	if(!active) return;
 	
 	for(int i=0; i<triggers.size(); i++) {
 		

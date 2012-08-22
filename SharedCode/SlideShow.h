@@ -28,7 +28,7 @@ class SlideShow {
 			
 			visible = true;
 			active = true;
-			transitioning = false;
+			transitioning = true;
 			
 			rect.set(0,ofGetHeight()/4,ofGetWidth(), ofGetHeight()/2);
 		}
@@ -76,7 +76,9 @@ class SlideShow {
 			float timeSinceLastChange = elapsedTime - lastChange;
 			
 			if(timeSinceLastChange>timePerImage){
-	
+				
+				currentImageIndex++;
+				
 				if(currentImageIndex >= images.size()){
 					currentImageIndex = 0;
 				}
