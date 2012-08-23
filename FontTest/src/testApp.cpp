@@ -16,12 +16,15 @@ void testApp::draw(){
 	ofBackground(0);
 	
 	ofTranslate(20,20); 
-	fontWriter.writeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	fontWriter.writeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ.");
 	ofTranslate(0,40);
     fontWriter.writeText("1234567890");
 	ofTranslate(0,40);
     fontWriter.writeText("OMG What a freaking awesome \nvector font!");
-	
+	ofTranslate(0,80);
+    fontWriter.writeText("00:01:05");
+    ofTranslate(0,40);
+    fontWriter.writeText("WEEEEEEEEEE!");
 	
 }
 
