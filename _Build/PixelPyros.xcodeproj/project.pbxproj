@@ -11,17 +11,6 @@
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
-		966C865C15C7274E00D5A853 /* Back.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864515C7274E00D5A853 /* Back.cpp */; };
-		966C865D15C7274E00D5A853 /* Bounce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864715C7274E00D5A853 /* Bounce.cpp */; };
-		966C865E15C7274E00D5A853 /* Circ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864915C7274E00D5A853 /* Circ.cpp */; };
-		966C865F15C7274E00D5A853 /* Cubic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864B15C7274E00D5A853 /* Cubic.cpp */; };
-		966C866015C7274E00D5A853 /* Elastic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C864E15C7274E00D5A853 /* Elastic.cpp */; };
-		966C866115C7274E00D5A853 /* Expo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865015C7274E00D5A853 /* Expo.cpp */; };
-		966C866215C7274E00D5A853 /* Linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865215C7274E00D5A853 /* Linear.cpp */; };
-		966C866315C7274E00D5A853 /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865415C7274E00D5A853 /* Quad.cpp */; };
-		966C866415C7274E00D5A853 /* Quart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865615C7274E00D5A853 /* Quart.cpp */; };
-		966C866515C7274E00D5A853 /* Quint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865815C7274E00D5A853 /* Quint.cpp */; };
-		966C866615C7274E00D5A853 /* Sine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 966C865A15C7274E00D5A853 /* Sine.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
 		967E72E515D3B4F3008D7EF3 /* Calibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E72AA15D3B4F3008D7EF3 /* Calibration.cpp */; };
 		967E72E615D3B4F3008D7EF3 /* ContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E72AB15D3B4F3008D7EF3 /* ContourFinder.cpp */; };
@@ -128,7 +117,7 @@
 		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StretchyNetPoint.h; sourceTree = "<group>"; };
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
-		121E540715DFA6AB005014DB /* BasicRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicRocket.h; path = ../../SharedCode/Particles/BasicRocket.h; sourceTree = "<group>"; };
+		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
 		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
 		126119DC15E4330000DD04DD /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
 		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
@@ -137,12 +126,17 @@
 		1278BA9C15E38AB00076753F /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		1278BA9D15E38AB00076753F /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
 		1285CE4715E25AA300019B65 /* TriggerPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerPattern.h; sourceTree = "<group>"; };
-		1285CE4815E25C9D00019B65 /* ScenePatternTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScenePatternTest.h; sourceTree = "<group>"; };
 		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
 		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
 		12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererShape.h; sourceTree = "<group>"; };
+		12CD4AD915E6539100C21984 /* Scene1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1.h; sourceTree = "<group>"; };
+		12CD4ADA15E6539100C21984 /* SceneTron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTron.h; sourceTree = "<group>"; };
+		12CD4ADB15E6539100C21984 /* SceneFountains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneFountains.h; sourceTree = "<group>"; };
+		12CD4ADC15E6539100C21984 /* ScenePatternTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenePatternTest.h; sourceTree = "<group>"; };
+		12CD4ADD15E6A6CF00C21984 /* RocketTron.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketTron.h; sourceTree = "<group>"; };
+		12CD4AF015E6E1A100C21984 /* ParticleRendererLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererLine.h; sourceTree = "<group>"; };
+		12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketTronFountain.h; sourceTree = "<group>"; };
 		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
-		12D7CD6015DFF0B90089AA4D /* SceneFountains.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneFountains.h; sourceTree = "<group>"; };
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RocketSettings.h; path = ../../SharedCode/Particles/RocketSettings.h; sourceTree = "<group>"; };
 		964A382715D2C207004D2BE7 /* ColourModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColourModifier.h; path = ../../SharedCode/Particles/ColourModifier.h; sourceTree = "<group>"; };
 		964A382815D2C207004D2BE7 /* LifeCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LifeCycle.h; path = ../../SharedCode/Particles/LifeCycle.h; sourceTree = "<group>"; };
@@ -154,29 +148,6 @@
 		964A382E15D2C207004D2BE7 /* ParticleSystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleSystemManager.h; path = ../../SharedCode/Particles/ParticleSystemManager.h; sourceTree = "<group>"; };
 		964A382F15D2C207004D2BE7 /* ParticleSystemSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleSystemSettings.h; path = ../../SharedCode/Particles/ParticleSystemSettings.h; sourceTree = "<group>"; };
 		964A383015D2C207004D2BE7 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsObject.h; path = ../../SharedCode/Particles/PhysicsObject.h; sourceTree = "<group>"; };
-		966C864515C7274E00D5A853 /* Back.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Back.cpp; sourceTree = "<group>"; };
-		966C864615C7274E00D5A853 /* Back.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
-		966C864715C7274E00D5A853 /* Bounce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bounce.cpp; sourceTree = "<group>"; };
-		966C864815C7274E00D5A853 /* Bounce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bounce.h; sourceTree = "<group>"; };
-		966C864915C7274E00D5A853 /* Circ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circ.cpp; sourceTree = "<group>"; };
-		966C864A15C7274E00D5A853 /* Circ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circ.h; sourceTree = "<group>"; };
-		966C864B15C7274E00D5A853 /* Cubic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cubic.cpp; sourceTree = "<group>"; };
-		966C864C15C7274E00D5A853 /* Cubic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cubic.h; sourceTree = "<group>"; };
-		966C864D15C7274E00D5A853 /* easing_terms_of_use.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = easing_terms_of_use.html; sourceTree = "<group>"; };
-		966C864E15C7274E00D5A853 /* Elastic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Elastic.cpp; sourceTree = "<group>"; };
-		966C864F15C7274E00D5A853 /* Elastic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Elastic.h; sourceTree = "<group>"; };
-		966C865015C7274E00D5A853 /* Expo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Expo.cpp; sourceTree = "<group>"; };
-		966C865115C7274E00D5A853 /* Expo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expo.h; sourceTree = "<group>"; };
-		966C865215C7274E00D5A853 /* Linear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Linear.cpp; sourceTree = "<group>"; };
-		966C865315C7274E00D5A853 /* Linear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Linear.h; sourceTree = "<group>"; };
-		966C865415C7274E00D5A853 /* Quad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quad.cpp; sourceTree = "<group>"; };
-		966C865515C7274E00D5A853 /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
-		966C865615C7274E00D5A853 /* Quart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quart.cpp; sourceTree = "<group>"; };
-		966C865715C7274E00D5A853 /* Quart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quart.h; sourceTree = "<group>"; };
-		966C865815C7274E00D5A853 /* Quint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quint.cpp; sourceTree = "<group>"; };
-		966C865915C7274E00D5A853 /* Quint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quint.h; sourceTree = "<group>"; };
-		966C865A15C7274E00D5A853 /* Sine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sine.cpp; sourceTree = "<group>"; };
-		966C865B15C7274E00D5A853 /* Sine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sine.h; sourceTree = "<group>"; };
 		967E720615D3B206008D7EF3 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		967E720715D3B206008D7EF3 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		967E729C15D3B4F3008D7EF3 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -291,8 +262,6 @@
 		969750D015DA509100707C61 /* simpleFileLister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simpleFileLister.h; sourceTree = "<group>"; };
 		969750D115DA509100707C61 /* simpleLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simpleLogger.cpp; sourceTree = "<group>"; };
 		969750D215DA509100707C61 /* simpleLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simpleLogger.h; sourceTree = "<group>"; };
-		9697511315DAD0BE00707C61 /* Scene1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene1.h; sourceTree = "<group>"; };
-		9697511715DAD2F400707C61 /* Scene2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene2.h; sourceTree = "<group>"; };
 		969989A415D3BA1F00647A18 /* CameraFirewire.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraFirewire.cpp; sourceTree = "<group>"; };
 		969989A515D3BA1F00647A18 /* CameraFirewire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFirewire.h; sourceTree = "<group>"; };
 		969989A615D3BA1F00647A18 /* CameraManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraManager.cpp; sourceTree = "<group>"; };
@@ -367,6 +336,19 @@
 			path = ../../SharedCode/Sound;
 			sourceTree = "<group>";
 		};
+		12CD4AD815E6539100C21984 /* SceneData */ = {
+			isa = PBXGroup;
+			children = (
+				12CD4AD915E6539100C21984 /* Scene1.h */,
+				12CD4ADB15E6539100C21984 /* SceneFountains.h */,
+				12CD4ADC15E6539100C21984 /* ScenePatternTest.h */,
+				12CD4ADA15E6539100C21984 /* SceneTron.h */,
+				12CD4ADD15E6A6CF00C21984 /* RocketTron.h */,
+				12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */,
+			);
+			path = SceneData;
+			sourceTree = "<group>";
+		};
 		961E975A15CA96A50056F458 /* Triggers */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,44 +371,15 @@
 				966C867B15C82B5300D5A853 /* Particles */,
 			);
 			name = SharedCode;
-			sourceTree = "<group>";
-		};
-		966C864415C7274E00D5A853 /* PennerEasing */ = {
-			isa = PBXGroup;
-			children = (
-				966C864515C7274E00D5A853 /* Back.cpp */,
-				966C864615C7274E00D5A853 /* Back.h */,
-				966C864715C7274E00D5A853 /* Bounce.cpp */,
-				966C864815C7274E00D5A853 /* Bounce.h */,
-				966C864915C7274E00D5A853 /* Circ.cpp */,
-				966C864A15C7274E00D5A853 /* Circ.h */,
-				966C864B15C7274E00D5A853 /* Cubic.cpp */,
-				966C864C15C7274E00D5A853 /* Cubic.h */,
-				966C864D15C7274E00D5A853 /* easing_terms_of_use.html */,
-				966C864E15C7274E00D5A853 /* Elastic.cpp */,
-				966C864F15C7274E00D5A853 /* Elastic.h */,
-				966C865015C7274E00D5A853 /* Expo.cpp */,
-				966C865115C7274E00D5A853 /* Expo.h */,
-				966C865215C7274E00D5A853 /* Linear.cpp */,
-				966C865315C7274E00D5A853 /* Linear.h */,
-				966C865415C7274E00D5A853 /* Quad.cpp */,
-				966C865515C7274E00D5A853 /* Quad.h */,
-				966C865615C7274E00D5A853 /* Quart.cpp */,
-				966C865715C7274E00D5A853 /* Quart.h */,
-				966C865815C7274E00D5A853 /* Quint.cpp */,
-				966C865915C7274E00D5A853 /* Quint.h */,
-				966C865A15C7274E00D5A853 /* Sine.cpp */,
-				966C865B15C7274E00D5A853 /* Sine.h */,
-			);
-			path = PennerEasing;
+			path = src;
 			sourceTree = "<group>";
 		};
 		966C867B15C82B5300D5A853 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				121E540715DFA6AB005014DB /* RocketBasic.h */,
 				1278BA9415E38A6E0076753F /* VelocityModifier.h */,
 				1278BA9515E38A6E0076753F /* VelocityModifierSettings.h */,
-				121E540715DFA6AB005014DB /* BasicRocket.h */,
 				12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */,
 				961E974C15C99D580056F458 /* RocketSettings.h */,
 				964A382715D2C207004D2BE7 /* ColourModifier.h */,
@@ -436,6 +389,7 @@
 				964A382B15D2C207004D2BE7 /* ParticleRendererBase.h */,
 				12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */,
 				1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */,
+				12CD4AF015E6E1A100C21984 /* ParticleRendererLine.h */,
 				1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */,
 				964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */,
 				964A382D15D2C207004D2BE7 /* ParticleSystem.h */,
@@ -454,10 +408,6 @@
 				967E720615D3B206008D7EF3 /* Scene.cpp */,
 				967E720715D3B206008D7EF3 /* Scene.h */,
 				1285CE4715E25AA300019B65 /* TriggerPattern.h */,
-				12D7CD6015DFF0B90089AA4D /* SceneFountains.h */,
-				9697511315DAD0BE00707C61 /* Scene1.h */,
-				9697511715DAD2F400707C61 /* Scene2.h */,
-				1285CE4815E25C9D00019B65 /* ScenePatternTest.h */,
 				968E4DE315DD104800D91D6E /* SceneTest.h */,
 			);
 			name = Scenes;
@@ -835,6 +785,7 @@
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				964A383315D2C210004D2BE7 /* SharedCode */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
@@ -845,8 +796,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				964A383315D2C210004D2BE7 /* SharedCode */,
-				966C864415C7274E00D5A853 /* PennerEasing */,
+				12CD4AD815E6539100C21984 /* SceneData */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
@@ -955,17 +905,6 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				966C865C15C7274E00D5A853 /* Back.cpp in Sources */,
-				966C865D15C7274E00D5A853 /* Bounce.cpp in Sources */,
-				966C865E15C7274E00D5A853 /* Circ.cpp in Sources */,
-				966C865F15C7274E00D5A853 /* Cubic.cpp in Sources */,
-				966C866015C7274E00D5A853 /* Elastic.cpp in Sources */,
-				966C866115C7274E00D5A853 /* Expo.cpp in Sources */,
-				966C866215C7274E00D5A853 /* Linear.cpp in Sources */,
-				966C866315C7274E00D5A853 /* Quad.cpp in Sources */,
-				966C866415C7274E00D5A853 /* Quart.cpp in Sources */,
-				966C866515C7274E00D5A853 /* Quint.cpp in Sources */,
-				966C866615C7274E00D5A853 /* Sine.cpp in Sources */,
 				964A383115D2C207004D2BE7 /* Particle.cpp in Sources */,
 				964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */,
 				967E720815D3B206008D7EF3 /* Scene.cpp in Sources */,
@@ -1108,7 +1047,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1203,7 +1142,7 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;

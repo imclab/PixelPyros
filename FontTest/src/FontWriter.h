@@ -29,6 +29,7 @@ class FontWriter {
 		ofPushStyle();
 		ofEnableSmoothing();
 		ofEnableAlphaBlending();
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		ofSetLineWidth(2); 
 		
 		float xpos = 0;
@@ -58,13 +59,14 @@ class FontWriter {
 		
 		ofMesh mesh;
 		mesh.setMode(OF_PRIMITIVE_LINES);
-		float randomness = 0.3;
+		float randomness = 1;
 		
 		ofVec2f offset(x,y);
 		
 		for(int i = 0; i<letter.points.size(); i++) {
 			ofVec2f random(ofRandom(-randomness,randomness),ofRandom(-randomness,randomness));
 			mesh.addVertex(letter.points[i]*5+offset+random);
+			mesh.addColor(ofColor(0,255,10));
 				
 		}
 		mesh.draw();

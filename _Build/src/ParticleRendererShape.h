@@ -27,6 +27,7 @@ public:
 		
 		meshMode  = OF_PRIMITIVE_TRIANGLES;
 		
+		lineWidth = 1; 
 	}
     
     virtual void renderParticles(vector <Particle * > particles){
@@ -36,9 +37,10 @@ public:
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		//		ofEnableAlphaBlending();
 		//
+		
+		ofSetLineWidth(lineWidth); 
 		ofMesh mesh;
 		
-        
 		mesh.setMode(meshMode);
 		
 		//ofMatrix4x4 mat;
@@ -75,6 +77,7 @@ public:
 	
 	vector <ofVec3f> shape;
 	ofPrimitiveMode meshMode;
+	float lineWidth; 
     
 	
 	

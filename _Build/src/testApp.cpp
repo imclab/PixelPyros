@@ -195,10 +195,10 @@ void testApp:: setupScenes() {
 	scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 
 	scenes.push_back(new Scene1(particleSystemManager, triggerarea));
-	scenes.push_back(new Scene2(particleSystemManager, triggerarea));
+	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
 	
 	
-	currentSceneIndex = 0;
+	currentSceneIndex = 4;
 
 	scenes[currentSceneIndex]->start();
 	

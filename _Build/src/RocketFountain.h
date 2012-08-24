@@ -1,5 +1,5 @@
 //
-//  BasicRocket.h
+//  RocketBasic.h
 //  ArchitectureCamera
 //
 //  Created by Seb Lee-Delisle on 17/08/2012.

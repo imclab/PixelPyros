@@ -121,7 +121,7 @@ class StretchyNet {
 		ofTranslate(-bounds.width/2,-bounds.height/2);
 		
 		ofSetLineWidth(1.5);
-		ofEnableSmoothing();
+		//ofEnableSmoothing();
 		ofMesh mesh;
 		mesh.setMode(OF_PRIMITIVE_LINES);
 		

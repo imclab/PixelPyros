@@ -15,7 +15,7 @@
 #include "MotionManager.h"
 #include "ofxAutoControlPanel.h"
 #include "Scene1.h"
-#include "Scene2.h"
+#include "SceneTron.h"
 #include "SceneFountains.h"
 #include "ScenePatternTest.h"
 #include "SceneTest.h"

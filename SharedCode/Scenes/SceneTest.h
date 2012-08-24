@@ -11,7 +11,7 @@ class SceneTest : public Scene {
 	public : 
 	
 	SceneTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){		
-		BasicRocket rocketSettings(100,10, 120);
+		RocketBasic rocketSettings(100,10, 120);
 		
 		TriggerSimple trigger(psm);
 		
@@ -22,7 +22,7 @@ class SceneTest : public Scene {
 		
 		TriggerPattern pattern;
 		
-		pattern.addTrigger(trigger);
+		//pattern.addTrigger(trigger);
 		pattern.addTrigger(trigger2);
 		
 		addArrangement(pattern); 
