@@ -1,0 +1,10 @@
+
+1) Load MRMR client, determine IP from prefs
+2) Create new patch in client
+
+3) Terminal:
+
+nc <CLIENT_IP> 31337 < pixelpyros.mrmr
+
+4) Save patch in client
+
