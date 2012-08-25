@@ -12,6 +12,8 @@ void testApp::setup(){
 	
 	ofBackground(0);
 
+    shader.load("shaders/noise");
+    
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
 	
@@ -90,6 +92,11 @@ void testApp::draw(){
 	if(useFbo) {
 		fbo.begin();
 		
+        shader.begin();
+        shader.setUniform1f("timeValX", ofGetElapsedTimef() * 0.1);
+        shader.setUniform1f("timeValY", -ofGetElapsedTimef() * 0.18);
+        shader.setUniform2f("mouse", mouseX - ofGetWidth() / 2, ofGetHeight() / 2 - mouseY); 
+        
 //		FOR TRAILS :
 //		ofEnableAlphaBlending();
 //		ofSetColor(0, 100);
@@ -122,6 +129,8 @@ void testApp::draw(){
 	}
 
 	if(useFbo) {
+        shader.end();
+        
 		fbo.end();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		fbo.draw(0,0);

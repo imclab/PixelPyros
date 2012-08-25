@@ -29,6 +29,8 @@
 #define OSC_OFF(x) (x == 0)
 #define OSC_ON(x) (x == 1000)
 
+#include "ofShader.h"
+
 class testApp : public ofBaseApp{
 	
 public:
@@ -77,4 +79,5 @@ private:
     static const int OSC_RECEIVER_PORT = 1234;
     ofxOscReceiver receiver;
 	
+    ofShader shader;
 };
