@@ -10,7 +10,7 @@
 
 #include "ParticleSystemSettings.h"
 #include "ParticleRendererSquare.h"
-#include "ParticleRendererLine.h"
+#include "ParticleRendererGlitchLine.h"
 //#include "ParticleRendererBitmap.h"
 
 class RocketTronFountain : public RocketSettings {
@@ -21,9 +21,9 @@ class RocketTronFountain : public RocketSettings {
         
 		
 		particleRenderer = new ParticleRendererSquare();
-		particleLineRenderer = new ParticleRendererLine();
-		particleLineRenderer->lineWidth = 2;
-		whiteImage.loadImage("img/ParticleWhite.png");
+		particleLineRenderer = new ParticleRendererGlitchLine(1.5);
+		//particleLineRenderer->lineWidth = 2;
+		//whiteImage.loadImage("img/ParticleWhite.png");
         
         // ParticleData
 		// size range
@@ -47,15 +47,15 @@ class RocketTronFountain : public RocketSettings {
 		// PHYSICS
 		ps.speedMin = 60;
 		ps.speedMax = 100;
-		ps.directionZ = 80;
+		ps.directionZ = 0;
 		ps.directionZVar = 0;
 		ps.directionYVar = 180;
 		ps.drag = 0.90;
-		ps.gravity.set(0,30);
+		ps.gravity.set(0,0);
 		
 		//LIFE
 		ps.lifeMin = 0.5;
-		ps.lifeMax = 1.5;
+		ps.lifeMax = 0.7;
 		
 		//APPEARANCE
 		
@@ -82,7 +82,7 @@ class RocketTronFountain : public RocketSettings {
 		// delay
 		
 		ps.emitMode = PARTICLE_EMIT_CONTINUOUS;
-		ps.emitCount = 1000;
+		ps.emitCount = 40;
 		
 		ps.emitDelay = 0;
 		ps.emitLifeTime= 1.4;
@@ -92,9 +92,9 @@ class RocketTronFountain : public RocketSettings {
 		ps.emitHueModifierOffset = 0;
 		
 		//ps.emitAttachedPhysicsObject = &rocket;
-		ps.emitInheritVelocity = -0.1;
+		ps.emitInheritVelocity = 0;
 		
-		ps.startSound = "SynthThud";
+		ps.startSound = "DirtyTechno";
 		
 		if(renderer1!=NULL)
 			ps.renderer = renderer1;
@@ -160,7 +160,7 @@ class RocketTronFountain : public RocketSettings {
 		drag = 0.9; 
 		
 		addParticleSystemSetting(ps);
-		addParticleSystemSetting(ps2);
+		//addParticleSystemSetting(ps2);
 		
         
     };
@@ -171,8 +171,8 @@ class RocketTronFountain : public RocketSettings {
 	ofImage whiteImage;
 	
 	
-	ParticleRendererShape* particleRenderer;
-	ParticleRendererLine* particleLineRenderer;
+	ParticleRendererBase* particleRenderer;
+	ParticleRendererBase* particleLineRenderer;
 	
 	ParticleSystemSettings ps;
 	

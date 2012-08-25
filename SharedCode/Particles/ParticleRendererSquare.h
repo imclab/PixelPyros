@@ -12,7 +12,7 @@ class ParticleRendererSquare : public ParticleRendererShape {
 
 public:
 
-	ParticleRendererSquare() : ParticleRendererShape(){
+	ParticleRendererSquare(float linewidth = 1, bool smoothlines = false) : ParticleRendererShape(){
 		shape.clear();
 		
 		shape.push_back(ofVec3f( -0.5, 0, -0.5 ));
@@ -28,16 +28,20 @@ public:
 		shape.push_back(ofVec3f( -0.5, 0, -0.5 ));
 		
 		meshMode = OF_PRIMITIVE_LINES;
+		
+		lineWidth = linewidth;
+		smooth = smoothlines;
 
 	}
 
 	virtual void renderParticles(vector <Particle * > particles){
         
         // BASIC TRIANGLE RENDERER
-		//		ofDisableSmoothing();
+		if(smooth)	ofEnableSmoothing();
+		else ofDisableSmoothing();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		//		ofEnableAlphaBlending();
-		//
+		
+		ofSetLineWidth(lineWidth);
 		ofMesh mesh;
 		
         
@@ -76,7 +80,8 @@ public:
     }
 	
 
-	
+	bool smooth;
+	float lineWidth; 
 	
 	
 };

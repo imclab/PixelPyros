@@ -23,9 +23,7 @@ class Particle : public PhysicsObject{
 	
 	bool update(float deltaTime) ;
     ofColor& getColour();
-	
-//	bool draw();
-	
+		
     float size;
     
 	float sizeStart; 

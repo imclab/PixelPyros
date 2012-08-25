@@ -8,6 +8,7 @@
 #pragma once
 #include "ofMain.h"
 #include "LifeCycle.h"
+//class PhysicsObjectRenderer;
 
 class PhysicsObject { 
 
@@ -23,7 +24,6 @@ class PhysicsObject {
 		drag = 1; 
 		gravity.set(0,0,0);
 		
-		
 	}; 
 	
 	virtual void reset() { 
@@ -31,6 +31,8 @@ class PhysicsObject {
 		elapsedTime = 0; 
 		enabled = true;
 		life.reset();
+		
+		//renderer = NULL;
 	};
 	
 	virtual bool update(float deltaTime) {
@@ -64,6 +66,8 @@ class PhysicsObject {
 	int dragApplyCount;
 	float dragApplyFrequency; 
 	float elapsedTime;
-	bool enabled; 
+	bool enabled;
+	
+	//PhysicsObjectRenderer* renderer;
 	
 };

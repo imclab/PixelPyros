@@ -22,7 +22,7 @@ class StretchyNet {
 		elapsedTime = 0;
 	}
 
-	void init(ofRectangle boundsrect, float colwidth = 50, int rowheight = 50) {
+	void init(ofRectangle boundsrect, float colwidth =30, int rowheight = 30) {
 		
 		bounds = boundsrect; 
 		points.clear();
@@ -44,7 +44,7 @@ class StretchyNet {
 				for(int x = 0; x<numcols; x++) {
 				
 					
-					points.push_back(StretchyNetPoint(x*xspacing, y*yspacing, z*zspacing));
+					points.push_back(StretchyNetPoint(x*xspacing, y*yspacing, (z*zspacing) + 150));
 					
 					StretchyNetPoint& p = points.back();
 					p.rotate(10, ofVec3f(0,bounds.height*0.9,0), ofVec3f(1,0,0));
@@ -92,7 +92,7 @@ class StretchyNet {
 					float distsquared = po->pos.distanceSquared(p);
 					if(distsquared<(200*200)){
 						float dist = sqrt(distsquared);
-						float power = (200-dist)/200 * 10;
+						float power = (200-dist)/200 * 6;
 						p +=  (power*((p-po->pos)/dist));
 						
 						
@@ -120,7 +120,7 @@ class StretchyNet {
 		
 		ofTranslate(-bounds.width/2,-bounds.height/2);
 		
-		ofSetLineWidth(1.5);
+		ofSetLineWidth(1);
 		//ofEnableSmoothing();
 		ofMesh mesh;
 		mesh.setMode(OF_PRIMITIVE_LINES);
@@ -130,7 +130,7 @@ class StretchyNet {
 			
 			mesh.addVertex(*it);
 			float strength = ofMap(it->vel.lengthSquared(),0,10,0.3,0.8,true);
-			mesh.addColor(ofColor(strength*80,strength*100,strength*120));
+			mesh.addColor(ofColor(strength*100,strength*140,(strength*140) + 0));
 		}
 		
 		mesh.addIndices(indices);

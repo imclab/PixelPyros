@@ -48,7 +48,7 @@ public:
 		for(std::vector<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
 			
 			Particle& p = **it; // *(particles[i]);
-			if((!p.enabled) || (p.size<1)) continue;
+			if((!p.enabled) || (p.size<0.1)) continue;
 			
 			int vertexIndex = mesh.getNumVertices();
 			

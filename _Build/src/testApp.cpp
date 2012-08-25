@@ -30,6 +30,11 @@ void testApp::setup(){
 	soundPlayer.addSound("ExplosionSynth1", "ExplosionSynth1");
 	
 	soundPlayer.addSound("mortar", "SynthThud", 1, 0.8, 0.2, "mp3");
+	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.3, 0.8, 0.4, "aif", 0.1);
+	soundPlayer.addSound("TechnoMortar", "TechnoMortar", 0.9, 1.2, 0.5, "mp3", 0.02);
+	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
+	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.02);
+	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.8, 2, 0.2, "wav", 0.02);
 	soundPlayer.globalVolume = 1;
 	
 	gui.hide();
@@ -167,7 +172,7 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
         std::cout << "OscClient disconnect" << std::endl;
     } else {
         std::vector<std::string> params = ofSplitString(address, "/");
-        if( params.size() >= 3 ) {
+        if( params.size() >= 4 ) {
             string widgetType = params[2];
             int widgetIndex = atoi(params[3].c_str());
             int widgetState = msg.getArgAsInt32(0);
@@ -247,7 +252,7 @@ void testApp:: setupScenes() {
 
 	scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 
-	scenes.push_back(new Scene1(particleSystemManager, triggerarea));
+	scenes.push_back(new SceneSpace(particleSystemManager, triggerarea));
 	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
 	
 	

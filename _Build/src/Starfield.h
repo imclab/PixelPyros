@@ -16,7 +16,7 @@ class Starfield {
 	Starfield() {
 	
 		for(int i = 0; i<5000; i++) {
-			stars.push_back(ofVec3f(ofRandom(-200,APP_WIDTH+200), ofRandom(-200,APP_HEIGHT+200), ofRandom(-2000,2000)));
+			stars.push_back(ofVec3f(ofRandom(-200,APP_WIDTH+200), ofRandom(-200,APP_HEIGHT+200), ofRandom(-2000,3000)));
 			
 			
 			
@@ -31,8 +31,10 @@ class Starfield {
 			ofVec3f& s = *it;
 			//mesh.addVertex(s);
 			//mesh.addColor(ofColor(ofRandom(200,255)));
-			s.z+=deltaTime*50;
-			if(s.z>2000) s.z-=4000;
+			s.z+=deltaTime*100;
+			if(s.z>3000) s.z-=5000;
+			//s.y+=deltaTime*100;
+			if(s.y>200+APP_HEIGHT) s.y-=APP_HEIGHT+400;
 			
 		}
 		elapsedTime+=deltaTime;
@@ -44,6 +46,8 @@ class Starfield {
 		
 		ofPushMatrix();
 		//ofRotateY(sin(elapsedTime)*5);
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
+		ofDisableSmoothing();
 		ofMesh mesh ;
 		mesh.setMode(OF_PRIMITIVE_POINTS);
 		
@@ -57,6 +61,28 @@ class Starfield {
 		}
 		
 		mesh.draw();
+		
+		
+		ofMesh mesh2 ;
+		mesh2.setMode(OF_PRIMITIVE_LINES);
+		
+		
+		for(int i = 0; i<stars.size(); i+=20) {
+			ofVec3f& s = stars[i];
+			mesh2.addVertex(s-ofVec3f(-1,-1));
+			mesh2.addColor(ofColor(ofMap(s.z,0,-2000,200,10,true )));
+			mesh2.addVertex(s-ofVec3f(1,1));
+			mesh2.addColor(ofColor(ofMap(s.z,0,-2000,200,10,true )));
+			mesh2.addVertex(s-ofVec3f(1,-1));
+			mesh2.addColor(ofColor(ofMap(s.z,0,-2000,200,10,true )));
+			mesh2.addVertex(s-ofVec3f(-1,1));
+			mesh2.addColor(ofColor(ofMap(s.z,0,-2000,200,10,true )));
+			
+			
+		}
+		
+		mesh2.draw();
+
 		
 		ofPopMatrix();
 		

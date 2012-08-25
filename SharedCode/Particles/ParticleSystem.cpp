@@ -50,7 +50,8 @@ bool ParticleSystem::update(float deltaTime) {
 			//cout << "pan " << pan << endl;
 			float volume = 1;
 			if(attachedPhysicsObject!=NULL) {
-				volume = ofMap(attachedPhysicsObject->vel.length(), 200,3000,0,1,true);
+				//volume = ofMap(attachedPhysicsObject->vel.length(), 200,3000,0,1,true);
+				volume = 1;
 				//cout << "volume "<< volume << " " << attachedPhysicsObject->vel.length() << endl;
 				
 			}

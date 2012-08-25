@@ -20,7 +20,8 @@ class RocketSettings {
 		directionVar = 10; 
 		gravity.set(0,0,0); 
 		drag = 1;
-		lifeTime = 2; 
+		lifeTime = 2;
+	//	renderer = NULL;
 		
 		
 	};
@@ -40,7 +41,9 @@ class RocketSettings {
 	float lifeTime; 
 	
 	ofVec3f gravity; 
-	float	drag; 
+	float	drag;
+	
+	//PhysicsObjectRenderer* renderer;
 	
 	vector <ParticleSystemSettings> particleSystemSettings;
 

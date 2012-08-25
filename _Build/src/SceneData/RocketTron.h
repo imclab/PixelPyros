@@ -10,7 +10,9 @@
 
 #include "ParticleSystemSettings.h"
 #include "ParticleRendererSquare.h"
+#include "ParticleRendererStar.h"
 #include "ParticleRendererLine.h"
+#include "ParticleRendererCircle.h"
 //#include "ParticleRendererBitmap.h"
 
 class RocketTron : public RocketSettings {
@@ -24,103 +26,135 @@ class RocketTron : public RocketSettings {
 		
 		/// ROCKETS WITH CYAN SQUARE BURSTS
 		
+		// STAR ROCKET HEAD
+		
+		//head.renderer = new ParticleRendererStar(30,45);
+		head.renderer = new ParticleRendererCircle(12, false, 2, ofVec3f(100,0,0));
+		
+		
+		head.speedMin = head.speedMax =0;
+		head.lifeMin = 0.5;
+		head.lifeMax = 0.8;
+		head.sizeStartMin = 1;
+		head.sizeStartMax = 1.2;
+		head.sizeChangeRatio = 10;
+		head.brightnessStartMin = 255;
+		head.brightnessStartMax = 255;
+		head.shimmerMin = 1; 
+		
+		head.saturationMin = 150;
+		head.saturationMax = 200;
+		head.saturationEnd = 255;
+
+		head.hueStartMin = head.hueStartMax = 120; 
+		
+		head.brightnessEnd = 0; 
+		head.emitMode = PARTICLE_EMIT_CONTINUOUS;
+		head.emitCount = 100;
+		head.emitDelay = 0;
+		head.emitLifeTime= 2.2;
+		head.emitStartSizeModifier = 0.1;
+		
+		head.startSound = "LaunchSweep";
+		
+		
 		// rocket thrusters
 		
-		ps.speedMin = 0;
-		ps.speedMax = 0;
-		ps.directionZ = 0;
-		ps.directionZVar = 0;
-		ps.directionYVar = 180;
-		ps.drag = 0.90;
-		ps.gravity.set(0,30);
+		trails.speedMin = 0;
+		trails.speedMax = 0;
+		trails.directionZ = 0;
+		trails.directionZVar = 0;
+		trails.directionYVar = 180;
+		trails.drag = 0.90;
+		trails.gravity.set(0,30);
 		
 		//LIFE
-		ps.lifeMin = 0.5;
-		ps.lifeMax = 1.5;
+		trails.lifeMin = 0.2;
+		trails.lifeMax = 0.5;
 		
 		//APPEARANCE
 		
-		ps.sizeStartMin = 4;
-		ps.sizeStartMax = 6;
-		ps.sizeChangeRatio = 1;
+		trails.sizeStartMin = 5;
+		trails.sizeStartMax = 10;
+		trails.sizeChangeRatio = 0;
 		
-		ps.hueStartMin = 110+hueStartOffset;
-		ps.hueStartMax = 130+hueStartOffset;
-		ps.hueChange = 0;
+		trails.hueStartMin = 110+hueStartOffset;
+		trails.hueStartMax = 130+hueStartOffset;
+		trails.hueChange = 0;
 		
-		ps.brightnessStartMin = 150;
-		ps.brightnessStartMax = 255;
-		ps.brightnessEnd = 0;
+		trails.brightnessStartMin = 50;
+		trails.brightnessStartMax = 65;
+		trails.brightnessEnd = 255;
 		
-		ps.saturationMin = 150;
-		ps.saturationMax = 255;
-		ps.saturationEnd = 255;
+		trails.saturationMin = 150;
+		trails.saturationMax = 255;
+		trails.saturationEnd = 255;
 		
-		ps.emitMode = PARTICLE_EMIT_CONTINUOUS;
-		ps.emitCount = 1000;
+		trails.emitMode = PARTICLE_EMIT_CONTINUOUS;
+		trails.emitCount = 100;
 		
-		ps.emitDelay = 0;
-		ps.emitLifeTime= 2.5;
+		trails.emitDelay = 0;
+		trails.emitLifeTime= 2.2;
 		
-		ps.emitStartSizeModifier = 0;
-		ps.emitSpeedModifier = 0;
-		ps.emitHueModifierOffset = 0;
+		trails.emitStartSizeModifier = 0;
+		trails.emitSpeedModifier = 0;
+		trails.emitHueModifierOffset = 0;
 		
-		//ps.emitAttachedPhysicsObject = &rocket;
-		ps.emitInheritVelocity = 0;
+		//trails.emitAttachedPhysicsObject = &rocket;
+		trails.emitInheritVelocity = 0;
 		
-		ps.startSound = "SynthThud";
+		//trails.startSound = "SynthThud";
 		
-		ps.renderer = new ParticleRendererSquare();
+		trails.renderer = new ParticleRendererShape();
 		
 		
 		// flat circle explosion
 		
 		// PHYSICS
-		ps2.speedMin = 600;
-		ps2.speedMax = 800;
-		ps2.directionZ = 0;
-		ps2.directionZVar =0;
-		ps2.directionYVar = 180;
-		ps2.drag = 0.959;
-		ps2.gravity.set(0,0);
+		explosion.speedMin = 600;
+		explosion.speedMax = 800;
+		explosion.directionZ = 0;
+		explosion.directionZVar =0;
+		explosion.directionYVar = 180;
+		explosion.drag = 0.959;
+		explosion.gravity.set(0,0);
 		
 		//LIFE
-		ps2.lifeMin = 0.8;
-		ps2.lifeMax = 1.2;
+		explosion.lifeMin = 0.8;
+		explosion.lifeMax = 1.2;
 		
 		//APPEARANCE
 		
-		ps2.sizeStartMin = 25;
-		ps2.sizeStartMax = 35;
-		ps2.sizeChangeRatio = 0;
+		explosion.sizeStartMin = 25;
+		explosion.sizeStartMax = 35;
+		explosion.sizeChangeRatio = 0;
 		
-		ps2.hueStartMin = 110+explosionHue;
-		ps2.hueStartMax = 130+explosionHue;
-		ps2.hueChange = 0;
+		explosion.hueStartMin = 110+explosionHue;
+		explosion.hueStartMax = 130+explosionHue;
+		explosion.hueChange = 0;
 		
-		ps2.brightnessStartMin = 255;
-		ps2.brightnessStartMax = 255;
-		ps2.brightnessEnd = 255;
+		explosion.brightnessStartMin = 255;
+		explosion.brightnessStartMax = 255;
+		explosion.brightnessEnd = 255;
 		
-		ps2.saturationMin = 25;
-		ps2.saturationMax = 75;
-		ps2.saturationEnd = 200;
+		explosion.saturationMin = 25;
+		explosion.saturationMax = 75;
+		explosion.saturationEnd = 200;
 		
-		ps2.shimmerMin = 0.3;
+		explosion.shimmerMin = 0.3;
 		
 		// but also :
 		// lifeExpectancy
 		// delay
 		
-		ps2.emitMode = PARTICLE_EMIT_BURST;
-		ps2.emitCount = 10000;
+		explosion.emitMode = PARTICLE_EMIT_BURST;
+		explosion.emitCount = 10000;
 		
-		ps2.emitDelay = 2;
-		ps2.emitLifeTime= 0.1;
+		explosion.emitDelay = 2.2;
+		explosion.emitLifeTime= 0.1;
 		
-		ps2.startSound = "ExplosionSynth1";
-		ps2.renderer = new ParticleRendererSquare();
+		explosion.startSound = "LaunchTechnoLow";
+		explosion.renderer = new ParticleRendererSquare();
 
 		
 		
@@ -129,7 +163,7 @@ class RocketTron : public RocketSettings {
 		direction = -90;
 		directionVar = 1;
 		gravity.y = 400;
-		lifeTime =2.2;
+		lifeTime =2.3;
 		
 		
         
@@ -137,13 +171,14 @@ class RocketTron : public RocketSettings {
 	
 	void addParticleSystems() {
 		
-		addParticleSystemSetting(ps);
-		addParticleSystemSetting(ps2);
+		addParticleSystemSetting(head);
+		//addParticleSystemSetting(trails);
+		addParticleSystemSetting(explosion);
 		
 		
 	};
 	
-	ParticleSystemSettings ps, ps2;
+	ParticleSystemSettings trails, explosion, head;
 	
 	ParticleRendererSquare particleRendererSquare;
 	ParticleRendererLine particleLineRenderer;

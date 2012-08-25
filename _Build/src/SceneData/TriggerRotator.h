@@ -22,6 +22,7 @@ class TriggerRotator : public TriggerSimple {
 		rotationSpeed = speed;
 		rotateOnFire = rotateonfire;
 		minTimeBetweenRockets = 0.1;
+		angle = -90;
 		
 		
 	}

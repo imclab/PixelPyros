@@ -14,7 +14,7 @@
 #include "SoundPlayer.h"
 #include "MotionManager.h"
 #include "ofxAutoControlPanel.h"
-#include "Scene1.h"
+#include "SceneSpace.h"
 #include "SceneTron.h"
 #include "SceneFountains.h"
 #include "ScenePatternTest.h"
