@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "TriggerTest.h"
 
-#include "TriggerSimple.h"
+#include "TriggerRocket.h"
 
 class SceneTest : public Scene {
 	
@@ -13,9 +13,9 @@ class SceneTest : public Scene {
 	SceneTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){		
 		RocketBasic rocketSettings(100,10, 120);
 		
-		TriggerSimple trigger(psm);
+		TriggerRocket trigger(psm);
 		
-		trigger.addRocket(rocketSettings); 
+		trigger.addRocketSettings(rocketSettings); 
 		//addTriggers(trigger, 50, 0, ofGetHeight()*0.85, ofGetWidth());
 		
 		TriggerTest trigger2(psm);

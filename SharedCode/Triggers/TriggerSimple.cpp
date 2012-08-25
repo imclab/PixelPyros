@@ -1,69 +1,59 @@
-//
-//  Trigger.cpp
-//  ParticlePlay4
-//
-//  Created by Seb Lee-Delisle on 02/08/2012.
-//  Copyright (c) 2012 seb.ly. All rights reserved.
-//
 
 #include "TriggerSimple.h"
 
 
 TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	
-	typeLabel = "TriggerSimple"; 
+	typeLabel = "TriggerSimple";
 	// the power level for the trigger
 	unitPower =1;
-	// the amount typename = "TriggerSimple"; of power a rocket takes away
-	rocketPower = 0.2; 
-	elapsedTime = 0; 
-	lastRocketTime = 0; 
-	minTimeBetweenRockets = 0.3; 
+	// the amount typename = "TriggerRocket"; of power a rocket takes away
+	triggerPower = 0.2;
+	elapsedTime = 0;
+	lastTriggerTime = 0;
+	minTriggerInterval = 0.3;
 	
-	elapsedTime = 0; 
+	elapsedTime = 0;
 	
-	type = TRIGGER_TYPE_FIRE_ON_MOTION; 
+	type = TRIGGER_TYPE_FIRE_ON_MOTION;
 	
-	restoreSpeed = 0.2; 
-	triggerLevel = 0.5; 
-	stopping = false; 
-	active = false; 
-	scale = 0; 
-	radius = 5; 
-	chargeOnMotion = 0;
-	chargeAmount = 1; 
+	restoreSpeed = 0.2;
+	triggerLevel = 0.5;
+	stopping = false;
+	active = false;
+	scale = 0;
+	radius = 5;
+	motionSensitivity = 0;
+	
 	motionDecay = 1;
-	
-	currentRocketIndex = 0; 
-	
 	
 }
 
-void TriggerSimple:: start() { 
-
-	stopping = false; 
-	scale = 0; 
+void TriggerSimple :: start() {
 	
-	active = true; 
-	motionLevel = 0; 
+	stopping = false;
+	scale = 0;
 	
-	if(type == TRIGGER_TYPE_FIRE_ON_CHARGE) { 
-		unitPower = 0; 
-	} else if(type == TRIGGER_TYPE_FIRE_ON_MOTION) { 
-		unitPower = 1; 
+	active = true;
+	motionLevel = 0;
+	
+	if(type == TRIGGER_TYPE_FIRE_ON_CHARGE) {
+		unitPower = 0;
+	} else if(type == TRIGGER_TYPE_FIRE_ON_MOTION) {
+		unitPower = 1;
 	}
 	
 }
 
-void TriggerSimple:: stop() { 
+void TriggerSimple :: stop() {
 	
-	stopping = true; 
+	stopping = true;
 	
 }
 
-bool TriggerSimple::update(float deltaTime) { 
+bool TriggerSimple::update(float deltaTime) {
 	
-	if(!active) return false; 
+	if(!active) return false;
 	
 	
 	elapsedTime+=deltaTime;
@@ -74,139 +64,98 @@ bool TriggerSimple::update(float deltaTime) {
 		if(scale<=0.0) {
 			scale = 0;
 			active = false;
-			return false; 
+			return false;
 		}
-	} else { 
+	} else {
 		scale+= (1-scale)*0.1;
 	}
-
 	
-	if(type == TRIGGER_TYPE_FIRE_ON_MOTION) { 
-		unitPower+=restoreSpeed * deltaTime; 
-		if(unitPower>1) unitPower = 1; 
-
-
-		if(motionLevel >= triggerLevel) { 
-			if(makeRocket()) { 
-				motionLevel = 0; 
+	
+	if(type == TRIGGER_TYPE_FIRE_ON_MOTION) {
+		unitPower+=restoreSpeed * deltaTime;
+		if(unitPower>1) unitPower = 1;
 		
-				if(restoreSpeed==0) { 
-					// this trigger is a one shot so stop it
-					stop(); 
+		
+		// we need to have sensed motion,
+		// AND we need to have enough unitPower to trigger
+		if( (!stopping) &&
+		    (scale>0.99) &&
+		    (motionLevel >= triggerLevel) &&
+		    (unitPower>=triggerPower) &&
+		    (elapsedTime - lastTriggerTime > minTriggerInterval) ) {
 			
+			if(doTrigger()) {
+				motionLevel = 0;
+				unitPower-=triggerPower;
+				lastTriggerTime = elapsedTime;
+				
+				if(restoreSpeed==0) {
+					// this trigger is a one shot so stop it
+					stop();
+					
 				}
 			}
 		}
-
-		motionLevel -= motionDecay*deltaTime; 
-		if(motionLevel<0) motionLevel = 0; 
-
-	} else if(type == TRIGGER_TYPE_FIRE_ON_CHARGE) { 
-		unitPower+=(motionLevel*deltaTime*chargeAmount); 
-		motionLevel = 0; 
-		if(unitPower>=triggerLevel) { 
-			if(makeRocket()) { 
-				unitPower = 0; 
-				
-			}
-			
-		}
 		
+		motionLevel -= motionDecay*deltaTime;
+		if(motionLevel<0) motionLevel = 0;
 		
 	}
 	
+	
+	//	else if(type == TRIGGER_TYPE_FIRE_ON_CHARGE) {
+	//		unitPower+=(motionLevel*deltaTime*motionSensitivity);
+	//		motionLevel = 0;
+	//		if(unitPower>=triggerLevel) {
+	//			if(doTrigger()) {
+	//				unitPower = 0;
+	//
+	//			}
+	//
+	//		}
+	//
+	//
+	//	}
+	//
 	
 	return active;
 }
 
-void TriggerSimple::draw() { 
-
-	ofPushStyle(); 
+void TriggerSimple :: draw() {
+	
+	ofPushStyle();
 	ofPushMatrix();
     
-	ofTranslate(pos); 
-	ofScale(scale, scale); 
+	ofTranslate(pos);
+	ofScale(scale, scale);
 	ofEnableSmoothing();
 	ofDisableBlendMode();
-    
-//    
-//	ofSetColor(ofColor::red);
-//    ofNoFill();
-//    ofBeginShape();
-//    ofVertex(0, 0);
-//    for(float i=0; i<360*motionLevel; i+=10){
-//        
-//        ofVertex(cosf(ofDegToRad(i))*(radius+2),sinf(ofDegToRad(i))*(radius+2));
-//        
-//    }
-//    ofEndShape(); 
-    
-    
+        
     ofSetColor(ofColor::white);
     
-	if((unitPower>rocketPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
+	if((unitPower>triggerPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
 		
-		ofCircle(0, 0, radius*unitPower); 
-		ofNoFill(); 
 		ofCircle(0, 0, radius*unitPower);
-
+		ofNoFill();
+		ofCircle(0, 0, radius*unitPower);
+		
 	} else {
 		ofNoFill();
-		ofSetColor(100); 
+		ofSetColor(100);
 	}
 	
-	ofCircle(0, 0, radius); 
-	ofPopStyle(); 
+	ofCircle(0, 0, radius);
+	ofPopStyle();
 	ofPopMatrix();
 }
 
 
-void TriggerSimple :: registerMotion(float unitValue) { 
+void TriggerSimple :: registerMotion(float unitValue) {
 	motionLevel+=unitValue;
-	unitPower += unitValue*chargeOnMotion; 
+	unitPower += unitValue*motionSensitivity;
 	
 }
 
-bool TriggerSimple::makeRocket() { 
-	
-	
-	if(unitPower<=rocketPower) return false; 
-	else if (elapsedTime - lastRocketTime < minTimeBetweenRockets) return false; 
-	
-	if(rocketSettings.size()==0) return false;
-	
-	
-	RocketSettings & rs = rocketSettings[currentRocketIndex];
-	currentRocketIndex++;
-	if(currentRocketIndex==rocketSettings.size()) currentRocketIndex = 0; 
-	
-	PhysicsObject *rocket = particleSystemManager.getPhysicsObject(); 
-	
-	rocket->vel.set(ofRandom(rs.startSpeedMin, rs.startSpeedMax),0,0); 
-	rocket->vel.rotate(0,0,ofRandom(rs.direction - rs.directionVar, rs.direction+rs.directionVar)); 
-	rocket->gravity = rs.gravity; 
-	rocket->drag = rs.drag; 
-	rocket->pos.set(pos);
-	rocket->lastPos.set(pos);
-	rocket->life.lifeTime = rs.lifeTime;
-	
-	for(int i = 0; i<rs.particleSystemSettings.size(); i++) { 
-		ParticleSystemSettings pss = rs.particleSystemSettings[i]; 
-		
-		ParticleSystem* ps = particleSystemManager.getParticleSystem(); 
-
-		//pss.hueStartMin = pss.hueStartMax = ofRandom(255); 
-		ps->init(pss);
-		ps->attachedPhysicsObject = rocket; 
-	}
-	unitPower-=rocketPower; 
-	lastRocketTime = elapsedTime; 
-	return true; 
-}
-
-void TriggerSimple:: addRocket(RocketSettings rocket) {
-	
-	rocketSettings.push_back(rocket);
-	
-	
+bool TriggerSimple::doTrigger() {
+	return true;
 }

@@ -52,6 +52,8 @@ class ParticleSystem {
 	//string startSound;
 	SoundPlayer& soundPlayer;
 	
+	float power; 
+	
 
 }; 
 

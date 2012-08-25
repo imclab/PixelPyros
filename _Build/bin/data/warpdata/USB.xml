@@ -11,8 +11,8 @@
     <y>1024</y>
 </srcvec>
 <srcvec>
-    <x>1536</x>
-    <y>1024</y>
+    <x>1495</x>
+    <y>1007</y>
 </srcvec>
 <dstvec>
     <x>0</x>
@@ -27,8 +27,8 @@
     <y>1024</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>1024</y>
+    <x>1509</x>
+    <y>1006</y>
 </dstvec>
 <srcWidth>640</srcWidth>
 <srcHeight>480</srcHeight>

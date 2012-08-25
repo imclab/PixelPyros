@@ -11,7 +11,7 @@
 #include "RocketTron.h"
 
 #include "RocketTronFountain.h"
-#include "TriggerSimple.h"
+#include "TriggerRocket.h"
 #include "StretchyNet.h"
 #include "ParticleRendererSquare.h"
 #include "RocketFountain.h"
@@ -28,45 +28,39 @@ class SceneTron : public Scene {
 		
 		rocketTron.addParticleSystems();
 		
+		TriggerRocket trigger(particleSystemManager);
 		
-		
-		TriggerSimple trigger(particleSystemManager);
-		
-		trigger.addRocket(rocketTron);
+		trigger.addRocketSettings(rocketTron);
 		// makes one shot type
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger.triggerLevel = 1;
 		trigger.restoreSpeed = 0.5;
-		trigger.rocketPower = 0.99;
+		trigger.triggerPower = 0.99;
 		
-		trigger.chargeAmount = 2; 
-	
-		//addTriggers(trigger, 50, 100,ofGetHeight()*0.85, ofGetWidth()-160);
-		
+		trigger.motionSensitivity = 2; 
 		
 		RocketTronFountain rocketFountainBlue(130,10);
-		rocketFountainBlue.startSpeedMin = 200;
+		rocketFountainBlue.startSpeedMin = 500;
 		rocketFountainBlue.startSpeedMax = 800;
 		RocketTronFountain rocketFountainPink(-20,0);
-		rocketFountainPink.startSpeedMin = 200;
+		rocketFountainPink.startSpeedMin = 500;
 		rocketFountainPink.startSpeedMax = 800;
 		
-		
-		TriggerRotator glitchTrigger(particleSystemManager,20,2,true);
+		TriggerRotator glitchTrigger(particleSystemManager,20,1,true);
 		
 		glitchTrigger.restoreSpeed = 2;
 		TriggerRotator glitchTrigger2(glitchTrigger);
-		glitchTrigger.addRocket(rocketFountainBlue);
+		glitchTrigger.addRocketSettings(rocketFountainBlue);
 		
-		glitchTrigger2.addRocket(rocketFountainPink);
+		glitchTrigger2.addRocketSettings(rocketFountainPink);
 		
 		
-		TriggerSimple starTrigger(particleSystemManager);
+		TriggerRocket starTrigger(particleSystemManager);
 		starTrigger.triggerLevel = 1;
 		starTrigger.restoreSpeed = 2;
-		starTrigger.rocketPower = 0.99;
+		starTrigger.triggerPower = 0.99;
 		
-		trigger.chargeAmount = 2;
+		trigger.motionSensitivity = 2;
 		
 		RocketTron glitchRocket;
 		glitchRocket.head.renderer = new ParticleRendererGlitchLine(2);
@@ -79,6 +73,7 @@ class SceneTron : public Scene {
 		glitchRocket.head.lifeMin= 0.1;
 		glitchRocket.head.lifeMax= 0.15;
 		glitchRocket.head.emitInheritVelocity  =0.5;
+		//glitchRocket.head.emitSpeedModifier = 0.1;
 		
 		glitchRocket.explosion.renderer = new ParticleRendererGlitchLine(1.1);
 		glitchRocket.explosion.sizeStartMin = glitchRocket.explosion.sizeStartMax =2;
@@ -88,49 +83,50 @@ class SceneTron : public Scene {
 		glitchRocket.explosion.speedMax = 2000;
 		glitchRocket.explosion.directionZVar = 0;
 		glitchRocket.explosion.lifeMin= 0.1;
-		glitchRocket.explosion.lifeMax= 0.5;
+		glitchRocket.explosion.lifeMax= 0.4;
 		glitchRocket.explosion.hueStartMin = 130;
 		glitchRocket.explosion.hueStartMax = 130;
 		
 		
 		glitchRocket.explosion.emitCount = 5000;
-		
+		glitchRocket.explosion.emitLifeTime = 0.1;
+		glitchRocket.explosion.emitDelay = 2.1;
 		
 		glitchRocket.explosion.drag = 0.99;
 		
 		
 		
 		glitchRocket.startSpeedMin = 700;
-		
-		
+		glitchRocket.directionVar = 6;
 		
 		
 		
 		
 		glitchRocket.addParticleSystems();
 		glitchRocket.addParticleSystemSetting(glitchRocket.trails);
-		starTrigger.addRocket(glitchRocket);
+		starTrigger.addRocketSettings(glitchRocket);
 		
 		TriggerPattern glitchPattern;
+		
+		glitchPattern.addTrigger(glitchTrigger);
+		glitchPattern.addTrigger(glitchTrigger);
 		glitchPattern.addTrigger(starTrigger);
 		glitchPattern.addTrigger(glitchTrigger);
-		glitchPattern.addTrigger(glitchTrigger);
+		glitchPattern.addTrigger(glitchTrigger2);
 		glitchPattern.addTrigger(glitchTrigger2);
 		glitchPattern.addTrigger(glitchTrigger);
-		glitchPattern.addTrigger(glitchTrigger);
-		glitchPattern.addTrigger(glitchTrigger2);
 		
 		addArrangement(glitchPattern);
 		
 		
 		
-		TriggerSimple trigger2(particleSystemManager);
-		trigger2.addRocket(rocketFountainBlue);
-		//trigger2.addRocket(rocketFountain);
+		TriggerRocket trigger2(particleSystemManager);
+		trigger2.addRocketSettings(rocketFountainBlue);
+		//trigger2.addRocketSettings(rocketFountain);
 		trigger2.restoreSpeed = 2;
 		
-		TriggerSimple trigger3(particleSystemManager);
-		trigger3.addRocket(rocketFountainPink);
+		TriggerRocket trigger3(particleSystemManager);
+		trigger3.addRocketSettings(rocketFountainPink);
 		trigger3.restoreSpeed = 2;
 		
 		

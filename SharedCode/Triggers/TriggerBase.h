@@ -27,9 +27,7 @@ class TriggerBase {
 		typeLabel = "TriggerBase";
 	};
 	
-	
 	virtual TriggerBase* clone() const=0;
-	
 	
 	virtual bool update(float deltaTime) =0;
 	virtual void draw() = 0;
@@ -38,10 +36,9 @@ class TriggerBase {
 	virtual void stop() = 0;
 	
 	virtual void registerMotion(float unitValue) = 0;
-	virtual void addRocket(RocketSettings rocket) = 0;
 	
 	//virtual TriggerBase* clone() const = 0;
-	virtual bool makeRocket() = 0;
+	virtual bool doTrigger() = 0;
 	
 	TriggerType type;
 	
@@ -50,28 +47,37 @@ class TriggerBase {
 	
 	
 	// to create a trigger that is one shot, set restoreSpeed
-	// to 0. If you want a trigger that needs charging up,
-	// set motionDecay to 0, fireOnCharge to true
+	// to 0. 
 	
-	// activityLevel is the accumulated motion
+	// motionLevel is the accumulated motion
 	float motionLevel;
 	
 	//amount per second to take away from the accumulated motion
 	float motionDecay;
-	// triggerLevel is the amount of motion needed to make something happen
+	// triggerLevel is the amount of unitPower needed to make something happen
 	float triggerLevel;
 	
-	float chargeOnMotion;
-	float chargeAmount;
+	// a scalar that multiplies the motion level to add to the
+	// unitPower
+	float motionSensitivity;
 	
-	float minTimeBetweenRockets;
+	// set restoreSpeed to 0 to make it a single shot trigger
 	float restoreSpeed;
-	float lastRocketTime;
 	
+	float unitPower;
 	
+	// the amount of power needed to trigger
+	float triggerPower;
+	
+	// minimum time between triggers
+	float minTriggerInterval;
+	
+	float lastTriggerTime;
+	
+	// scale is just used to keep track of whether we're growing or shrinking
 	float scale;
+	// radius is the graphical size and also the motion area size
 	float radius;
-	float targetScale;
 	
 	
 	ofVec3f pos;
@@ -80,8 +86,6 @@ class TriggerBase {
 	
 	ParticleSystemManager & particleSystemManager;
 	
-	float unitPower;
-	float rocketPower;
 	
 	float elapsedTime;
 	

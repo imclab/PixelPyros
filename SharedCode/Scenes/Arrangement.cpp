@@ -22,7 +22,7 @@ void Arrangement :: start() {
 	cout << "start arrangement" << endl; 
 	for(int i=0; i<triggers.size(); i++) {
 		
-		//if(ofRandom(100)<2) triggers[i]->makeRocket();
+		//if(ofRandom(100)<2) triggers[i]->doTrigger();
 		//cout << "start trigger " << i <<endl;
 		
 		triggers[i]->start();
@@ -38,7 +38,7 @@ void Arrangement :: stop() {
 	
 	for(int i=0; i<triggers.size(); i++) {
 		
-		//if(ofRandom(100)<2) triggers[i]->makeRocket();
+		//if(ofRandom(100)<2) triggers[i]->doTrigger();
 		
 		triggers[i]->stop();
 		

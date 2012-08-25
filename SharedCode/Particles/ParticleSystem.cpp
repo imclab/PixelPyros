@@ -25,7 +25,8 @@ void ParticleSystem::reset(){
 	
 	life.reset(); 
 	numParticlesCreated = 0; 
-	finished = false; 
+	finished = false;
+	power = 1; 
 }
 
 
@@ -51,7 +52,7 @@ bool ParticleSystem::update(float deltaTime) {
 			float volume = 1;
 			if(attachedPhysicsObject!=NULL) {
 				//volume = ofMap(attachedPhysicsObject->vel.length(), 200,3000,0,1,true);
-				volume = 1;
+				volume = power*0.8+0.2;
 				//cout << "volume "<< volume << " " << attachedPhysicsObject->vel.length() << endl;
 				
 			}

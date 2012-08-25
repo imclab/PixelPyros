@@ -10,7 +10,7 @@
 #pragma once
 
 #include "TriggerBase.h"
-#include "TriggerSimple.h"
+#include "TriggerRocket.h"
 #include "TriggerPattern.h"
 
 #include "ParticleSystemManager.h"

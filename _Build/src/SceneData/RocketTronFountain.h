@@ -45,11 +45,13 @@ class RocketTronFountain : public RocketSettings {
 		// optional colour modifier
 		
 		// PHYSICS
-		ps.speedMin = 60;
-		ps.speedMax = 100;
-		ps.directionZ = 0;
-		ps.directionZVar = 0;
-		ps.directionYVar = 180;
+		ps.speedMin = 0;
+		ps.speedMax = 30;
+		ps.directionZ = -90;
+		ps.directionZVar = 90;
+		//ps.directionZVar = 0;
+		ps.directionYVar = 0;
+		
 		ps.drag = 0.90;
 		ps.gravity.set(0,0);
 		
@@ -82,13 +84,13 @@ class RocketTronFountain : public RocketSettings {
 		// delay
 		
 		ps.emitMode = PARTICLE_EMIT_CONTINUOUS;
-		ps.emitCount = 40;
+		ps.emitCount = 30;
 		
 		ps.emitDelay = 0;
 		ps.emitLifeTime= 1.4;
 		
 		ps.emitStartSizeModifier = 0;
-		ps.emitSpeedModifier = 0;
+		ps.emitSpeedModifier = 10;
 		ps.emitHueModifierOffset = 0;
 		
 		//ps.emitAttachedPhysicsObject = &rocket;

@@ -9,7 +9,7 @@
 
 #include "Scene.h"
 #include "RocketBasic.h"
-#include "TriggerSimple.h"
+#include "TriggerRocket.h"
 #include "Starfield.h"
 
 class SceneSpace : public Scene {
@@ -205,9 +205,9 @@ class SceneSpace : public Scene {
 		rocketSettings.addParticleSystemSetting(ps2); 
 		rocketSettings.addParticleSystemSetting(ps3); 
 		
-		TriggerSimple trigger(particleSystemManager);
+		TriggerRocket trigger(particleSystemManager);
 		
-		trigger.addRocket(rocketSettings);
+		trigger.addRocketSettings(rocketSettings);
 		
 		TriggerPattern pattern;
 		pattern.addTrigger(trigger);
@@ -218,7 +218,7 @@ class SceneSpace : public Scene {
 		// makes chargeable trigger
 		trigger.type = TRIGGER_TYPE_FIRE_ON_CHARGE;
 		trigger.triggerLevel = 1; 
-		trigger.chargeAmount = 5;
+		trigger.motionSensitivity = 5;
 		
 		//addTriggers(trigger, 4, 100,ofGetHeight()*0.85, ofGetWidth()-160);
 		pattern.addTrigger(trigger);
@@ -228,7 +228,7 @@ class SceneSpace : public Scene {
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger.triggerLevel = 1;
 		trigger.restoreSpeed = 0; 
-		trigger.rocketPower = 0.9; 
+		trigger.triggerPower = 0.9; 
 		
 		//addTriggers(trigger, 4, 180,ofGetHeight()*0.85, ofGetWidth()-160);
 		pattern.addTrigger(trigger);

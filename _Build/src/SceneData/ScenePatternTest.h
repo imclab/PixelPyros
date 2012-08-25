@@ -9,7 +9,7 @@
 #pragma once
 
 #include "Scene.h"
-#include "TriggerSimple.h"
+#include "TriggerRocket.h"
 #include "RocketBasic.h"
 #include "Arrangement.h"
 
@@ -26,23 +26,23 @@ class ScenePatternTest : public Scene {
 	
 		RocketBasic rocketSettings(100,10, 120);
 		
-		TriggerSimple trigger(particleSystemManager);
+		TriggerRocket trigger(particleSystemManager);
 		
-		trigger.addRocket(rocketSettings);
+		trigger.addRocketSettings(rocketSettings);
 		// makes one shot type
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger.triggerLevel = 1;
 		trigger.restoreSpeed = 0.0;
-		trigger.rocketPower = 0.99;
+		trigger.triggerPower = 0.99;
 		
-		trigger.chargeAmount = 2;
+		trigger.motionSensitivity = 2;
 		
-		TriggerSimple trigger2(particleSystemManager);
+		TriggerRocket trigger2(particleSystemManager);
 		trigger.type = TRIGGER_TYPE_FIRE_ON_MOTION;
 		trigger2.restoreSpeed = 0.0;
 		//trigger.triggerLevel = 1;
 		
-		trigger2.addRocket(RocketFountain()); 
+		trigger2.addRocketSettings(RocketFountain()); 
 		
 		TriggerPattern pattern;
 		trigger.radius = 10;
