@@ -7,6 +7,8 @@ void testApp::setup(){
 	ofSetFrameRate(50);
 	lastUpdateTime = ofGetElapsedTimef();
 	
+    receiver.setup(OSC_RECEIVER_PORT);
+    std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
 	ofBackground(0);
 
@@ -36,14 +38,17 @@ void testApp::setup(){
 	fbo.begin();
 	ofClear(0,0,0);
 	fbo.end(); 
-	
-	
-	
-
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    while( receiver.hasWaitingMessages() )
+    {
+        ofxOscMessage msg;
+        receiver.getNextMessage(&msg);
+        handleOSCMessage(msg);
+    }
 
 	if(cameraManager.update()){
 		
@@ -150,8 +155,74 @@ void testApp::draw(){
     
 }
 
+//--------------------------------------------------------------
+// From: http://stackoverflow.com/questions/236129/splitting-a-string-in-c
+// Could probably do with moving this stuff to its own file
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while( std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
 
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    return split(s, delim, elems);
+}
+// End
 
+//--------------------------------------------------------------
+void testApp::handleOSCMessage(ofxOscMessage msg) {
+    string address = msg.getAddress().substr(0, msg.getAddress().find(":"));
+    std::cout << "OSC Message: " << address << std::endl;
+    
+    if( address.compare(OSC_CMD("Present")) == 0 ) {
+        std::cout << "OscClient connected" << std::endl;
+    }
+    else if( address.compare(OSC_CMD("NotPresent")) == 0 ) {
+        std::cout << "OscClient disconnect" << std::endl;
+    } else {
+        std::vector<std::string> params = split(address, '/');
+        if( params.size() >= 3 ) {
+            string widgetType = params[2];
+            int widgetIndex = atoi(params[3].c_str());
+            int widgetState = msg.getArgAsInt32(0);
+            
+            // Push buttons send 'on' (0) and 'off' (1000)
+            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
+                switch( widgetIndex ) {
+                    case 1:
+                        if( OSC_OFF(widgetState) ) {
+                            prevScene();
+                        }
+                        break;
+                    
+                    case 2:
+                        if( OSC_OFF(widgetState) ) {
+                            nextScene();
+                        }
+                        break;
+                        
+                    case 3:
+                        if( OSC_OFF(widgetState) ) {
+                            cameraManager.toggleWarperGui(); 
+                        }
+                        break;
+                        
+                    case 4:
+                        if( OSC_OFF(widgetState) ) {
+                            cameraManager.next(); 
+                        }
+                        break;
+                }
+            }
+        }
+    }
+}
+                               
+//--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	
 	

@@ -1,0 +1,7 @@
+/mrmrIB mrmr_clear_all
+/mrmrIB titleview nil .1 2 10 1 4 2 1 PixelPyros
+/mrmrIB pushbutton nil 0.2000000 3 6 1 1 1 1 Prev_Scene 1
+/mrmrIB pushbutton nil 0.2000000 3 6 3 1 1 1 Next_Scene 1
+/mrmrIB pushbutton nil 0.2000000 3 6 1 2 1 1 Toggle_Warp 2
+/mrmrIB pushbutton nil 0.2000000 3 6 3 2 1 1 Switch_Camera 2
+
