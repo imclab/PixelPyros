@@ -17,36 +17,17 @@ class RocketTron : public RocketSettings {
 	
     public :
     
-    RocketTron(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 20, ParticleRendererBase * renderer1 = NULL, ParticleRendererBase * renderer2 = NULL) : RocketSettings() {
-        
+    RocketTron(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 0, ParticleRendererBase * renderer1 = NULL, ParticleRendererBase * renderer2 = NULL) : RocketSettings() {
+     
+		particleLineRenderer.lineWidth = 2;
 		
-		particleRenderer = new ParticleRendererSquare();
-		particleLineRenderer = new ParticleRendererLine(); 
-		particleLineRenderer->lineWidth = 2;
-		whiteImage.loadImage("img/ParticleWhite.png");
-        
-        // ParticleData
-		// size range
-		// size modifier
-		// velocity range
-		// life range
-		// drag
-		// gravity
-		// colour
-		// colour modifier
-		// renderer
 		
-		// EmmisionData
-		// Frequency
-		// Burst/continuous
-		// range of start sizes for particles
-		// range of colours for particles
+		/// ROCKETS WITH CYAN SQUARE BURSTS
 		
-		// optional colour modifier
+		// rocket thrusters
 		
-		// PHYSICS
-		ps.speedMin = 60;
-		ps.speedMax = 100;
+		ps.speedMin = 0;
+		ps.speedMax = 0;
 		ps.directionZ = 0;
 		ps.directionZVar = 0;
 		ps.directionYVar = 180;
@@ -63,9 +44,9 @@ class RocketTron : public RocketSettings {
 		ps.sizeStartMax = 6;
 		ps.sizeChangeRatio = 1;
 		
-		ps.hueStartMin = 0+hueStartOffset;
-		ps.hueStartMax = 30+hueStartOffset;
-		ps.hueChange = hueChange;
+		ps.hueStartMin = 110+hueStartOffset;
+		ps.hueStartMax = 130+hueStartOffset;
+		ps.hueChange = 0;
 		
 		ps.brightnessStartMin = 150;
 		ps.brightnessStartMax = 255;
@@ -75,33 +56,25 @@ class RocketTron : public RocketSettings {
 		ps.saturationMax = 255;
 		ps.saturationEnd = 255;
 		
-		//ps.shimmerMin = 0.1;
-		
-		// but also :
-		// lifeExpectancy
-		// delay
-		
 		ps.emitMode = PARTICLE_EMIT_CONTINUOUS;
 		ps.emitCount = 1000;
 		
 		ps.emitDelay = 0;
-		ps.emitLifeTime= 2;
+		ps.emitLifeTime= 2.5;
 		
 		ps.emitStartSizeModifier = 0;
 		ps.emitSpeedModifier = 0;
 		ps.emitHueModifierOffset = 0;
 		
 		//ps.emitAttachedPhysicsObject = &rocket;
-		ps.emitInheritVelocity = -2;
+		ps.emitInheritVelocity = 0;
 		
 		ps.startSound = "SynthThud";
 		
-		if(renderer1!=NULL)
-			ps.renderer = renderer1;
-		else
-			ps.renderer = particleRenderer;
+		ps.renderer = new ParticleRendererSquare();
 		
 		
+		// flat circle explosion
 		
 		// PHYSICS
 		ps2.speedMin = 600;
@@ -122,8 +95,8 @@ class RocketTron : public RocketSettings {
 		ps2.sizeStartMax = 35;
 		ps2.sizeChangeRatio = 0;
 		
-		ps2.hueStartMin = 0+explosionHue;
-		ps2.hueStartMax = 15+explosionHue;
+		ps2.hueStartMin = 110+explosionHue;
+		ps2.hueStartMax = 130+explosionHue;
 		ps2.hueChange = 0;
 		
 		ps2.brightnessStartMin = 255;
@@ -147,38 +120,32 @@ class RocketTron : public RocketSettings {
 		ps2.emitLifeTime= 0.1;
 		
 		ps2.startSound = "ExplosionSynth1";
-		if(renderer2!=NULL)
-			ps2.renderer = renderer2;
-		else
-			ps2.renderer = particleRenderer;
+		ps2.renderer = new ParticleRendererSquare();
+
 		
 		
-        startSpeedMin = 600;
+		startSpeedMin = 600;
 		startSpeedMax = 750;
 		direction = -90;
-		directionVar = 5;
+		directionVar = 1;
 		gravity.y = 400;
 		lifeTime =2.2;
 		
-		addParticleSystemSetting(ps);
-		addParticleSystemSetting(ps2);
 		
         
     };
 	
+	void addParticleSystems() {
+		
+		addParticleSystemSetting(ps);
+		addParticleSystemSetting(ps2);
+		
+		
+	};
 	
+	ParticleSystemSettings ps, ps2;
 	
-	
-	ofImage whiteImage;
-	
-	
-	ParticleRendererShape* particleRenderer;
-	ParticleRendererLine* particleLineRenderer;
-	
-	ParticleSystemSettings ps;
-	
-	ParticleSystemSettings ps2;
-	
-	
+	ParticleRendererSquare particleRendererSquare;
+	ParticleRendererLine particleLineRenderer;
 	
 };

@@ -38,7 +38,7 @@ class TriggerSimple : public TriggerBase {
 		return new TriggerSimple( *this );
 	}
 	
-	
+	int currentRocketIndex; 
 	
 	TriggerType type; 
 	

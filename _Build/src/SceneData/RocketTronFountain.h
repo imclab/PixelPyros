@@ -67,7 +67,7 @@ class RocketTronFountain : public RocketSettings {
 		ps.hueStartMax = 0+hueStartOffset;
 		ps.hueChange = hueChange;
 		
-		ps.brightnessStartMin = 150;
+		ps.brightnessStartMin = 230;
 		ps.brightnessStartMax = 255;
 		ps.brightnessEnd = 0;
 		
@@ -85,14 +85,14 @@ class RocketTronFountain : public RocketSettings {
 		ps.emitCount = 1000;
 		
 		ps.emitDelay = 0;
-		ps.emitLifeTime= 2;
+		ps.emitLifeTime= 1.4;
 		
 		ps.emitStartSizeModifier = 0;
 		ps.emitSpeedModifier = 0;
 		ps.emitHueModifierOffset = 0;
 		
 		//ps.emitAttachedPhysicsObject = &rocket;
-		ps.emitInheritVelocity = -0.5;
+		ps.emitInheritVelocity = -0.1;
 		
 		ps.startSound = "SynthThud";
 		
@@ -102,61 +102,59 @@ class RocketTronFountain : public RocketSettings {
 			ps.renderer = particleLineRenderer;
 		
 		
-		/*
 		// PHYSICS
-		ps2.speedMin = 600;
-		ps2.speedMax = 800;
+		ps2.speedMin = 15;
+		ps2.speedMax = 20;
 		ps2.directionZ = 0;
-		ps2.directionZVar =0;
+		ps2.directionZVar = 90;
 		ps2.directionYVar = 180;
-		ps2.drag = 0.959;
-		ps2.gravity.set(0,0);
+		ps2.drag = 0.90;
+		ps2.gravity.set(0,-30);
 		
 		//LIFE
-		ps2.lifeMin = 0.8;
-		ps2.lifeMax = 1.2;
+		ps2.lifeMin = 1;
+		ps2.lifeMax = 1.5;
 		
 		//APPEARANCE
 		
-		ps2.sizeStartMin = 25;
-		ps2.sizeStartMax = 35;
-		ps2.sizeChangeRatio = 0;
+		ps2.sizeStartMin = 2;
+		ps2.sizeStartMax = 5;
+		ps2.sizeChangeRatio = 5;
 		
-		ps2.hueStartMin = 0+explosionHue;
-		ps2.hueStartMax = 15+explosionHue;
+		ps2.hueStartMin = 0+hueStartOffset;
+		ps2.hueStartMax = 0+hueStartOffset;
 		ps2.hueChange = 0;
 		
-		ps2.brightnessStartMin = 255;
-		ps2.brightnessStartMax = 255;
-		ps2.brightnessEnd = 255;
+		ps2.brightnessStartMin = 20;
+		ps2.brightnessStartMax = 70;
+		ps2.brightnessEnd = 0;
 		
-		ps2.saturationMin = 25;
-		ps2.saturationMax = 75;
-		ps2.saturationEnd = 200;
+		ps2.saturationMin = 100;
+		ps2.saturationMax = 100;
+		ps2.saturationEnd = 100;
 		
-		ps2.shimmerMin = 0.3;
+		//ps.shimmerMin = 0.1;
 		
 		// but also :
 		// lifeExpectancy
 		// delay
 		
-		ps2.emitMode = PARTICLE_EMIT_BURST;
-		ps2.emitCount = 10000;
+		ps2.emitStartSizeModifier = 0;
+		//ps2.emitSpeedModifier = 0;
 		
-		ps2.emitDelay = 2;
-		ps2.emitLifeTime= 0.1;
 		
-		ps2.startSound = "ExplosionSynth1";
-		if(renderer2!=NULL)
-			ps2.renderer = renderer2;
-		else
-			ps2.renderer = particleRenderer;
-		*/
+		ps2.emitMode = PARTICLE_EMIT_CONTINUOUS;
+		ps2.emitCount = 500;
 		
-        startSpeedMin = 600;
-		startSpeedMax = 750;
+		ps2.emitDelay = 0;
+		ps2.emitLifeTime= 0.5;
+		ps2.renderer = new ParticleRendererShape(); 
+		
+		
+        startSpeedMin = 800;
+		startSpeedMax = 950;
 		direction = -90;
-		directionVar = 5;
+		directionVar = 10;
 		gravity.y = 0;
 		lifeTime =1.4;
 		drag = 0.9; 

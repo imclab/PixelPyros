@@ -128,6 +128,7 @@
 		1285CE4715E25AA300019B65 /* TriggerPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerPattern.h; sourceTree = "<group>"; };
 		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
 		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
+		12C9126D15E8412A007A222E /* TriggerRotator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerRotator.h; sourceTree = "<group>"; };
 		12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererShape.h; sourceTree = "<group>"; };
 		12CD4AD915E6539100C21984 /* Scene1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1.h; sourceTree = "<group>"; };
 		12CD4ADA15E6539100C21984 /* SceneTron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTron.h; sourceTree = "<group>"; };
@@ -345,6 +346,7 @@
 				12CD4ADA15E6539100C21984 /* SceneTron.h */,
 				12CD4ADD15E6A6CF00C21984 /* RocketTron.h */,
 				12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */,
+				12C9126D15E8412A007A222E /* TriggerRotator.h */,
 			);
 			path = SceneData;
 			sourceTree = "<group>";

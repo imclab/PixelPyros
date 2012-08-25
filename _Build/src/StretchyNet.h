@@ -39,7 +39,7 @@ class StretchyNet {
 		
 		int vertexNumber = 0; 
 		
-		for(int z = -1; z<3; z++ ) {
+		for(int z = 0; z<1; z++ ) {
 			for(int y = 0; y<numrows; y++) {
 				for(int x = 0; x<numcols; x++) {
 				

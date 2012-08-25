@@ -34,6 +34,8 @@ TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	chargeAmount = 1; 
 	motionDecay = 1;
 	
+	currentRocketIndex = 0; 
+	
 	
 }
 
@@ -174,7 +176,9 @@ bool TriggerSimple::makeRocket() {
 	if(rocketSettings.size()==0) return false;
 	
 	
-	RocketSettings & rs = rocketSettings[0];
+	RocketSettings & rs = rocketSettings[currentRocketIndex];
+	currentRocketIndex++;
+	if(currentRocketIndex==rocketSettings.size()) currentRocketIndex = 0; 
 	
 	PhysicsObject *rocket = particleSystemManager.getPhysicsObject(); 
 	

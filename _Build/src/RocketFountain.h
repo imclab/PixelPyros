@@ -15,7 +15,7 @@ class RocketFountain : public RocketSettings {
 	
     public :
     
-    RocketFountain(float hueStartOffset = 0, float hueChange = 0, float explosionHue = 160) : RocketSettings() {
+    RocketFountain(float hueStartOffset = 150, float hueChange = 0, float explosionHue = 160) : RocketSettings() {
         
         renderer = new ParticleRendererShape();
 		
@@ -37,8 +37,6 @@ class RocketFountain : public RocketSettings {
 		// range of colours for particles
 		
 		// optional colour modifier
-		
-		ParticleSystemSettings ps;
 		// PHYSICS
 		ps.speedMin = 0;
 		ps.speedMax = 20;
@@ -58,8 +56,8 @@ class RocketFountain : public RocketSettings {
 		ps.sizeStartMax = 15;
 		ps.sizeChangeRatio = 0;
 		
-		ps.hueStartMin = 0+hueStartOffset;
-		ps.hueStartMax = 30+hueStartOffset;
+		ps.hueStartMin = 0;
+		ps.hueStartMax = 30;
 		ps.hueChange = hueChange;
 		
 		ps.brightnessStartMin = 255;
@@ -93,10 +91,8 @@ class RocketFountain : public RocketSettings {
 		//psystem.init(ps);
 		
 		// optional colour modifier
+	
 		
-		
-		
-		ParticleSystemSettings ps2;
 		// PHYSICS
 		ps2.speedMin = 15;
 		ps2.speedMax = 20;
@@ -116,8 +112,8 @@ class RocketFountain : public RocketSettings {
 		ps2.sizeStartMax = 5;
 		ps2.sizeChangeRatio = 5;
 		
-		ps2.hueStartMin = 150;
-		ps2.hueStartMax = 150;
+		ps2.hueStartMin = 0+hueStartOffset;
+		ps2.hueStartMax = 0+hueStartOffset;
 		ps2.hueChange = 0;
 		
 		ps2.brightnessStartMin = 20;
@@ -170,12 +166,8 @@ class RocketFountain : public RocketSettings {
 	ParticleRendererBase * renderer;
 	
 	
+	ParticleSystemSettings ps, ps2;
 	
 	
-	
-	
-	
-	
-	
-	
+		
 };
