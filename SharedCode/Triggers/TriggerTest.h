@@ -23,7 +23,7 @@ class TriggerTest : public TriggerSimple {
 	};
 	
 	TriggerTest* clone() const{
-		cout << "clone TriggerTest"<< endl;
+		//cout << "clone TriggerTest"<< endl;
 		
 		return new TriggerTest( *this );
 	}

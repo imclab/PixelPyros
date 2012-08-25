@@ -99,7 +99,7 @@ class TriggerRotator : public TriggerSimple {
 	}
 
 	virtual TriggerRotator* clone() const{
-		cout << "clone TriggerRotator"<< endl;
+		//cout << "clone TriggerRotator"<< endl;
 		return new TriggerRotator( *this );
 	}
 

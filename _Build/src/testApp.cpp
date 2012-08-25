@@ -156,24 +156,6 @@ void testApp::draw(){
 }
 
 //--------------------------------------------------------------
-// From: http://stackoverflow.com/questions/236129/splitting-a-string-in-c
-// Could probably do with moving this stuff to its own file
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
-    std::stringstream ss(s);
-    std::string item;
-    while( std::getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
-}
-
-std::vector<std::string> split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    return split(s, delim, elems);
-}
-// End
-
-//--------------------------------------------------------------
 void testApp::handleOSCMessage(ofxOscMessage msg) {
     string address = msg.getAddress().substr(0, msg.getAddress().find(":"));
     std::cout << "OSC Message: " << address << std::endl;
@@ -184,7 +166,7 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
     else if( address.compare(OSC_CMD("NotPresent")) == 0 ) {
         std::cout << "OscClient disconnect" << std::endl;
     } else {
-        std::vector<std::string> params = split(address, '/');
+        std::vector<std::string> params = ofSplitString(address, "/");
         if( params.size() >= 3 ) {
             string widgetType = params[2];
             int widgetIndex = atoi(params[3].c_str());

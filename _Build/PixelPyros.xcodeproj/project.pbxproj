@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1203A3D615E8E82A004A9E90 /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1203A3D515E8E82A004A9E90 /* libusb-1.0.a */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		1672DAA115E8346C00BE4372 /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9915E8346C00BE4372 /* ofxOscBundle.cpp */; };
@@ -125,6 +126,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1203A3D515E8E82A004A9E90 /* libusb-1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libusb-1.0.a"; sourceTree = "<group>"; };
 		1209A8CE15E5018000D5E526 /* Starfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Starfield.h; sourceTree = "<group>"; };
 		1209A8CF15E50B3C00D5E526 /* StretchyNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StretchyNet.h; sourceTree = "<group>"; };
 		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StretchyNetPoint.h; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				96CB3CC515D3B6D0004B6502 /* opencv.a in Frameworks */,
 				967E72EE15D3B4F3008D7EF3 /* libdc1394.a in Frameworks */,
+				1203A3D615E8E82A004A9E90 /* libusb-1.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +691,7 @@
 		967E72D015D3B4F3008D7EF3 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				1203A3D515E8E82A004A9E90 /* libusb-1.0.a */,
 				967E72D115D3B4F3008D7EF3 /* libdc1394.a */,
 			);
 			path = lib;
@@ -1274,7 +1278,7 @@
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
-					"../../../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a",
+					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyrosDebug;
 				SDKROOT = macosx;
@@ -1377,7 +1381,7 @@
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
-					"../../../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a",
+					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyros;
 				SDKROOT = macosx;

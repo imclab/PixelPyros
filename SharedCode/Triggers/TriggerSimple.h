@@ -34,7 +34,7 @@ class TriggerSimple : public TriggerBase {
 	
 	
 	virtual TriggerSimple* clone() const{
-		cout << "clone TriggerSimple"<< endl; 
+		//cout << "clone TriggerSimple"<< endl;
 		return new TriggerSimple( *this );
 	}
 	
