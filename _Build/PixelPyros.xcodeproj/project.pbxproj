@@ -1318,7 +1318,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
+					../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyrosDebug;
@@ -1421,7 +1421,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
+					../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyros;
