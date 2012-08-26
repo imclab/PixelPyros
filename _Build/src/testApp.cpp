@@ -32,11 +32,11 @@ void testApp::setup(){
 	soundPlayer.addSound("ExplosionSynth1", "ExplosionSynth1");
 	
 	soundPlayer.addSound("mortar", "SynthThud", 1, 0.8, 0.2, "mp3");
-	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.3, 0.8, 0.4, "aif", 0.1);
+	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.1, 0.8, 0.4, "aif", 0.1);
 	soundPlayer.addSound("TechnoMortar", "TechnoMortar", 0.9, 1.2, 0.5, "mp3", 0.02);
 	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
-	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.02);
-	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.8, 2, 0.2, "wav", 0.02);
+	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.01);
+	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.2, 2, 0.2, "wav", 0.02);
 	soundPlayer.globalVolume = 1;
 	
 	gui.hide();
@@ -92,11 +92,11 @@ void testApp::draw(){
 	if(useFbo) {
 		fbo.begin();
 		
-        shader.begin();
-        shader.setUniform1f("timeValX", ofGetElapsedTimef() * 0.1);
-        shader.setUniform1f("timeValY", -ofGetElapsedTimef() * 0.18);
-        shader.setUniform2f("mouse", mouseX - ofGetWidth() / 2, ofGetHeight() / 2 - mouseY); 
-        
+//        shader.begin();
+//        shader.setUniform1f("timeValX", ofGetElapsedTimef() * 0.1);
+//        shader.setUniform1f("timeValY", -ofGetElapsedTimef() * 0.18);
+//        shader.setUniform2f("mouse", mouseX - ofGetWidth() / 2, ofGetHeight() / 2 - mouseY); 
+//        
 //		FOR TRAILS :
 //		ofEnableAlphaBlending();
 //		ofSetColor(0, 100);
@@ -129,7 +129,7 @@ void testApp::draw(){
 	}
 
 	if(useFbo) {
-        shader.end();
+        //shader.end();
         
 		fbo.end();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);

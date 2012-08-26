@@ -72,7 +72,7 @@ class SceneTron : public Scene {
 		
 		glitchRocket.head.lifeMin= 0.1;
 		glitchRocket.head.lifeMax= 0.15;
-		glitchRocket.head.emitInheritVelocity  =0.5;
+		glitchRocket.head.emitInheritVelocity  =0.0;
 		//glitchRocket.head.emitSpeedModifier = 0.1;
 		
 		glitchRocket.explosion.renderer = new ParticleRendererGlitchLine(1.1);
@@ -103,7 +103,7 @@ class SceneTron : public Scene {
 		
 		
 		glitchRocket.addParticleSystems();
-		glitchRocket.addParticleSystemSetting(glitchRocket.trails);
+		//glitchRocket.addParticleSystemSetting(glitchRocket.trails);
 		starTrigger.addRocketSettings(glitchRocket);
 		
 		TriggerPattern glitchPattern;
