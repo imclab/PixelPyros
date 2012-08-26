@@ -1242,7 +1242,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					"\"../../../addons/ofxOpenCv/libs/opencv/include/\"",
-					"\"../../../addons/ofxCv/libs/ofxCv/include/\"",
+					"\"../addons/ofxCv/libs/ofxCv/include/\"",
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
@@ -1345,7 +1345,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					"\"../../../addons/ofxOpenCv/libs/opencv/include/\"",
-					"\"../../../addons/ofxCv/libs/ofxCv/include/\"",
+					"\"../addons/ofxCv/libs/ofxCv/include/\"",
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
