@@ -80,4 +80,7 @@ private:
     ofxOscReceiver receiver;
 	
     ofShader shader;
+    float bloomValue;
+    
+    bool paused;
 };

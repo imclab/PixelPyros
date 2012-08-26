@@ -12,8 +12,6 @@ void testApp::setup(){
 	
 	ofBackground(0);
 
-    shader.load("shaders/noise");
-    
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
 	
@@ -45,6 +43,10 @@ void testApp::setup(){
 	fbo.begin();
 	ofClear(0,0,0);
 	fbo.end(); 
+    
+    shader.load("shaders/bloom");
+    bloomValue = 0.0;
+    paused = false;
 }
 
 //--------------------------------------------------------------
@@ -72,13 +74,13 @@ void testApp::update(){
 
 	lastUpdateTime = time;
 	
-	for(int i = 0; i<scenes.size(); i++) {	
-		scenes[i]->update(deltaTime); 
-	}
+    if( !paused ) {
+        for(int i = 0; i<scenes.size(); i++) {	
+            scenes[i]->update(deltaTime); 
+        }
 	
-	particleSystemManager.update(deltaTime);
-
-	
+        particleSystemManager.update(deltaTime);
+    }
 }
 
 //--------------------------------------------------------------
@@ -92,11 +94,6 @@ void testApp::draw(){
 	if(useFbo) {
 		fbo.begin();
 		
-        shader.begin();
-        shader.setUniform1f("timeValX", ofGetElapsedTimef() * 0.1);
-        shader.setUniform1f("timeValY", -ofGetElapsedTimef() * 0.18);
-        shader.setUniform2f("mouse", mouseX - ofGetWidth() / 2, ofGetHeight() / 2 - mouseY); 
-        
 //		FOR TRAILS :
 //		ofEnableAlphaBlending();
 //		ofSetColor(0, 100);
@@ -129,12 +126,31 @@ void testApp::draw(){
 	}
 
 	if(useFbo) {
+		fbo.end();
+        
+        shader.begin();
+        shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
+        shader.setUniform1f("bloom", bloomValue);
+        glBegin(GL_QUADS);
+            glTexCoord2f(0, 0);
+            glVertex2f(0, 0);
+            
+            glTexCoord2f(APP_WIDTH, 0);
+            glVertex2f(APP_WIDTH, 0);
+            
+            glTexCoord2f(APP_WIDTH, APP_HEIGHT);
+            glVertex2f(APP_WIDTH, APP_HEIGHT);
+            
+            glTexCoord2f(0, APP_HEIGHT);
+            glVertex2f(0, APP_HEIGHT);
+        glEnd();
         shader.end();
         
-		fbo.end();
+        /*
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		fbo.draw(0,0);
 		ofDisableBlendMode();
+        */
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -220,8 +236,7 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
                                
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
-	
+    
 	if(key==OF_KEY_LEFT) {
 		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
 			prevScene();
@@ -236,7 +251,11 @@ void testApp::keyPressed(int key){
 		cameraManager.next(); 
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
-	}
+	} else if( key == 'b' ) {
+        bloomValue = 1.0 - bloomValue;
+    } else if( key == 'p' ) {
+        paused = !paused;
+    }
 
 }
 //
