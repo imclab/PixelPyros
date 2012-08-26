@@ -1,6 +1,3 @@
 [submodule "addons/ofxCv"]
 	path = addons/ofxCv
 	url = https://github.com/kylemcdonald/ofxCv.git
-[submodule "addons/ofxLibdc"]
-	path = addons/ofxLibdc
-	url = https://github.com/kylemcdonald/ofxLibdc.git
