@@ -24,6 +24,10 @@
 		1672DAC615E8350C00BE4372 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DABE15E8350C00BE4372 /* UdpSocket.cpp */; };
 		1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */; };
 		1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */; };
+		16F6B4DF15E9893C00D826B8 /* noise.frag in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4DD15E9893C00D826B8 /* noise.frag */; };
+		16F6B4E015E9893C00D826B8 /* noise.vert in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4DE15E9893C00D826B8 /* noise.vert */; };
+		16F6B4E615E9AC0400D826B8 /* bloom.vert in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4E515E9AC0400D826B8 /* bloom.vert */; };
+		16F6B4E815E9AC1500D826B8 /* bloom.frag in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4E715E9AC1500D826B8 /* bloom.frag */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
@@ -193,6 +197,10 @@
 		1672DAC015E8350C00BE4372 /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
 		1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtilsWin.cpp; sourceTree = "<group>"; };
 		1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocketWin.cpp; sourceTree = "<group>"; };
+		16F6B4DD15E9893C00D826B8 /* noise.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.frag; sourceTree = "<group>"; };
+		16F6B4DE15E9893C00D826B8 /* noise.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.vert; sourceTree = "<group>"; };
+		16F6B4E515E9AC0400D826B8 /* bloom.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom.vert; sourceTree = "<group>"; };
+		16F6B4E715E9AC1500D826B8 /* bloom.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom.frag; sourceTree = "<group>"; };
 		961E974C15C99D580056F458 /* RocketSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RocketSettings.h; path = ../../SharedCode/Particles/RocketSettings.h; sourceTree = "<group>"; };
 		964A382715D2C207004D2BE7 /* ColourModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColourModifier.h; path = ../../SharedCode/Particles/ColourModifier.h; sourceTree = "<group>"; };
 		964A382815D2C207004D2BE7 /* LifeCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LifeCycle.h; path = ../../SharedCode/Particles/LifeCycle.h; sourceTree = "<group>"; };
@@ -489,6 +497,18 @@
 			path = win32;
 			sourceTree = "<group>";
 		};
+		16F6B4DC15E9893C00D826B8 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				16F6B4DD15E9893C00D826B8 /* noise.frag */,
+				16F6B4DE15E9893C00D826B8 /* noise.vert */,
+				16F6B4E515E9AC0400D826B8 /* bloom.vert */,
+				16F6B4E715E9AC1500D826B8 /* bloom.frag */,
+			);
+			name = Shaders;
+			path = bin/data/shaders;
+			sourceTree = SOURCE_ROOT;
+		};
 		961E975A15CA96A50056F458 /* Triggers */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +526,7 @@
 		964A383315D2C210004D2BE7 /* SharedCode */ = {
 			isa = PBXGroup;
 			children = (
+				16F6B4DC15E9893C00D826B8 /* Shaders */,
 				1278BA9B15E38AB00076753F /* Sound */,
 				969989A315D3BA1F00647A18 /* Camera */,
 				969989AD15D3BA1F00647A18 /* Homography */,
@@ -1121,6 +1142,10 @@
 				1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */,
 				1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */,
 				1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */,
+				16F6B4DF15E9893C00D826B8 /* noise.frag in Sources */,
+				16F6B4E015E9893C00D826B8 /* noise.vert in Sources */,
+				16F6B4E615E9AC0400D826B8 /* bloom.vert in Sources */,
+				16F6B4E815E9AC1500D826B8 /* bloom.frag in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,7 +1242,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					"\"../../../addons/ofxOpenCv/libs/opencv/include/\"",
-					"\"../../../addons/ofxCv/libs/ofxCv/include/\"",
+					"\"../addons/ofxCv/libs/ofxCv/include/\"",
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
@@ -1293,7 +1318,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
+					../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyrosDebug;
@@ -1320,7 +1345,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					"\"../../../addons/ofxOpenCv/libs/opencv/include/\"",
-					"\"../../../addons/ofxCv/libs/ofxCv/include/\"",
+					"\"../addons/ofxCv/libs/ofxCv/include/\"",
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
@@ -1396,7 +1421,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
-					../../../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
+					../addons/ofxLibdc/libs/osx/lib/libdc1394.a,
 					"\"$(SRCROOT)/../addons/ofxLibdc/libs/osx/lib/libusb-1.0.a\"",
 				);
 				PRODUCT_NAME = PixelPyros;
