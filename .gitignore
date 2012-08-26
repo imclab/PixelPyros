@@ -13,3 +13,9 @@
 
 # OSX meta
 .DS_Store
+
+# Builds
+_Build/bin/PixelPyrosDebug.app
+
+# Xcode personal settings
+xcuserdata
