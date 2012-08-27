@@ -7,6 +7,7 @@
 
 #include "ofMain.h"
 #include "Scene.h"
+#include "SceneManager.h"
 #include "ParticleSystemManager.h"
 #include "ParticleSystemSettings.h"
 #include "RocketSettings.h"
@@ -39,7 +40,7 @@ class testApp : public ofBaseApp{
 	
 public:
 	
-	testApp():particleSystemManager(soundPlayer) {
+	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager) {
 		
 		
 	};
@@ -56,12 +57,13 @@ public:
 	void eventsIn(guiCallbackData & data);
 
 	void setupScenes(); 
-	bool nextScene(); 
-	bool prevScene(); 
+	//bool nextScene();
+	//bool prevScene();
     
     void handleOSCMessage(ofxOscMessage);
 	
-	ParticleSystemManager particleSystemManager; 
+	ParticleSystemManager particleSystemManager;
+	SceneManager		sceneManager; 
 	CameraManagerWarped cameraManager; 
 	MotionManager		motionManager;
 	SoundPlayer			soundPlayer;
@@ -70,11 +72,6 @@ public:
 	bool useFbo; 
 	
 	ofxAutoControlPanel gui; 
-	
-	
-	vector <Scene*> scenes; 
-	
-	int currentSceneIndex;
 	
 	float lastUpdateTime; 
     

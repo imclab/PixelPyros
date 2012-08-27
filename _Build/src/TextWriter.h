@@ -18,7 +18,7 @@ public:
     TextWriter();
     void draw(ofRectangle, string);
     
-    float glyphSpacing, glyphLineWeight;
+    float glyphSpacing, glyphLineSpacing, glyphLineWeight;
     
 private:
     

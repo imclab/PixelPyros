@@ -14,7 +14,7 @@ inline std::string trim(const std::string &s) {
 
 TextWriter::TextWriter() {
     glyphWidth = 4;
-    glyphHeight = 6;
+    glyphHeight = 10;
     glyphSpacing = 1.5;
     glyphLineWeight = 2;
     
@@ -82,13 +82,19 @@ void TextWriter::drawGlyph(Letter &letter, ofRectangle box) {
 void TextWriter::draw(ofRectangle box, string text) {
     text = ofToUpper(text);
     
+	// added these lines otherwise you get horribleness! 
+	if(box.height<=0) box.height = 1;
+	if(box.width<=0) box.width = 1;
+	
+	
     ofPushStyle();
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetLineWidth(glyphLineWeight);
-    
-    // Debug
+    ofNoFill();
+	ofRect(box);
+	// Debug
     /*
     ofSetColor(255, 0, 0);
     ofNoFill();

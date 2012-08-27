@@ -68,23 +68,20 @@ void testApp::update(){
 
 		motionManager.update(cameraManager.getPixelsRef());
 		
-		scenes[currentSceneIndex]->updateMotion(motionManager, cameraManager.warper.inverseHomography ); 
+		sceneManager.updateMotion(motionManager, cameraManager.warper.inverseHomography );
 		
 	}
 	
 	// HORRIBLE.
-	bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
+	//bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
 	
 	float time = ofGetElapsedTimef(); 
-	float deltaTime =  time - lastUpdateTime; 
+	float deltaTime =  time - lastUpdateTime;
 
 	lastUpdateTime = time;
 	
     if( !paused ) {
-        for(int i = 0; i<scenes.size(); i++) {	
-            scenes[i]->update(deltaTime); 
-        }
-	
+        sceneManager.update(deltaTime); 
         particleSystemManager.update(deltaTime);
     }
 }
@@ -128,13 +125,23 @@ void testApp::draw(){
 	// this draws all the triggers, should be outside of the rotation upwards
     // a better solution would be to alter matrix for the particle system dependent on
     // start position. 
-    
-	for(int i = 0; i<scenes.size(); i++) {	
-		scenes[i]->draw(); 
-	}
+	sceneManager.draw(); 
 
 	
-//	textWriter.draw(ofRectangle(50, 50, 800, 300), "The Awesome PixelPyros Text Rendering Demo");
+	
+	
+	float rectWidth = APP_WIDTH*0.6;
+	float rectHeight = APP_HEIGHT*0.3;
+	
+	// For testing the text box!
+	if(ofGetMousePressed()) {
+		
+		rectWidth = ofGetMouseX() - APP_WIDTH*0.2;
+		rectHeight = ofGetMouseY() - APP_HEIGHT *0.1;
+		
+	}
+
+	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
@@ -174,19 +181,6 @@ void testApp::draw(){
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
 	
-	string activeSceneMap = "";
-	string activeSceneArrangements = "";
-	string activeArrangementNumbers = ""; 
-	for(int i = 0; i<scenes.size(); i++) {
-		Scene* scene = scenes[i];
-
-		activeSceneMap += (scene->active ? "1 " : "0 ");
-		activeSceneArrangements += ofToString(scene->activeArrangements)+" ";
-		activeArrangementNumbers += ofToString(scene->currentArrangementIndex)+" ";
-	}
-	ofDrawBitmapString(activeSceneMap,20,85); ;
-	ofDrawBitmapString(activeSceneArrangements,20,100); ;
-	ofDrawBitmapString(activeArrangementNumbers,20,115); ;
 	
 	
 	ofDisableBlendMode();
@@ -221,13 +215,13 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
                 switch( widgetIndex ) {
                     case 1:
                         if( OSC_OFF(widgetState) ) {
-                            prevScene();
+                            sceneManager.prevScene();
                         }
                         break;
                     
                     case 2:
                         if( OSC_OFF(widgetState) ) {
-                            nextScene();
+                            sceneManager.nextScene();
                         }
                         break;
                         
@@ -253,20 +247,20 @@ void testApp::keyPressed(int key){
     
 	if(key==OF_KEY_LEFT) {
 		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			prevScene();
+			sceneManager.prevScene();
 		else
-			scenes[currentSceneIndex]->previous();
+			sceneManager.previousArrangement();
 	} else if(key==OF_KEY_RIGHT) { 
 		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			nextScene();
+			sceneManager.nextScene();
 		else
-			scenes[currentSceneIndex]->next();
+			sceneManager.nextArrangement();
 	} else if(key=='c') {
 		cameraManager.next(); 
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
 	} else if( key == 'b' ) {
-        bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
+        //bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
     } else if( key == 'p' ) {
         paused = !paused;
     }
@@ -289,54 +283,26 @@ void testApp:: setupScenes() {
 	ofRectangle triggerarea(APP_WIDTH*0.05 ,APP_HEIGHT*0.85,APP_WIDTH*0.9,10);
 	
 	
-	scenes.push_back(new SceneTest(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
-	scenes.push_back(new SceneRetro(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneRetro(particleSystemManager, triggerarea));
 	
-	scenes.push_back(new SceneRealistic(particleSystemManager, triggerarea));
-	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneRealistic(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneTron(particleSystemManager, triggerarea));
 	
-	scenes.push_back(new SceneSpace(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
 	
-	
-	currentSceneIndex =1;
-
-	scenes[currentSceneIndex]->start();
 	
 }
 
-bool testApp::nextScene(){ 
-	
-	if(currentSceneIndex == scenes.size()-1) {
-		return false; 
-	} else { 
-		scenes[currentSceneIndex]->stop(); 
-		currentSceneIndex++; 
-		scenes[currentSceneIndex]->start(); 
-	
-		return true; 
-	}
-		
-}
 
-bool testApp::prevScene(){ 
-	
-	if(currentSceneIndex == 0) {
-		return false; 
-	} else { 
-		scenes[currentSceneIndex]->stop(); 
-		currentSceneIndex--; 
-		scenes[currentSceneIndex]->start(); 
-		
-		return true; 
-	}
-	
-}
 
 
 void testApp::mouseMoved( int x, int y ){
+	
+	vector <Scene*>& scenes = sceneManager.scenes;
 	for(int j = 0 ; j<scenes.size(); j++ ) { 
 		Scene* scene1 = scenes[j];
 		vector<Arrangement*> * arrangements = &scene1->arrangements;

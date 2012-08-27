@@ -48,7 +48,7 @@ bool Scene :: update(float deltaTime) {
 	
 	for(int i=0; i<arrangements.size(); i++) {
 	
-		if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
+		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		else if ((!stopping) && (i==currentArrangementIndex)) next();
 		

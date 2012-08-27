@@ -11,6 +11,7 @@
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
+		129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 129F267215EC0694005DBFAA /* SceneManager.cpp */; };
 		12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12BF0D6515EB655D00417B56 /* SceneRetro.cpp */; };
 		12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12C1236515EBD1B600440F63 /* SceneRealistic.cpp */; };
 		16252DAD15EAE8810074106D /* noise.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4DD15E9893C00D826B8 /* noise.frag */; };
@@ -163,6 +164,8 @@
 		1285CE4715E25AA300019B65 /* TriggerPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriggerPattern.h; sourceTree = "<group>"; };
 		1285CE4915E2616900019B65 /* Arrangement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arrangement.h; sourceTree = "<group>"; };
 		1285CE4A15E2642200019B65 /* Arrangement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrangement.cpp; sourceTree = "<group>"; };
+		129F267115EC04D3005DBFAA /* SceneManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		129F267215EC0694005DBFAA /* SceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneManager.cpp; sourceTree = "<group>"; };
 		12BF0D6415EB64EF00417B56 /* SceneRetro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneRetro.h; sourceTree = "<group>"; };
 		12BF0D6515EB655D00417B56 /* SceneRetro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRetro.cpp; sourceTree = "<group>"; };
 		12BF0D6715EB6BD600417B56 /* ParticleRendererLowRes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererLowRes.h; sourceTree = "<group>"; };
@@ -424,6 +427,13 @@
 			name = PresetParticleSystems;
 			sourceTree = "<group>";
 		};
+		129F267015EBFC3B005DBFAA /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
 		12BF0D6215EB64CD00417B56 /* Tron */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +474,7 @@
 		12CD4AD815E6539100C21984 /* SceneData */ = {
 			isa = PBXGroup;
 			children = (
+				129F267015EBFC3B005DBFAA /* Intro */,
 				129F266F15EBDDF7005DBFAA /* PresetParticleSystems */,
 				12C1236315EBCA6600440F63 /* Realistic */,
 				12C1236215EBAF1D00440F63 /* Space */,
@@ -644,12 +655,14 @@
 		967E720515D3B206008D7EF3 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				129F267215EC0694005DBFAA /* SceneManager.cpp */,
 				1285CE4915E2616900019B65 /* Arrangement.h */,
 				1285CE4A15E2642200019B65 /* Arrangement.cpp */,
 				967E720615D3B206008D7EF3 /* Scene.cpp */,
 				967E720715D3B206008D7EF3 /* Scene.h */,
 				1285CE4715E25AA300019B65 /* TriggerPattern.h */,
 				968E4DE315DD104800D91D6E /* SceneTest.h */,
+				129F267115EC04D3005DBFAA /* SceneManager.h */,
 			);
 			name = Scenes;
 			path = ../../SharedCode/Scenes;
@@ -1218,6 +1231,7 @@
 				16252DB415EAEE650074106D /* TextWriter.cpp in Sources */,
 				12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */,
 				12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */,
+				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,7 +1321,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1410,7 +1424,7 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
