@@ -19,6 +19,7 @@
 #include "SceneFountains.h"
 #include "SceneRetro.h"
 #include "ScenePatternTest.h"
+#include "SceneRealistic.h"
 #include "SceneTest.h"
 #include "glut/glut.h"
 

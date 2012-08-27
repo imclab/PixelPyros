@@ -40,7 +40,9 @@ class Scene {
 	bool previous(); 
 	
 	bool active; 
-	bool stopping; 
+	bool stopping;
+	
+	float bloomLevel; 
 	
 	vector <Arrangement*> arrangements;
 	int currentArrangementIndex;

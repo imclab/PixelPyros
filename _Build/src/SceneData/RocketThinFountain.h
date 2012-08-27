@@ -72,7 +72,7 @@ class RocketThinFountain : public RocketSettings {
 		ps.brightnessEnd = 0;
 		
 		ps.saturationMin = 150;
-		ps.saturationMax = 255;
+		ps.saturationMax = 155;
 		ps.saturationEnd = 255;
 		
 		//ps.shimmerMin = 0.1;

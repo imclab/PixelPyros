@@ -23,6 +23,7 @@ class SceneTron : public Scene {
 	
 	SceneTron (ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
+		bloomLevel = 2;
 		
 		RocketTron rocketTron;
 		

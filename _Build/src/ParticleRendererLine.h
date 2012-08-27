@@ -13,16 +13,20 @@ class ParticleRendererLine : public ParticleRendererBase {
 
 	public:
 	
-	ParticleRendererLine() : ParticleRendererBase() {
-		lineWidth = 1; 
+	ParticleRendererLine(float linewidth = 1, bool smoothlines = false) : ParticleRendererBase() {
+		lineWidth = linewidth;
+		smooth = smoothlines; 
 		
 	}
 	
 	void renderParticles(vector <Particle * > particles){
         
         // BASIC TRIANGLE RENDERER
-		//		ofDisableSmoothing();
+		if(smooth) ofEnableSmoothing();
+		else ofDisableSmoothing();
+		
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
+		
 		//		ofEnableAlphaBlending();
 		//
 		
@@ -55,5 +59,6 @@ class ParticleRendererLine : public ParticleRendererBase {
         
     }
 	
-float lineWidth; 
+	float lineWidth;
+	bool smooth; 
 };

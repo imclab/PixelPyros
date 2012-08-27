@@ -12,6 +12,7 @@
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12BF0D6515EB655D00417B56 /* SceneRetro.cpp */; };
+		12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12C1236515EBD1B600440F63 /* SceneRealistic.cpp */; };
 		16252DAD15EAE8810074106D /* noise.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4DD15E9893C00D826B8 /* noise.frag */; };
 		16252DAE15EAE8810074106D /* noise.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4DE15E9893C00D826B8 /* noise.vert */; };
 		16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4E515E9AC0400D826B8 /* bloom.vert */; };
@@ -165,6 +166,8 @@
 		12BF0D6415EB64EF00417B56 /* SceneRetro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneRetro.h; sourceTree = "<group>"; };
 		12BF0D6515EB655D00417B56 /* SceneRetro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRetro.cpp; sourceTree = "<group>"; };
 		12BF0D6715EB6BD600417B56 /* ParticleRendererLowRes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererLowRes.h; sourceTree = "<group>"; };
+		12C1236415EBCB7800440F63 /* SceneRealistic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneRealistic.h; sourceTree = "<group>"; };
+		12C1236515EBD1B600440F63 /* SceneRealistic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRealistic.cpp; sourceTree = "<group>"; };
 		12CD4AD715E5821F00C21984 /* ParticleRendererShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererShape.h; sourceTree = "<group>"; };
 		12CD4AD915E6539100C21984 /* SceneSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneSpace.h; sourceTree = "<group>"; };
 		12CD4ADA15E6539100C21984 /* SceneTron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTron.h; sourceTree = "<group>"; };
@@ -414,13 +417,19 @@
 			path = ../../SharedCode/Sound;
 			sourceTree = "<group>";
 		};
+		129F266F15EBDDF7005DBFAA /* PresetParticleSystems */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PresetParticleSystems;
+			sourceTree = "<group>";
+		};
 		12BF0D6215EB64CD00417B56 /* Tron */ = {
 			isa = PBXGroup;
 			children = (
 				12CD4ADA15E6539100C21984 /* SceneTron.h */,
 				12CD4ADD15E6A6CF00C21984 /* RocketTron.h */,
 				12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */,
-				1203A3DA15E9317F004A9E90 /* RocketThinFountain.h */,
 			);
 			name = Tron;
 			sourceTree = "<group>";
@@ -434,12 +443,32 @@
 			name = Retro;
 			sourceTree = "<group>";
 		};
+		12C1236215EBAF1D00440F63 /* Space */ = {
+			isa = PBXGroup;
+			children = (
+				1203A3DA15E9317F004A9E90 /* RocketThinFountain.h */,
+				12CD4AD915E6539100C21984 /* SceneSpace.h */,
+			);
+			name = Space;
+			sourceTree = "<group>";
+		};
+		12C1236315EBCA6600440F63 /* Realistic */ = {
+			isa = PBXGroup;
+			children = (
+				12C1236415EBCB7800440F63 /* SceneRealistic.h */,
+				12C1236515EBD1B600440F63 /* SceneRealistic.cpp */,
+			);
+			name = Realistic;
+			sourceTree = "<group>";
+		};
 		12CD4AD815E6539100C21984 /* SceneData */ = {
 			isa = PBXGroup;
 			children = (
+				129F266F15EBDDF7005DBFAA /* PresetParticleSystems */,
+				12C1236315EBCA6600440F63 /* Realistic */,
+				12C1236215EBAF1D00440F63 /* Space */,
 				12BF0D6315EB64DB00417B56 /* Retro */,
 				12BF0D6215EB64CD00417B56 /* Tron */,
-				12CD4AD915E6539100C21984 /* SceneSpace.h */,
 				12CD4ADB15E6539100C21984 /* SceneFountains.h */,
 				12CD4ADC15E6539100C21984 /* ScenePatternTest.h */,
 			);
@@ -1188,6 +1217,7 @@
 				1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */,
 				16252DB415EAEE650074106D /* TextWriter.cpp in Sources */,
 				12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */,
+				12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,7 +48,7 @@ void testApp::setup(){
 	fbo.end(); 
     
     shader.load("shaders/bloom");
-    bloomValue = 1.5;
+    bloomValue = 3;
     paused = false;
 }
 
@@ -71,6 +71,9 @@ void testApp::update(){
 		scenes[currentSceneIndex]->updateMotion(motionManager, cameraManager.warper.inverseHomography ); 
 		
 	}
+	
+	// HORRIBLE.
+	bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
 	
 	float time = ofGetElapsedTimef(); 
 	float deltaTime =  time - lastUpdateTime; 
@@ -263,7 +266,7 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
 	} else if( key == 'b' ) {
-        bloomValue =1.5- bloomValue;
+        bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
     } else if( key == 'p' ) {
         paused = !paused;
     }
@@ -287,16 +290,18 @@ void testApp:: setupScenes() {
 	
 	
 	scenes.push_back(new SceneTest(particleSystemManager, triggerarea));
-	scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
+	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
-	scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
-
-	scenes.push_back(new SceneSpace(particleSystemManager, triggerarea));
-	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
+	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 	scenes.push_back(new SceneRetro(particleSystemManager, triggerarea));
 	
+	scenes.push_back(new SceneRealistic(particleSystemManager, triggerarea));
+	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
 	
-	currentSceneIndex =5;
+	scenes.push_back(new SceneSpace(particleSystemManager, triggerarea));
+	
+	
+	currentSceneIndex =1;
 
 	scenes[currentSceneIndex]->start();
 	

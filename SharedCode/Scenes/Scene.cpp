@@ -17,7 +17,8 @@ Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSys
 	triggerArea = triggerarea;
 	//setTriggerArea(triggerarea);
 	currentArrangementIndex = -1;
-	activeArrangements = 0; 
+	activeArrangements = 0;
+	bloomLevel = 0; 
 	
 }
 
