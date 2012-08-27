@@ -31,6 +31,8 @@
 
 #include "ofShader.h"
 
+#include "TextWriter.h"
+
 class testApp : public ofBaseApp{
 	
 public:
@@ -80,6 +82,7 @@ private:
     ofxOscReceiver receiver;
 	
     ofShader shader;
+    TextWriter textWriter;
     float bloomValue;
     
     bool paused;
