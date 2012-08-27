@@ -148,11 +148,18 @@ class SceneTron : public Scene {
 		addArrangement(pattern);
 		
 		
+		// Arrangement with only glitch fountains, closer spaced
 		
+		TriggerPattern crazyPattern;
+		TriggerRotator crazyTrigger(particleSystemManager,20,1,false);
+		crazyTrigger.triggerPower = 1;
+		crazyTrigger.restoreSpeed = 1;
+		crazyTrigger.addRocketSettings(rocketFountainBlue);
+		crazyTrigger.addRocketSettings(rocketFountainPink);
+		crazyPattern.addTrigger(crazyTrigger,0,0,0.3);
+		//pattern.addTrigger(trigger2);
 		
-		
-		
-
+		addArrangement(crazyPattern);
 		
 		stretchyNet.init(ofRectangle(0,0,APP_WIDTH, APP_HEIGHT));
 						

@@ -17,6 +17,7 @@
 #include "SceneSpace.h"
 #include "SceneTron.h"
 #include "SceneFountains.h"
+#include "SceneRetro.h"
 #include "ScenePatternTest.h"
 #include "SceneTest.h"
 #include "glut/glut.h"

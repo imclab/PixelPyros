@@ -28,7 +28,14 @@ class RocketSettings {
 
 	ParticleSystemSettings * addParticleSystemSetting(const ParticleSystemSettings& pss) {
 		
-		particleSystemSettings.push_back(ParticleSystemSettings(pss)); 
+		particleSystemSettings.push_back(ParticleSystemSettings(pss));
+		
+		if(lifeTime <  pss.emitDelay + pss.emitLifeTime) {
+			
+			lifeTime = pss.emitDelay + pss.emitLifeTime;
+			
+		}
+		
 		return &particleSystemSettings.back(); 
 		
 	};

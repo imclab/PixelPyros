@@ -35,6 +35,9 @@ void testApp::setup(){
 	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
 	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.01);
 	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.2, 2, 0.2, "wav", 0.02);
+	soundPlayer.addSound("RetroLaunch", "RetroLaunch", 0.2, 1, 0.2, "wav", 0.02);
+	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
+	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
 	soundPlayer.globalVolume = 1;
 	
 	gui.hide();
@@ -45,7 +48,7 @@ void testApp::setup(){
 	fbo.end(); 
     
     shader.load("shaders/bloom");
-    bloomValue = 3;
+    bloomValue = 1.5;
     paused = false;
 }
 
@@ -127,12 +130,13 @@ void testApp::draw(){
 		scenes[i]->draw(); 
 	}
 
+	
+//	textWriter.draw(ofRectangle(50, 50, 800, 300), "The Awesome PixelPyros Text Rendering Demo");
+//	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
+//	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
+	
+	
 	if(useFbo) {
-
-        textWriter.draw(ofRectangle(50, 50, 800, 300), "The Awesome PixelPyros Text Rendering Demo");
-        textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
-        textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
-        
 
 		fbo.end();
         
@@ -259,7 +263,7 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
 	} else if( key == 'b' ) {
-        bloomValue =3.0 - bloomValue;
+        bloomValue =1.5- bloomValue;
     } else if( key == 'p' ) {
         paused = !paused;
     }
@@ -289,9 +293,10 @@ void testApp:: setupScenes() {
 
 	scenes.push_back(new SceneSpace(particleSystemManager, triggerarea));
 	scenes.push_back(new SceneTron(particleSystemManager, triggerarea));
+	scenes.push_back(new SceneRetro(particleSystemManager, triggerarea));
 	
 	
-	currentSceneIndex = 4;
+	currentSceneIndex =5;
 
 	scenes[currentSceneIndex]->start();
 	

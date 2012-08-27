@@ -22,12 +22,17 @@ class TriggerRotator : public TriggerRocket {
 		rotationSpeed = speed;
 		rotateOnFire = rotateonfire;
 		minTriggerInterval = 0.1;
-		angle = -90;
-		displayAngle = -90; 
+		
 		rocketCount = 0; 
 		
 	}
+	
+	void start() {
+		TriggerRocket::start();
+		angle = -90;
+		displayAngle = -90;
 
+	}
 	bool update(float deltaTime) {
 		
 		

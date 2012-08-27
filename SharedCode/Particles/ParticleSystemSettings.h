@@ -26,8 +26,8 @@ class ParticleSystemSettings{
 		
 		
 	// PHYSICS
-		speedMin = speedMax = 200; 
-		directionZ = 0; 
+		speedMin = speedMax = 100;
+		directionZ = -90;
 		directionZVar = 180;
 		directionY = directionYVar = 0; 
 	
@@ -38,23 +38,23 @@ class ParticleSystemSettings{
 		lifeMin = lifeMax = 1; 
 
 		// APPEARANCE
-		sizeStartMin = sizeStartMax = 1; 
+		sizeStartMin = sizeStartMax = 10;
 		sizeChangeRatio = 0; 
 		
 		// COLOUR
 		hueStartMin = hueStartMax = hueChange = 0; 
 		brightnessStartMin = brightnessStartMax = brightnessEnd = 255; 
-		saturationMin = saturationMax = saturationEnd = 0; 
+		saturationMin = saturationMax = saturationEnd = 0;
 		
 		shimmerMin = 1; 
 		
 		//EMISSION LIFE CYCLE
-		emitLifeTime; 
-		emitDelay; 
+		emitLifeTime = 1;
+		emitDelay = 0;
 		
 		// EMISSION MODE AND PARTICLE COUNT
-		emitMode; 
-		emitCount; // number of Particles per second
+		emitMode = PARTICLE_EMIT_CONTINUOUS;
+		emitCount = 100; // number of Particles per second
 		
 		// EMISSION CHANGE OVER TIME 
 		// This will change the start size and hue of emitted
@@ -92,7 +92,7 @@ class ParticleSystemSettings{
 		c->brightnessEnd = brightnessEnd; 
 		
 		c->saturationStart = ofRandom(saturationMin, saturationMax); 
-		c->saturationEnd = saturationEnd; 
+		c->saturationEnd = saturationEnd;
 		
 	}
 	
@@ -126,8 +126,9 @@ class ParticleSystemSettings{
 	float brightnessEnd;
 	
 	float saturationMin; 
-	float saturationMax; 
-	float saturationEnd; 
+	float saturationMax;
+	float saturationEnd;
+	
 	
 	float shimmerMin; 
 

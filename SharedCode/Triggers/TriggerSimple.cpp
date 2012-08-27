@@ -134,8 +134,8 @@ void TriggerSimple :: draw() {
 	ofDisableBlendMode();
         
     ofSetColor(ofColor::white);
-    
-	if((unitPower>triggerPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
+    //cout << triggerPower << " " << unitPower << endl;
+	if((triggerPower<=unitPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
 		
 		ofCircle(0, 0, radius*unitPower);
 		ofNoFill();

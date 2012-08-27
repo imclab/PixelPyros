@@ -123,7 +123,7 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	triggerArea = triggerarea;
 	minimumSpacing = minspacing; 
 	
-	cout << "updateLayout " << triggerArea.x << " " << triggerArea.width << endl;
+	//cout << "updateLayout " << triggerArea.x << " " << triggerArea.width << endl;
 	float xPos = 0;//triggerArea.x;
 		
 	int triggerIndex = 0;
@@ -131,7 +131,7 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	float lastSpacing = 0; 
 	
 	while (xPos < (triggerArea.width/2)-minimumSpacing/2) {
-		cout << xPos << endl;
+		//cout << xPos << endl;
 		
 		TriggerBase* triggerLeft;
 		TriggerBase* triggerRight;
@@ -139,7 +139,7 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 		if(triggersLeft.size()>triggerCount) {
 			triggerLeft = triggersLeft[triggerCount];
 			triggerRight = triggersRight[triggerCount];
-			cout << "REUSING TRIGGERS" << endl;
+			//cout << "REUSING TRIGGERS" << endl;
 		} else {
 			triggerLeft = triggerPattern.triggers[triggerIndex]->clone();
 			triggerRight = triggerPattern.triggers[triggerIndex]->clone();
@@ -148,7 +148,7 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 			triggersRight.push_back(triggerRight);
 			triggers.push_back(triggerLeft);
 			triggers.push_back(triggerRight);
-			cout << "MAKING NEW TRIGGERS" << endl;
+			//cout << "MAKING NEW TRIGGERS" << endl;
 
 		}
 		
@@ -179,13 +179,13 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	triggerCount--;
 	
 	float spacing = (triggerArea.width/2) / (xPos- lastSpacing) ;
-	cout << "spacing " << spacing << endl;
-	cout << triggerCount << endl;
+	//cout << "spacing " << spacing << endl;
+	//cout << triggerCount << endl;
 	
 	
 	for(int i = 0; i<triggers.size(); i+=2) {
 		
-		cout << i <<  " trigger ";
+		//cout << i <<  " trigger ";
 		
 		triggers[i]->pos.x *=spacing;
 		triggers[i+1]->pos.x = (triggerArea.x + triggerArea.width) - triggers[i]->pos.x;

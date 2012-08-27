@@ -66,7 +66,7 @@ class TriggerBase {
 	
 	float unitPower;
 	
-	// the amount of power needed to trigger
+	// the amount of power taken away when it triggers
 	float triggerPower;
 	
 	// minimum time between triggers
