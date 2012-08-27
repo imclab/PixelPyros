@@ -8,11 +8,15 @@
 
 #include "Arrangement.h"
 
-Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
+Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea) :
+
+	// SHOULD MAYBE STOP TRIGGER AREA BEING SET HERE
+	particleSystemManager(psm) {
 	active = false;
 	stopping = false;
-	setTriggerArea(triggerarea);
-	triggerPattern = NULL;
+	//setTriggerArea(triggerarea);
+	//triggerPattern = NULL;
+		triggerCount = 0; 
 	
 }
 
@@ -20,7 +24,7 @@ Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea)
 void Arrangement :: start() {
 	stopping = false; 
 	cout << "start arrangement" << endl; 
-	for(int i=0; i<triggers.size(); i++) {
+	for(int i=0; i<triggerCount; i++) {
 		
 		//if(ofRandom(100)<2) triggers[i]->doTrigger();
 		//cout << "start trigger " << i <<endl;
@@ -36,7 +40,7 @@ void Arrangement :: start() {
 
 void Arrangement :: stop() {
 	
-	for(int i=0; i<triggers.size(); i++) {
+	for(int i=0; i<triggerCount; i++) {
 		
 		//if(ofRandom(100)<2) triggers[i]->doTrigger();
 		
@@ -54,7 +58,7 @@ bool Arrangement :: update(float deltaTime) {
 	if(!active) return false;
 	int activeTriggers = 0;
 	
-	for(int i=0; i<triggers.size(); i++) {
+	for(int i=0; i<triggerCount; i++) {
 		
 		if( triggers[i]->update(deltaTime)) activeTriggers++;
 		
@@ -72,7 +76,7 @@ void Arrangement:: draw() {
 	
 	if(!active) return;
 	
-	for(int i=0; i<triggers.size(); i++) {
+	for(int i=0; i<triggerCount; i++) {
 		
 		triggers[i]->draw();
 		
@@ -88,7 +92,7 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 	if(!active) return;
 	
-	for(int i = 0; i<triggers.size(); i++) {
+	for(int i = 0; i<triggerCount; i++) {
 		
 		TriggerBase * trigger = triggers[i];
 		
@@ -104,50 +108,125 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 }
 
-void Arrangement :: initialiseFromPattern(TriggerPattern tp) {
+void Arrangement :: setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing) {
 	
-	// MAKE A FUNCTION that lays out all the triggers. 
-	float minSpacing = 50;
-	int numPerPattern = tp.triggers.size();
-	int numPatterns = triggerArea.width/ (numPerPattern* minSpacing);
-	int spacing = triggerArea.width / (numPatterns*numPerPattern);
+	triggerPattern = tp;
+	updateLayout(triggerarea, minspacing); 
 	
-	float xPos = triggerArea.x;
 	
-	for(int j = 0; j<numPatterns; j++ ) {
-		for(int i =0; i<tp.triggers.size(); i++) {
+	
+	
+}
+
+void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
+	
+	triggerArea = triggerarea;
+	minimumSpacing = minspacing; 
+	
+	cout << "updateLayout " << triggerArea.x << " " << triggerArea.width << endl;
+	float xPos = 0;//triggerArea.x;
 		
-			//TriggerBase* trigger = addTrigger(tp.triggers[i]);
-			TriggerBase* trigger = tp.triggers[i]->clone();
-			triggers.push_back(trigger); 
-			trigger->pos.x = xPos;
-			trigger->pos.y = triggerArea.y+(triggerArea.height/2);
-			xPos+=spacing;
-			
-//			cout << "original : "<< tp.triggers[i]->typeLabel << " copy : " << trigger->typeLabel << endl;
-//			tp.triggers[i]->typeLabel+="****";
-//			cout << "original : "<< tp.triggers[i]->typeLabel << " copy : " << trigger->typeLabel << endl;
-			
+	int triggerIndex = 0;
+	triggerCount = 0;
+	float lastSpacing = 0; 
+	
+	while (xPos < (triggerArea.width/2)-minimumSpacing/2) {
+		cout << xPos << endl;
+		
+		TriggerBase* triggerLeft;
+		TriggerBase* triggerRight;
+		//bool makeNew = false;
+		if(triggersLeft.size()>triggerCount) {
+			triggerLeft = triggersLeft[triggerCount];
+			triggerRight = triggersRight[triggerCount];
+			cout << "REUSING TRIGGERS" << endl;
+		} else {
+			triggerLeft = triggerPattern.triggers[triggerIndex]->clone();
+			triggerRight = triggerPattern.triggers[triggerIndex]->clone();
+		
+			triggersLeft.push_back(triggerLeft);
+			triggersRight.push_back(triggerRight);
+			triggers.push_back(triggerLeft);
+			triggers.push_back(triggerRight);
+			cout << "MAKING NEW TRIGGERS" << endl;
+
 		}
-	}
-}
-
-void Arrangement:: setTriggerArea(ofRectangle rect) {
-	triggerArea = rect;
-	for(int i=0; i<triggers.size(); i++) {
 		
-		triggers[i]->pos.y = triggerArea.y+(triggerArea.width/2);
+		
+		float yvar = triggerPattern.verticalVariations[triggerIndex];
+		float ypos = triggerPattern.verticalPositions[triggerIndex] + ofRandom(-yvar, yvar);
+		ypos *= triggerArea.height/2; 
+		
+		triggerLeft->pos.y = ypos + triggerArea.getCenter().y;
+		triggerLeft->pos.x = xPos;
+		triggerRight->pos = triggerLeft->pos; 
+		
+		lastSpacing = (minimumSpacing * triggerPattern.horizSpacings[triggerIndex]);
+		
+		xPos+=lastSpacing;
+		
+		triggerIndex++;
+		if(triggerIndex>=triggerPattern.triggers.size()) triggerIndex = 0;
+		triggerCount++;
+		
+		
+	}
+
+	
+	// times by two to get both sets
+	triggerCount *=2;
+	// and subtract one to get rid of double in middle
+	triggerCount--;
+	
+	float spacing = (triggerArea.width/2) / (xPos- lastSpacing) ;
+	cout << "spacing " << spacing << endl;
+	cout << triggerCount << endl;
+	
+	
+	for(int i = 0; i<triggers.size(); i+=2) {
+		
+		cout << i <<  " trigger ";
+		
+		triggers[i]->pos.x *=spacing;
+		triggers[i+1]->pos.x = (triggerArea.x + triggerArea.width) - triggers[i]->pos.x;
+		triggers[i]->pos.x+=triggerArea.x;
+	
+		// disable spares!
+		if(i>=triggerCount)
+			triggers[i]->stop();
+		else
+			triggers[i]->start();
+		
+		
+		if(i+1>=triggerCount)
+			triggers[i+1]->stop();
+		else
+			triggers[i+1]->start();
 	}
 	
-}
-
-template <typename T>
-T* Arrangement :: addTrigger(T* trigger) {
 	
-	T* newtrigger = trigger->clone();
-	triggers.push_back(newtrigger);
-	return newtrigger;
+	
+	
+	
 	
 }
-
+//
+//void Arrangement:: setTriggerArea(ofRectangle rect) {
+//	triggerArea = rect;
+//	for(int i=0; i<triggers.size(); i++) {
+//		
+//		triggers[i]->pos.y = triggerArea.y+(triggerArea.width/2);
+//	}
+//	
+//}
+//
+//template <typename T>
+//T* Arrangement :: addTrigger(T* trigger) {
+//	
+//	T* newtrigger = trigger->clone();
+//	triggers.push_back(newtrigger);
+//	return newtrigger;
+//	
+//}
+//
 

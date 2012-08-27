@@ -52,10 +52,9 @@ void TriggerSimple :: stop() {
 }
 
 bool TriggerSimple::update(float deltaTime) {
-	
+
 	if(!active) return false;
-	
-	
+
 	elapsedTime+=deltaTime;
 	
 	// scale up / down on start stop
@@ -122,6 +121,9 @@ bool TriggerSimple::update(float deltaTime) {
 }
 
 void TriggerSimple :: draw() {
+
+	if(!active) return;
+
 	
 	ofPushStyle();
 	ofPushMatrix();
@@ -151,6 +153,9 @@ void TriggerSimple :: draw() {
 
 
 void TriggerSimple :: registerMotion(float unitValue) {
+	
+	if(!active) return;
+
 	motionLevel+=unitValue;
 	unitPower += unitValue*motionSensitivity;
 	

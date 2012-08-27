@@ -31,25 +31,29 @@ class Arrangement {
 	
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
 	
-	virtual void initialiseFromPattern(TriggerPattern tp);
 	
-	template <typename T>
-	T* addTrigger(T* trigger);
+	virtual void updateLayout(ofRectangle& triggerarea, float minSpacing); 
+	virtual void setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing);
 	
-	void setTriggerArea(ofRectangle area);
-
+	//template <typename T>
+	//T* addTrigger(T* trigger);
 	
-	
+	//void setTriggerArea(ofRectangle area);
 	
 	bool active;
 	bool stopping;
 	
 	vector <TriggerBase*> triggers;
+	vector <TriggerBase*> triggersLeft;
+	vector <TriggerBase*> triggersRight;
+	
 	
 	ParticleSystemManager& particleSystemManager;
 	ofRectangle triggerArea;
+	float minimumSpacing; 
 		
-	TriggerPattern* triggerPattern;
+	TriggerPattern triggerPattern;
+	int triggerCount;
 
 	
 };

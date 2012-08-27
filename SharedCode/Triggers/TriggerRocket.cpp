@@ -18,7 +18,9 @@ TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerSimple(psm)
 	
 	
 }
-void TriggerRocket::draw() { 
+void TriggerRocket::draw() {
+	
+	if(!active) return;
 
 	ofPushStyle(); 
 	ofPushMatrix();

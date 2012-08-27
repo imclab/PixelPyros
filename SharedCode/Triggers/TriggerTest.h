@@ -62,13 +62,14 @@ class TriggerTest : public TriggerRocket {
 	};
 	
 	void draw() {
-		
+		if(!active) return;
+
 		//cout << "trigger test draw" << endl;
 		
 		// draw trigger and motion bitmap 
 		TriggerRocket::draw();
         
-        if(!active) return;
+        
 		
 		
 		ofPushMatrix();

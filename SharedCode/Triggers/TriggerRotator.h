@@ -42,6 +42,8 @@ class TriggerRotator : public TriggerRocket {
 	}
 	
 	void draw() {
+		if(!active) return;
+
 		TriggerRocket::draw();
 		
 		ofPushStyle();

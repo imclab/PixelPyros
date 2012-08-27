@@ -34,7 +34,7 @@ class Scene {
 	
 	Arrangement& addArrangement(TriggerPattern& pattern);
 	
-	void setTriggerArea(ofRectangle rect);
+	//void setTriggerArea(ofRectangle rect);
 
 	bool next();
 	bool previous(); 
