@@ -11,6 +11,11 @@
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
+		16252DAD15EAE8810074106D /* noise.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4DD15E9893C00D826B8 /* noise.frag */; };
+		16252DAE15EAE8810074106D /* noise.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4DE15E9893C00D826B8 /* noise.vert */; };
+		16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4E515E9AC0400D826B8 /* bloom.vert */; };
+		16252DB015EAE8810074106D /* bloom.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4E715E9AC1500D826B8 /* bloom.frag */; };
+		16252DB415EAEE650074106D /* TextWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16252DB315EAEE650074106D /* TextWriter.cpp */; };
 		1672DAA115E8346C00BE4372 /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9915E8346C00BE4372 /* ofxOscBundle.cpp */; };
 		1672DAA215E8346C00BE4372 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9B15E8346C00BE4372 /* ofxOscMessage.cpp */; };
 		1672DAA315E8346C00BE4372 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9D15E8346C00BE4372 /* ofxOscReceiver.cpp */; };
@@ -24,10 +29,6 @@
 		1672DAC615E8350C00BE4372 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DABE15E8350C00BE4372 /* UdpSocket.cpp */; };
 		1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */; };
 		1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */; };
-		16F6B4DF15E9893C00D826B8 /* noise.frag in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4DD15E9893C00D826B8 /* noise.frag */; };
-		16F6B4E015E9893C00D826B8 /* noise.vert in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4DE15E9893C00D826B8 /* noise.vert */; };
-		16F6B4E615E9AC0400D826B8 /* bloom.vert in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4E515E9AC0400D826B8 /* bloom.vert */; };
-		16F6B4E815E9AC1500D826B8 /* bloom.frag in Sources */ = {isa = PBXBuildFile; fileRef = 16F6B4E715E9AC1500D826B8 /* bloom.frag */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
@@ -124,6 +125,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				16252DAD15EAE8810074106D /* noise.frag in CopyFiles */,
+				16252DAE15EAE8810074106D /* noise.vert in CopyFiles */,
+				16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */,
+				16252DB015EAE8810074106D /* bloom.frag in CopyFiles */,
 				BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +170,10 @@
 		12CD4AF015E6E1A100C21984 /* ParticleRendererLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererLine.h; sourceTree = "<group>"; };
 		12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketTronFountain.h; sourceTree = "<group>"; };
 		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
+		16252DB215EAE9C70074106D /* TextWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextWriter.h; sourceTree = "<group>"; };
+		16252DB315EAEE650074106D /* TextWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextWriter.cpp; sourceTree = "<group>"; };
+		16252DB515EB04400074106D /* Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Letter.h; sourceTree = "<group>"; };
+		16252DB615EB06100074106D /* VectorFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorFont.h; sourceTree = "<group>"; };
 		1672DA9715E8346C00BE4372 /* ofxOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
 		1672DA9815E8346C00BE4372 /* ofxOscArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscArg.h; sourceTree = "<group>"; };
 		1672DA9915E8346C00BE4372 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscBundle.cpp; sourceTree = "<group>"; };
@@ -415,6 +424,17 @@
 			path = SceneData;
 			sourceTree = "<group>";
 		};
+		16252DB115EAE9910074106D /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				16252DB215EAE9C70074106D /* TextWriter.h */,
+				16252DB315EAEE650074106D /* TextWriter.cpp */,
+				16252DB515EB04400074106D /* Letter.h */,
+				16252DB615EB06100074106D /* VectorFont.h */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
 		1672DA9615E8346C00BE4372 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +546,7 @@
 		964A383315D2C210004D2BE7 /* SharedCode */ = {
 			isa = PBXGroup;
 			children = (
+				16252DB115EAE9910074106D /* Text */,
 				16F6B4DC15E9893C00D826B8 /* Shaders */,
 				1278BA9B15E38AB00076753F /* Sound */,
 				969989A315D3BA1F00647A18 /* Camera */,
@@ -1142,10 +1163,7 @@
 				1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */,
 				1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */,
 				1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */,
-				16F6B4DF15E9893C00D826B8 /* noise.frag in Sources */,
-				16F6B4E015E9893C00D826B8 /* noise.vert in Sources */,
-				16F6B4E615E9AC0400D826B8 /* bloom.vert in Sources */,
-				16F6B4E815E9AC1500D826B8 /* bloom.frag in Sources */,
+				16252DB415EAEE650074106D /* TextWriter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

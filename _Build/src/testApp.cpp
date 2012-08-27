@@ -45,7 +45,7 @@ void testApp::setup(){
 	fbo.end(); 
     
     shader.load("shaders/bloom");
-    bloomValue = 0.0;
+    bloomValue = 3;
     paused = false;
 }
 
@@ -102,6 +102,7 @@ void testApp::draw(){
 //		
 		ofClear(0);
 		//ofSetColor(255);
+        
 	}
 	ofPushMatrix();
 	
@@ -126,6 +127,10 @@ void testApp::draw(){
 	}
 
 	if(useFbo) {
+        textWriter.draw(ofRectangle(50, 50, 800, 300), "The Awesome PixelPyros Text Rendering Demo");
+        textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
+        textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
+        
 		fbo.end();
         
         shader.begin();
