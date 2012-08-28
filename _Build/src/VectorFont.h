@@ -333,6 +333,25 @@ public:
         
         letters['.'] = lper;
         
+        Letter lhypen;
+        lhypen.addLine(1 , 3 , 3 , 3);
+        
+        letters['-'] =lhypen;
+        
+        Letter lhash;
+        
+        lhash.addLine(1 , 1 , 1 , 5);
+        lhash.addLine(0 , 2 , 4 , 2);
+        lhash.addLine(0 , 4 , 4 , 4);
+        lhash.addLine(3 , 1 , 3 , 5);
+        
+        letters['#'] =lhash;
+        
+        Letter lcomma;
+        
+        lcomma.addLine(2 , 5 , 2 , 6);
+        
+        letters[','] =lcomma;
         
 	}
     

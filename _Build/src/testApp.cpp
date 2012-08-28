@@ -141,7 +141,7 @@ void testApp::draw(){
 		
 	}
 
-	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo");
+	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
