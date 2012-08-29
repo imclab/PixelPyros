@@ -27,7 +27,15 @@ class SceneRealistic : public Scene {
 	
 	RocketSettings getFluffyRocket();
 	
-	ofImage softWhiteImage; 
+	
+	RocketSettings  getBangerRocket();
+	ParticleSystemSettings getBangerTrails();
+	ParticleSystemSettings getBangerBang();
+	ParticleSystemSettings  getBangerCrackles();
+	
+	ParticleSystemSettings getSmoke();
 
+	ofImage softWhiteImage; 
+	ofImage bangerFlashImage;
 
 };

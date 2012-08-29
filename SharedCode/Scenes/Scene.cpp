@@ -54,7 +54,7 @@ bool Scene :: update(float deltaTime) {
             updateTriggerArea = false ;
             arrangements[i]->updateLayout(*triggerArea, arrangements[i]->minimumSpacing);
         }
-		if(ofGetMousePressed()) arrangements[i]->updateLayout(*triggerArea, max(1, min(300,ofGetMouseY())));
+		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		else if ((!stopping) && (i==currentArrangementIndex)) next();
 		

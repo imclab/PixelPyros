@@ -25,6 +25,8 @@ void Particle::reset() {
 	sizeEnd = 0; 
 	shimmerMin = 0.2;
 	
+	renderDelay = 0; 
+	
 	velocityModifier.reset(); 
 	
 	enabled = true;
@@ -35,10 +37,19 @@ void Particle::reset() {
 bool Particle :: update(float deltaTime) { 
 	if(!enabled) return false;
 	
-	
 	enabled = PhysicsObject::update(deltaTime);
 	
-    size = ofMap(life.unitLifeProgress, 0, 1, sizeStart, sizeEnd, true);
+	velocityModifier.update(deltaTime, this, startPos);
+		
+	// This system is a bit sucky. 
+	if(renderDelay>0) {
+		life.resetElapsedTime();
+		size = 1;
+		renderDelay-=deltaTime;
+	} else {
+		size = ofMap(life.unitLifeProgress, 0, 1, sizeStart, sizeEnd, true);
+		
+	}
     
 	if(shimmerMin!=1) {
 		size = ofMap(ofRandom(1),0,1,size*shimmerMin, size);
@@ -46,32 +57,8 @@ bool Particle :: update(float deltaTime) {
     
 	colourModifier->update(life.unitLifeProgress);
 	
-	velocityModifier.update(deltaTime, this, startPos);
-		
-	
 	return enabled; 
 }
-
-//bool Particle::draw() { 
-//	if(!enabled) return false; 
-//	
-//	// size modifier default
-//	//float size = ofMap(Quint::easeOut(life.unitLifeProgress, 0, 1, 1), 0, 1, sizeStart, sizeEnd, true); 
-//	
-//	
-//	
-//	
-//	ofPushMatrix(); 
-//	ofTranslate(pos);
-//	ofScale(size, size, size); 
-//	ofSetColor(colourModifier->colour);
-//	
-//	renderer->render(); 
-//	ofPopMatrix(); 
-//	
-//	return true; 
-//	
-//}
 
 ofColor& Particle:: getColour() {
     return colourModifier->colour; 

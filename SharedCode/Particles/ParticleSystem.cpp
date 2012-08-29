@@ -58,17 +58,29 @@ bool ParticleSystem::update(float deltaTime) {
 			}
 			soundPlayer.playSound(settings.startSound, volume , pan);
 		}
-		
 	}
 	
 	
 	if(life.active) {
-		while(numParticlesCreated<(life.elapsedTime-life.delay)*settings.emitCount){
+		
+		int newparticlecount;
+		
+		if(settings.emitMode == PARTICLE_EMIT_CONTINUOUS) {
+			newparticlecount = (life.elapsedTime-life.delay)*settings.emitCount;
+		} else if (settings.emitMode == PARTICLE_EMIT_BURST) {
+			newparticlecount = settings.emitCount;
+			life.end();
+		}
+		
+		while(numParticlesCreated<newparticlecount){
 			Particle& p = *addParticle();
 			
-			if(attachedPhysicsObject!=NULL) { 
-				p.pos = ((attachedPhysicsObject->pos - attachedPhysicsObject->lastPos) * ofMap(numParticlesCreated/settings.emitCount, life.lastUpdateTime, life.elapsedTimeActual,0,1)) + attachedPhysicsObject->lastPos; 
-			
+			if(attachedPhysicsObject!=NULL) {
+				if(settings.emitMode == PARTICLE_EMIT_CONTINUOUS) {
+					p.pos = ((attachedPhysicsObject->pos - attachedPhysicsObject->lastPos) * ofMap(numParticlesCreated/settings.emitCount, life.lastUpdateTime, life.elapsedTimeActual,0,1)) + attachedPhysicsObject->lastPos;
+				} else {
+					p.pos = attachedPhysicsObject->pos;
+				}
 			}
 		}
 	
@@ -156,10 +168,14 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 	
 	p->sizeEnd = p->sizeStart * settings.sizeChangeRatio; 
 	
-	settings.initColourModifier(p->colourModifier, life); 	
+	settings.initColourModifier(p->colourModifier, life);
 	p->shimmerMin = settings.shimmerMin; 
 	
-	
+	float curvedRandom = ofRandom(1);
+	curvedRandom*=curvedRandom;
+	curvedRandom*=curvedRandom;
+
+	p->renderDelay = ofMap(curvedRandom, 0, 1, settings.renderDelayMin, settings.renderDelayMax);
 	p->velocityModifier.reset();
 	
 	if(settings.velocityModifierSettings!=NULL) {

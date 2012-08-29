@@ -181,7 +181,7 @@ class SceneSpace : public Scene {
 		// lifeExpectancy
 		// delay
 		
-		ps2.emitMode = PARTICLE_EMIT_BURST;
+		//ps2.emitMode = PARTICLE_EMIT_BURST;
 		ps2.emitCount = 10000;
 		
 		ps2.emitDelay = 2;
@@ -229,7 +229,7 @@ class SceneSpace : public Scene {
 		// lifeExpectancy
 		// delay
 		
-		ps3.emitMode = PARTICLE_EMIT_BURST;
+		//ps3.emitMode = PARTICLE_EMIT_BURST;
 		ps3.emitCount = 10000;
 		
 		ps3.emitDelay = 1.95;
