@@ -36,6 +36,6 @@ class SceneRealistic : public Scene {
 	ParticleSystemSettings getSmoke();
 
 	ofImage softWhiteImage; 
-
+	ofImage bangerFlashImage;
 
 };

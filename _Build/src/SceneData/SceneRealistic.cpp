@@ -11,6 +11,7 @@
 SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
 
 	softWhiteImage.loadImage("img/ParticleWhite.png");
+	bangerFlashImage.loadImage("img/ParticleBangerFlash.png");
 	
 	TriggerRocket triggerFluffy(psm);
 	TriggerRocket triggerFlower(psm);
@@ -19,13 +20,17 @@ SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle trigger
 	TriggerPattern pattern;
 	
 	triggerFluffy.addRocketSettings(getFluffyRocket());
+	//triggerFluffy.addRocketSettings(getFountain());
 	triggerFlower.addRocketSettings(getFlowerRocket());
 	triggerFluffy.restoreSpeed = 2;
 	
 	triggerBanger.addRocketSettings(getBangerRocket());
 
 	pattern.addTrigger(triggerFluffy);
+	pattern.addTrigger(triggerFluffy);
 	pattern.addTrigger(triggerFlower);
+	pattern.addTrigger(triggerFluffy);
+	pattern.addTrigger(triggerFluffy);
 	pattern.addTrigger(triggerFlower);
 	pattern.addTrigger(triggerBanger);
 
@@ -85,7 +90,7 @@ ParticleSystemSettings SceneRealistic :: getFlowerTrailParticles(float hue, floa
 	trails.shimmerMin = 0;
 	trails.lifeMin = 0.1;
 	trails.lifeMax = 0.3;
-	//trails.startSound = "RetroLaunch";
+	trails.startSound = "LaunchRocketSharp";
 	
 	return trails;
 
@@ -120,7 +125,7 @@ ParticleSystemSettings SceneRealistic :: getFlowerExplosionParticles(float hue, 
 	explosion.emitLifeTime = 0.1;
 	explosion.emitCount = 3000;
 	
-	//explosion.startSound = "RetroExplosion";
+	explosion.startSound = "SoftExplosion";
 	
 	
 	return explosion;
@@ -202,7 +207,7 @@ RocketSettings SceneRealistic :: getFountain(){
 	ParticleSystemSettings pss2(pss);
 	pss2.directionZ = 180;
 	
-	pss2.startSound = "RetroFountain";
+	pss2.startSound = "RocketFountain";
 	
 	rocketSettings.startSpeedMin = 700;
 	rocketSettings.startSpeedMax = 1200;
@@ -225,27 +230,39 @@ RocketSettings SceneRealistic :: getFluffyRocket(){
 	RocketSettings rocketSettings;
 	ParticleSystemSettings pss;
 	pss.renderer = new ParticleRendererBitmap(&softWhiteImage);
-	pss.shimmerMin = 0.5;
+	
 	pss.gravity.y = 100;
 	pss.speedMin = 00;
-	pss.speedMax = 50;
+	pss.speedMax = 20;
+	pss.drag = 0.93;
 	
-	pss.sizeStartMin = 10;
-	pss.sizeStartMax = 12;
+	pss.sizeStartMin = 8;
+	pss.sizeStartMax = 15;
+	pss.sizeChangeRatio = 0.9;
+	pss.shimmerMin = 1; 
 	
 	pss.emitCount = 500;
-	pss.emitStartSizeModifier = 0;
+	pss.emitStartSizeModifier = 0.2;
 	
-	pss.lifeMin = 0.4;
-	pss.lifeMax = 0.9;
+	pss.brightnessStartMin = 10;
+	pss.brightnessStartMax = 255;
+	pss.brightnessEnd = 0;
 	
+	pss.lifeMin = 0.5;
+	pss.lifeMax = 0.8;
 
-	rocketSettings.startSpeedMin = 200;
-	rocketSettings.startSpeedMin = 400;
+	
+	pss.startSound = "RocketFountain";
+
+
+	rocketSettings.startSpeedMin = 350;
+	rocketSettings.startSpeedMax = 400;
+	rocketSettings.gravity.y = 100;
 	
 	
 	
 	rocketSettings.addParticleSystemSetting(pss);
+	//rocketSettings.addParticleSystemSetting(getSmoke());
 	
 	return rocketSettings;
 	
@@ -310,7 +327,7 @@ ParticleSystemSettings SceneRealistic :: getBangerTrails() {
 	trails.shimmerMin = 0;
 	trails.lifeMin = 0.1;
 	trails.lifeMax = 0.3;
-	//trails.startSound = "";
+	trails.startSound = "Launch";
 	
 	return trails;
 
@@ -321,16 +338,17 @@ ParticleSystemSettings SceneRealistic :: getBangerTrails() {
 ParticleSystemSettings SceneRealistic:: getBangerBang() {
 	
 	ParticleSystemSettings explosion;
-	explosion.renderer = new ParticleRendererCircle(24);
-	
+	//explosion.renderer = new ParticleRendererCircle(24);
+	explosion.renderer = new ParticleRendererBitmap(&bangerFlashImage);
+
 	//pss.directionZVar = 20;
 	explosion.speedMin = 0;
 	explosion.speedMax = 0;
 	explosion.drag = 0.90;
 	
-	explosion.sizeStartMin = 50;
-	explosion.sizeStartMax = 80;
-	explosion.sizeChangeRatio = 1; 
+	explosion.sizeStartMin = 600;
+	explosion.sizeStartMax = 900;
+	explosion.sizeChangeRatio = 0;
 	explosion.hueStartMin = explosion.hueStartMax = 0;
 	explosion.hueChange = 0;
 	explosion.saturationMin = explosion.saturationMax = 0;
@@ -338,9 +356,9 @@ ParticleSystemSettings SceneRealistic:: getBangerBang() {
 	explosion.brightnessStartMin = explosion.brightnessStartMin = 255;
 	explosion.brightnessEnd = 0;
 	
-	explosion.shimmerMin = 0.0;
-	explosion.lifeMin = 0.2;
-	explosion.lifeMax = 0.2;
+	explosion.shimmerMin = 1;
+	explosion.lifeMin = 0.1;
+	explosion.lifeMax = 0.1;
 	
 	explosion.emitMode = PARTICLE_EMIT_BURST;
 	explosion.emitLifeTime = 0.1;
@@ -348,7 +366,7 @@ ParticleSystemSettings SceneRealistic:: getBangerBang() {
 	
 	
 	
-	//explosion.startSound = "RetroExplosion";
+	explosion.startSound = "Banger";
 	
 	
 	return explosion;
@@ -392,7 +410,7 @@ ParticleSystemSettings SceneRealistic:: getBangerCrackles() {
 	explosion.renderDelayMax = 3;
 	
 	
-	//explosion.startSound = "RetroExplosion";
+	explosion.startSound = "Crackle";
 	
 	
 	return explosion;

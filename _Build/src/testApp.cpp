@@ -5,6 +5,7 @@ void testApp::setup(){
 	
 	useFbo = true;
 	ofSetFrameRate(50);
+	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
 	
     receiver.setup(OSC_RECEIVER_PORT);
@@ -30,6 +31,7 @@ void testApp::setup(){
 	soundPlayer.addSound("ExplosionSynth1", "ExplosionSynth1");
 	
 	soundPlayer.addSound("mortar", "SynthThud", 1, 0.8, 0.2, "mp3");
+	soundPlayer.addSound("mortar", "mortar", 1, 0.8, 0.2, "mp3");
 	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.1, 0.8, 0.4, "aif", 0.1);
 	soundPlayer.addSound("TechnoMortar", "TechnoMortar", 0.9, 1.2, 0.5, "mp3", 0.02);
 	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
@@ -38,6 +40,13 @@ void testApp::setup(){
 	soundPlayer.addSound("RetroLaunch", "RetroLaunch", 0.2, 1, 0.2, "wav", 0.02);
 	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
 	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
+	
+	soundPlayer.addSound("Banger", "Banger", 1.2, 0.4, 0.0, "wav", 0.2);
+	soundPlayer.addSound("Crackle", "Crackle", 0.15, 0.8, 0.3, "wav", 0.2);
+	
+	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
+	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
+	soundPlayer.addSound("SoftExplosion", "SoftExplosion", 1.0, 1.0, 0.2, "wav", 0.2);
 	soundPlayer.globalVolume = 1;
 	
 	gui.hide();
@@ -144,7 +153,7 @@ void testApp::draw(){
 		
 	}
 
-	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,"); 
+	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
