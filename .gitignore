@@ -16,6 +16,7 @@
 
 # Builds
 _Build/bin/PixelPyrosDebug.app
+_Build/bin/PixelPyros.app
 
 # Xcode personal settings
 xcuserdata
