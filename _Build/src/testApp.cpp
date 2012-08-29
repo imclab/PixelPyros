@@ -153,7 +153,7 @@ void testApp::draw(){
 		
 	}
 
-	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
+	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
@@ -308,7 +308,8 @@ void testApp:: setupScenes() {
 	ofRectangle triggerarea(APP_WIDTH*0.05 ,APP_HEIGHT*0.85,APP_WIDTH*0.9,10);
 	
 	
-	sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
+	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));

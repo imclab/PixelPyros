@@ -75,7 +75,12 @@ bool ParticleSystem::update(float deltaTime) {
 		while(numParticlesCreated<newparticlecount){
 			Particle& p = *addParticle();
 			
-			if(attachedPhysicsObject!=NULL) {
+			if(settings.emitShape!=NULL) {
+				
+				p.pos = settings.emitShape->getVertex(ofRandom(0,settings.emitShape->getNumVertices()));
+				
+				
+			} else if(attachedPhysicsObject!=NULL) {
 				if(settings.emitMode == PARTICLE_EMIT_CONTINUOUS) {
 					p.pos = ((attachedPhysicsObject->pos - attachedPhysicsObject->lastPos) * ofMap(numParticlesCreated/settings.emitCount, life.lastUpdateTime, life.elapsedTimeActual,0,1)) + attachedPhysicsObject->lastPos;
 				} else {
@@ -137,8 +142,9 @@ Particle * ParticleSystem::initParticle(Particle * p) {
 	
 	p->reset(); 
 	
-	p->pos = pos;
-	p->startPos = pos;
+	
+	p->pos =  pos;
+	p->startPos = p->pos;
 
 	
 	settings.initVelocity(p->vel); 

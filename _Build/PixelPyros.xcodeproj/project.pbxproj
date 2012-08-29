@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1203A3D615E8E82A004A9E90 /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1203A3D515E8E82A004A9E90 /* libusb-1.0.a */; };
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
+		121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121DB79615EEA6C800F99300 /* SceneIntro.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 129F267215EC0694005DBFAA /* SceneManager.cpp */; };
@@ -151,6 +152,8 @@
 		1209A8CE15E5018000D5E526 /* Starfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Starfield.h; path = ../Starfield.h; sourceTree = "<group>"; };
 		1209A8CF15E50B3C00D5E526 /* StretchyNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNet.h; path = ../StretchyNet.h; sourceTree = "<group>"; };
 		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNetPoint.h; path = ../StretchyNetPoint.h; sourceTree = "<group>"; };
+		121DB79515EEA68100F99300 /* SceneIntro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneIntro.h; sourceTree = "<group>"; };
+		121DB79615EEA6C800F99300 /* SceneIntro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneIntro.cpp; sourceTree = "<group>"; };
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 		129F267015EBFC3B005DBFAA /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				121DB79515EEA68100F99300 /* SceneIntro.h */,
+				121DB79615EEA6C800F99300 /* SceneIntro.cpp */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -1232,6 +1237,7 @@
 				12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */,
 				12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */,
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
+				121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,7 +1265,7 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -1290,7 +1296,7 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;

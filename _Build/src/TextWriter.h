@@ -24,9 +24,9 @@ private:
     
     int findBestBreak(string, int, int);
     int calculateBlockWidth(string, int, int);
-    void drawGlyph(Letter&, ofRectangle);
-    void renderGlyph(Letter&, int, int);
-    
+    //void drawGlyph(Letter&, ofRectangle);
+    void addGlyphToMesh(Letter&, ofRectangle, ofMesh& );
+
     int glyphWidth, glyphHeight;
     float glyphRatio;
     VectorFont font;

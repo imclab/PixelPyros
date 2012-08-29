@@ -48,36 +48,38 @@ int TextWriter::calculateBlockWidth(string s, int glyphRenderWidth, int glyphRen
     return (len * glyphRenderWidth) + (glyphRenderSpacing * (len - 1));
 }
 
-void TextWriter::renderGlyph(Letter &letter, int w, int h) {
-    ofMesh mesh;
-    mesh.setMode(OF_PRIMITIVE_LINES);
+void TextWriter::addGlyphToMesh(Letter &letter, ofRectangle box, ofMesh& mesh) {
+    //ofMesh mesh;
+    //mesh.setMode(OF_PRIMITIVE_LINES);
     
     for( int i = 0; i < letter.points.size(); i++ ) {
-        float vx = ofMap(letter.points[i].x, 0, glyphWidth, 0, w);
-        float vy = ofMap(letter.points[i].y, 0, glyphHeight, 0, h);
-        
-        mesh.addVertex(ofVec2f(vx, vy));
+		
+		ofVec3f v; 
+		v.x = box.x + ofMap(letter.points[i].x, 0, glyphWidth, 0, box.width);
+		v.y = box.y + ofMap(letter.points[i].y, 0, glyphHeight, 0, box.height);
+       
+        mesh.addVertex(v);
         mesh.addColor(ofColor(0, 255, 10));
     }
-    mesh.draw();
+   // mesh.draw();
 }
-
-void TextWriter::drawGlyph(Letter &letter, ofRectangle box) {
-    ofPushMatrix();
-    
-    ofTranslate(box.x, box.y);
-    
-    // Debug
-    /*
-    ofSetColor(50, 50, 50);
-    ofNoFill();
-    ofRect(0, 0, box.width, box.height);
-    */
-    
-    renderGlyph(letter, box.width, box.height);
-    
-    ofPopMatrix();
-}
+//
+//void TextWriter::drawGlyph(Letter &letter, ofRectangle box) {
+//    ofPushMatrix();
+//    
+//    ofTranslate(box.x, box.y);
+//    
+//    // Debug
+//    /*
+//    ofSetColor(50, 50, 50);
+//    ofNoFill();
+//    ofRect(0, 0, box.width, box.height);
+//    */
+//    
+//    renderGlyph(letter, box.width, box.height);
+//    
+//    ofPopMatrix();
+//}
 
 void TextWriter::draw(ofRectangle box, string text) {
     text = ofToUpper(text);
@@ -152,17 +154,23 @@ void TextWriter::draw(ofRectangle box, string text) {
     
     map <int, Letter>& letters = font.letters;
     
+	ofMesh writingMesh; 
+	
     int ofsX = marginLeft, ofsY = marginTop;
     for( int j = 0; j < lines.size(); j++ ) {
         string line = lines[j];
         int glyphMarginLeft = ((box.width - calculateBlockWidth(line, glyphRenderWidth, glyphRenderSpacing)) / 2.0) - marginLeft;
         for( int i = 0; i < line.length(); i++ ) {
-            drawGlyph(letters[line[i]], ofRectangle(box.x + ofsX + glyphMarginLeft, box.y + ofsY, glyphRenderWidth, glyphRenderHeight));
+			addGlyphToMesh(letters[line[i]], ofRectangle(box.x + ofsX + glyphMarginLeft, box.y + ofsY, glyphRenderWidth, glyphRenderHeight), writingMesh);
+            //drawGlyph(letters[line[i]], ofRectangle(box.x + ofsX + glyphMarginLeft, box.y + ofsY, glyphRenderWidth, glyphRenderHeight));
             ofsX += glyphRenderWidth + glyphRenderSpacing;
         }
         ofsX = marginLeft;
         ofsY += glyphRenderHeight + glyphRenderSpacing;
     }
+	
+	writingMesh.setMode(OF_PRIMITIVE_LINES);
+    writingMesh.draw(); 
     
     ofPopStyle();
 }
