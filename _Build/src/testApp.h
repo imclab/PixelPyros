@@ -83,6 +83,7 @@ private:
     ofShader shader;
     TextWriter textWriter;
     float bloomValue;
+    float gammaValue;
     
     bool paused;
 };

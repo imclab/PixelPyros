@@ -47,8 +47,9 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
-    shader.load("shaders/bloom");
+    shader.load("shaders/gamma");
     bloomValue = 3;
+    gammaValue = 1.0;
     paused = false;
 }
 
@@ -141,10 +142,10 @@ void testApp::draw(){
 		
 	}
 
-	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
+	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,"); 
+    textWriter.draw(ofRectangle(APP_WIDTH - 100, 0, 100, 50), "Gamma " + ofToString(gammaValue));
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
-	
 	
 	if(useFbo) {
 
@@ -152,7 +153,8 @@ void testApp::draw(){
         
         shader.begin();
         shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
-        shader.setUniform1f("bloom", bloomValue);
+        // shader.setUniform1f("bloom", bloomValue);
+        shader.setUniform1f("gamma", gammaValue);
         glBegin(GL_QUADS);
             glTexCoord2f(0, 0);
             glVertex2f(0, 0);
@@ -263,7 +265,15 @@ void testApp::keyPressed(int key){
         //bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
     } else if( key == 'p' ) {
         paused = !paused;
-    }
+    } else if( key == 'g' ) {
+        // gammaValue = MAX(gammaValue - 0.1, 0.0);
+        gammaValue -= 0.1;
+    } else if( key == 'G' ) {
+        // gammaValue = MIN(gammaValue + 0.1, 1.0);
+        gammaValue += 0.1;
+    } else if( key == 'p' ) {
+            paused = !paused;
+        }
 
 }
 //
