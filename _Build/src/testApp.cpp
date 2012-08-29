@@ -50,8 +50,8 @@ void testApp::setup(){
     shader.load("shaders/gamma");
     bloomValue = 0.5;
     gammaValue = 1.2;
-    blackPoint = 0.1;
-    whitePoint = 0.5;
+    blackPoint = 0.0;
+    whitePoint = 1.0;
     paused = false;
 }
 
@@ -270,23 +270,10 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') {
 		cameraManager.toggleWarperGui();
         
-	} else if( key == 'l' ) {
-        blackPoint -= 0.05;
-	} else if( key == 'L' ) {
-        blackPoint += 0.05;
-	} else if( key == 'h' ) {
-        whitePoint -= 0.05;
-	} else if( key == 'H' ) {
-        whitePoint += 0.05;
-    } else if( key == 'g' ) {
-        gammaValue -= 0.05;
-    } else if( key == 'G' ) {
-        gammaValue += 0.05;
     } else if( key == 'b' ) {
         bloomValue -= 0.05;
     } else if( key == 'B' ) {
         bloomValue += 0.05;
-    
 
     } else if( key == 'F' ) {
         cameraManager.beginCapture();
@@ -369,6 +356,13 @@ void testApp::setupControlPanel() {
 	cameraManager.initControlPanel(gui);
 
 	gui.setWhichColumn(1);
+    
+	gui.addLabel("Levels");
+	
+	gui.addSlider("Black Point", "SHADER_BLACK", blackPoint, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Gamma", "SHADER_GAMMA", gammaValue, 0, 10.0, false)->setDimensions(400, 10);
+	gui.addSlider("White Point", "SHADER_WHITE", whitePoint, 0, 1.0, false)->setDimensions(400, 10);
+    
 	gui.addPanel("Motion");
 	
 	motionManager.initControlPanel(gui);
@@ -383,7 +377,15 @@ void testApp::setupControlPanel() {
 }
 
 void testApp::eventsIn(guiCallbackData & data){
-	
+	if( data.getXmlName() == "SHADER_BLACK" ) {
+        blackPoint = data.getFloat(0);
+    }
+	else if( data.getXmlName() == "SHADER_WHITE" ) {
+        whitePoint = data.getFloat(0);
+    }
+	else if( data.getXmlName() == "SHADER_GAMMA" ) {
+        gammaValue = data.getFloat(0);
+    }
 }
 
 
