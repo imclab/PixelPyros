@@ -194,7 +194,7 @@ ParticleSystemSettings SceneRetro::  getPixelExplosionParticles(float hue, float
 	explosion.shimmerMin = 0;
 	explosion.lifeMin = explosion.lifeMax = 0.6;
 	
-	explosion.emitMode = PARTICLE_EMIT_BURST;
+	//explosion.emitMode = PARTICLE_EMIT_BURST;
 	explosion.emitLifeTime = 0.1;
 	explosion.emitCount = 500;
 	explosion.startSound = "RetroExplosion";

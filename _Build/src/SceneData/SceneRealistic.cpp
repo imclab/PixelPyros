@@ -14,19 +14,24 @@ SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle trigger
 	
 	TriggerRocket triggerFluffy(psm);
 	TriggerRocket triggerFlower(psm);
+	TriggerRocket triggerBanger(psm);
 
 	TriggerPattern pattern;
 	
 	triggerFluffy.addRocketSettings(getFluffyRocket());
 	triggerFlower.addRocketSettings(getFlowerRocket());
-	triggerFluffy.restoreSpeed = 2; 
+	triggerFluffy.restoreSpeed = 2;
+	
+	triggerBanger.addRocketSettings(getBangerRocket());
 
 	pattern.addTrigger(triggerFluffy);
 	pattern.addTrigger(triggerFlower);
+	pattern.addTrigger(triggerFlower);
+	pattern.addTrigger(triggerBanger);
 
 	addArrangement(pattern);
 
-	bloomLevel = 2;
+	bloomLevel = 4;
 
 }
 
@@ -80,7 +85,7 @@ ParticleSystemSettings SceneRealistic :: getFlowerTrailParticles(float hue, floa
 	trails.shimmerMin = 0;
 	trails.lifeMin = 0.1;
 	trails.lifeMax = 0.3;
-	trails.startSound = "RetroLaunch";
+	//trails.startSound = "RetroLaunch";
 	
 	return trails;
 
@@ -111,11 +116,11 @@ ParticleSystemSettings SceneRealistic :: getFlowerExplosionParticles(float hue, 
 	explosion.lifeMin = 0.5;
 	explosion.lifeMax = 1;
 	
-	explosion.emitMode = PARTICLE_EMIT_BURST;
+	//explosion.emitMode = PARTICLE_EMIT_BURST;
 	explosion.emitLifeTime = 0.1;
 	explosion.emitCount = 3000;
 	
-	explosion.startSound = "RetroExplosion";
+	//explosion.startSound = "RetroExplosion";
 	
 	
 	return explosion;
@@ -148,11 +153,11 @@ ParticleSystemSettings SceneRealistic :: getLineExplosionParticles(float hue, fl
 	explosion.lifeMin = 1;
 	explosion.lifeMax = 2;
 	
-	explosion.emitMode = PARTICLE_EMIT_BURST;
+	//explosion.emitMode = PARTICLE_EMIT_BURST;
 	explosion.emitLifeTime = 0.1;
 	explosion.emitCount = 2000;
 	
-	explosion.startSound = "RetroExplosion";
+	//explosion.startSound = "RetroExplosion";
 	
 	
 	return explosion;
@@ -243,11 +248,216 @@ RocketSettings SceneRealistic :: getFluffyRocket(){
 	rocketSettings.addParticleSystemSetting(pss);
 	
 	return rocketSettings;
+	
+}
+
+RocketSettings SceneRealistic:: getBangerRocket() {
+	
+	RocketSettings rocketSettings;
+	
+	rocketSettings.startSpeedMin = 1000;
+	rocketSettings.startSpeedMax = 1200;
+	rocketSettings.directionVar = 4;
+	rocketSettings.gravity.y = 200;
+	rocketSettings.drag = 0.95;
+	
+	ParticleSystemSettings trails = getBangerTrails();
+	ParticleSystemSettings bang = getBangerBang();
+	ParticleSystemSettings bangCrackles = getBangerCrackles();
+	ParticleSystemSettings smoke1 = getSmoke();
+	ParticleSystemSettings smoke2 = getSmoke();
+	
+	smoke2.emitMode = PARTICLE_EMIT_CONTINUOUS;
+	smoke2.emitCount = 200;
+	smoke2.emitLifeTime = 0.2; 
+	smoke2.sizeStartMax = 30;
+	smoke2.speedMax = 100;
+	smoke2.brightnessStartMin = 10;
+	smoke2.brightnessStartMax = 30;
+	
+	
+	bang.emitDelay = bangCrackles.emitDelay = trails.emitLifeTime = smoke1.emitLifeTime =smoke2.emitDelay = 2;
+	
+	rocketSettings.addParticleSystemSetting(trails);
+	rocketSettings.addParticleSystemSetting(smoke1);
+	rocketSettings.addParticleSystemSetting(smoke2);
+	rocketSettings.addParticleSystemSetting(bang);
+	rocketSettings.addParticleSystemSetting(bangCrackles);
+	
+	return rocketSettings;
+	
+}
+
+
+ParticleSystemSettings SceneRealistic :: getBangerTrails() {
+	
+	ParticleSystemSettings trails;
+	trails.renderer = new ParticleRendererLine(1.5, true);
+	//pss.directionZVar = 20;
+	trails.speedMin = 5;
+	trails.speedMax = 6;
+	trails.sizeStartMin = trails.sizeStartMax = 3;
+	trails.hueStartMin = trails.hueStartMax = 30;
+	trails.hueChange = -10;
+	trails.saturationMin = trails.saturationMax = 0;
+	trails.saturationEnd = 0;
+	trails.brightnessStartMin = trails.brightnessStartMin = trails.brightnessEnd = 255;
+	
+	trails.emitInheritVelocity = -0.01;
+	trails.emitCount = 500;
+	
+	
+	trails.shimmerMin = 0;
+	trails.lifeMin = 0.1;
+	trails.lifeMax = 0.3;
+	//trails.startSound = "";
+	
+	return trails;
 
 	
+}
+
+
+ParticleSystemSettings SceneRealistic:: getBangerBang() {
+	
+	ParticleSystemSettings explosion;
+	explosion.renderer = new ParticleRendererCircle(24);
+	
+	//pss.directionZVar = 20;
+	explosion.speedMin = 0;
+	explosion.speedMax = 0;
+	explosion.drag = 0.90;
+	
+	explosion.sizeStartMin = 50;
+	explosion.sizeStartMax = 80;
+	explosion.sizeChangeRatio = 1; 
+	explosion.hueStartMin = explosion.hueStartMax = 0;
+	explosion.hueChange = 0;
+	explosion.saturationMin = explosion.saturationMax = 0;
+	explosion.saturationEnd = 0;
+	explosion.brightnessStartMin = explosion.brightnessStartMin = 255;
+	explosion.brightnessEnd = 0;
+	
+	explosion.shimmerMin = 0.0;
+	explosion.lifeMin = 0.2;
+	explosion.lifeMax = 0.2;
+	
+	explosion.emitMode = PARTICLE_EMIT_BURST;
+	explosion.emitLifeTime = 0.1;
+	explosion.emitCount = 1;
 	
 	
 	
+	//explosion.startSound = "RetroExplosion";
+	
+	
+	return explosion;
+
+	
+	return ParticleSystemSettings();
+	
+}
+
+
+
+ParticleSystemSettings SceneRealistic:: getBangerCrackles() {
+	
+	ParticleSystemSettings explosion;
+	explosion.renderer = new ParticleRendererCircle();
+
+	
+	explosion.directionYVar= 90;
+	explosion.speedMin = 300;
+	explosion.speedMax = 400;
+	explosion.drag = 0.93;
+	
+	explosion.sizeStartMin = 5;
+	explosion.sizeStartMax = 8;
+	explosion.hueStartMin = explosion.hueStartMax = 0;
+	explosion.hueChange = 0;
+	explosion.saturationMin = explosion.saturationMax = 0;
+	explosion.saturationEnd = 0;
+	explosion.brightnessStartMin = explosion.brightnessStartMin = 255;
+	explosion.brightnessEnd = 0;
+	
+	explosion.shimmerMin = 0.0;
+	explosion.lifeMin = 0.1;
+	explosion.lifeMax = 0.2;
+	
+	explosion.emitMode = PARTICLE_EMIT_BURST;
+	//explosion.emitLifeTime = 0.1;
+	explosion.emitCount = 200;
+	
+	explosion.renderDelayMin = 0.5;
+	explosion.renderDelayMax = 3;
+	
+	
+	//explosion.startSound = "RetroExplosion";
+	
+	
+	return explosion;
 	
 	
 }
+
+
+ParticleSystemSettings SceneRealistic:: getSmoke() {
+	
+	float hueStartOffset = 200;
+	float saturation = 0; 
+	ParticleSystemSettings ps2; 
+	// PHYSICS
+	ps2.speedMin = 15;
+	ps2.speedMax = 20;
+	ps2.directionZ = 0;
+	ps2.directionZVar = 90;
+	ps2.directionYVar = 180;
+	ps2.drag = 0.90;
+	ps2.gravity.set(0,-30);
+	
+	//LIFE
+	ps2.lifeMin = 1;
+	ps2.lifeMax = 1.5;
+	
+	//APPEARANCE
+	
+	ps2.sizeStartMin = 2;
+	ps2.sizeStartMax = 5;
+	ps2.sizeChangeRatio = 5;
+	
+	ps2.hueStartMin = 0+hueStartOffset;
+	ps2.hueStartMax = 0+hueStartOffset;
+	ps2.hueChange = 0;
+	
+	ps2.brightnessStartMin = 20;
+	ps2.brightnessStartMax = 70;
+	ps2.brightnessEnd = 0;
+	
+	ps2.saturationMin = saturation;
+	ps2.saturationMax = saturation;
+	ps2.saturationEnd = saturation;
+	
+	//ps.shimmerMin = 0.1;
+	
+	// but also :
+	// lifeExpectancy
+	// delay
+	
+	ps2.emitStartSizeModifier = 0;
+	//ps2.emitSpeedModifier = 0;
+	
+	
+	ps2.emitMode = PARTICLE_EMIT_CONTINUOUS;
+	ps2.emitCount = 500;
+	
+	ps2.emitDelay = 0;
+	ps2.emitLifeTime= 0.5;
+	
+	ps2.renderer = new ParticleRendererBitmap(&softWhiteImage); 
+
+	
+	return ps2; 
+	
+	
+}
+

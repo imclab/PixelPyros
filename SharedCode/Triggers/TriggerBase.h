@@ -54,8 +54,6 @@ class TriggerBase {
 	
 	//amount per second to take away from the accumulated motion
 	float motionDecay;
-	// triggerLevel is the amount of unitPower needed to make something happen
-	float triggerLevel;
 	
 	// a scalar that multiplies the motion level to add to the
 	// unitPower
@@ -65,6 +63,9 @@ class TriggerBase {
 	float restoreSpeed;
 	
 	float unitPower;
+	
+	// triggerLevel is the amount of unitPower needed to make something happen
+	float triggerLevel;
 	
 	// the amount of power taken away when it triggers
 	float triggerPower;

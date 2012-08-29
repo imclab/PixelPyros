@@ -147,7 +147,7 @@ class RocketTron : public RocketSettings {
 		// lifeExpectancy
 		// delay
 		
-		explosion.emitMode = PARTICLE_EMIT_BURST;
+		//explosion.emitMode = PARTICLE_EMIT_BURST;
 		explosion.emitCount = 10000;
 		
 		explosion.emitDelay = 2.2;

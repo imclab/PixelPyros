@@ -7,7 +7,7 @@ void testApp::setup(){
 	ofSetFrameRate(50);
 	lastUpdateTime = ofGetElapsedTimef();
 	
-    receiver.setup(OSC_RECEIVER_PORT);
+   receiver.setup(OSC_RECEIVER_PORT);
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
 	ofBackground(0);
@@ -73,7 +73,7 @@ void testApp::update(){
 	}
 	
 	// HORRIBLE.
-	//bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
+	bloomValue = bloomValue>0 ? sceneManager.currentScene->bloomLevel : 0;
 	
 	float time = ofGetElapsedTimef(); 
 	float deltaTime =  time - lastUpdateTime;
@@ -141,7 +141,7 @@ void testApp::draw(){
 		
 	}
 
-	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo");
+//	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
@@ -260,7 +260,7 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') { 
 		cameraManager.toggleWarperGui(); 
 	} else if( key == 'b' ) {
-        //bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
+        bloomValue = bloomValue>0 ? 0 : sceneManager.currentScene->bloomLevel;
     } else if( key == 'p' ) {
         paused = !paused;
     }
@@ -295,6 +295,7 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
 	
 	
+	sceneManager.changeScene(2);
 }
 
 

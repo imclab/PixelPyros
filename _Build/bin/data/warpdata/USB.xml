@@ -3,32 +3,32 @@
     <y>0</y>
 </srcvec>
 <srcvec>
-    <x>1536</x>
-    <y>0</y>
+    <x>1387</x>
+    <y>147</y>
 </srcvec>
 <srcvec>
-    <x>0</x>
-    <y>1024</y>
+    <x>16</x>
+    <y>690</y>
 </srcvec>
 <srcvec>
-    <x>1495</x>
-    <y>1007</y>
+    <x>1493</x>
+    <y>670</y>
 </srcvec>
 <dstvec>
     <x>0</x>
     <y>0</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>0</y>
+    <x>1527</x>
+    <y>4</y>
 </dstvec>
 <dstvec>
-    <x>0</x>
-    <y>1024</y>
+    <x>1</x>
+    <y>1195</y>
 </dstvec>
 <dstvec>
-    <x>1509</x>
-    <y>1006</y>
+    <x>1516</x>
+    <y>1198</y>
 </dstvec>
 <srcWidth>640</srcWidth>
 <srcHeight>480</srcHeight>

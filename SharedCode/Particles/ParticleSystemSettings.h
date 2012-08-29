@@ -46,6 +46,9 @@ class ParticleSystemSettings{
 		brightnessStartMin = brightnessStartMax = brightnessEnd = 255; 
 		saturationMin = saturationMax = saturationEnd = 0;
 		
+		// if you don't want the particle to start rendering yet, use this!
+		renderDelayMin = renderDelayMax =0;
+		
 		shimmerMin = 1; 
 		
 		//EMISSION LIFE CYCLE
@@ -128,6 +131,10 @@ class ParticleSystemSettings{
 	float saturationMin; 
 	float saturationMax;
 	float saturationEnd;
+	
+	float renderDelayMin;
+	float renderDelayMax;
+	
 	
 	
 	float shimmerMin; 

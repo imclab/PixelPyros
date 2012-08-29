@@ -176,9 +176,9 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	// times by two to get both sets
 	triggerCount *=2;
 	// and subtract one to get rid of double in middle
-	triggerCount--;
+	//triggerCount--;
 	
-	float spacing = (triggerArea.width/2) / (xPos- lastSpacing) ;
+	float spacing = (triggerArea.width/2) / (xPos- (lastSpacing*0.5)) ;
 	//cout << "spacing " << spacing << endl;
 	//cout << triggerCount << endl;
 	
