@@ -1,7 +1,7 @@
 
 #include "SceneIntro.h"
 
-SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
+SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea) {
 
 
 	
@@ -12,9 +12,9 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 		textLines.addVertex(v+ofVec3f(400,400));
 		
 	}
+
 	
-	
-	
+	//TextWriter textWriter;
 	
 	ParticleSystemSettings ps;
 	
