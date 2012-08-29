@@ -29,7 +29,7 @@
 #define OSC_NAMESPACE string("/mrmr")
 #define OSC_CMD(x) (OSC_NAMESPACE + x)
 #define OSC_OFF(x) (x == 0)
-#define OSC_ON(x) (x == 1000)
+#define OSC_ON(x) (x == 1.0f	)
 
 #include "ofShader.h"
 
@@ -80,12 +80,21 @@ public:
     
 private:
     
+    // reverse top and bottom for osc slider
+    static const float TRIGGER_Y_TOP = 1.0f ;
+    static const float TRIGGER_Y_BOTTOM = 0.7f ;
+    float triggerY ;
+    
     static const int OSC_RECEIVER_PORT = 1234;
     ofxOscReceiver receiver;
 	
+    ofRectangle* triggerarea;
+    
     ofShader shader;
     TextWriter textWriter;
     float bloomValue;
     
     bool paused;
+    
+    void setTriggerUnit ( float val );
 };

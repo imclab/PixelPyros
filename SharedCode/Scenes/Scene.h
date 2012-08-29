@@ -20,7 +20,7 @@ class Scene {
 
 	public : 
 	
-	Scene(ParticleSystemManager& psm, ofRectangle triggerarea);
+	Scene(ParticleSystemManager& psm, ofRectangle* triggerarea);
 	
 	virtual void start();
 	virtual void stop();
@@ -35,6 +35,8 @@ class Scene {
 	Arrangement& addArrangement(TriggerPattern& pattern);
 	
 	//void setTriggerArea(ofRectangle rect);
+    
+    bool updateTriggerArea;
 
 	bool next();
 	bool previous(); 
@@ -50,6 +52,6 @@ class Scene {
 	
 	ParticleSystemManager& particleSystemManager; 
 	
-	ofRectangle triggerArea; 
+	ofRectangle* triggerArea; 
 
 };

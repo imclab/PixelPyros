@@ -12,7 +12,7 @@ class SceneRetro : public Scene {
 
 	public :
 
-	SceneRetro (ParticleSystemManager& psm, ofRectangle triggerarea) ;
+	SceneRetro (ParticleSystemManager& psm, ofRectangle* triggerarea) ;
 
 	bool draw();
 	
