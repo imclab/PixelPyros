@@ -9,12 +9,14 @@
 
 #include "CameraManager.h"
 
-
-
-CameraManager::CameraManager() { 
+CameraManager::CameraManager() {
 	cameraFirewire		= new CameraFirewire(); 
 	cameraVidPlayer		= new CameraVidPlayer(); 
-    cameraVidGrabber	= new CameraVidGrabber(); 
+    cameraVidGrabber	= new CameraVidGrabber();
+    
+    captureInterval = 1.0f / CAPTURE_FPS;
+    capturing = false;
+    captureBase = "/tmp";
 }
 
 void CameraManager::init() { 
@@ -65,24 +67,53 @@ bool CameraManager::update() {
 //	if(camera->getShutter()!=shutter) camera->setShutter(shutter); 
 //	if(camera->getBrightness()!=brightness) camera->setBrightness(brightness); 
 	
-	return camera->update();
+	bool updateCamera = camera->update();
+    if( updateCamera && capturing ) {
+        captureFrame();
+    }
 
-
+    return updateCamera;
 }
 
 void CameraManager::draw(float x, float y) { 
-	
-	camera->draw(x, y); 
-	
+	camera->draw(x, y);
+}
+
+void CameraManager::captureFrame() {
+    if( capturing && ((ofGetElapsedTimef() - captureDelta) > captureInterval) ) {
+        ofSaveImage(camera->getPixelsRef(), getCaptureFilename());
+        
+        captureDelta = ofGetElapsedTimef();
+        framesCaptured++;
+    }
 }
 
 void CameraManager::draw(float x, float y, float w, float h){
-	
 	camera->draw(x,y,w,h);
-	
 }
 
-ofPixelsRef CameraManager::getPixelsRef() { 
+string CameraManager::getCaptureFilename() {
+    return captureBase + "/pixelpyros_" + captureTimestamp + "_" + ofToString(framesCaptured) + ".tiff";
+}
+
+void CameraManager::beginCapture() {
+    capturing = true;
+    framesCaptured = 0;
+    captureDelta = ofGetElapsedTimef();
+    captureTimestamp = ofGetTimestampString("%Y%m%d-%H%M%S");
+    
+    cout << "Capturing to " << getCaptureFilename() << " at " << CAPTURE_FPS << " FPS" << endl;
+}
+
+void CameraManager::endCapture() {
+    if( capturing ) {
+        capturing = false;
+        
+        cout << "End Capture: " << framesCaptured << " frames captured" << endl;
+    }
+}
+
+ofPixelsRef CameraManager::getPixelsRef() {
 	return camera->getPixelsRef();
 
 }
@@ -128,9 +159,10 @@ bool CameraManager:: changeCamera(string camname) {
 }
 
 bool CameraManager :: changeCamera(CameraWrapper* cam) { 
-	camera = cam; 
-	cout << "changed camera to " << camera->name << endl; 
-	return true; 
+	camera = cam;
+    capturing = false;
+	cout << "changed camera to " << camera->name << endl;
+	return true;
 }
 
 void CameraManager:: initControlPanel(ofxAutoControlPanel &gui){
@@ -180,32 +212,4 @@ void CameraManager::close() {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

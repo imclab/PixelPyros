@@ -282,7 +282,10 @@ void testApp::keyPressed(int key){
         gammaValue -= 0.05;
     } else if( key == 'G' ) {
         gammaValue += 0.05;
-        
+
+    } else if( key == 'F' ) {
+        cameraManager.beginCapture();
+
     } else if( key == 'p' ) {
         paused = !paused;
     }

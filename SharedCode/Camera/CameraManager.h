@@ -17,6 +17,8 @@
 
 #include "ofxAutoControlPanel.h"
 
+#define CAPTURE_FPS 1
+
 class CameraManager : public ofBaseDraws{ 
 	public : 
 	
@@ -45,6 +47,9 @@ class CameraManager : public ofBaseDraws{
 	
 	void initControlPanel(ofxAutoControlPanel& gui); 
 	void guiEventsIn(guiCallbackData & data);
+    
+    void beginCapture();
+    void endCapture();
 	
 	guiTypeToggle* toggleShowUSBControls;
 	guiTypeDrawable* cameraPreview; 
@@ -62,7 +67,16 @@ class CameraManager : public ofBaseDraws{
 	int shutter; 
 	int brightness;
 	
-	//vector <CameraWrapper> cameras; 
-	
-	
+    bool capturing;
+    float captureInterval;
+    unsigned long framesCaptured;
+    string captureBase;
+    string captureTimestamp;
+    
+private:
+    
+    float captureDelta;
+    
+    void captureFrame();
+    string getCaptureFilename();
 };
