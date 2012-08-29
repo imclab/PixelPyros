@@ -1,34 +1,34 @@
 <srcvec>
+    <x>221</x>
+    <y>172</y>
+</srcvec>
+<srcvec>
+    <x>1295</x>
+    <y>130</y>
+</srcvec>
+<srcvec>
+    <x>0</x>
+    <y>1030</y>
+</srcvec>
+<srcvec>
+    <x>1679</x>
+    <y>1015</y>
+</srcvec>
+<dstvec>
     <x>0</x>
     <y>0</y>
-</srcvec>
-<srcvec>
-    <x>1387</x>
-    <y>147</y>
-</srcvec>
-<srcvec>
-    <x>16</x>
-    <y>690</y>
-</srcvec>
-<srcvec>
-    <x>1493</x>
-    <y>670</y>
-</srcvec>
+</dstvec>
+<dstvec>
+    <x>1577</x>
+    <y>11</y>
+</dstvec>
 <dstvec>
     <x>0</x>
-    <y>0</y>
+    <y>1024</y>
 </dstvec>
 <dstvec>
-    <x>1527</x>
-    <y>4</y>
-</dstvec>
-<dstvec>
-    <x>1</x>
-    <y>1195</y>
-</dstvec>
-<dstvec>
-    <x>1516</x>
-    <y>1198</y>
+    <x>1679</x>
+    <y>1023</y>
 </dstvec>
 <srcWidth>640</srcWidth>
 <srcHeight>480</srcHeight>

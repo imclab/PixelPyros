@@ -215,8 +215,9 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::handleOSCMessage(ofxOscMessage msg) {
     string address = msg.getAddress().substr(0, msg.getAddress().find(":"));
-    std::cout << "OSC Message: " << address << std::endl;
+    //std::cout << "OSC Message: " << address << std::endl;
     
+    std::cout << "OSC Message: " << msg.getAddress() << std::endl;
     if( address.compare(OSC_CMD("Present")) == 0 ) {
         std::cout << "OscClient connected" << std::endl;
     }
@@ -224,13 +225,30 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
         std::cout << "OscClient disconnect" << std::endl;
     } else {
         std::vector<std::string> params = ofSplitString(address, "/");
-        if( params.size() >= 4 ) {
-            string widgetType = params[2];
-            int widgetIndex = atoi(params[3].c_str());
-            int widgetState = msg.getArgAsInt32(0);
+        int paramsLength = params.size();
+        if( paramsLength >= 2 ) {
+            string objectName = params[paramsLength-2];
+            string objectProperty = params[paramsLength-2]; 
+            float arg = msg.getArgAsFloat(0) ;
             
-            // Push buttons send 'on' (0) and 'off' (1000)
-            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
+            if ( objectName == "PrevSceneButton" )
+            {
+                if ( OSC_OFF(arg) )
+                    sceneManager.prevScene();
+            }
+            else if ( objectName == "NextSceneButton" )
+            {
+                if ( OSC_OFF(arg) )
+                    sceneManager.nextScene();
+            }
+            else if ( objectName == "TriggerShift" )
+            {
+                // we're getting multiple osc messages per frame due to physics and stuff, so thought it would be better to give update flag for this, rather than a forced redraw, don't want to hurt performance
+                setTriggerUnit(arg) ;
+                sceneManager.currentScene->updateTriggerArea = true ;
+            }
+
+/*            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
                 switch( widgetIndex ) {
                     case 1:
                         if( OSC_OFF(widgetState) ) {
@@ -256,7 +274,7 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
                         }
                         break;
                 }
-            }
+            }*/
         }
     }
 }
@@ -304,9 +322,9 @@ void testApp:: mousePressed(int x, int y, int button ) {
 
 void testApp:: setupScenes() { 
 	
-
-	ofRectangle triggerarea(APP_WIDTH*0.05 ,APP_HEIGHT*0.85,APP_WIDTH*0.9,10);
+	triggerarea = new ofRectangle (APP_WIDTH*0.05 ,0,APP_WIDTH*0.9,10);
 	
+    setTriggerUnit( 0.5f ) ;
 	
 	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
 	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
@@ -384,6 +402,13 @@ void testApp::setupControlPanel() {
 	
 	ofAddListener(gui.guiEvent, this, &testApp::eventsIn);
 	
+}
+
+void testApp::setTriggerUnit ( float val )
+{
+    triggerY = val ;
+    
+    triggerarea->y = APP_HEIGHT * ( TRIGGER_Y_TOP + ( ( TRIGGER_Y_BOTTOM - TRIGGER_Y_TOP ) * triggerY ) ) ;
 }
 
 void testApp::eventsIn(guiCallbackData & data){

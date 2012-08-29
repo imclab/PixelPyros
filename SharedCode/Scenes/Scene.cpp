@@ -11,7 +11,7 @@
 
 
 
-Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
+Scene::Scene(ParticleSystemManager & psm, ofRectangle* triggerarea) : particleSystemManager(psm) {
 	active = false; 
 	stopping = false;
 	triggerArea = triggerarea;
@@ -48,6 +48,12 @@ bool Scene :: update(float deltaTime) {
 	
 	for(int i=0; i<arrangements.size(); i++) {
 	
+        if ( updateTriggerArea ) 
+        {
+            std::cout << "updating trigger area" << std::endl;
+            updateTriggerArea = false ;
+            arrangements[i]->updateLayout(*triggerArea, arrangements[i]->minimumSpacing);
+        }
 		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		else if ((!stopping) && (i==currentArrangementIndex)) next();
@@ -104,9 +110,9 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 
 
 Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
-	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea));
+	arrangements.push_back(new Arrangement(particleSystemManager, *triggerArea));
 	//arrangements.back()->setTriggerArea(triggerArea);
-	arrangements.back()->setPattern(pattern, triggerArea, 50);
+	arrangements.back()->setPattern(pattern, *triggerArea, 50);
 	
 	
 }
