@@ -4,6 +4,15 @@
 void testApp::setup(){
 	
 	useFbo = true;
+    
+    bloomValue = 0.5;
+    gammaValue = 1.2;
+    blackPoint = 0.0;
+    whitePoint = 1.0;
+    paused = false;
+    
+    shader.load("shaders/gamma");
+    
 	ofSetFrameRate(50);
 	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
@@ -56,12 +65,6 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
-    shader.load("shaders/gamma");
-    bloomValue = 0.5;
-    gammaValue = 1.2;
-    blackPoint = 0.0;
-    whitePoint = 1.0;
-    paused = false;
 }
 
 //--------------------------------------------------------------
