@@ -9,6 +9,9 @@ void testApp::setup(){
 	
     receiver.setup(OSC_RECEIVER_PORT);
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
+    
+    cameraServer.setup(4321, false);
+    cameraServer.setMessageDelimiter("\n");
 	
 	ofBackground(0);
 
@@ -45,7 +48,7 @@ void testApp::setup(){
 	fbo.allocate(APP_WIDTH, APP_HEIGHT);
 	fbo.begin();
 	ofClear(0,0,0);
-	fbo.end(); 
+	fbo.end();
     
     shader.load("shaders/gamma");
     bloomValue = 0.5;
@@ -63,6 +66,25 @@ void testApp::update(){
         ofxOscMessage msg;
         receiver.getNextMessage(&msg);
         handleOSCMessage(msg);
+    }
+    
+    for( int i = 0; i < cameraServer.getLastID(); i++ ) {
+        if( !cameraServer.isClientConnected(i) ) {
+            continue;
+        }
+        
+        if( cameraServer.getNumReceivedBytes(i) > 0 ) {
+            std::cout << cameraServer.receive(i) << std::endl;
+        } else {
+            ofPixels pixels = cameraManager.getPixelsRef();
+            ofSaveImage(pixels, "/tmp/output.png");
+            ofBuffer buf = ofBufferFromFile("/tmp/output.png");
+            
+            string header = "HTTP/1.0 200 OK\r\nRefresh: 1; url=http://localhost:4321\r\nContent-Type: image/png\r\nContent-Length: " + ofToString(buf.size()) + "\r\n\r\n";
+            cameraServer.sendRawBytes(i, header.data(), header.length());
+            cameraServer.sendRawBytes(i, buf.getBinaryBuffer(), buf.size());
+            cameraServer.disconnectClient(i);
+        }
     }
 
 	if(cameraManager.update()){
@@ -171,11 +193,6 @@ void testApp::draw(){
             glVertex2f(0, APP_HEIGHT);
         glEnd();
         shader.end();        
-        /*
-		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		fbo.draw(0,0);
-		ofDisableBlendMode();
-        */
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);

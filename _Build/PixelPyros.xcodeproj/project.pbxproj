@@ -34,6 +34,10 @@
 		1672DAC615E8350C00BE4372 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DABE15E8350C00BE4372 /* UdpSocket.cpp */; };
 		1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */; };
 		1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */; };
+		169658A815EE77E100F6B565 /* ofxTCPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169658A015EE77E100F6B565 /* ofxTCPClient.cpp */; };
+		169658A915EE77E100F6B565 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169658A215EE77E100F6B565 /* ofxTCPManager.cpp */; };
+		169658AA15EE77E100F6B565 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169658A415EE77E100F6B565 /* ofxTCPServer.cpp */; };
+		169658AB15EE77E100F6B565 /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169658A615EE77E100F6B565 /* ofxUDPManager.cpp */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
@@ -222,6 +226,16 @@
 		1672DAC015E8350C00BE4372 /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
 		1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtilsWin.cpp; sourceTree = "<group>"; };
 		1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocketWin.cpp; sourceTree = "<group>"; };
+		1696589E15EE77E100F6B565 /* ofxNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetwork.h; sourceTree = "<group>"; };
+		1696589F15EE77E100F6B565 /* ofxNetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxNetworkUtils.h; sourceTree = "<group>"; };
+		169658A015EE77E100F6B565 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPClient.cpp; sourceTree = "<group>"; };
+		169658A115EE77E100F6B565 /* ofxTCPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPClient.h; sourceTree = "<group>"; };
+		169658A215EE77E100F6B565 /* ofxTCPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPManager.cpp; sourceTree = "<group>"; };
+		169658A315EE77E100F6B565 /* ofxTCPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPManager.h; sourceTree = "<group>"; };
+		169658A415EE77E100F6B565 /* ofxTCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTCPServer.cpp; sourceTree = "<group>"; };
+		169658A515EE77E100F6B565 /* ofxTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTCPServer.h; sourceTree = "<group>"; };
+		169658A615EE77E100F6B565 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUDPManager.cpp; sourceTree = "<group>"; };
+		169658A715EE77E100F6B565 /* ofxUDPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
 		16F6B4DD15E9893C00D826B8 /* noise.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.frag; sourceTree = "<group>"; };
 		16F6B4DE15E9893C00D826B8 /* noise.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.vert; sourceTree = "<group>"; };
 		16F6B4E515E9AC0400D826B8 /* bloom.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom.vert; sourceTree = "<group>"; };
@@ -583,6 +597,24 @@
 				1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */,
 			);
 			path = win32;
+			sourceTree = "<group>";
+		};
+		1696589D15EE77E100F6B565 /* ofxNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				1696589E15EE77E100F6B565 /* ofxNetwork.h */,
+				1696589F15EE77E100F6B565 /* ofxNetworkUtils.h */,
+				169658A015EE77E100F6B565 /* ofxTCPClient.cpp */,
+				169658A115EE77E100F6B565 /* ofxTCPClient.h */,
+				169658A215EE77E100F6B565 /* ofxTCPManager.cpp */,
+				169658A315EE77E100F6B565 /* ofxTCPManager.h */,
+				169658A415EE77E100F6B565 /* ofxTCPServer.cpp */,
+				169658A515EE77E100F6B565 /* ofxTCPServer.h */,
+				169658A615EE77E100F6B565 /* ofxUDPManager.cpp */,
+				169658A715EE77E100F6B565 /* ofxUDPManager.h */,
+			);
+			name = ofxNetwork;
+			path = ../../../addons/ofxNetwork/src;
 			sourceTree = "<group>";
 		};
 		16F6B4DC15E9893C00D826B8 /* Shaders */ = {
@@ -988,6 +1020,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				1696589D15EE77E100F6B565 /* ofxNetwork */,
 				1672DAA515E834DD00BE4372 /* ofxOsc */,
 				9697509615DA509100707C61 /* ofxControlPanel */,
 				96CB3CC315D3B646004B6502 /* ofxCv */,
@@ -1240,6 +1273,10 @@
 				12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */,
 				12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */,
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
+				169658A815EE77E100F6B565 /* ofxTCPClient.cpp in Sources */,
+				169658A915EE77E100F6B565 /* ofxTCPManager.cpp in Sources */,
+				169658AA15EE77E100F6B565 /* ofxTCPServer.cpp in Sources */,
+				169658AB15EE77E100F6B565 /* ofxUDPManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1340,6 +1377,7 @@
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
+					../../../addons/ofxNetwork/src/,
 				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1443,6 +1481,7 @@
 					../../../addons/ofxOsc/src,
 					../../../addons/ofxOsc/libs/oscpack/src/osc/,
 					../../../addons/ofxOsc/libs/oscpack/src/,
+					../../../addons/ofxNetwork/src/,
 				);
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";

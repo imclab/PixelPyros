@@ -27,14 +27,15 @@
 #include "ofxOsc.h"
 #include <string.h>
 
+
 #define OSC_NAMESPACE string("/mrmr")
 #define OSC_CMD(x) (OSC_NAMESPACE + x)
 #define OSC_OFF(x) (x == 0)
 #define OSC_ON(x) (x == 1000)
 
 #include "ofShader.h"
-
 #include "TextWriter.h"
+#include "ofxTCPServer.h"
 
 class testApp : public ofBaseApp{
 	
@@ -79,6 +80,8 @@ private:
     
     static const int OSC_RECEIVER_PORT = 1234;
     ofxOscReceiver receiver;
+    
+    ofxTCPServer cameraServer;
 	
     ofShader shader;
     TextWriter textWriter;
