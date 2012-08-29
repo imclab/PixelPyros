@@ -51,6 +51,17 @@ class LifeCycle {
 			
 	}
 	
+	void end() {
+		elapsedTime = delay+lifeTime;
+	}
+	void resetElapsedTime() {
+		unitLifeProgress = 0;
+		elapsedTimeActual = 0;
+		elapsedTime = 0; 
+		
+	}
+	
+	
 	bool active; 
 	float lifeTime; 
 	float elapsedTime; 

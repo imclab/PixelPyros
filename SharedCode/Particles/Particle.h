@@ -30,7 +30,9 @@ class Particle : public PhysicsObject{
 	float sizeEnd; 
 	float shimmerMin; 
 	
-	bool	enabled; 
+	bool	enabled;
+	
+	float renderDelay; 
 	
 	
 	ColourModifier * colourModifier;
