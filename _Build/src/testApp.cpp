@@ -234,19 +234,18 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
             if ( objectName == "PrevSceneButton" )
             {
                 if ( OSC_OFF(arg) )
-                    prevScene() ;
+                    sceneManager.prevScene();
             }
             else if ( objectName == "NextSceneButton" )
             {
                 if ( OSC_OFF(arg) )
-                    nextScene() ;
+                    sceneManager.nextScene();
             }
             else if ( objectName == "TriggerShift" )
             {
                 // we're getting multiple osc messages per frame due to physics and stuff, so thought it would be better to give update flag for this, rather than a forced redraw, don't want to hurt performance
                 setTriggerUnit(arg) ;
-                scenes[currentSceneIndex]->updateTriggerArea = true ;
-                
+                sceneManager.currentScene->updateTriggerArea = true ;
             }
 
 /*            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
