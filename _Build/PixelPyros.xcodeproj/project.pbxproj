@@ -19,6 +19,8 @@
 		16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4E515E9AC0400D826B8 /* bloom.vert */; };
 		16252DB015EAE8810074106D /* bloom.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16F6B4E715E9AC1500D826B8 /* bloom.frag */; };
 		16252DB415EAEE650074106D /* TextWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16252DB315EAEE650074106D /* TextWriter.cpp */; };
+		16417B6115ED9D9A00209EC4 /* gamma.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16417B5D15ED9D6F00209EC4 /* gamma.vert */; };
+		16417B6215ED9D9A00209EC4 /* gamma.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 16417B5F15ED9D7600209EC4 /* gamma.frag */; };
 		1672DAA115E8346C00BE4372 /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9915E8346C00BE4372 /* ofxOscBundle.cpp */; };
 		1672DAA215E8346C00BE4372 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9B15E8346C00BE4372 /* ofxOscMessage.cpp */; };
 		1672DAA315E8346C00BE4372 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DA9D15E8346C00BE4372 /* ofxOscReceiver.cpp */; };
@@ -128,6 +130,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				16417B6115ED9D9A00209EC4 /* gamma.vert in CopyFiles */,
+				16417B6215ED9D9A00209EC4 /* gamma.frag in CopyFiles */,
 				16252DAD15EAE8810074106D /* noise.frag in CopyFiles */,
 				16252DAE15EAE8810074106D /* noise.vert in CopyFiles */,
 				16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */,
@@ -184,6 +188,8 @@
 		16252DB315EAEE650074106D /* TextWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextWriter.cpp; sourceTree = "<group>"; };
 		16252DB515EB04400074106D /* Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Letter.h; sourceTree = "<group>"; };
 		16252DB615EB06100074106D /* VectorFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorFont.h; sourceTree = "<group>"; };
+		16417B5D15ED9D6F00209EC4 /* gamma.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gamma.vert; sourceTree = "<group>"; };
+		16417B5F15ED9D7600209EC4 /* gamma.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gamma.frag; sourceTree = "<group>"; };
 		1672DA9715E8346C00BE4372 /* ofxOsc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
 		1672DA9815E8346C00BE4372 /* ofxOscArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscArg.h; sourceTree = "<group>"; };
 		1672DA9915E8346C00BE4372 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscBundle.cpp; sourceTree = "<group>"; };
@@ -586,6 +592,8 @@
 				16F6B4DE15E9893C00D826B8 /* noise.vert */,
 				16F6B4E515E9AC0400D826B8 /* bloom.vert */,
 				16F6B4E715E9AC1500D826B8 /* bloom.frag */,
+				16417B5D15ED9D6F00209EC4 /* gamma.vert */,
+				16417B5F15ED9D7600209EC4 /* gamma.frag */,
 			);
 			name = Shaders;
 			path = bin/data/shaders;
