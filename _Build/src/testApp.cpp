@@ -49,7 +49,9 @@ void testApp::setup(){
     
     shader.load("shaders/gamma");
     bloomValue = 3;
-    gammaValue = 1.0;
+    gammaValue = 1.2;
+    blackPoint = 0.1;
+    whitePoint = 0.5;
     paused = false;
 }
 
@@ -143,7 +145,6 @@ void testApp::draw(){
 	}
 
 	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,"); 
-    textWriter.draw(ofRectangle(APP_WIDTH - 100, 0, 100, 50), "Gamma " + ofToString(gammaValue));
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
@@ -155,6 +156,8 @@ void testApp::draw(){
         shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
         // shader.setUniform1f("bloom", bloomValue);
         shader.setUniform1f("gamma", gammaValue);
+        shader.setUniform1f("blackPoint", blackPoint);
+        shader.setUniform1f("whitePoint", whitePoint);
         glBegin(GL_QUADS);
             glTexCoord2f(0, 0);
             glVertex2f(0, 0);
@@ -180,6 +183,11 @@ void testApp::draw(){
 	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
+    
+	ofDrawBitmapString("L: " + ofToString(blackPoint),20,150);
+	ofDrawBitmapString("H: " + ofToString(whitePoint),20,165);
+	ofDrawBitmapString("G: " + ofToString(gammaValue),20,180);
+    
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
 	
@@ -259,22 +267,25 @@ void testApp::keyPressed(int key){
 			sceneManager.nextArrangement();
 	} else if(key=='c') {
 		cameraManager.next(); 
-	} else if(key=='w') { 
-		cameraManager.toggleWarperGui(); 
-	} else if( key == 'b' ) {
-        //bloomValue = bloomValue>0 ? 0 : scenes[currentSceneIndex]->bloomLevel;
+	} else if(key=='w') {
+		cameraManager.toggleWarperGui();
+        
+	} else if( key == 'l' ) {
+        blackPoint -= 0.05;
+	} else if( key == 'L' ) {
+        blackPoint += 0.05;
+	} else if( key == 'h' ) {
+        whitePoint -= 0.05;
+	} else if( key == 'H' ) {
+        whitePoint += 0.05;
+    } else if( key == 'g' ) {
+        gammaValue -= 0.05;
+    } else if( key == 'G' ) {
+        gammaValue += 0.05;
+        
     } else if( key == 'p' ) {
         paused = !paused;
-    } else if( key == 'g' ) {
-        // gammaValue = MAX(gammaValue - 0.1, 0.0);
-        gammaValue -= 0.1;
-    } else if( key == 'G' ) {
-        // gammaValue = MIN(gammaValue + 0.1, 1.0);
-        gammaValue += 0.1;
-    } else if( key == 'p' ) {
-            paused = !paused;
-        }
-
+    }
 }
 //
 //void testApp:keyReleased(int key){

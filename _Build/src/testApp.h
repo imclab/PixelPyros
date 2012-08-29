@@ -84,6 +84,8 @@ private:
     TextWriter textWriter;
     float bloomValue;
     float gammaValue;
+    float blackPoint;
+    float whitePoint;
     
     bool paused;
 };
