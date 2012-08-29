@@ -156,7 +156,7 @@ void testApp::draw(){
 		
 	}
 
-	textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
+	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
@@ -300,7 +300,7 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') {
 		cameraManager.toggleWarperGui();
         
-    } else if( key == 'F' ) {
+    } else if( key == 'r' ) {
         cameraManager.beginCapture();
 
     } else if( key == 'p' ) {

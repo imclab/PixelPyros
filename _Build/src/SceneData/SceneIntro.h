@@ -2,7 +2,9 @@
 #pragma once 
 
 #include "Scene.h"
-#include "ParticleRendererShape.h"
+#include "ParticleRendererGlitchLine.h"
+
+#include "ParticleRendererLine.h"
 #include "RocketBasic.h"
 #include "ParticleSystemManager.h"
 #include "ofMain.h"
@@ -14,7 +16,7 @@ class SceneIntro : public Scene {
 	
 	SceneIntro (ParticleSystemManager& psm, ofRectangle* triggerarea) ;
 	
-
+	ParticleSystemSettings getSmoke();
 	
 	ofMesh letterMesh;
 
