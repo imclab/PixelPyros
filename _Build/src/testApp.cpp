@@ -300,11 +300,6 @@ void testApp::keyPressed(int key){
 	} else if(key=='w') {
 		cameraManager.toggleWarperGui();
         
-    } else if( key == 'b' ) {
-        bloomValue -= 0.05;
-    } else if( key == 'B' ) {
-        bloomValue += 0.05;
-
     } else if( key == 'F' ) {
         cameraManager.beginCapture();
 
@@ -393,6 +388,7 @@ void testApp::setupControlPanel() {
 	gui.addSlider("Black Point", "SHADER_BLACK", blackPoint, 0, 1.0, false)->setDimensions(400, 10);
 	gui.addSlider("Gamma", "SHADER_GAMMA", gammaValue, 0, 10.0, false)->setDimensions(400, 10);
 	gui.addSlider("White Point", "SHADER_WHITE", whitePoint, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Bloom", "SHADER_BLOOM", bloomValue, 0, 10.0, false)->setDimensions(400, 10);
     
 	gui.addPanel("Motion");
 	
@@ -423,6 +419,9 @@ void testApp::eventsIn(guiCallbackData & data){
     }
 	else if( data.getXmlName() == "SHADER_GAMMA" ) {
         gammaValue = data.getFloat(0);
+    }
+	else if( data.getXmlName() == "SHADER_BLOOM" ) {
+        bloomValue = data.getFloat(0);
     }
 }
 
