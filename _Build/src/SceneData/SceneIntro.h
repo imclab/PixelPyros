@@ -6,6 +6,7 @@
 #include "RocketBasic.h"
 #include "ParticleSystemManager.h"
 #include "ofMain.h"
+#include "TextWriter.h"
 
 class SceneIntro : public Scene {
 	
@@ -15,7 +16,7 @@ class SceneIntro : public Scene {
 	
 
 	
-	ofMesh textLines; 
+	ofMesh letterMesh;
 
 
 
