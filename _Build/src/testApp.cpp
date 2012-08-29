@@ -48,7 +48,7 @@ void testApp::setup(){
 	fbo.end(); 
     
     shader.load("shaders/gamma");
-    bloomValue = 3;
+    bloomValue = 0.5;
     gammaValue = 1.2;
     blackPoint = 0.1;
     whitePoint = 0.5;
@@ -149,12 +149,11 @@ void testApp::draw(){
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	
 	if(useFbo) {
-
 		fbo.end();
         
         shader.begin();
         shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
-        // shader.setUniform1f("bloom", bloomValue);
+        shader.setUniform1f("bloom", bloomValue);
         shader.setUniform1f("gamma", gammaValue);
         shader.setUniform1f("blackPoint", blackPoint);
         shader.setUniform1f("whitePoint", whitePoint);
@@ -187,6 +186,7 @@ void testApp::draw(){
 	ofDrawBitmapString("L: " + ofToString(blackPoint),20,150);
 	ofDrawBitmapString("H: " + ofToString(whitePoint),20,165);
 	ofDrawBitmapString("G: " + ofToString(gammaValue),20,180);
+	ofDrawBitmapString("Bloom: " + ofToString(bloomValue),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -282,6 +282,11 @@ void testApp::keyPressed(int key){
         gammaValue -= 0.05;
     } else if( key == 'G' ) {
         gammaValue += 0.05;
+    } else if( key == 'b' ) {
+        bloomValue -= 0.05;
+    } else if( key == 'B' ) {
+        bloomValue += 0.05;
+    
 
     } else if( key == 'F' ) {
         cameraManager.beginCapture();
