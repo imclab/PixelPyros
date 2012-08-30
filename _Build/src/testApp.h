@@ -23,7 +23,7 @@
 #include "ScenePatternTest.h"
 #include "SceneRealistic.h"
 #include "SceneCalibration.h"
-#include "ofxQuadWarper.h"
+#include "SceneSlideshow.h"
 
 #include "QuadWarp.h"
 
@@ -81,8 +81,6 @@ public:
 	
 	QuadWarp fboWarper1;
 	QuadWarp fboWarper2;
-	
-	ofxQuadWarper warper; 
 	
 	ofImage testImage; 
 	vector <ofVec3f> fboWarpPoints1;

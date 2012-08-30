@@ -21,7 +21,7 @@ Warper :: Warper() {
 	dstPreviewScale = 0.2;
 	
 	autoSave =true;
-	verbose = false; 
+	verbose = false;	
 	
 };
 

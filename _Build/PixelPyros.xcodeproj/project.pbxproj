@@ -11,7 +11,6 @@
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
 		121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121DB79615EEA6C800F99300 /* SceneIntro.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
-		121F52FE15EFE9AE00450DBC /* ofxQuadWarper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 129F267215EC0694005DBFAA /* SceneManager.cpp */; };
 		12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12B1576015EF681C00A457C0 /* QuadWarp.cpp */; };
@@ -37,6 +36,7 @@
 		1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */; };
 		1695AFF615EF06DA00863FF5 /* default.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1695AFF215EF06B500863FF5 /* default.frag */; };
 		1695AFF715EF06DA00863FF5 /* default.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1695AFF315EF06B500863FF5 /* default.vert */; };
+		1695B00D15EFAD2A00863FF5 /* SceneSlideshow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1695B00C15EFAD2A00863FF5 /* SceneSlideshow.cpp */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
@@ -163,9 +163,6 @@
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
-		121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxQuadWarper.cpp; sourceTree = "<group>"; };
-		121F52FD15EFE9AE00450DBC /* ofxQuadWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQuadWarper.h; sourceTree = "<group>"; };
-		121F52FF15EFEF3900450DBC /* matrix_funcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_funcs.h; sourceTree = "<group>"; };
 		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
 		126119DC15E4330000DD04DD /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
 		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
@@ -234,6 +231,9 @@
 		1695AFF215EF06B500863FF5 /* default.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.frag; sourceTree = "<group>"; };
 		1695AFF315EF06B500863FF5 /* default.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vert; sourceTree = "<group>"; };
 		1695AFF815EF09CB00863FF5 /* RetroShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RetroShader.h; sourceTree = "<group>"; };
+		1695B00B15EFA84700863FF5 /* SceneSlideshow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneSlideshow.h; sourceTree = "<group>"; };
+		1695B00C15EFAD2A00863FF5 /* SceneSlideshow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSlideshow.cpp; sourceTree = "<group>"; };
+		1695B00E15EFB02E00863FF5 /* SlideShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideShow.h; path = ../SlideShow.h; sourceTree = "<group>"; };
 		16F6B4DD15E9893C00D826B8 /* noise.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.frag; sourceTree = "<group>"; };
 		16F6B4DE15E9893C00D826B8 /* noise.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.vert; sourceTree = "<group>"; };
 		16F6B4E515E9AC0400D826B8 /* bloom.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom.vert; sourceTree = "<group>"; };
@@ -690,6 +690,7 @@
 		967E720515D3B206008D7EF3 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1695B00E15EFB02E00863FF5 /* SlideShow.h */,
 				129F267215EC0694005DBFAA /* SceneManager.cpp */,
 				129F267115EC04D3005DBFAA /* SceneManager.h */,
 				1285CE4915E2616900019B65 /* Arrangement.h */,
@@ -698,6 +699,8 @@
 				967E720715D3B206008D7EF3 /* Scene.h */,
 				1285CE4715E25AA300019B65 /* TriggerPattern.h */,
 				968E4DE315DD104800D91D6E /* SceneCalibration.h */,
+				1695B00B15EFA84700863FF5 /* SceneSlideshow.h */,
+				1695B00C15EFAD2A00863FF5 /* SceneSlideshow.cpp */,
 			);
 			name = Scenes;
 			path = ../../SharedCode/Scenes;
@@ -996,9 +999,6 @@
 		969989AD15D3BA1F00647A18 /* Homography */ = {
 			isa = PBXGroup;
 			children = (
-				121F52FF15EFEF3900450DBC /* matrix_funcs.h */,
-				121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */,
-				121F52FD15EFE9AE00450DBC /* ofxQuadWarper.h */,
 				969989AE15D3BA1F00647A18 /* Warper.cpp */,
 				969989AF15D3BA1F00647A18 /* Warper.h */,
 				12B1575F15EF67C100A457C0 /* QuadWarp.h */,
@@ -1271,7 +1271,7 @@
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
 				121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */,
 				12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */,
-				121F52FE15EFE9AE00450DBC /* ofxQuadWarper.cpp in Sources */,
+				1695B00D15EFAD2A00863FF5 /* SceneSlideshow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
