@@ -22,7 +22,10 @@
 #include "SceneRetro.h"
 #include "ScenePatternTest.h"
 #include "SceneRealistic.h"
-#include "SceneTest.h"
+#include "SceneCalibration.h"
+
+#include "QuadWarp.h"
+
 #include "glut/glut.h"
 
 #include "ofxOsc.h"
@@ -41,7 +44,7 @@ class testApp : public ofBaseApp{
 	
 public:
 	
-	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager) {
+	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager), fboWarper1(fboWarpPoints1), fboWarper2(fboWarpPoints2) {
 	};
 	
 	void setup();
@@ -73,7 +76,13 @@ public:
 	
 	ofxAutoControlPanel gui; 
 	
-	float lastUpdateTime; 
+	float lastUpdateTime;
+	
+	QuadWarp fboWarper1;
+	QuadWarp fboWarper2;
+	vector <ofVec3f> fboWarpPoints1;
+	vector <ofVec3f> fboWarpPoints2;
+	
     
 private:
     

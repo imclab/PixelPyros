@@ -1,6 +1,6 @@
 //
 //  ParticleSystemManager.h
-//  SceneTest
+//  SceneCalibration
 //
 //  Created by Seb Lee-Delisle on 03/08/2012.
 //  Copyright (c) 2012 seb.ly. All rights reserved.

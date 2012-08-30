@@ -290,7 +290,10 @@ bool Warper :: hitTestPoints ( vector<ofVec2f>& points, ofVec2f& point) {
 	for(int i = 0; i < points.size(); i++) {
 		if(points[i].distance(point) < 40) {
 			movingPoint = true;
+			
 			curPoint = &points[i];
+			clickOffset.set(curPoint->x  - point.x, curPoint->y - point.y);
+			dragStartPoint = point;
 			return true;
 		}
 	}
@@ -343,7 +346,13 @@ void Warper :: mouseDragged(ofMouseEventArgs &e) {
 	
 	if(movingPoint) { 
 
-		curPoint->set(e.x, e.y); 
+		ofVec2f diff(e.x, e.y);
+		diff-=dragStartPoint;
+		diff*=0.3; 
+		
+		
+		*curPoint = dragStartPoint+diff+clickOffset;
+		//*curPoint+=clickOffset;
 	
 		changed = true;
 	

@@ -4,7 +4,15 @@
 void testApp::setup(){
 	
 	useFbo = true;
-    
+	fboWarpPoints1.push_back(ofVec2f(0,0));
+	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,0));
+	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,APP_HEIGHT));
+	fboWarpPoints1.push_back(ofVec2f(0,APP_HEIGHT));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,0));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,0));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,APP_HEIGHT));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,APP_HEIGHT));
+  
     paused = false;
     
     SceneShader *defaultShader = new SceneShader();
@@ -23,12 +31,10 @@ void testApp::setup(){
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
 	
-	
 	cameraManager.init();
 	//cameraManager.shutter = 35; 
 	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight()); 
-	
-	
+		
 	setupControlPanel();
 	
 	soundPlayer.defaultPath = "../../../Sounds/";
@@ -48,8 +54,8 @@ void testApp::setup(){
 	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
 	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
 	
-	soundPlayer.addSound("Banger", "Banger", 1.2, 0.4, 0.0, "wav", 0.2);
-	soundPlayer.addSound("Crackle", "Crackle", 0.15, 0.8, 0.3, "wav", 0.2);
+	soundPlayer.addSound("Banger", "Banger", 1.0, 0.4, 0.0, "wav", 0.2);
+	soundPlayer.addSound("Crackle", "Crackle", 0.1, 0.8, 0.3, "wav", 0.2);
 	
 	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
 	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
@@ -160,7 +166,7 @@ void testApp::draw(){
         
         SceneShader *sceneShader = sceneManager.getSceneShader();
         updateGUI(sceneShader);
-        sceneShader->draw(fbo);
+        sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
         
         /*
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
@@ -189,6 +195,10 @@ void testApp::draw(){
     //ofNoFill();
     //ofRect(0,0,768*2,1024);
 	ofFill();
+	
+	fboWarper1.draw();
+	fboWarper2.draw();
+	
     
     
     
@@ -264,22 +274,27 @@ void testApp::handleOSCMessage(ofxOscMessage msg) {
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
-	if(key==OF_KEY_LEFT) {
-		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			sceneManager.prevScene();
-		else
-			sceneManager.previousArrangement();
-	} else if(key==OF_KEY_RIGHT) { 
-		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			sceneManager.nextScene();
-		else
-			sceneManager.nextArrangement();
-	} else if(key=='c') {
-		cameraManager.next(); 
-	} else if(key=='w') {
+	if(key=='w') {
 		cameraManager.toggleWarperGui();
         
-    } else if( key == 'r' ) {
+    }
+	if(!cameraManager.warper.guiVisible) {
+			
+		if(key==OF_KEY_LEFT) {
+			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+				sceneManager.prevScene();
+			else
+				sceneManager.previousArrangement();
+		} else if(key==OF_KEY_RIGHT) { 
+			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+				sceneManager.nextScene();
+			else
+				sceneManager.nextArrangement();
+		}
+		
+	} else if(key=='c') {
+		cameraManager.next(); 
+	} else if( key == 'r' ) {
         cameraManager.beginCapture();
 
     } else if( key == 'p' ) {
@@ -299,11 +314,11 @@ void testApp:: mousePressed(int x, int y, int button ) {
 
 void testApp:: setupScenes() { 
 	
-	triggerarea = new ofRectangle (APP_WIDTH*0.05 ,0,APP_WIDTH*0.9,10);
+	triggerarea = new ofRectangle (APP_WIDTH/12*1.5 ,0,APP_WIDTH*4.5/6,10);
 	
     setTriggerUnit( 0.5f ) ;
 	
-	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerarea));
 	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
