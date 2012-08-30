@@ -80,6 +80,8 @@ public:
 	
 	QuadWarp fboWarper1;
 	QuadWarp fboWarper2;
+	
+	ofImage testImage; 
 	vector <ofVec3f> fboWarpPoints1;
 	vector <ofVec3f> fboWarpPoints2;
 	

@@ -12,7 +12,9 @@ using namespace ofxCv;
 using namespace cv; 
 MotionManager :: MotionManager(int w, int h){ 
 
-	init(w, h);  
+	init(w, h);
+	
+	motionSensitivity = 1;
 
 };
 
@@ -118,7 +120,7 @@ float MotionManager :: getMotionAtPosition(ofVec2f topleft, ofVec2f bottomright)
 	
 	Scalar avg = mean(diffRoi);
 	ofColor avgColor(avg[0]);
-	return avgColor.getBrightness(); 
+	return avgColor.getBrightness() * motionSensitivity;
 	
 };
 
