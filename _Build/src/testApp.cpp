@@ -160,13 +160,22 @@ void testApp::draw(){
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 	ofSetColor(255);
 
+	warper.setPoint(0, fboWarpPoints1[0]);
+	warper.setPoint(1, fboWarpPoints1[1]);
+	warper.setPoint(2, fboWarpPoints1[2]);
+	warper.setPoint(3, fboWarpPoints1[3]);
+	
+	
+	
 	if(useFbo) {
 		fbo.end();
         
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
+		ofPushMatrix();
+		warper.apply(fbo.getWidth()/2, fbo.getHeight());
 		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
-	        
+		ofPopMatrix();
 		//ofEnableBlendMode(OF_BLENDMODE_ADD);
 		
 //		ofMesh mesh;

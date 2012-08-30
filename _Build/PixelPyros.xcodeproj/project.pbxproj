@@ -11,6 +11,7 @@
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
 		121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121DB79615EEA6C800F99300 /* SceneIntro.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
+		121F52FE15EFE9AE00450DBC /* ofxQuadWarper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 129F267215EC0694005DBFAA /* SceneManager.cpp */; };
 		12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12B1576015EF681C00A457C0 /* QuadWarp.cpp */; };
@@ -162,6 +163,9 @@
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
+		121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxQuadWarper.cpp; sourceTree = "<group>"; };
+		121F52FD15EFE9AE00450DBC /* ofxQuadWarper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQuadWarper.h; sourceTree = "<group>"; };
+		121F52FF15EFEF3900450DBC /* matrix_funcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_funcs.h; sourceTree = "<group>"; };
 		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
 		126119DC15E4330000DD04DD /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
 		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
@@ -992,6 +996,9 @@
 		969989AD15D3BA1F00647A18 /* Homography */ = {
 			isa = PBXGroup;
 			children = (
+				121F52FF15EFEF3900450DBC /* matrix_funcs.h */,
+				121F52FC15EFE9AE00450DBC /* ofxQuadWarper.cpp */,
+				121F52FD15EFE9AE00450DBC /* ofxQuadWarper.h */,
 				969989AE15D3BA1F00647A18 /* Warper.cpp */,
 				969989AF15D3BA1F00647A18 /* Warper.h */,
 				12B1575F15EF67C100A457C0 /* QuadWarp.h */,
@@ -1264,6 +1271,7 @@
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
 				121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */,
 				12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */,
+				121F52FE15EFE9AE00450DBC /* ofxQuadWarper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
