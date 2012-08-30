@@ -115,14 +115,15 @@ void testApp::draw(){
 		fbo.begin();
 		
 
-//		FOR TRAILS :
+		//FOR TRAILS :
 //		ofEnableAlphaBlending();
 //		ofSetColor(0, 100);
 //		ofRect(0,0,APP_WIDTH,APP_HEIGHT);
 //		ofDisableAlphaBlending();
-//		
-		ofClear(0);
-		//ofSetColor(255);
+//		ofSetColor(255);
+		
+//		ofClear(0);
+	
         
 	}
 	ofPushMatrix();
@@ -160,12 +161,6 @@ void testApp::draw(){
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 
 	ofSetColor(255);
-
-	warper.setPoint(0, fboWarpPoints1[0]);
-	warper.setPoint(1, fboWarpPoints1[1]);
-	warper.setPoint(2, fboWarpPoints1[2]);
-	warper.setPoint(3, fboWarpPoints1[3]);
-	
 	
 	
 	if(useFbo) {
@@ -173,42 +168,8 @@ void testApp::draw(){
         
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
-		ofPushMatrix();
-		warper.apply(fbo.getWidth()/2, fbo.getHeight());
-		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
-		ofPopMatrix();
-		//ofEnableBlendMode(OF_BLENDMODE_ADD);
-		
-//		ofMesh mesh;
-//		float hw = APP_WIDTH/2;
-//		
-//		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-//		
-//		mesh.addVertex(fboWarpPoints1[0]);
-//		mesh.addTexCoord(ofVec2f(0,0));
-//		
-//		mesh.addVertex(fboWarpPoints1[1]);
-//		mesh.addTexCoord(ofVec2f(hw,0)); 
-//		
-//		mesh.addVertex(fboWarpPoints1[2]);
-//		mesh.addTexCoord(ofVec2f(hw,APP_HEIGHT));
-//		
-//		mesh.addVertex(fboWarpPoints1[3]);
-//		mesh.addTexCoord(ofVec2f(0,APP_HEIGHT));
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		
-//		mesh.addTriangle(0,1,2);
-//		mesh.addTriangle(0,2,3);
-//		
-//		fbo.getTextureReference().bind();
-//		mesh.draw();
-//		fbo.getTextureReference().unbind();
-		//fbo.draw(0,0);
-		//ofDisableBlendMode();
-        
+		sceneShader->draw(fbo, fboWarper1, fboWarper2);
+		        
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -216,10 +177,10 @@ void testApp::draw(){
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
     
-	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
-	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
-	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
-	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
+//	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
+//	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
+//	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
+//	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -354,10 +315,11 @@ void testApp:: setupScenes() {
 	
     setTriggerUnit( 0.5f ) ;
 	
-    sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerarea));
-	
+  
 	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
+	
+	sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerarea));
+	
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
@@ -367,6 +329,8 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneTron(particleSystemManager, triggerarea));
 	
 	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
+	
 }
 
 

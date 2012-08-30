@@ -26,6 +26,7 @@
 #include "SceneSlideshow.h"
 
 #include "QuadWarp.h"
+//#include "ofxQuadWarper.h"
 
 #include "glut/glut.h"
 
@@ -85,6 +86,7 @@ public:
 	ofImage testImage; 
 	vector <ofVec3f> fboWarpPoints1;
 	vector <ofVec3f> fboWarpPoints2;
+	//ofxQuadWarper warper;
 	
     
 private:
