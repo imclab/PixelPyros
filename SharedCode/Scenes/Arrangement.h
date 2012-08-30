@@ -32,6 +32,7 @@ class Arrangement {
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
 	
 	
+	virtual void updateDebug(bool debug); 
 	virtual void updateLayout(ofRectangle& triggerarea, float minSpacing); 
 	virtual void setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing);
 	

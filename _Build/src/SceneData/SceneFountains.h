@@ -17,7 +17,7 @@ class SceneFountains : public Scene {
 	
 	public :
 	
-	SceneFountains(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea){
+	SceneFountains(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
 		TriggerRocket trigger(psm);
 		

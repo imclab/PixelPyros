@@ -13,10 +13,10 @@
 #include "RocketSettings.h"
 #include "ParticleSystemManager.h"
 
-#include "TriggerSimple.h"
+#include "TriggerTest.h"
 
 //template <typename Derived>
-class TriggerRocket : public TriggerSimple {
+class TriggerRocket : public TriggerTest {
 
 	public : 
 	

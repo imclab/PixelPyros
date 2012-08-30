@@ -44,7 +44,7 @@ class TriggerBase {
 	
 	bool active;
 	bool stopping;
-	
+	bool drawTest;
 	
 	// to create a trigger that is one shot, set restoreSpeed
 	// to 0. 
