@@ -13,7 +13,7 @@
 #include "MotionManager.h"
 #include "ofxCV.h"
 
-
+#include "SceneShader.h"
 
 class Scene { 
 
@@ -21,6 +21,7 @@ class Scene {
 	public : 
 	
 	Scene(ParticleSystemManager& psm, ofRectangle* triggerarea);
+	Scene(ParticleSystemManager& psm, ofRectangle* triggerarea, SceneShader *);
 	
 	virtual void start();
 	virtual void stop();
@@ -29,6 +30,8 @@ class Scene {
 	virtual bool draw();
 	
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
+    virtual void initShaderParameters();
+    SceneShader *getShader();
 	
 	bool startArrangement(int num);
 	
@@ -44,7 +47,7 @@ class Scene {
 	bool active; 
 	bool stopping;
 	
-	float bloomLevel; 
+    SceneShader *shader;
 	
 	vector <Arrangement*> arrangements;
 	int currentArrangementIndex;
@@ -53,5 +56,8 @@ class Scene {
 	ParticleSystemManager& particleSystemManager; 
 	
 	ofRectangle* triggerArea; 
-
+    
+private:
+        
+    void init(ofRectangle *triggerarea);
 };

@@ -35,9 +35,6 @@ SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle* trigge
 	pattern.addTrigger(triggerBanger);
 
 	addArrangement(pattern);
-
-	bloomLevel = 4;
-
 }
 
 
@@ -478,4 +475,5 @@ ParticleSystemSettings SceneRealistic:: getSmoke() {
 	
 	
 }
+
 

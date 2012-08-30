@@ -23,8 +23,6 @@ class SceneTron : public Scene {
 	
 	SceneTron (ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea){
 		
-		bloomLevel = 2;
-		
 		RocketTron rocketTron;
 		
 		rocketTron.addParticleSystems();
@@ -188,6 +186,11 @@ class SceneTron : public Scene {
 		
 	}
 	
+    void initShaderParameters() {
+        Scene::initShaderParameters();
+        shader->bloomValue = 2.0;
+    }
+
 	StretchyNet stretchyNet; 
 	ParticleRendererSquare renderer;
 	

@@ -21,8 +21,6 @@ class SceneSpace : public Scene {
 	
 	SceneSpace(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea){
 		
-		bloomLevel = 4;
-
 		TriggerRocket planetTrigger(particleSystemManager);
 		
 		planetTrigger.addRocketSettings(getPlanetRocket());
@@ -367,6 +365,11 @@ class SceneSpace : public Scene {
 		
 	}
 		
+    void initShaderParameters() {
+        Scene::initShaderParameters();
+        shader->bloomValue = 4.0;
+    }
+
 	
 	ParticleRendererShape* renderer;
 	

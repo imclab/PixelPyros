@@ -5,13 +5,11 @@ void testApp::setup(){
 	
 	useFbo = true;
     
-    bloomValue = 0.5;
-    gammaValue = 1.2;
-    blackPoint = 0.0;
-    whitePoint = 1.0;
     paused = false;
     
-    shader.load("shaders/gamma");
+    SceneShader *defaultShader = new SceneShader();
+    defaultShader->load("shaders/default");
+    sceneManager.setDefaultShader(defaultShader);
     
 	ofSetFrameRate(50);
 	ofSetVerticalSync(true);
@@ -87,9 +85,6 @@ void testApp::update(){
 		
 	}
 	
-	// HORRIBLE.
-	//bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
-	
 	float time = ofGetElapsedTimef(); 
 	float deltaTime =  time - lastUpdateTime;
 
@@ -163,26 +158,10 @@ void testApp::draw(){
 	if(useFbo) {
 		fbo.end();
         
-        shader.begin();
-        shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
-        shader.setUniform1f("bloom", bloomValue);
-        shader.setUniform1f("gamma", gammaValue);
-        shader.setUniform1f("blackPoint", blackPoint);
-        shader.setUniform1f("whitePoint", whitePoint);
-        glBegin(GL_QUADS);
-            glTexCoord2f(0, 0);
-            glVertex2f(0, 0);
-            
-            glTexCoord2f(APP_WIDTH, 0);
-            glVertex2f(APP_WIDTH, 0);
-            
-            glTexCoord2f(APP_WIDTH, APP_HEIGHT);
-            glVertex2f(APP_WIDTH, APP_HEIGHT);
-            
-            glTexCoord2f(0, APP_HEIGHT);
-            glVertex2f(0, APP_HEIGHT);
-        glEnd();
-        shader.end();        
+        SceneShader *sceneShader = sceneManager.getSceneShader();
+        updateGUI(sceneShader);
+        sceneShader->draw(fbo);
+        
         /*
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		fbo.draw(0,0);
@@ -195,10 +174,10 @@ void testApp::draw(){
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
     
-	ofDrawBitmapString("L: " + ofToString(blackPoint),20,150);
-	ofDrawBitmapString("H: " + ofToString(whitePoint),20,165);
-	ofDrawBitmapString("G: " + ofToString(gammaValue),20,180);
-	ofDrawBitmapString("Bloom: " + ofToString(bloomValue),20,195);
+	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
+	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
+	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
+	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -364,12 +343,15 @@ void testApp::mouseMoved( int x, int y ){
 	}
 }
 
+void testApp::updateGUI(SceneShader *shader) {
+    gui.setValueF("SHADER_BLOOM", shader->bloomValue);
+    gui.setValueF("SHADER_BLACK", shader->blackPoint);
+    gui.setValueF("SHADER_WHITE", shader->whitePoint);
+    gui.setValueF("SHADER_GAMMA", shader->gammaValue);
+}
 
 void testApp::setupControlPanel() { 
-
-	
 	gui.setup(900, ofGetHeight());
-	
 
 	ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 60, 200));
 	ofxControlPanel::setTextColor(simpleColor(240, 50, 50, 255));
@@ -385,10 +367,10 @@ void testApp::setupControlPanel() {
     
 	gui.addLabel("Levels");
 	
-	gui.addSlider("Black Point", "SHADER_BLACK", blackPoint, 0, 1.0, false)->setDimensions(400, 10);
-	gui.addSlider("Gamma", "SHADER_GAMMA", gammaValue, 0, 10.0, false)->setDimensions(400, 10);
-	gui.addSlider("White Point", "SHADER_WHITE", whitePoint, 0, 1.0, false)->setDimensions(400, 10);
-	gui.addSlider("Bloom", "SHADER_BLOOM", bloomValue, 0, 10.0, false)->setDimensions(400, 10);
+	gui.addSlider("Black Point", "SHADER_BLACK", 0, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Gamma", "SHADER_GAMMA", 0, 0, 10.0, false)->setDimensions(400, 10);
+	gui.addSlider("White Point", "SHADER_WHITE", 0, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Bloom", "SHADER_BLOOM", 0, 0, 10.0, false)->setDimensions(400, 10);
     
 	gui.addPanel("Motion");
 	
@@ -411,17 +393,19 @@ void testApp::setTriggerUnit ( float val )
 }
 
 void testApp::eventsIn(guiCallbackData & data){
+    SceneShader *sceneShader = sceneManager.getSceneShader();
+    
 	if( data.getXmlName() == "SHADER_BLACK" ) {
-        blackPoint = data.getFloat(0);
+        sceneShader->blackPoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_WHITE" ) {
-        whitePoint = data.getFloat(0);
+        sceneShader->whitePoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_GAMMA" ) {
-        gammaValue = data.getFloat(0);
+        sceneShader->gammaValue = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_BLOOM" ) {
-        bloomValue = data.getFloat(0);
+        sceneShader->bloomValue = data.getFloat(0);
     }
 }
 

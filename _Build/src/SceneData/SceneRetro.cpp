@@ -5,7 +5,6 @@
 
 SceneRetro :: SceneRetro(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea) {
 
-	bloomLevel = 1.5;
 	pixelSize = 4;
 	
 	TriggerRocket triggerRocket(psm);
@@ -204,5 +203,8 @@ ParticleSystemSettings SceneRetro::  getPixelExplosionParticles(float hue, float
 	
 };
 
-
+void SceneRetro::initShaderParameters() {
+    Scene::initShaderParameters();
+    shader->bloomValue = 1.5;
+}
 

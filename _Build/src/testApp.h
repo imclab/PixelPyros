@@ -33,7 +33,7 @@
 #define OSC_OFF(x) (x == 0)
 #define OSC_ON(x) (x == 1.0f	)
 
-#include "ofShader.h"
+#include "SceneShader.h"
 
 #include "TextWriter.h"
 
@@ -42,8 +42,6 @@ class testApp : public ofBaseApp{
 public:
 	
 	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager) {
-		
-		
 	};
 	
 	void setup();
@@ -62,6 +60,7 @@ public:
 	//bool prevScene();
     
     void handleOSCMessage(ofxOscMessage);
+    void updateGUI(SceneShader *);
 	
 	ParticleSystemManager particleSystemManager;
 	SceneManager		sceneManager; 
@@ -88,12 +87,7 @@ private:
 	
     ofRectangle* triggerarea;
     
-    ofShader shader;
     TextWriter textWriter;
-    float bloomValue;
-    float gammaValue;
-    float blackPoint;
-    float whitePoint;
     
     bool paused;
     

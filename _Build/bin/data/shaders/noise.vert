@@ -2,7 +2,6 @@
 
 uniform float timeValX = 1.0;
 uniform float timeValY = 1.0;
-uniform vec2 mouse;
 
 //generate a random value from four points
 vec4 rand(vec2 A,vec2 B,vec2 C,vec2 D){ 
@@ -54,6 +53,7 @@ void main(){
 	float noiseB = noise( vec2(timeValY * 0.25, pos.y / 2000.0f), 20.0 );
     
 	//lets also figure out the distance between the mouse and the vertex and apply a repelling force away from the mouse
+    /*
 	vec2 d = vec2(pos.x, pos.y) - mouse;
 	float len =  sqrt(d.x*d.x + d.y*d.y);
 	if( len < 300 && len > 0  ){
@@ -74,6 +74,7 @@ void main(){
 		pos.x += d.x * pct * 90.0f;
 		pos.y += d.y * pct * 90.0f;
 	}
+    */
     
 	//modify our position with the smooth noise
 	pos.x += noiseAmntX * 20.0;

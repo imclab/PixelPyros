@@ -37,5 +37,5 @@ class SceneRealistic : public Scene {
 
 	ofImage softWhiteImage; 
 	ofImage bangerFlashImage;
-
+    
 };

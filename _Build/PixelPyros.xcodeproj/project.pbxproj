@@ -33,6 +33,8 @@
 		1672DAC615E8350C00BE4372 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DABE15E8350C00BE4372 /* UdpSocket.cpp */; };
 		1672DAC715E8350C00BE4372 /* NetworkingUtilsWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */; };
 		1672DAC815E8350C00BE4372 /* UdpSocketWin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */; };
+		1695AFF615EF06DA00863FF5 /* default.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1695AFF215EF06B500863FF5 /* default.frag */; };
+		1695AFF715EF06DA00863FF5 /* default.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1695AFF315EF06B500863FF5 /* default.vert */; };
 		964A383115D2C207004D2BE7 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382915D2C207004D2BE7 /* Particle.cpp */; };
 		964A383215D2C207004D2BE7 /* ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964A382C15D2C207004D2BE7 /* ParticleSystem.cpp */; };
 		967E720815D3B206008D7EF3 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 967E720615D3B206008D7EF3 /* Scene.cpp */; };
@@ -129,6 +131,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1695AFF615EF06DA00863FF5 /* default.frag in CopyFiles */,
+				1695AFF715EF06DA00863FF5 /* default.vert in CopyFiles */,
 				16252DAD15EAE8810074106D /* noise.frag in CopyFiles */,
 				16252DAE15EAE8810074106D /* noise.vert in CopyFiles */,
 				16252DAF15EAE8810074106D /* bloom.vert in CopyFiles */,
@@ -219,6 +223,10 @@
 		1672DAC015E8350C00BE4372 /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
 		1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtilsWin.cpp; sourceTree = "<group>"; };
 		1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocketWin.cpp; sourceTree = "<group>"; };
+		1695AFF115EEF31B00863FF5 /* SceneShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneShader.h; sourceTree = "<group>"; };
+		1695AFF215EF06B500863FF5 /* default.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.frag; sourceTree = "<group>"; };
+		1695AFF315EF06B500863FF5 /* default.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vert; sourceTree = "<group>"; };
+		1695AFF815EF09CB00863FF5 /* RetroShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RetroShader.h; sourceTree = "<group>"; };
 		16F6B4DD15E9893C00D826B8 /* noise.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.frag; sourceTree = "<group>"; };
 		16F6B4DE15E9893C00D826B8 /* noise.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = noise.vert; sourceTree = "<group>"; };
 		16F6B4E515E9AC0400D826B8 /* bloom.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom.vert; sourceTree = "<group>"; };
@@ -587,13 +595,25 @@
 			path = win32;
 			sourceTree = "<group>";
 		};
-		16F6B4DC15E9893C00D826B8 /* Shaders */ = {
+		1695AFF015EEF2EE00863FF5 /* GPU */ = {
 			isa = PBXGroup;
 			children = (
+				1695AFF215EF06B500863FF5 /* default.frag */,
+				1695AFF315EF06B500863FF5 /* default.vert */,
 				16F6B4DD15E9893C00D826B8 /* noise.frag */,
 				16F6B4DE15E9893C00D826B8 /* noise.vert */,
 				16F6B4E515E9AC0400D826B8 /* bloom.vert */,
 				16F6B4E715E9AC1500D826B8 /* bloom.frag */,
+			);
+			name = GPU;
+			sourceTree = "<group>";
+		};
+		16F6B4DC15E9893C00D826B8 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				1695AFF015EEF2EE00863FF5 /* GPU */,
+				1695AFF115EEF31B00863FF5 /* SceneShader.h */,
+				1695AFF815EF09CB00863FF5 /* RetroShader.h */,
 			);
 			name = Shaders;
 			path = bin/data/shaders;
@@ -664,13 +684,13 @@
 			isa = PBXGroup;
 			children = (
 				129F267215EC0694005DBFAA /* SceneManager.cpp */,
+				129F267115EC04D3005DBFAA /* SceneManager.h */,
 				1285CE4915E2616900019B65 /* Arrangement.h */,
 				1285CE4A15E2642200019B65 /* Arrangement.cpp */,
 				967E720615D3B206008D7EF3 /* Scene.cpp */,
 				967E720715D3B206008D7EF3 /* Scene.h */,
 				1285CE4715E25AA300019B65 /* TriggerPattern.h */,
 				968E4DE315DD104800D91D6E /* SceneTest.h */,
-				129F267115EC04D3005DBFAA /* SceneManager.h */,
 			);
 			name = Scenes;
 			path = ../../SharedCode/Scenes;
