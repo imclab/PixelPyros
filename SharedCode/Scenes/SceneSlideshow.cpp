@@ -119,6 +119,11 @@ bool SceneSlideshow::draw() {
     }
 }
  
+void SceneSlideshow::initShaderParameters() {
+    Scene::initShaderParameters();
+    shader->bloomValue = 0.0;
+}
+
 bool SceneSlideshow::startArrangement(int i) {
     return true;
 }

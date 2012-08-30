@@ -122,6 +122,7 @@ public:
     
     virtual bool draw();
    	virtual bool startArrangement(int);
+    virtual void initShaderParameters();
     
 private:
         
