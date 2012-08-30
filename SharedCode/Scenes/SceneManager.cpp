@@ -4,11 +4,14 @@
 
 
 SceneManager :: SceneManager(ParticleSystemManager& psm) : particleSystemManager(psm) {
-	
 }
 
 void SceneManager::addScene(Scene *scene) {
-	
+    addScene(scene, defaultShader);
+}
+
+void SceneManager::addScene(Scene *scene, SceneShader *shader) {
+    scene->shader = shader;
 	
 	scenes.push_back(scene);
 	
@@ -24,9 +27,25 @@ bool SceneManager ::update(float deltaTime){
 	for(int i = 0; i<scenes.size(); i++) {
 		scenes[i]->update(deltaTime);
 	}
+}
 
-	
-	
+// This should really be part of the constructor, but didn't want to change it until Seb's done
+void SceneManager::setDefaultShader(SceneShader *shader) {
+    defaultShader = shader;
+}
+
+SceneShader *SceneManager::getSceneShader() {
+    SceneShader *sceneShader = NULL;
+    
+    if( currentScene != NULL ) {
+        sceneShader = currentScene->getShader();
+    }
+    
+    if( sceneShader == NULL ) {
+        sceneShader = defaultShader;
+    }
+    
+    return sceneShader;
 }
 
 void SceneManager::draw() {
@@ -112,6 +131,7 @@ bool SceneManager :: changeScene (Scene* scene) {
 	} else {
 		currentSceneIndex = newSceneIndex;
 		currentScene = scene;
+        currentScene->initShaderParameters();
 	}
 	
 	return true;

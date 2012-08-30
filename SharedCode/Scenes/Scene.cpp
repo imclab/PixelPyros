@@ -1,6 +1,6 @@
 //
 //  Scene.cpp
-//  SceneTest
+//  SceneCalibration
 //
 //  Created by Seb Lee-Delisle on 02/08/2012.
 //  Copyright (c) 2012 seb.ly. All rights reserved.
@@ -9,19 +9,23 @@
 #include "Scene.h"
 
 
-
-
 Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
+    init(triggerarea);
+}
+
+Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea, SceneShader *sceneShader) : particleSystemManager(psm) {
+    init(triggerarea);
+    shader = sceneShader;
+}
+
+void Scene::init(ofRectangle triggerarea) {
 	active = false; 
 	stopping = false;
 	triggerArea = triggerarea;
 	//setTriggerArea(triggerarea);
 	currentArrangementIndex = -1;
 	activeArrangements = 0;
-	bloomLevel = 0; 
-	
 }
-
 
 void Scene :: start() {
 	stopping = false; 
@@ -30,6 +34,16 @@ void Scene :: start() {
 	updateTriggerDebug = true ;
 }
 
+void Scene::initShaderParameters() {
+    shader->bloomValue = 0.5;
+    shader->gammaValue = 1.2;
+    shader->blackPoint = 0.0;
+    shader->whitePoint = 1.0;
+}
+
+SceneShader *Scene::getShader() {
+    return shader;
+}
 
 void Scene :: stop() { 
 	

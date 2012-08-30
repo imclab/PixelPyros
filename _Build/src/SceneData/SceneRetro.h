@@ -23,6 +23,8 @@ class SceneRetro : public Scene {
 	RocketSettings getRetroFountain(); 
 	
 	RocketSettings getFluffyRocket();
-
+    
 	unsigned int pixelSize; 
+    
+    virtual void initShaderParameters();
 };

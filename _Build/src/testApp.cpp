@@ -4,6 +4,21 @@
 void testApp::setup(){
 	
 	useFbo = true;
+	fboWarpPoints1.push_back(ofVec2f(0,0));
+	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,0));
+	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,APP_HEIGHT));
+	fboWarpPoints1.push_back(ofVec2f(0,APP_HEIGHT));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,0));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,0));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,APP_HEIGHT));
+	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,APP_HEIGHT));
+  
+    paused = false;
+    
+    SceneShader *defaultShader = new SceneShader();
+    defaultShader->load("shaders/default");
+    sceneManager.setDefaultShader(defaultShader);
+    
 	ofSetFrameRate(50);
 	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
@@ -21,12 +36,10 @@ void testApp::setup(){
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
 	
-	
 	cameraManager.init();
 	//cameraManager.shutter = 35; 
 	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight()); 
-	
-	
+		
 	setupControlPanel();
 	
 	soundPlayer.defaultPath = "../../../Sounds/";
@@ -46,8 +59,8 @@ void testApp::setup(){
 	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
 	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
 	
-	soundPlayer.addSound("Banger", "Banger", 1.2, 0.4, 0.0, "wav", 0.2);
-	soundPlayer.addSound("Crackle", "Crackle", 0.15, 0.8, 0.3, "wav", 0.2);
+	soundPlayer.addSound("Banger", "Banger", 1.0, 0.4, 0.0, "wav", 0.2);
+	soundPlayer.addSound("Crackle", "Crackle", 0.1, 0.8, 0.3, "wav", 0.2);
 	
 	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
 	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
@@ -67,6 +80,8 @@ void testApp::setup(){
 	
     shader.load("shaders/gamma");
     paused = false;
+
+	testImage.loadImage("img/ParticleWhite.png");
 }
 
 //--------------------------------------------------------------
@@ -83,9 +98,6 @@ void testApp::update(){
 		sceneManager.updateMotion(motionManager, cameraManager.warper.inverseHomography );
 		
 	}
-	
-	// HORRIBLE.
-	//bloomValue = bloomValue>0 ? scenes[currentSceneIndex]->bloomLevel : 0;
 	
 	float time = ofGetElapsedTimef(); 
 	float deltaTime =  time - lastUpdateTime;
@@ -151,9 +163,6 @@ void testApp::draw(){
     // a better solution would be to alter matrix for the particle system dependent on
     // start position. 
 	sceneManager.draw(); 
-
-	
-	
 	
 	float rectWidth = APP_WIDTH*0.6;
 	float rectHeight = APP_HEIGHT*0.3;
@@ -169,35 +178,49 @@ void testApp::draw(){
 	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
-	
+
+	ofSetColor(255);
+
 	if(useFbo) {
 		fbo.end();
         
-        shader.begin();
-        shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
-        shader.setUniform1f("bloom", settingsManager.bloomValue);
-        shader.setUniform1f("gamma", settingsManager.gammaValue);
-        shader.setUniform1f("blackPoint", settingsManager.blackPoint);
-        shader.setUniform1f("whitePoint", settingsManager.whitePoint);
-        glBegin(GL_QUADS);
-            glTexCoord2f(0, 0);
-            glVertex2f(0, 0);
-            
-            glTexCoord2f(APP_WIDTH, 0);
-            glVertex2f(APP_WIDTH, 0);
-            
-            glTexCoord2f(APP_WIDTH, APP_HEIGHT);
-            glVertex2f(APP_WIDTH, APP_HEIGHT);
-            
-            glTexCoord2f(0, APP_HEIGHT);
-            glVertex2f(0, APP_HEIGHT);
-        glEnd();
-        shader.end();        
-        /*
-		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		fbo.draw(0,0);
-		ofDisableBlendMode();
-        */
+
+		SceneShader *sceneShader = sceneManager.getSceneShader();
+		updateGUI(sceneShader);
+		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
+	        
+		//ofEnableBlendMode(OF_BLENDMODE_ADD);
+		
+//		ofMesh mesh;
+//		float hw = APP_WIDTH/2;
+//		
+//		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+//		
+//		mesh.addVertex(fboWarpPoints1[0]);
+//		mesh.addTexCoord(ofVec2f(0,0));
+//		
+//		mesh.addVertex(fboWarpPoints1[1]);
+//		mesh.addTexCoord(ofVec2f(hw,0)); 
+//		
+//		mesh.addVertex(fboWarpPoints1[2]);
+//		mesh.addTexCoord(ofVec2f(hw,APP_HEIGHT));
+//		
+//		mesh.addVertex(fboWarpPoints1[3]);
+//		mesh.addTexCoord(ofVec2f(0,APP_HEIGHT));
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		
+//		mesh.addTriangle(0,1,2);
+//		mesh.addTriangle(0,2,3);
+//		
+//		fbo.getTextureReference().bind();
+//		mesh.draw();
+//		fbo.getTextureReference().unbind();
+		//fbo.draw(0,0);
+		//ofDisableBlendMode();
+        
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -205,10 +228,10 @@ void testApp::draw(){
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
     
-	ofDrawBitmapString("L: " + ofToString(settingsManager.blackPoint),20,150);
-	ofDrawBitmapString("H: " + ofToString(settingsManager.whitePoint),20,165);
-	ofDrawBitmapString("G: " + ofToString(settingsManager.gammaValue),20,180);
-	ofDrawBitmapString("Bloom: " + ofToString(settingsManager.bloomValue),20,195);
+	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
+	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
+	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
+	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -220,6 +243,10 @@ void testApp::draw(){
     //ofNoFill();
     //ofRect(0,0,768*2,1024);
 	ofFill();
+	
+	fboWarper1.draw();
+	fboWarper2.draw();
+	
     
     
     
@@ -228,27 +255,26 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
-	if(key==OF_KEY_LEFT) {
-		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			sceneManager.prevScene();
-		else
-			sceneManager.previousArrangement();
-	} else if(key==OF_KEY_RIGHT) { 
-		if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
-			sceneManager.nextScene();
-		else
-			sceneManager.nextArrangement();
+	if(key=='w') {
+		cameraManager.toggleWarperGui();
+    }
+	if(!cameraManager.warper.guiVisible) {
+			
+		if(key==OF_KEY_LEFT) {
+			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+				sceneManager.prevScene();
+			else
+				sceneManager.previousArrangement();
+		} else if(key==OF_KEY_RIGHT) { 
+			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+				sceneManager.nextScene();
+			else
+				sceneManager.nextArrangement();
+		}
+		
 	} else if(key=='c') {
 		cameraManager.next(); 
-	} else if(key=='w') {
-		cameraManager.toggleWarperGui();
-        
-    } else if( key == 'b' ) {
-        settingsManager.bloomValue -= 0.05;
-    } else if( key == 'B' ) {
-        settingsManager.bloomValue += 0.05;
-
-    } else if( key == 'F' ) {
+	} else if( key == 'r' ) {
         cameraManager.beginCapture();
 
     } else if( key == 'p' ) {
@@ -278,10 +304,7 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
-	
-	
-}
+	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));}
 
 
 
@@ -308,12 +331,15 @@ void testApp::mouseMoved( int x, int y ){
 	}
 }
 
+void testApp::updateGUI(SceneShader *shader) {
+    gui.setValueF("SHADER_BLOOM", shader->bloomValue);
+    gui.setValueF("SHADER_BLACK", shader->blackPoint);
+    gui.setValueF("SHADER_WHITE", shader->whitePoint);
+    gui.setValueF("SHADER_GAMMA", shader->gammaValue);
+}
 
 void testApp::setupControlPanel() { 
-
-	
 	gui.setup(900, ofGetHeight());
-	
 
 	ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 60, 200));
 	ofxControlPanel::setTextColor(simpleColor(240, 50, 50, 255));
@@ -329,9 +355,10 @@ void testApp::setupControlPanel() {
     
 	gui.addLabel("Levels");
 	
-	gui.addSlider("Black Point", "SHADER_BLACK", settingsManager.blackPoint, 0, 1.0, false)->setDimensions(400, 10);
-	gui.addSlider("Gamma", "SHADER_GAMMA", settingsManager.gammaValue, 0, 10.0, false)->setDimensions(400, 10);
-	gui.addSlider("White Point", "SHADER_WHITE", settingsManager.whitePoint, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Black Point", "SHADER_BLACK", 0, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Gamma", "SHADER_GAMMA", 0, 0, 10.0, false)->setDimensions(400, 10);
+	gui.addSlider("White Point", "SHADER_WHITE", 0, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Bloom", "SHADER_BLOOM", 0, 0, 10.0, false)->setDimensions(400, 10);
     
 	gui.addPanel("Motion");
 	
@@ -347,14 +374,19 @@ void testApp::setupControlPanel() {
 }
 
 void testApp::eventsIn(guiCallbackData & data){
+    SceneShader *sceneShader = sceneManager.getSceneShader();
+    
 	if( data.getXmlName() == "SHADER_BLACK" ) {
-        settingsManager.blackPoint = data.getFloat(0);
+        sceneShader->blackPoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_WHITE" ) {
-        settingsManager.whitePoint = data.getFloat(0);
+        sceneShader->whitePoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_GAMMA" ) {
-        settingsManager.gammaValue = data.getFloat(0);
+        sceneShader->gammaValue = data.getFloat(0);
+    }
+	else if( data.getXmlName() == "SHADER_BLOOM" ) {
+        sceneShader->bloomValue = data.getFloat(0);
     }
 }
 

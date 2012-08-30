@@ -65,6 +65,8 @@ class Warper {
 	bool movingPoint; 
 	bool autoSave; 
 	ofVec2f *curPoint;
+	ofVec2f clickOffset;
+	ofVec2f dragStartPoint;
 	
 	bool verbose; 
 	

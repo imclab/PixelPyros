@@ -4,14 +4,17 @@
 
 #include "ParticleSystemManager.h"
 #include "Scene.h"
+#include "SceneShader.h"
 
 class SceneManager {
 
-	public :
+public :
 	
 	SceneManager(ParticleSystemManager& psm);
 	
 	void addScene(Scene * scene);
+    void addScene(Scene * scene, SceneShader *);
+    
 	bool changeScene(int sceneIndex);
 	bool changeScene(Scene * scene); 
 	bool nextScene();
@@ -25,7 +28,9 @@ class SceneManager {
 	
 	bool nextArrangement();
 	bool previousArrangement(); 
-	
+    
+    void setDefaultShader(SceneShader *);
+    SceneShader *getSceneShader();
 	
 	vector <Scene*> scenes;
 	
@@ -34,5 +39,8 @@ class SceneManager {
 	
 	ParticleSystemManager & particleSystemManager;
 	
-
+private:
+    
+    SceneShader *defaultShader;
+    
 };

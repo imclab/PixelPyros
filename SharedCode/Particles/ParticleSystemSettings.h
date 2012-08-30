@@ -71,8 +71,8 @@ class ParticleSystemSettings{
 		
 		velocityModifierSettings = 0;
 		
-		renderer = NULL; 
-		
+		renderer = NULL;
+		emitShape = NULL; 
 		
 	};
 
@@ -148,6 +148,10 @@ class ParticleSystemSettings{
 	// EMISSION MODE AND PARTICLE COUNT
 	ParticleEmitMode emitMode; 
 	float emitCount; // number of Particles per second
+	
+	// EMISSION SHAPE FOR TEXT AND GEOMETRY
+	ofMesh* emitShape;
+	
 	
 	// EMISSION CHANGE OVER TIME 
 	// This will change the start size, speed and hue of emitted

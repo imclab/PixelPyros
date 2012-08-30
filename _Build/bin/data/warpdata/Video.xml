@@ -7,12 +7,12 @@
     <y>245</y>
 </srcvec>
 <srcvec>
-    <x>1</x>
-    <y>1005</y>
+    <x>54.9</x>
+    <y>977.4</y>
 </srcvec>
 <srcvec>
-    <x>1451</x>
-    <y>1000</y>
+    <x>1384.7</x>
+    <y>914.2</y>
 </srcvec>
 <dstvec>
     <x>0</x>
@@ -23,12 +23,12 @@
     <y>0</y>
 </dstvec>
 <dstvec>
-    <x>17</x>
-    <y>1041</y>
+    <x>13.1</x>
+    <y>1020.6</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>1024</y>
+    <x>1461.9</x>
+    <y>941.2</y>
 </dstvec>
 <srcWidth>1024</srcWidth>
 <srcHeight>768</srcHeight>

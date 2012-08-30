@@ -1,6 +1,6 @@
 //
 //  Scene.h
-//  SceneTest
+//  SceneCalibration
 //
 //  Created by Seb Lee-Delisle on 02/08/2012.
 //  Copyright (c) 2012 seb.ly. All rights reserved.
@@ -13,7 +13,7 @@
 #include "MotionManager.h"
 #include "ofxCV.h"
 
-
+#include "SceneShader.h"
 
 class Scene { 
 
@@ -21,6 +21,7 @@ class Scene {
 	public : 
 	
 	Scene(ParticleSystemManager& psm, ofRectangle triggerarea);
+	Scene(ParticleSystemManager& psm, ofRectangle triggerarea, SceneShader *);
 	
 	virtual void start();
 	virtual void stop();
@@ -29,8 +30,10 @@ class Scene {
 	virtual bool draw();
 	
 	virtual void updateMotion(MotionManager& motionManager, cv::Mat homography);
+    virtual void initShaderParameters();
+    SceneShader *getShader();
 	
-	bool startArrangement(int num);
+	virtual bool startArrangement(int num);
 	
 	Arrangement& addArrangement(TriggerPattern& pattern);
 	
@@ -45,7 +48,7 @@ class Scene {
 	bool active; 
 	bool stopping;
 	
-	float bloomLevel; 
+    SceneShader *shader;
 	
 	vector <Arrangement*> arrangements;
 	int currentArrangementIndex;
@@ -55,4 +58,8 @@ class Scene {
 	
 	ofRectangle triggerArea; 
 	bool triggerDebug; 
+    
+private:
+        
+    void init(ofRectangle triggerarea);
 };
