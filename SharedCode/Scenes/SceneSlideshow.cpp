@@ -9,7 +9,7 @@
 #include "ofMain.h"
 #include "testApp.h"
 
-SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle *triggerarea): Scene(psm, triggerarea) {
+SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerarea): Scene(psm, triggerarea) {
     /*
     slideShow.folderPath = ofToDataPath("slideshow/");
     slideShow.reloadImages();

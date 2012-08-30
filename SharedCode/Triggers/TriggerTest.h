@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 seb.ly. All rights reserved.
 //
 
+#pragma once
+
 #include "TriggerSimple.h"
 
 class TriggerTest : public TriggerSimple {

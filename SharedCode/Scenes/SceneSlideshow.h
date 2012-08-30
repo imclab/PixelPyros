@@ -118,7 +118,7 @@ class SceneSlideshow : public Scene {
 
 public:
     
-    SceneSlideshow(ParticleSystemManager &, ofRectangle *);
+    SceneSlideshow(ParticleSystemManager &, ofRectangle);
     
     virtual bool draw();
    	virtual bool startArrangement(int);

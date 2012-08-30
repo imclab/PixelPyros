@@ -14,7 +14,7 @@ class SceneIntro : public Scene {
 	
 	public :
 	
-	SceneIntro (ParticleSystemManager& psm, ofRectangle* triggerarea) ;
+	SceneIntro (ParticleSystemManager& psm, ofRectangle triggerarea) ;
 	
 	ParticleSystemSettings getSmoke();
 	
