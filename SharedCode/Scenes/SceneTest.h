@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Scene.h"
-#include "TriggerTest.h"
 
 #include "TriggerRocket.h"
 
@@ -10,7 +9,7 @@ class SceneTest : public Scene {
 	
 	public : 
 	
-	SceneTest(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea){		
+	SceneTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){		
 		RocketBasic rocketSettings(100,10, 120);
 		
 		TriggerRocket trigger(psm);

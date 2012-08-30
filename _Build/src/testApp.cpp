@@ -8,10 +8,15 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
 	
-    receiver.setup(OSC_RECEIVER_PORT);
+	settingsManager.setup () ;
+	
+   /* receiver.setup(OSC_RECEIVER_PORT);
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
-	ofBackground(0);
+    // we'll need to setup a vector of devices for this
+    sender.setup("JIP2.local", OSC_SENDER_PORT);*/
+    
+    ofBackground(0);
 
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
@@ -56,24 +61,19 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
+	oscManager.settingsManager = &settingsManager ;
+	oscManager.sceneManager = &sceneManager ;
+	oscManager.setup () ;
+	
     shader.load("shaders/gamma");
-    bloomValue = 0.5;
-    gammaValue = 1.2;
-    blackPoint = 0.0;
-    whitePoint = 1.0;
     paused = false;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    while( receiver.hasWaitingMessages() )
-    {
-        ofxOscMessage msg;
-        receiver.getNextMessage(&msg);
-        handleOSCMessage(msg);
-    }
 
+	oscManager.update () ;
+	
 	if(cameraManager.update()){
 		
 		ofImage image(cameraManager.getPixelsRef()); 
@@ -92,7 +92,20 @@ void testApp::update(){
 
 	lastUpdateTime = time;
 	
+	if ( settingsManager.triggerAreaUpdate )
+	{
+		sceneManager.updateTriggerArea(settingsManager.triggerarea) ;
+		settingsManager.triggerAreaUpdate = false ;
+	}
+	
+	if ( settingsManager.triggerDebugUpdate )
+	{
+		sceneManager.updateTriggerDebug(settingsManager.triggerDebug) ;
+		settingsManager.triggerDebugUpdate = false ;
+	}
+	
     if( !paused ) {
+		
         sceneManager.update(deltaTime); 
         particleSystemManager.update(deltaTime);
     }
@@ -162,10 +175,10 @@ void testApp::draw(){
         
         shader.begin();
         shader.setUniformTexture("baseTexture", fbo.getTextureReference(), 0);
-        shader.setUniform1f("bloom", bloomValue);
-        shader.setUniform1f("gamma", gammaValue);
-        shader.setUniform1f("blackPoint", blackPoint);
-        shader.setUniform1f("whitePoint", whitePoint);
+        shader.setUniform1f("bloom", settingsManager.bloomValue);
+        shader.setUniform1f("gamma", settingsManager.gammaValue);
+        shader.setUniform1f("blackPoint", settingsManager.blackPoint);
+        shader.setUniform1f("whitePoint", settingsManager.whitePoint);
         glBegin(GL_QUADS);
             glTexCoord2f(0, 0);
             glVertex2f(0, 0);
@@ -192,10 +205,10 @@ void testApp::draw(){
 	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
 	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
     
-	ofDrawBitmapString("L: " + ofToString(blackPoint),20,150);
-	ofDrawBitmapString("H: " + ofToString(whitePoint),20,165);
-	ofDrawBitmapString("G: " + ofToString(gammaValue),20,180);
-	ofDrawBitmapString("Bloom: " + ofToString(bloomValue),20,195);
+	ofDrawBitmapString("L: " + ofToString(settingsManager.blackPoint),20,150);
+	ofDrawBitmapString("H: " + ofToString(settingsManager.whitePoint),20,165);
+	ofDrawBitmapString("G: " + ofToString(settingsManager.gammaValue),20,180);
+	ofDrawBitmapString("Bloom: " + ofToString(settingsManager.bloomValue),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -212,73 +225,6 @@ void testApp::draw(){
     
 }
 
-//--------------------------------------------------------------
-void testApp::handleOSCMessage(ofxOscMessage msg) {
-    string address = msg.getAddress().substr(0, msg.getAddress().find(":"));
-    //std::cout << "OSC Message: " << address << std::endl;
-    
-    std::cout << "OSC Message: " << msg.getAddress() << std::endl;
-    if( address.compare(OSC_CMD("Present")) == 0 ) {
-        std::cout << "OscClient connected" << std::endl;
-    }
-    else if( address.compare(OSC_CMD("NotPresent")) == 0 ) {
-        std::cout << "OscClient disconnect" << std::endl;
-    } else {
-        std::vector<std::string> params = ofSplitString(address, "/");
-        int paramsLength = params.size();
-        if( paramsLength >= 2 ) {
-            string objectName = params[paramsLength-2];
-            string objectProperty = params[paramsLength-2]; 
-            float arg = msg.getArgAsFloat(0) ;
-            
-            if ( objectName == "PrevSceneButton" )
-            {
-                if ( OSC_OFF(arg) )
-                    sceneManager.prevScene();
-            }
-            else if ( objectName == "NextSceneButton" )
-            {
-                if ( OSC_OFF(arg) )
-                    sceneManager.nextScene();
-            }
-            else if ( objectName == "TriggerShift" )
-            {
-                // we're getting multiple osc messages per frame due to physics and stuff, so thought it would be better to give update flag for this, rather than a forced redraw, don't want to hurt performance
-                setTriggerUnit(arg) ;
-                sceneManager.currentScene->updateTriggerArea = true ;
-            }
-
-/*            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
-                switch( widgetIndex ) {
-                    case 1:
-                        if( OSC_OFF(widgetState) ) {
-                            sceneManager.prevScene();
-                        }
-                        break;
-                    
-                    case 2:
-                        if( OSC_OFF(widgetState) ) {
-                            sceneManager.nextScene();
-                        }
-                        break;
-                        
-                    case 3:
-                        if( OSC_OFF(widgetState) ) {
-                            cameraManager.toggleWarperGui(); 
-                        }
-                        break;
-                        
-                    case 4:
-                        if( OSC_OFF(widgetState) ) {
-                            cameraManager.next(); 
-                        }
-                        break;
-                }
-            }*/
-        }
-    }
-}
-                               
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
@@ -298,9 +244,9 @@ void testApp::keyPressed(int key){
 		cameraManager.toggleWarperGui();
         
     } else if( key == 'b' ) {
-        bloomValue -= 0.05;
+        settingsManager.bloomValue -= 0.05;
     } else if( key == 'B' ) {
-        bloomValue += 0.05;
+        settingsManager.bloomValue += 0.05;
 
     } else if( key == 'F' ) {
         cameraManager.beginCapture();
@@ -322,20 +268,17 @@ void testApp:: mousePressed(int x, int y, int button ) {
 
 void testApp:: setupScenes() { 
 	
-	triggerarea = new ofRectangle (APP_WIDTH*0.05 ,0,APP_WIDTH*0.9,10);
-	
-    setTriggerUnit( 0.5f ) ;
-	
-	sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
+	// rocket inherits testtrigger, no need for test scene
+	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneRetro(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));
 	
-	sceneManager.addScene(new SceneRealistic(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneTron(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
 	
 	
 }
@@ -386,9 +329,9 @@ void testApp::setupControlPanel() {
     
 	gui.addLabel("Levels");
 	
-	gui.addSlider("Black Point", "SHADER_BLACK", blackPoint, 0, 1.0, false)->setDimensions(400, 10);
-	gui.addSlider("Gamma", "SHADER_GAMMA", gammaValue, 0, 10.0, false)->setDimensions(400, 10);
-	gui.addSlider("White Point", "SHADER_WHITE", whitePoint, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Black Point", "SHADER_BLACK", settingsManager.blackPoint, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Gamma", "SHADER_GAMMA", settingsManager.gammaValue, 0, 10.0, false)->setDimensions(400, 10);
+	gui.addSlider("White Point", "SHADER_WHITE", settingsManager.whitePoint, 0, 1.0, false)->setDimensions(400, 10);
     
 	gui.addPanel("Motion");
 	
@@ -403,22 +346,15 @@ void testApp::setupControlPanel() {
 	
 }
 
-void testApp::setTriggerUnit ( float val )
-{
-    triggerY = val ;
-    
-    triggerarea->y = APP_HEIGHT * ( TRIGGER_Y_TOP + ( ( TRIGGER_Y_BOTTOM - TRIGGER_Y_TOP ) * triggerY ) ) ;
-}
-
 void testApp::eventsIn(guiCallbackData & data){
 	if( data.getXmlName() == "SHADER_BLACK" ) {
-        blackPoint = data.getFloat(0);
+        settingsManager.blackPoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_WHITE" ) {
-        whitePoint = data.getFloat(0);
+        settingsManager.whitePoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_GAMMA" ) {
-        gammaValue = data.getFloat(0);
+        settingsManager.gammaValue = data.getFloat(0);
     }
 }
 

@@ -6,20 +6,19 @@
 //  Copyright (c) 2012 seb.ly. All rights reserved.
 //
 
-#include "TriggerRocket.h"
+#include "TriggerSimple.h"
 
-class TriggerTest : public TriggerRocket {
+class TriggerTest : public TriggerSimple {
 	
 	public : 
 	
-	TriggerTest(ParticleSystemManager& psm): TriggerRocket (psm) {
+	TriggerTest(ParticleSystemManager& psm): TriggerSimple (psm) {
 		typeLabel = "TriggerTest"; 
 		motionDecay = 100;
 		type = TRIGGER_TYPE_FIRE_ON_MOTION; 
 		//triggerLevel = 0.01;
 		motionValueCount = 20;
 		lastUpdate = 0; 
-	
 	};
 	
 	TriggerTest* clone() const{
@@ -52,7 +51,7 @@ class TriggerTest : public TriggerRocket {
 			motionValues.pop_front(); 
 		}
 		
-		if (TriggerRocket :: update(deltaTime)){
+		if (TriggerSimple :: update(deltaTime)){
 			return true;
 		} else { 
 			return false; 
@@ -61,13 +60,14 @@ class TriggerTest : public TriggerRocket {
 		
 	};
 	
-	void draw() {
-		if(!active) return;
+	virtual void draw() {
+		if(!active || !drawTest) return;
 
 		//cout << "trigger test draw" << endl;
 		
 		// draw trigger and motion bitmap 
-		TriggerRocket::draw();
+        // disabling super draw as this is now being extended byTtriggerRocket, which overrides the draw of simple
+		//TriggerRocket::draw();
         
         
 		
@@ -121,7 +121,7 @@ class TriggerTest : public TriggerRocket {
 		
 	};
 	
-	deque <float> motionValues; 
+    deque <float> motionValues; 
 	int motionValueCount; 
 	float lastUpdate; 
 

@@ -59,8 +59,25 @@ void SceneManager ::updateMotion(MotionManager& motionManager, cv::Mat homograph
 
 }
 
+void SceneManager::updateTriggerArea(ofRectangle triggerarea)
+{
+	for ( int i = 0; i<scenes.size(); i++ )
+	{
+		scenes[i]->triggerArea = triggerarea;
+		if ( scenes[i]==currentScene )
+			scenes[i]->updateTriggerArea = true ;
+	}
+}
 
-
+void SceneManager::updateTriggerDebug(bool debug)
+{
+	for ( int i = 0; i<scenes.size(); i++ )
+	{
+		scenes[i]->triggerDebug = debug;
+		if ( scenes[i]==currentScene )
+			scenes[i]->updateTriggerDebug = true ;
+	}
+}
 
 bool SceneManager :: changeScene(int sceneIndex) {
 

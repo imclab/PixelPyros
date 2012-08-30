@@ -11,7 +11,7 @@
 
 
 
-Scene::Scene(ParticleSystemManager & psm, ofRectangle* triggerarea) : particleSystemManager(psm) {
+Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
 	active = false; 
 	stopping = false;
 	triggerArea = triggerarea;
@@ -26,7 +26,8 @@ Scene::Scene(ParticleSystemManager & psm, ofRectangle* triggerarea) : particleSy
 void Scene :: start() {
 	stopping = false; 
 	if (startArrangement(0)) active = true;
-	
+	updateTriggerArea = true ;
+	updateTriggerDebug = true ;
 }
 
 
@@ -51,14 +52,26 @@ bool Scene :: update(float deltaTime) {
         if ( updateTriggerArea ) 
         {
             std::cout << "updating trigger area" << std::endl;
-            updateTriggerArea = false ;
-            arrangements[i]->updateLayout(*triggerArea, arrangements[i]->minimumSpacing);
+            arrangements[i]->updateLayout(triggerArea, arrangements[i]->minimumSpacing);
+        }
+		
+		if ( updateTriggerDebug ) 
+        {
+            std::cout << "updating trigger debug" << std::endl;
+            arrangements[i]->updateDebug(triggerDebug);
         }
 		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		else if ((!stopping) && (i==currentArrangementIndex)) next();
 		
 	}
+	
+	if (updateTriggerArea)
+		updateTriggerArea = false ;
+	
+	if (updateTriggerDebug)
+		updateTriggerDebug = false ;
+	
 	if((stopping) && (activeArrangements==0) ) {
 		active = false;
 	}
@@ -110,9 +123,9 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 
 
 Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
-	arrangements.push_back(new Arrangement(particleSystemManager, *triggerArea));
+	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea));
 	//arrangements.back()->setTriggerArea(triggerArea);
-	arrangements.back()->setPattern(pattern, *triggerArea, 50);
+	arrangements.back()->setPattern(pattern, triggerArea, 50);
 	
 	
 }

@@ -3,7 +3,7 @@
 #include "SceneRetro.h"
 
 
-SceneRetro :: SceneRetro(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea) {
+SceneRetro :: SceneRetro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
 
 	bloomLevel = 1.5;
 	pixelSize = 4;

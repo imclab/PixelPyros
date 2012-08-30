@@ -118,6 +118,16 @@ void Arrangement :: setPattern(TriggerPattern tp, ofRectangle& triggerarea, floa
 	
 }
 
+void Arrangement::updateDebug(bool debug)
+{
+	for(int i=0; i<triggerCount; i++) 
+	{
+		TriggerBase *trigger = triggers[i] ;
+		
+		trigger->drawTest = debug ;
+	}
+}
+
 void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	
 	triggerArea = triggerarea;

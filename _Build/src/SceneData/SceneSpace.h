@@ -19,7 +19,7 @@ class SceneSpace : public Scene {
 	
 	public : 
 	
-	SceneSpace(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea){
+	SceneSpace(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
 		
 		bloomLevel = 4;
 
