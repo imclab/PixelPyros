@@ -69,6 +69,7 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
+	testImage.loadImage("img/ParticleWhite.png");
 }
 
 //--------------------------------------------------------------
@@ -142,9 +143,6 @@ void testApp::draw(){
     // a better solution would be to alter matrix for the particle system dependent on
     // start position. 
 	sceneManager.draw(); 
-
-	
-	
 	
 	float rectWidth = APP_WIDTH*0.6;
 	float rectHeight = APP_HEIGHT*0.3;
@@ -160,21 +158,48 @@ void testApp::draw(){
 	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
-//    textWriter.draw(ofRectangle(768 - 300, 512 - 125, 600, 250), "the official launch of the 2012 brighton digital festival!");
 
-	
+	ofSetColor(255);
+
 	if(useFbo) {
 		fbo.end();
         
-        SceneShader *sceneShader = sceneManager.getSceneShader();
-        updateGUI(sceneShader);
-        sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
+		SceneShader *sceneShader = sceneManager.getSceneShader();
+		updateGUI(sceneShader);
+		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
+	        
+		//ofEnableBlendMode(OF_BLENDMODE_ADD);
+		
+//		ofMesh mesh;
+//		float hw = APP_WIDTH/2;
+//		
+//		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+//		
+//		mesh.addVertex(fboWarpPoints1[0]);
+//		mesh.addTexCoord(ofVec2f(0,0));
+//		
+//		mesh.addVertex(fboWarpPoints1[1]);
+//		mesh.addTexCoord(ofVec2f(hw,0)); 
+//		
+//		mesh.addVertex(fboWarpPoints1[2]);
+//		mesh.addTexCoord(ofVec2f(hw,APP_HEIGHT));
+//		
+//		mesh.addVertex(fboWarpPoints1[3]);
+//		mesh.addTexCoord(ofVec2f(0,APP_HEIGHT));
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		mesh.addColor(ofColor::white);
+//		
+//		mesh.addTriangle(0,1,2);
+//		mesh.addTriangle(0,2,3);
+//		
+//		fbo.getTextureReference().bind();
+//		mesh.draw();
+//		fbo.getTextureReference().unbind();
+		//fbo.draw(0,0);
+		//ofDisableBlendMode();
         
-        /*
-		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		fbo.draw(0,0);
-		ofDisableBlendMode();
-        */
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);

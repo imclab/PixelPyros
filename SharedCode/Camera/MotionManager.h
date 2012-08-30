@@ -43,6 +43,7 @@ class MotionManager {
 	ofImage previous; 
 	ofImage diff; 
 	
-	vector <ofVec2f> motionPositions; 
+	vector <ofVec2f> motionPositions;
+	float motionSensitivity; 
 
 };
