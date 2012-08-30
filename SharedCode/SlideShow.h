@@ -147,7 +147,7 @@ class SlideShow {
 		}
 	
 		void hide() {
-			if(!active) return false;
+			if(!active) return;
 			
 			active = false;
 			

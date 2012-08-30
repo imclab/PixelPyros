@@ -160,6 +160,8 @@ void testApp::draw(){
 	//textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.1, rectWidth, rectHeight), "The Awesome PixelPyros Text Rendering Demo! Now with # - and,");
 //	textWriter.draw(ofRectangle(500, 400, 800, 400), "One Small Step");
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
+//    textWriter.draw(ofRectangle(768 - 300, 512 - 125, 600, 250), "the official launch of the 2012 brighton digital festival!");
+
 	
 	if(useFbo) {
 		fbo.end();
@@ -318,6 +320,8 @@ void testApp:: setupScenes() {
 	
     setTriggerUnit( 0.5f ) ;
 	
+    sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerarea));
+	
 	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerarea));
 	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
@@ -329,8 +333,6 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneTron(particleSystemManager, triggerarea));
 	
 	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
-	
-	
 }
 
 

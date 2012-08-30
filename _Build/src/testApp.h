@@ -23,6 +23,7 @@
 #include "ScenePatternTest.h"
 #include "SceneRealistic.h"
 #include "SceneCalibration.h"
+#include "SceneSlideshow.h"
 
 #include "QuadWarp.h"
 

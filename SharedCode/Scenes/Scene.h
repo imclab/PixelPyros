@@ -33,7 +33,7 @@ class Scene {
     virtual void initShaderParameters();
     SceneShader *getShader();
 	
-	bool startArrangement(int num);
+	virtual bool startArrangement(int num);
 	
 	Arrangement& addArrangement(TriggerPattern& pattern);
 	
