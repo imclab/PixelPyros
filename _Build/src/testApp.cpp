@@ -187,40 +187,7 @@ void testApp::draw(){
 
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
-		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
-	        
-		//ofEnableBlendMode(OF_BLENDMODE_ADD);
-		
-//		ofMesh mesh;
-//		float hw = APP_WIDTH/2;
-//		
-//		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-//		
-//		mesh.addVertex(fboWarpPoints1[0]);
-//		mesh.addTexCoord(ofVec2f(0,0));
-//		
-//		mesh.addVertex(fboWarpPoints1[1]);
-//		mesh.addTexCoord(ofVec2f(hw,0)); 
-//		
-//		mesh.addVertex(fboWarpPoints1[2]);
-//		mesh.addTexCoord(ofVec2f(hw,APP_HEIGHT));
-//		
-//		mesh.addVertex(fboWarpPoints1[3]);
-//		mesh.addTexCoord(ofVec2f(0,APP_HEIGHT));
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		
-//		mesh.addTriangle(0,1,2);
-//		mesh.addTriangle(0,2,3);
-//		
-//		fbo.getTextureReference().bind();
-//		mesh.draw();
-//		fbo.getTextureReference().unbind();
-		//fbo.draw(0,0);
-		//ofDisableBlendMode();
-        
+		sceneShader->draw(fbo, fboWarper1, fboWarper2);
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -299,12 +266,20 @@ void testApp:: setupScenes() {
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
+	
+	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
+
+	
 	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));
 	
 	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));}
+	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
+	
+}
 
 
 
