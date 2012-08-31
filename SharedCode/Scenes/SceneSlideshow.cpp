@@ -22,14 +22,36 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     defaultFontSize = 4.0;
     
     defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.jpg"));
+   
+    // N.B! Times must be in ascending order of showTime
+    // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
+    vector<string> times;
+    times.push_back("10:00");
+    times.push_back("11:00");
+    times.push_back("12:00");
+    times.push_back("13:00");
+    times.push_back("14:00");
+    times.push_back("15:00");
+    times.push_back("16:00");
+    times.push_back("17:00");
+    times.push_back("18:00");
+    times.push_back("19:00");
+    times.push_back("20:00");
+    times.push_back("21:00");
+    times.push_back("22:00");
+    times.push_back("23:00");
     
+    SlideTimer *timer = new SlideTimer(APP_WIDTH, APP_HEIGHT, ofRectangle(0, 0, 250, 120), ofColor(128, 128, 128), defaultFontSize, times);
+                                       
     // Slide 1
     
     SceneSlide *slide = new SceneSlide(&defaultBackground);
+    slide->add(timer);
+    
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 0, 700, 60),
-        ofColor(128, 128, 128), 
+        ofRectangle(0, 0 + 100, 700, 60),
+        ofColor(128, 128, 128),
         defaultFontSize,
         "the official launch of the 2012\nbrighton digital festival!"
     ));
@@ -50,46 +72,37 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
 //    ));
     
     // Auto-centred box, x, y are offsets from the middle
+    
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 120, 700, 60),
+        ofRectangle(0, 120 + 100, 700, 60),
         ofColor(128, 128, 128),
         0.7 * defaultFontSize,
         "2012.brightondigitalfestival.co.uk"
         ));
-
-    // N.B! Times must be in ascending order of showTime
-    // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
-    vector<string> times;
-    times.push_back("11:00");
-    times.push_back("11:30");
-    times.push_back("12:00");
-    times.push_back("18:00");
-    times.push_back("18:30");
-    times.push_back("19:00");
-    times.push_back("19:30");
-    times.push_back("20:00");
-    slide->add(new SlideTimer(APP_WIDTH, APP_HEIGHT, ofRectangle(0, 0, 100, 100), ofColor(128, 128, 128), defaultFontSize, times));
     
     // Duration to show, in seconds
-    slide->duration = 20;
+    slide->duration = 2;
     slides.push_back(slide);
     
     // Slide 2
     
     slide = new SceneSlide(&defaultBackground);
+    slide->add(timer);
+    
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, 0, 600, 100), 
+         ofRectangle(0, 0 + 120, 600, 100),
          ofColor(128, 128, 128), 
          0.9 * defaultFontSize,
          "thanks to:"
     ));
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, 200, 300, 100), 
+         ofRectangle(0, 200, 300, 100),
          ofColor(128, 128, 128), 
          0.6 * defaultFontSize,
          "thanks to people list of people!"
     ));
     
+    slide->duration = 2;
     slides.push_back(slide);
 }
 

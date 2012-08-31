@@ -13,7 +13,7 @@
 #include <vector>
 
 #define DEFAULT_SLIDE_DURATION 5.0
-
+#define NON_CURRENT_SLOTS_TO_SHOW 2
 
 class SlideObject {
     
@@ -39,10 +39,8 @@ public:
     ofColor col;
 };
 
-
-
 class SlideText: public SlideObject {
-
+    
 public: 
     SlideText(ofRectangle rect, ofColor c, float fontSize, string s): SlideObject(rect, c) {
         text = s;
@@ -66,7 +64,7 @@ public:
 
 
 class CentredSlideText: public SlideText {
-
+    
 public:
     CentredSlideText(int screenWidth, int screenHeight, ofRectangle rect, ofColor c, float fontSize, string s): SlideText(rect, c, fontSize, s) {
         box.x += (screenWidth / 2.0) - (box.width / 2.0);
@@ -97,74 +95,111 @@ public:
         }
     }
     
-    time_t hoursMinutesToEpoch(string t) {
+    time_t toTimeStamp(string timeString = "") {
         struct tm tm;
         
-        string timeString = ofGetTimestampString("%Y-%m-%d") + t;
-        if( strptime(timeString.c_str(), "%Y-%m-%d %H:%M", &tm) != NULL ) {
+        if( timeString == "" ) {
+            timeString = ofGetTimestampString("%Y-%m-%d %H:%M:%S");
+        }
+        
+        if( strptime(timeString.c_str(), "%Y-%m-%d %H:%M:%S", &tm) != NULL ) {
             time_t epoch = mktime(&tm);
             return epoch;
-            // std::cout << "added " << epoch << std::endl;
         }
         
         return 0;
     }
     
-     string hoursMinutesToMinutesSecondsString(string t) {
-         vector<string> parts = ofSplitString(t, ":");
-         
-         if( parts.size() != 2 ) {
-             std::cout << "Unrecognised hoursMinutes string: " << t << std::endl;
-             return 0;
-         }
-         
-         // This is horrible, but I'm rushing
-         unsigned long totalSeconds = atoi(parts[0].c_str()) * 60 + atoi(parts[1].c_str());
-         string minutes = ofToString(totalSeconds / 60);
-         if( minutes.length() < 2 ) {
-             minutes = "0" + minutes;
-         }
-         
-         string seconds = ofToString(totalSeconds % 60);
-         if( seconds.length() < 2 ) {
-             seconds = "0" + seconds;
-         }
-         return minutes + ":" + seconds;
+    time_t hoursMinutesToEpoch(string t) {
+        string timeString = ofGetTimestampString("%Y-%m-%d ") + t + ":00";
+        return toTimeStamp(timeString);
     }
     
-    string hoursMinutesToSecondsInt(string t) {
+    time_t getTime() {
+        return toTimeStamp();
+    }
+    
+    int getNextShowTimeIndex(unsigned long now) {
+        for( int i = 0; i < showTimeStamps.size(); i++ ) {
+            if( now < showTimeStamps[i] ) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    unsigned long getNextShowTime(unsigned long now) {
+        int idx = getNextShowTimeIndex(now);
         
-    }
-    
-    string getNextShowTime(unsigned long timeStamp = 0) {
-        if( timeStamp == 0 ) {
-            timeStamp = ofGetUnixTime();
+        if( idx < 0 ) {
+            return now;
         }
         
-        for( int i = 0; i < showTimeStamps.size(); i++ ) {
-            if( timeStamp < showTimeStamps[i] ) {
-                return showTimes[i];
+        return showTimeStamps[idx];
+    }
+    
+    string getTimeToNextShowString(unsigned long now) {
+        unsigned long nextShow = getNextShowTime(now);
+        string lhs, rhs;
+        
+        unsigned long diff = nextShow - now;
+        
+        // If for some reason the next show is over an hour away, show the difference in HH:MM
+        if( diff > 3600 ) {
+            unsigned long hours = diff / 3600;
+            lhs = ofToString(hours);
+            rhs = ofToString((diff - (hours * 3600)) / 60);
+        } else {
+            lhs = ofToString(diff / 60);
+            rhs = ofToString(diff % 60);
+        }
+        
+        if( lhs.length() < 2 ) {
+            lhs = "0" + lhs;
+        }
+        
+        if( rhs.length() < 2 ) {
+            rhs = "0" + rhs;
+        }
+        
+        return lhs + ":" + rhs;
+    }
+
+    virtual void draw() {
+        unsigned long now = getTime();
+        int i = getNextShowTimeIndex(now);
+        
+        // Nothing left to do, this is just to ensure the last historical entry gets displayed when we're past the last show time
+        if( i < 0 ) {
+            i = showTimeStamps.size();
+        }
+        
+        ofPushStyle();
+        ofNoFill();
+        
+        // Display the next n shows that are upcoming
+        ofSetColor(128, 128, 128);
+        for( int j = i, ctr = 1; ctr <= NON_CURRENT_SLOTS_TO_SHOW; j++, ctr++ ) {
+            if( j < showTimes.size() ) {
+                writer.drawFixedSize(ofRectangle(box.x - (250 * ctr), box.y, box.width, box.height), "\n" + showTimes[j], fontSize, true);
             }
         }
         
-        return "";
-    }
-    
-    string getTimeToNextShow() {
-        string nextShow = getNextShowTime();
-        if( nextShow == "" ) {
-            return 0;
+        // Display the next showing time
+        string nextShowTime = getTimeToNextShowString(now);
+        if( nextShowTime != "00:00" ) {
+            ofSetColor(200, 200, 200);
+            ofRect(ofRectangle(box.x, box.y - 20, box.width, box.height));
+            writer.drawFixedSize(box, "Next Show\n" + nextShowTime, fontSize, true);
         }
         
-        std::cout << "\nNext show: " << nextShow << std::endl;
-        return hoursMinutesToMinutesSecondsString(nextShow);
-    }
-    
-    virtual void draw() {
-        ofPushStyle();
-        
-        ofSetColor(col);
-        writer.drawFixedSize(box, "Next Show: " + getTimeToNextShow(), fontSize, false);
+        // Display the last n shows that have passed
+        ofSetColor(75, 75, 75);
+        for( int j = i - 1, ctr = 1; ctr <= NON_CURRENT_SLOTS_TO_SHOW; j--, ctr++ ) {
+            if( j >= 0 ) {
+                writer.drawFixedSize(ofRectangle(box.x + (250 * ctr), box.y, box.width, box.height), "\n" + showTimes[j], fontSize, true);
+            }
+        }
         
         ofPopStyle();
     }
