@@ -198,6 +198,7 @@ void testApp::draw(){
 
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
+		
 		sceneShader->draw(fbo, fboWarper1, fboWarper2);
 	}
 	
@@ -232,7 +233,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
-	shiftPressed = (glutGetModifiers() & GLUT_ACTIVE_SHIFT);
+	bool shiftPressed = (glutGetModifiers() & GLUT_ACTIVE_SHIFT);
 	
 	if(key=='w') {
 		cameraManager.toggleWarperGui();
@@ -242,7 +243,7 @@ void testApp::keyPressed(int key){
 		fboWarper2.visible = !fboWarper2.visible;
 	}
 
-	if(!cameraManager.warper.guiVisible) {
+	//if(!cameraManager.warper.guiVisible) {
 			
 		if(key==OF_KEY_LEFT) {
 			if(shiftPressed)
@@ -256,9 +257,10 @@ void testApp::keyPressed(int key){
 				sceneManager.nextArrangement();
 		}
 		
-	} else if(key=='c') {
+	//}
+	if(key=='c') {
 		cameraManager.next(); 
-	} else if( key == 'r' ) {
+	} else if( key == 'R' ) {
         cameraManager.beginCapture();
 
     } else if( key == 'p' ) {
@@ -287,14 +289,16 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
 
-	
+	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
+
 	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));
 	
 	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
 	
 	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
-	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
+	
+	sceneManager.changeScene(1);
 	
 }
 

@@ -24,6 +24,9 @@ SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle trigger
 	triggerFlower.addRocketSettings(getFlowerRocket());
 	triggerFluffy.restoreSpeed = 2;
 	
+	triggerBanger.triggerPower = 1; 
+	
+	
 	triggerBanger.addRocketSettings(getBangerRocket());
 
 	pattern.addTrigger(triggerFluffy);

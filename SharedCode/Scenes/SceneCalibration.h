@@ -33,7 +33,7 @@ class SceneCalibration : public Scene {
 	virtual bool draw() {
 		
 		
-		if(!active) return false;
+		if((!active) || stopping) return false;
 		
 		ofPushStyle();
 		ofEnableBlendMode(OF_BLENDMODE_ADD);

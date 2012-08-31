@@ -30,4 +30,15 @@ class TriggerSimple : public TriggerBase {
 	}
 	
 	
+	// for the debug data
+	deque <float> motionValues;
+	int motionValueCount;
+	float lastUpdate;
+
+	// for the spinny orb
+	float rot1, rot2, rot3;
+	float vel1, vel2, vel3;
+
+	
+	
 };

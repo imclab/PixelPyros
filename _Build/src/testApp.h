@@ -44,7 +44,7 @@ class testApp : public ofBaseApp{
 public:
 	
 	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager) {
-		shiftPressed = false; 
+		
 	};
 	
 	void setup();
@@ -80,7 +80,7 @@ public:
 	QuadWarp fboWarper1;
 	QuadWarp fboWarper2;
 	
-	bool shiftPressed; 
+	//bool shiftPressed;
 	
     
 private:

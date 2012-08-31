@@ -16,8 +16,11 @@ class SceneIntro : public Scene {
 	
 	SceneIntro (ParticleSystemManager& psm, ofRectangle triggerarea) ;
 	
-	ParticleSystemSettings getSmoke();
+	bool update(float deltaTime); 
 	
+	ParticleSystemSettings getSmoke();
+	ParticleSystemSettings getLetterSparks();
+	ParticleSystemSettings getFuseSparkles();
 	ofMesh letterMesh;
 
 
