@@ -353,6 +353,12 @@ public:
         
         letters[','] =lcomma;
         
+        Letter lfslash;
+        
+        lfslash.addLine(0 , 6 , 4 , 0);
+        
+        letters['/'] =lfslash;
+        
 	}
     
     map <int, Letter> letters;
