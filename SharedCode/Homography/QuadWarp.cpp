@@ -10,21 +10,48 @@
 
 #include "matrix_funcs.h"
 
-QuadWarp :: QuadWarp (vector <ofVec3f>& quadPoints) : points(quadPoints) {
+QuadWarp :: QuadWarp (string saveLabel) {
 	
 	ofAddListener(ofEvents().mousePressed, this, &QuadWarp::mousePressed);
 	ofAddListener(ofEvents().mouseDragged, this, &QuadWarp::mouseDragged);
 	ofAddListener(ofEvents().mouseReleased, this, &QuadWarp::mouseReleased);
 
-	pointColour = ofColor :: white;
 
+	pointColour = ofColor :: white;
+	dstPoints.resize(4);
+	defaultDstPoints.resize(4); 
 	visible = true;
 	pointRadius = 10;
-	curPoint = NULL; 
+	curPointIndex = -1;
+	lastMousePress = 0; 
 
 }
 
-void QuadWarp :: draw() {
+void QuadWarp :: draw(bool lockAxis) {
+	
+	if(!visible) return;
+	
+	if(curPointIndex>=0) {
+		
+		ofVec3f diff(ofGetMouseX(), ofGetMouseY());
+		diff-=dragStartPoint;
+		diff*=0.1;
+		
+		if(lockAxis) {
+			if(abs(diff.x)-abs(diff.y)>1) diff.y = 0;
+			else if (abs(diff.y)-abs(diff.x)>1) diff.x = 0;
+		}
+
+		ofVec3f& curPoint = dstPoints[curPointIndex];
+		
+		
+		curPoint = dragStartPoint+diff+clickOffset;
+		
+		curPoint.x = round(curPoint.x*10)/10;
+		curPoint.y = round(curPoint.y*10)/10;
+				
+	}
+
 	
 	
 	ofPushStyle();
@@ -33,12 +60,12 @@ void QuadWarp :: draw() {
 	
 	ofEnableSmoothing();
 	//ofScale(1024, 768);
-	for(int i = 0; i < points.size(); i++) {
+	for(int i = 0; i < dstPoints.size(); i++) {
 		ofSetColor(ofColor::black);
 		ofSetLineWidth(3);
 		
 		
-		ofVec3f& point = points[i];
+		ofVec3f& point = dstPoints[i];
 		
 		ofCircle(point, 1);
 		ofSetColor(pointColour);
@@ -46,7 +73,7 @@ void QuadWarp :: draw() {
 		ofCircle(point, pointRadius);
 		ofCircle(point, 1);
 	
-		if(&point == curPoint){
+		if(i == curPointIndex){
 			
 			ofLine(point.x, point.y - 100, point.x, point.y+100); 
 			ofLine(point.x-100, point.y, point.x+100, point.y);
@@ -63,6 +90,17 @@ void QuadWarp :: draw() {
 	
 }
 
+
+void QuadWarp ::setDstPoint(int index, ofVec3f point, bool setAsDefault ){
+	
+
+	dstPoints[index] = point;
+	if(setAsDefault) defaultDstPoints[index] = point;
+	
+	
+}
+
+// stolen from ofxAppUtils - thanks danomatika ! 
 
 void QuadWarp ::apply(ofRectangle sourceRect){
 	
@@ -92,8 +130,8 @@ void QuadWarp ::apply(ofRectangle sourceRect){
 	// corners are in 0.0 - 1.0 range
 	// so we scale up so that they are at the render scale
 	for(int i = 0; i < 4; i++){
-		dest[i][0] = points[i].x;// * (float) width;
-		dest[i][1] = points[i].y;// * (float) height;
+		dest[i][0] = dstPoints[i].x;// * (float) width;
+		dest[i][1] = dstPoints[i].y;// * (float) height;
 	}
 	
 	// perform the warp calculation
@@ -125,12 +163,14 @@ void QuadWarp :: mousePressed(ofMouseEventArgs &e) {
 	
 	if(!visible) return;
 	
+		
 	ofVec3f clickPoint(e.x, e.y);
 	
-	for(int i = 0; i < points.size(); i++) {
-		if(points[i].distance(clickPoint) < pointRadius) {
-			curPoint = &points[i];
-			clickOffset.set(curPoint->x  - clickPoint.x, curPoint->y - clickPoint.y);
+	for(int i = 0; i < dstPoints.size(); i++) {
+		if(dstPoints[i].distance(clickPoint) < pointRadius) {
+			curPointIndex = i;
+			ofVec3f &curPoint = dstPoints[i];
+			clickOffset = curPoint - clickPoint;
 			dragStartPoint = clickPoint;
 			
 			break;
@@ -144,23 +184,7 @@ void QuadWarp :: mouseDragged(ofMouseEventArgs &e) {
 	if(!visible) return;
 	
 	
-	if(curPoint!=NULL) {
 		
-		ofVec3f diff(e.x, e.y);
-		diff-=dragStartPoint;
-		diff*=0.1;
-		
-		
-		*curPoint = dragStartPoint+diff+clickOffset;
-		
-		curPoint->x = round(curPoint->x*10)/10;
-		curPoint->y = round(curPoint->y*10)/10;
-		//*curPoint+=clickOffset;
-		
-		changed = true;
-		
-	}
-	
 };
 
 
@@ -168,15 +192,82 @@ void QuadWarp :: mouseDragged(ofMouseEventArgs &e) {
 void QuadWarp :: mouseReleased(ofMouseEventArgs &e) {
 	if(!visible) return;
 	
-	if(curPoint!=NULL) {
-		curPoint = NULL; 
-		changed = true;
+	if(curPointIndex>=0) {
+		
+		if(ofGetElapsedTimef() - lastMousePress < 0.4) {
+			dstPoints[curPointIndex] = defaultDstPoints[curPointIndex]; 
+			
+			
+		}
+
+		
+		curPointIndex = -1;
+		saveSettings(); 
 	}
 	
+	lastMousePress  = ofGetElapsedTimef() ; 
+		
 	
 	//saveSettings();
 };
 
 
+bool QuadWarp::loadSettings() {
+	
+	string filename = "warpdata/"+label+".xml";
+	ofxXmlSettings xml;
+	if(!xml.loadFile(filename))
+		return false;
+	
+	dstPoints[0].x	= xml.getValue("quad:upperLeft:x", 0.0);
+	dstPoints[0].y	= xml.getValue("quad:upperLeft:y", 0.0);
+	
+	dstPoints[1].x	= xml.getValue("quad:upperRight:x", 1.0);
+	dstPoints[1].y	= xml.getValue("quad:upperRight:y", 0.0);
+	
+	dstPoints[2].x	= xml.getValue("quad:lowerRight:x", 1.0);
+	dstPoints[2].y	= xml.getValue("quad:lowerRight:y", 1.0);
+	
+	dstPoints[3].x	= xml.getValue("quad:lowerLeft:x", 0.0);
+	dstPoints[3].y	= xml.getValue("quad:lowerLeft:y", 1.0);
+	
+	return true;
+}
+
+void QuadWarp::saveSettings() {
+	
+	ofxXmlSettings xml;
+	
+	string filename = "warpdata/"+label+".xml";
+
+	xml.addTag("quad");
+	xml.pushTag("quad");
+	
+	xml.addTag("upperLeft");
+	xml.pushTag("upperLeft");
+	xml.addValue("x", dstPoints[0].x);
+	xml.addValue("y", dstPoints[0].y);
+	xml.popTag();
+	
+	xml.addTag("upperRight");
+	xml.pushTag("upperRight");
+	xml.addValue("x", dstPoints[1].x);
+	xml.addValue("y", dstPoints[1].y);
+	xml.popTag();
+	
+	xml.addTag("lowerRight");
+	xml.pushTag("lowerRight");
+	xml.addValue("x", dstPoints[2].x);
+	xml.addValue("y", dstPoints[2].y);
+	xml.popTag();
+	
+	xml.addTag("lowerLeft");
+	xml.pushTag("lowerLeft");
+	xml.addValue("x", dstPoints[3].x);
+	xml.addValue("y", dstPoints[3].y);
+	xml.popTag();
+	
+	xml.saveFile(filename);
+}
 
 

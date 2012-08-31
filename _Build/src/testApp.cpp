@@ -4,15 +4,23 @@
 void testApp::setup(){
 	
 	useFbo = true;
-	fboWarpPoints1.push_back(ofVec2f(0,0));
-	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,0));
-	fboWarpPoints1.push_back(ofVec2f(APP_WIDTH/2,APP_HEIGHT));
-	fboWarpPoints1.push_back(ofVec2f(0,APP_HEIGHT));
-	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,0));
-	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,0));
-	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH,APP_HEIGHT));
-	fboWarpPoints2.push_back(ofVec2f(APP_WIDTH/2 +1,APP_HEIGHT));
+	fboWarper1.label = "leftScreen";
+	fboWarper2.label = "rightScreen";
+	
+	
+	fboWarper1.setDstPoint(0, ofVec2f(0,0));
+	fboWarper1.setDstPoint(1, ofVec2f(APP_WIDTH/2,0));
+	fboWarper1.setDstPoint(2, ofVec2f(APP_WIDTH/2,APP_HEIGHT));
+	fboWarper1.setDstPoint(3, ofVec2f(0,APP_HEIGHT));
+	fboWarper2.setDstPoint(0, ofVec2f(APP_WIDTH/2 +1,0));
+	fboWarper2.setDstPoint(1, ofVec2f(APP_WIDTH,0));
+	fboWarper2.setDstPoint(2, ofVec2f(APP_WIDTH,APP_HEIGHT));
+	fboWarper2.setDstPoint(3, ofVec2f(APP_WIDTH/2 +1,APP_HEIGHT));
   
+	fboWarper1.loadSettings();
+	fboWarper2.loadSettings();
+	
+	
     paused = false;
     
     SceneShader *defaultShader = new SceneShader();
@@ -81,12 +89,14 @@ void testApp::setup(){
     shader.load("shaders/gamma");
     paused = false;
 
-	testImage.loadImage("img/ParticleWhite.png");
+
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
+	
+	
 	oscManager.update () ;
 	
 	if(cameraManager.update()){
@@ -131,6 +141,7 @@ void testApp::draw(){
 	cameraManager.draw(0,0);
 	motionManager.draw();
 
+	
 	if(useFbo) {
 		fbo.begin();
 		
@@ -211,29 +222,35 @@ void testApp::draw(){
     //ofRect(0,0,768*2,1024);
 	ofFill();
 	
-	fboWarper1.draw();
-	fboWarper2.draw();
+	fboWarper1.draw(ofGetKeyPressed('l'));
+	fboWarper2.draw(ofGetKeyPressed('l'));
 	
-    
-    
+ 
     
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
+	shiftPressed = (glutGetModifiers() & GLUT_ACTIVE_SHIFT);
+	
 	if(key=='w') {
 		cameraManager.toggleWarperGui();
-    }
+    } else if (key=='1') {
+		fboWarper1.visible = !fboWarper1.visible;
+	} else if (key=='2') {
+		fboWarper2.visible = !fboWarper2.visible;
+	}
+
 	if(!cameraManager.warper.guiVisible) {
 			
 		if(key==OF_KEY_LEFT) {
-			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+			if(shiftPressed)
 				sceneManager.prevScene();
 			else
 				sceneManager.previousArrangement();
-		} else if(key==OF_KEY_RIGHT) { 
-			if((glutGetModifiers() & GLUT_ACTIVE_SHIFT))
+		} else if(key==OF_KEY_RIGHT) {
+			if(shiftPressed)
 				sceneManager.nextScene();
 			else
 				sceneManager.nextArrangement();

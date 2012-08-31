@@ -43,7 +43,8 @@ class testApp : public ofBaseApp{
 	
 public:
 	
-	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager), fboWarper1(fboWarpPoints1), fboWarper2(fboWarpPoints2) {
+	testApp():particleSystemManager(soundPlayer), sceneManager(particleSystemManager) {
+		shiftPressed = false; 
 	};
 	
 	void setup();
@@ -79,10 +80,7 @@ public:
 	QuadWarp fboWarper1;
 	QuadWarp fboWarper2;
 	
-	ofImage testImage; 
-	vector <ofVec3f> fboWarpPoints1;
-	vector <ofVec3f> fboWarpPoints2;
-	//ofxQuadWarper warper;
+	bool shiftPressed; 
 	
     
 private:
