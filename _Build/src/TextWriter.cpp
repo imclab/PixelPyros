@@ -77,9 +77,9 @@ void TextWriter::drawFixedSize(ofRectangle box, string text, float glyphScaleFac
     ofSetLineWidth(glyphLineWeight);
     
     ofPushStyle();
-    ofSetColor(10, 10, 255, 128);
-    ofNoFill();
-	ofRect(box);
+// 	ofSetColor(10, 10, 255, 128);
+//  	ofNoFill();
+//	ofRect(box);
     ofPopStyle();
     
     vector<string> lines;
