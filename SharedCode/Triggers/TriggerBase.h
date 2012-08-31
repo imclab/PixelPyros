@@ -25,6 +25,7 @@ class TriggerBase {
 	
 	TriggerBase(ParticleSystemManager & psm) : particleSystemManager(psm){
 		typeLabel = "TriggerBase";
+		fixedPosition = false; 
 	};
 	
 	virtual TriggerBase* clone() const=0;
@@ -82,6 +83,7 @@ class TriggerBase {
 	
 	
 	ofVec3f pos;
+	bool fixedPosition; 
 	
 	//vector <RocketSettings> rocketSettings;
 	

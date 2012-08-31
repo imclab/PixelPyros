@@ -35,7 +35,7 @@ class Scene {
 	
 	virtual bool startArrangement(int num);
 	
-	Arrangement& addArrangement(TriggerPattern& pattern);
+	Arrangement& addArrangement(TriggerPattern& pattern, bool fixedPosition = false);
 	
 	//void setTriggerArea(ofRectangle rect);
     

@@ -21,7 +21,7 @@ class Arrangement {
 	
 	public :
 	
-	Arrangement(ParticleSystemManager& psm, ofRectangle triggerarea);
+	Arrangement(ParticleSystemManager& psm, ofRectangle triggerarea, bool fixedposition);
 	
 	virtual void start();
 	virtual void stop();
@@ -44,6 +44,9 @@ class Arrangement {
 	bool active;
 	bool stopping;
 	
+	
+	bool fixedPosition;
+	
 	vector <TriggerBase*> triggers;
 	vector <TriggerBase*> triggersLeft;
 	vector <TriggerBase*> triggersRight;
@@ -55,6 +58,7 @@ class Arrangement {
 		
 	TriggerPattern triggerPattern;
 	int triggerCount;
+	
 
 	
 };

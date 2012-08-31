@@ -76,7 +76,9 @@ bool Scene :: update(float deltaTime) {
         }
 		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
-		else if ((!stopping) && (i==currentArrangementIndex)) next();
+		
+		//THIS LINE MAKES IT AUTO CONTINUE - maybe a scene flag? 
+		//else if ((!stopping) && (i==currentArrangementIndex)) next();
 		
 	}
 	
@@ -136,8 +138,8 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 
 
 
-Arrangement& Scene ::addArrangement(TriggerPattern& pattern) {
-	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea));
+Arrangement& Scene ::addArrangement(TriggerPattern& pattern, bool fixedPosition) {
+	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea, fixedPosition));
 	//arrangements.back()->setTriggerArea(triggerArea);
 	arrangements.back()->setPattern(pattern, triggerArea, 50);
 	

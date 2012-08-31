@@ -4,7 +4,7 @@
 SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
 
 
-	
+	softWhiteImage.loadImage("img/ParticleWhite.png");
 //	for(float i = 0; i<360; i+=10) {
 //		
 //		ofVec3f v(100,0,0);
@@ -31,42 +31,72 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 //	
 	
 	
-	letters.push_back(font.letters['A']);
-	letters.push_back(font.letters['C']);
+//	letters.push_back(font.letters['A']);
+//	letters.push_back(font.letters['C']);
+//	letters.push_back(font.letters['T']);
+//	letters.push_back(font.letters['I']);
+//	letters.push_back(font.letters['V']);
+//	letters.push_back(font.letters['A']);
+//	letters.push_back(font.letters['T']);
+//	letters.push_back(font.letters['E']);
+//	letters.push_back(font.letters['D']);
+	
+	letters.push_back(font.letters['I']);
+	letters.push_back(font.letters['N']);
+	letters.push_back(font.letters['I']);
 	letters.push_back(font.letters['T']);
 	letters.push_back(font.letters['I']);
-	letters.push_back(font.letters['V']);
 	letters.push_back(font.letters['A']);
-	letters.push_back(font.letters['T']);
+	letters.push_back(font.letters['L']);
+	letters.push_back(font.letters['I']);
+	letters.push_back(font.letters['Z']);
 	letters.push_back(font.letters['E']);
 	letters.push_back(font.letters['D']);
+	letters.push_back(font.letters['!']);
+	
+	
+	float letterscale = 15;
+	float letterspacing = 90;
+	float lettercount = letters.size();
+	lettercount += (letters.size() % 2);
+	float x = APP_WIDTH/2 - (lettercount*letterspacing/2)+15;
+	
+	float fuseTime = 5;
+	float letterSparkTime = 20; 
 
+	float triggerSpacing = 0.1;
+	float triggerCentre = APP_WIDTH * 0.7;
+	
+	
 	
 	ParticleSystemSettings ps = getLetterSparks();
-	ps.emitShape = &letterMesh;
-	ps.emitDelay = 2;
+
+	ps.emitDelay = fuseTime;
 	ps.emitLifeTime = 20;
 	
 	ParticleSystemSettings smoke = getSmoke();
-	smoke.emitShape = &letterMesh;
-	smoke.emitDelay = 2;
-	smoke.emitLifeTime = 20;
+
+	smoke.emitDelay = fuseTime;
+	smoke.emitLifeTime = letterSparkTime;
 	smoke.emitStartSizeModifier = 1;
+	
+	ParticleSystemSettings letterBurst = getLetterBurst();
+	letterBurst.emitDelay = fuseTime;
+	letterBurst.emitLifeTime = letterSparkTime/2;
 	
 	
 	ParticleSystemSettings sparkler = getFuseSparkles();
-	sparkler.emitLifeTime = 2; 
+	sparkler.emitLifeTime = fuseTime; 
 
 	ParticleSystemSettings sparklerSmoke = getSmoke();
-	sparklerSmoke.emitLifeTime = 2;
+	sparklerSmoke.emitLifeTime = fuseTime;
 	sparklerSmoke.emitCount = 100;
 	sparklerSmoke.emitStartSizeModifier = 1;
 	
 	
 	
 	RocketSettings rocketTemplate;
-	rocketTemplate.startSpeedMin = rocketTemplate.startSpeedMax =200;
-	
+	rocketTemplate.directionVar = 0; 
 	
 	rocketTemplate.addParticleSystemSetting(sparkler);
 	rocketTemplate.addParticleSystemSetting(sparklerSmoke);
@@ -78,8 +108,7 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 	TriggerPattern pattern;
 
 	
-	float x = 320;
-	
+		
 	for(int j = 0; j<letters.size(); j++) {
 		
 		
@@ -93,21 +122,28 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 		
 		for(int i = 0; i<letter.points.size(); i+=2) {
 		
+			ofVec3f pos = ofVec3f(x,400);
+			letterMesh.addVertex(letter.points[i]*15 +pos);
+			letterMesh.addVertex(letter.points[i+1]*15 +pos);
+			
 			
 			ofVec3f v = letter.points[i+1] -letter.points[i];
 			ofVec3f p = letter.points[i];
 			
-			p*=20;
-			p+=ofVec3f(x,300);
-			v*=20;
+			p*=letterscale;
+			p+=pos;
+			v*=letterscale;
 			
 			
 			
-			float numPoints = floor(v.length()/15);
+			float numPoints = floor(v.length()/10);
+			if(numPoints<1) numPoints = 1;
 			
 			for(float t = 0; t<=1; t+=(1.0f/numPoints)) {
 				
 				glyph.addVertex(p+(v*t));
+				
+				
 				
 			}
 			
@@ -115,19 +151,38 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 		
 		ParticleSystemSettings sparks(ps);
 		ParticleSystemSettings smokes(smoke);
-		ps.emitShape = new ofMesh(glyph);
-		smoke.emitShape = new ofMesh(glyph);
+		ParticleSystemSettings burst(letterBurst);
+		ps.emitShape =  
+			smoke.emitShape = 
+			burst.emitShape = new ofMesh(glyph); 
 		
 		RocketSettings rocket(rocketTemplate);
 		rocket.addParticleSystemSetting(ps);
 		rocket.addParticleSystemSetting(smoke);
+		rocket.addParticleSystemSetting(burst);
+		
+		
 		
 		TriggerRocket trigger(triggerTemplate);
+		trigger.pos.x = ((x- (APP_WIDTH/2)) * triggerSpacing) + (triggerCentre);
+		trigger.fixedPosition = true;
+		
+		ofVec3f targetToLetter = ofVec3f(x,450) - trigger.pos;
+		
+		// dunno why i have to do this. 
+		//targetToLetter.y = -targetToLetter.y;
+		rocket.direction = -targetToLetter.angle(ofVec3f(1,0,0));
+		rocket.startSpeedMin = rocket.startSpeedMax = targetToLetter.length() / fuseTime;
+		
 		trigger.addRocketSettings(rocket);
+		
+		
+		
+		
 		pattern.addTrigger(trigger);
 		
 		
-		x+=110;
+		x+=letterspacing;
 	}
 	
 	
@@ -138,17 +193,35 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 	
 		
 	
-	addArrangement(pattern);
+	addArrangement(pattern, true);
 	
 	
 
 }
 
-
+bool SceneIntro :: draw() {
+	if (Scene :: draw()) {
+		// draw letters
+	
+		ofSetColor(200);
+		letterMesh.setMode(OF_PRIMITIVE_POINTS);
+		
+		letterMesh.draw();
+		
+		
+		
+		return true;
+	} else {
+		
+		return false;
+	}
+	
+	
+}
 bool SceneIntro :: update(float deltaTime) {
 	// disables reworking of arrangements
 	
-	updateTriggerArea = false;
+	//updateTriggerArea = false;
 	
 	return Scene :: update(deltaTime);
 	
@@ -168,7 +241,7 @@ ParticleSystemSettings SceneIntro:: getSmoke() {
 	ps2.directionY = -90; 
 	ps2.directionYVar = 20;
 	ps2.drag = 0.90;
-	ps2.gravity.set(-20,-100);
+	ps2.gravity.set(-40,-100);
 	
 	//LIFE
 	ps2.lifeMin = 0.5;
@@ -185,14 +258,14 @@ ParticleSystemSettings SceneIntro:: getSmoke() {
 	ps2.hueChange = 0;
 	
 	ps2.brightnessStartMin = 10;
-	ps2.brightnessStartMax = 30;
+	ps2.brightnessStartMax = 20;
 	ps2.brightnessEnd = 0;
 	
 	ps2.saturationMin = saturation;
 	ps2.saturationMax = saturation;
 	ps2.saturationEnd = saturation;
 	
-	ps2.shimmerMin = 0.8;
+	//ps2.shimmerMin = 0.8;
 	
 	// but also :
 	// lifeExpectancy
@@ -203,11 +276,12 @@ ParticleSystemSettings SceneIntro:: getSmoke() {
 	
 	
 	ps2.emitMode = PARTICLE_EMIT_CONTINUOUS;
-	ps2.emitCount = 1000;
+	ps2.emitCount = 800;
 	
 	ps2.emitDelay = 0;
 	ps2.emitLifeTime= 0.5;
 	
+	//ps2.renderer = new ParticleRendererBitmap(&softWhiteImage);
 	ps2.renderer = new ParticleRendererShape();
 	
 
@@ -221,6 +295,8 @@ ParticleSystemSettings SceneIntro:: getLetterSparks() {
 	ParticleSystemSettings ps;
 	
 	ps.renderer = new ParticleRendererShape();
+	ps.speedMin = 0;
+	ps.speedMax = 200;
 	
 	ps.directionZ = 0;
 	ps.directionZVar = 0;
@@ -229,11 +305,11 @@ ParticleSystemSettings SceneIntro:: getLetterSparks() {
 	ps.lifeMin = 0.01;
 	ps.shimmerMin = 0;
 	ps.emitCount = 1000;
-	ps.emitSpeedModifier = 0;
+	ps.emitSpeedModifier = 1;
+	ps.emitStartSizeModifier = 1;
 	
 	ps.brightnessEnd = 0;
-	ps.speedMin = 0;
-	ps.speedMax = 500;
+	
 	ps.gravity.y = 200;
 	
 	
@@ -273,4 +349,50 @@ ParticleSystemSettings SceneIntro:: getFuseSparkles() {
 	return ps;
 	
 }
+
+
+ParticleSystemSettings SceneIntro:: getLetterBurst() {
+	ParticleSystemSettings ps;
+	
+	ps.renderer = new ParticleRendererLine(0,false);
+	
+	ps.speedMin = 200;
+	ps.speedMax = 600;
+	ps.gravity.y = 100;
+	
+	
+	ps.directionZ = 0;
+	ps.directionZVar = 10;
+	ps.directionY = -90;
+	ps.directionYVar = 10;
+	
+	ps.drag = 0.93;
+	ps.lifeMin = 0.01;
+	//ps.shimmerMin = 0;
+	ps.emitCount = 5000;
+	ps.emitSpeedModifier = 0.5;
+	
+	ps.sizeStartMin = 0;
+	ps.sizeStartMin = 3;
+	ps.brightnessStartMin =
+		ps.brightnessStartMax = 255;
+	
+	ps.brightnessEnd = 0;
+	ps.saturationEnd = 500;
+	ps.hueStartMin = 20;
+	ps.hueStartMax = 30;
+
+	
+	
+	
+	//ps.brightnessEnd = 0;
+	
+	ps.emitLifeTime = 10;
+	
+	
+	
+	return ps;
+	
+}
+
 

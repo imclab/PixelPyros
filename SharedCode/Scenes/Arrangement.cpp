@@ -8,7 +8,7 @@
 
 #include "Arrangement.h"
 
-Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea) :
+Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea, bool fixedposition) :
 
 	// SHOULD MAYBE STOP TRIGGER AREA BEING SET HERE
 	particleSystemManager(psm) {
@@ -16,14 +16,16 @@ Arrangement :: Arrangement(ParticleSystemManager & psm, ofRectangle triggerarea)
 	stopping = false;
 	//setTriggerArea(triggerarea);
 	//triggerPattern = NULL;
-		triggerCount = 0; 
+	triggerCount = 0;
+		
+	fixedPosition = fixedposition;
 	
 }
 
 
 void Arrangement :: start() {
 	stopping = false; 
-	cout << "start arrangement" << endl; 
+	//cout << "start arrangement" << endl;
 	for(int i=0; i<triggerCount; i++) {
 		
 		//if(ofRandom(100)<2) triggers[i]->doTrigger();
@@ -132,90 +134,123 @@ void Arrangement::updateDebug(bool debug)
 void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 	
 	triggerArea = triggerarea;
-	minimumSpacing = minspacing; 
+	minimumSpacing = minspacing;
 	
-	//cout << "updateLayout " << triggerArea.x << " " << triggerArea.width << endl;
 	float xPos = 0;//triggerArea.x;
-		
+	
 	int triggerIndex = 0;
 	triggerCount = 0;
-	float lastSpacing = 0; 
+	float lastSpacing = 0;
 	
-	while (xPos < (triggerArea.width/2)-minimumSpacing/2) {
-		//cout << xPos << endl;
+	
+	if(fixedPosition) {
 		
-		TriggerBase* triggerLeft;
-		TriggerBase* triggerRight;
-		//bool makeNew = false;
-		if(triggersLeft.size()>triggerCount) {
-			triggerLeft = triggersLeft[triggerCount];
-			triggerRight = triggersRight[triggerCount];
-			//cout << "REUSING TRIGGERS" << endl;
-		} else {
-			triggerLeft = triggerPattern.triggers[triggerIndex]->clone();
-			triggerRight = triggerPattern.triggers[triggerIndex]->clone();
+		//vector<TriggerBase*>& triggers = triggerPattern.triggers;
 		
-			triggersLeft.push_back(triggerLeft);
-			triggersRight.push_back(triggerRight);
-			triggers.push_back(triggerLeft);
-			triggers.push_back(triggerRight);
-			//cout << "MAKING NEW TRIGGERS" << endl;
-
+		for (int i = 0; i<triggerPattern.triggers.size(); i++) {
+			
+			TriggerBase* trigger = triggerPattern.triggers[i];
+			
+			float yvar = triggerPattern.verticalVariations[triggerIndex];
+			float ypos = triggerPattern.verticalPositions[triggerIndex] + ofRandom(-yvar, yvar);
+			ypos *= triggerArea.height/2;
+			
+			if(!trigger->fixedPosition) trigger->pos.x = xPos + triggerArea.x;
+			trigger->pos.y = ypos + triggerArea.getCenter().y;
+			
+			xPos += 50;//triggerPattern.horizSpacings[i];
+			
+			cout << trigger->pos.x << " " << trigger->pos.y << endl;
+			if(triggers.size()<=i)
+				triggers.push_back(trigger);
+			
+			trigger->start();
+			triggerCount++; 
 		}
 		
 		
-		float yvar = triggerPattern.verticalVariations[triggerIndex];
-		float ypos = triggerPattern.verticalPositions[triggerIndex] + ofRandom(-yvar, yvar);
-		ypos *= triggerArea.height/2; 
-		
-		triggerLeft->pos.y = ypos + triggerArea.getCenter().y;
-		triggerLeft->pos.x = xPos;
-		triggerRight->pos = triggerLeft->pos; 
-		
-		lastSpacing = (minimumSpacing * triggerPattern.horizSpacings[triggerIndex]);
-		
-		xPos+=lastSpacing;
-		
-		triggerIndex++;
-		if(triggerIndex>=triggerPattern.triggers.size()) triggerIndex = 0;
-		triggerCount++;
 		
 		
-	}
+		
+	} else {
+		//cout << "updateLayout " << triggerArea.x << " " << triggerArea.width << endl;
+			
+		
+		while (xPos < (triggerArea.width/2)-minimumSpacing/2) {
+			//cout << xPos << endl;
+			
+			TriggerBase* triggerLeft;
+			TriggerBase* triggerRight;
+			//bool makeNew = false;
+			if(triggersLeft.size()>triggerCount) {
+				triggerLeft = triggersLeft[triggerCount];
+				triggerRight = triggersRight[triggerCount];
+				//cout << "REUSING TRIGGERS" << endl;
+			} else {
+				triggerLeft = triggerPattern.triggers[triggerIndex]->clone();
+				triggerRight = triggerPattern.triggers[triggerIndex]->clone();
+			
+				triggersLeft.push_back(triggerLeft);
+				triggersRight.push_back(triggerRight);
+				triggers.push_back(triggerLeft);
+				triggers.push_back(triggerRight);
+				//cout << "MAKING NEW TRIGGERS" << endl;
 
-	
-	// times by two to get both sets
-	triggerCount *=2;
-	// and subtract one to get rid of double in middle
-	//triggerCount--;
-	
-	float spacing = (triggerArea.width/2) / (xPos- (lastSpacing*0.5)) ;
-	//cout << "spacing " << spacing << endl;
-	//cout << triggerCount << endl;
-	
-	
-	for(int i = 0; i<triggers.size(); i+=2) {
+			}
+			
+			
+			float yvar = triggerPattern.verticalVariations[triggerIndex];
+			float ypos = triggerPattern.verticalPositions[triggerIndex] + ofRandom(-yvar, yvar);
+			ypos *= triggerArea.height/2; 
+			
+			triggerLeft->pos.y = ypos + triggerArea.getCenter().y;
+			triggerLeft->pos.x = xPos;
+			triggerRight->pos = triggerLeft->pos; 
+			
+			lastSpacing = (minimumSpacing * triggerPattern.horizSpacings[triggerIndex]);
+			
+			xPos+=lastSpacing;
+			
+			triggerIndex++;
+			if(triggerIndex>=triggerPattern.triggers.size()) triggerIndex = 0;
+			triggerCount++;
+			
+			
+		}
+
 		
-		//cout << i <<  " trigger ";
+		// times by two to get both sets
+		triggerCount *=2;
+		// and subtract one to get rid of double in middle
+		//triggerCount--;
 		
-		triggers[i]->pos.x *=spacing;
-		triggers[i+1]->pos.x = (triggerArea.x + triggerArea.width) - triggers[i]->pos.x;
-		triggers[i]->pos.x+=triggerArea.x;
-	
-		// disable spares!
-		if(i>=triggerCount)
-			triggers[i]->stop();
-		else
-			triggers[i]->start();
+		float spacing = (triggerArea.width/2) / (xPos- (lastSpacing*0.5)) ;
+		//cout << "spacing " << spacing << endl;
+		//cout << triggerCount << endl;
 		
 		
-		if(i+1>=triggerCount)
-			triggers[i+1]->stop();
-		else
-			triggers[i+1]->start();
+		for(int i = 0; i<triggers.size(); i+=2) {
+			
+			//cout << i <<  " trigger ";
+			
+			triggers[i]->pos.x *=spacing;
+			triggers[i+1]->pos.x = (triggerArea.x + triggerArea.width) - triggers[i]->pos.x;
+			triggers[i]->pos.x+=triggerArea.x;
+		
+			// disable spares!
+			if(i>=triggerCount)
+				triggers[i]->stop();
+			else
+				if(!triggers[i]->active) triggers[i]->start();
+			
+			
+			if(i+1>=triggerCount)
+				triggers[i+1]->stop();
+			else
+				if(!triggers[i]->active) triggers[i]->start();
+		}
+		
 	}
-	
-	
 	
 	
 	

@@ -318,7 +318,7 @@ public:
         
         Letter lex;
         lex.addLine(2 , 0 , 2 , 4);
-        lex.addLine(2 , 5 , 2 , 6);
+        lex.addLine(2 , 5.5 , 2 , 6);
         
         letters['!'] = lex; 
         
