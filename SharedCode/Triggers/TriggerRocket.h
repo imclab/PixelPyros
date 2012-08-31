@@ -13,10 +13,10 @@
 #include "RocketSettings.h"
 #include "ParticleSystemManager.h"
 
-#include "TriggerTest.h"
+#include "TriggerSimple.h"
 
 //template <typename Derived>
-class TriggerRocket : public TriggerTest {
+class TriggerRocket : public TriggerSimple{
 
 	public : 
 	
@@ -40,6 +40,8 @@ class TriggerRocket : public TriggerTest {
 	
 	int currentRocketIndex;
 	bool useAllPower;
+	
+	vector <RocketSettings> rocketSettings;
 	
 	
 };

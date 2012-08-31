@@ -25,7 +25,18 @@ TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	radius = 5;
 	motionSensitivity = 0;
 	
-	motionDecay = 1;
+	motionDecay = 20;
+	
+	
+	motionValueCount = 20; 
+	
+	rot1 = ofRandom(360);
+	rot2 = ofRandom(360);
+	rot3 = ofRandom(360);
+	vel1 = ofRandom(400,440);
+	vel2 = ofRandom(320,380);
+	vel3 = ofRandom(280,320);
+	
 	
 }
 
@@ -43,6 +54,14 @@ void TriggerSimple :: start() {
 		unitPower = 1;
 	}
 	
+	
+	rot1 = ofRandom(360);
+	rot2 = ofRandom(360);
+	rot3 = ofRandom(360);
+	vel1 = ofRandom(400,440);
+	vel2 = ofRandom(320,380);
+	vel3 = ofRandom(280,320);
+
 }
 
 void TriggerSimple :: stop() {
@@ -117,6 +136,40 @@ bool TriggerSimple::update(float deltaTime) {
 	//	}
 	//
 	
+	
+	float speed = 1.5;
+	if(unitPower<triggerPower ) speed = ofMap(unitPower, 0, triggerPower, 0, 0.5, true);
+	rot1+= vel1 * deltaTime * speed;
+	rot2+= vel2 * deltaTime * speed;
+	rot3+= vel3 * deltaTime * speed;
+	
+	
+	if(showDebugData) {
+		
+		if((elapsedTime-lastUpdate>0.032)||(motionValues.size()==0)) {
+			
+			motionValues.push_back(motionLevel);
+			lastUpdate = elapsedTime;
+			
+		} else {
+			
+			float lastlevel = 0;
+			
+			
+			lastlevel = motionValues[motionValues.size()-1];
+			
+			motionValues[motionValues.size()-1] = (motionLevel>lastlevel) ? motionLevel : lastlevel;
+		}
+		
+		//if(motionLevel>0) cout <<motionLevel << endl;
+		if(motionValues.size()>motionValueCount) {
+			motionValues.pop_front();
+		}
+	}
+	
+
+	
+	
 	return active;
 }
 
@@ -130,25 +183,134 @@ void TriggerSimple :: draw() {
     
 	ofTranslate(pos);
 	ofScale(scale, scale);
+	float activeScale = ofMap(unitPower, 0, triggerPower, 0.5, 1, true);
+	ofScale(activeScale, activeScale);
 	ofEnableSmoothing();
-	ofDisableBlendMode();
-        
+	//ofDisableBlendMode();
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetColor(ofColor::white);
     //cout << triggerPower << " " << unitPower << endl;
 	if((triggerPower<=unitPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
 		
-		ofCircle(0, 0, radius*unitPower);
-		ofNoFill();
-		ofCircle(0, 0, radius*unitPower);
+		//ofCircle(0, 0, radius*0.5);
+		//ofNoFill();
+		ofSetColor(ofMap(unitPower, 0, triggerLevel, 10,200, true));
+		ofCircle(0, 0, radius*unitPower*0.5);
+		//ofSetColor(200);
 		
 	} else {
-		ofNoFill();
-		ofSetColor(100);
+		//ofNoFill();
+		ofSetColor(50);
 	}
 	
-	ofCircle(0, 0, radius);
+	//ofCircle(0, 0, radius);
+	
+	
+	
+	//ofPushMatrix();
+	//ofTranslate(pos);
+	//orbSize = 0.5;
+	
+	//cout << orbSize << "\n";
+	
+	//ofScale(orbSize,orbSize,orbSize);
+	
+	
+	
+	//ofEnableSmoothing();
+	//ofSetColor(255,50);
+	//ofFill();
+	//ofCircle(0,0,22);
+	
+	
+	ofSetLineWidth(1);
+	
+	ofPushMatrix();
+	ofRotateY(30);
+	ofRotateX(rot1);
+	ofNoFill();
+	ofCircle(0, 0, radius/2, radius);
+	ofPopMatrix();
+	
+	ofPushMatrix();
+	ofRotateZ(120);
+	ofRotateX(rot2);
+	ofNoFill();
+	ofCircle(0, 0, radius/2, radius);
+	ofPopMatrix();
+	
+	ofPushMatrix();
+	ofRotateZ(240);
+	ofRotateX(rot3);
+	ofNoFill();
+	ofCircle(0, 0, radius/2, radius);
+	ofPopMatrix();
+	
+	
+	//ofPopMatrix();
+
+	
 	ofPopStyle();
 	ofPopMatrix();
+	
+	
+	if(showDebugData) {
+		
+		ofPushMatrix();
+		ofPushStyle();
+		ofTranslate(pos);
+        ofScale(1, scale);
+		ofTranslate(0, motionValueCount*-2);
+		ofSetColor(ofColor::red);
+		ofFill();
+		//ofRect(0,0,200,200);
+		
+		
+		
+        
+        for(float i = -0.5; i<=0.5 ; i++){
+            
+            
+            ofPushMatrix();
+            
+            ofBeginShape();
+            
+            
+            ofScale(i,1);
+            
+            ofVertex(-1,0);
+            float lastvalue = -1;
+            
+            for(int i = 0; i<motionValues.size(); i++) {
+				
+                float value = motionValues[i]*20;
+                if(value!=lastvalue) {
+                    //ofLine(0,i,motionValues[i]*20,i);
+                    ofVertex(lastvalue,(i*2)-1);
+                    ofVertex(value,i*2);
+                    ofVertex(value,(i*2)+1);
+                }
+                lastvalue = value;
+                //cout << motionValues[i] << " " << i << endl;
+            }
+            ofVertex(0,motionValues.size()*2);
+            ofVertex(-1,motionValues.size()*2);
+            ofEndShape();
+            
+            ofPopMatrix();
+        }
+		
+		ofPopMatrix();
+		ofPopStyle();
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 }
 
 

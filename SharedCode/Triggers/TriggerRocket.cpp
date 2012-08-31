@@ -9,7 +9,7 @@
 #include "TriggerRocket.h"
 
 
-TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerTest(psm){
+TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerSimple(psm){
 	
 	typeLabel = "TriggerRocket"; 
 	
@@ -22,32 +22,32 @@ void TriggerRocket::draw() {
 	
 	if(!active) return;
     
-    TriggerTest::draw() ;
+    TriggerSimple::draw() ;
 
-	ofPushStyle(); 
-	ofPushMatrix();
-    
-	ofTranslate(pos); 
-	ofScale(scale, scale); 
-	ofEnableSmoothing();
-	ofDisableBlendMode();
-        
-    ofSetColor(ofColor::white);
-    
-	if((unitPower>=triggerPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
-		
-		ofCircle(0, 0, radius*unitPower); 
-		ofNoFill(); 
-		ofCircle(0, 0, radius*unitPower);
-
-	} else {
-		ofNoFill();
-		ofSetColor(100); 
-	}
-	
-	ofCircle(0, 0, radius); 
-	ofPopStyle(); 
-	ofPopMatrix();
+//	ofPushStyle(); 
+//	ofPushMatrix();
+//    
+//	ofTranslate(pos); 
+//	ofScale(scale, scale); 
+//	ofEnableSmoothing();
+//	ofDisableBlendMode();
+//        
+//    ofSetColor(ofColor::white);
+//    
+//	if((unitPower>=triggerPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
+//		
+//		ofCircle(0, 0, radius*unitPower); 
+//		ofNoFill(); 
+//		ofCircle(0, 0, radius*unitPower);
+//
+//	} else {
+//		ofNoFill();
+//		ofSetColor(100); 
+//	}
+//	
+//	ofCircle(0, 0, radius); 
+//	ofPopStyle(); 
+//	ofPopMatrix();
 }
 
 bool TriggerRocket::doTrigger() { 

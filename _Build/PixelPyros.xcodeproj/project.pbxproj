@@ -637,8 +637,8 @@
 			isa = PBXGroup;
 			children = (
 				1203A3DF15E97D83004A9E90 /* TriggerRotator.h */,
-				1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */,
 				1203A3E115E97D83004A9E90 /* TriggerSimple.h */,
+				1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */,
 				126119DC15E4330000DD04DD /* TriggerBase.h */,
 				968E4DE715DD124300D91D6E /* TriggerRocket.h */,
 				968E4DE615DD124300D91D6E /* TriggerRocket.cpp */,

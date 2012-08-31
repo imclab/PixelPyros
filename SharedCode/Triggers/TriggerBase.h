@@ -44,7 +44,6 @@ class TriggerBase {
 	
 	bool active;
 	bool stopping;
-	bool drawTest;
 	
 	// to create a trigger that is one shot, set restoreSpeed
 	// to 0. 
@@ -77,15 +76,19 @@ class TriggerBase {
 	
 	// scale is just used to keep track of whether we're growing or shrinking
 	float scale;
+	//float targetScale;
 	// radius is the graphical size and also the motion area size
 	float radius;
 	
 	
 	ofVec3f pos;
 	
-	vector <RocketSettings> rocketSettings;
+	//vector <RocketSettings> rocketSettings;
 	
 	ParticleSystemManager & particleSystemManager;
+	
+	bool showDebugData;
+	
 	
 	
 	float elapsedTime;

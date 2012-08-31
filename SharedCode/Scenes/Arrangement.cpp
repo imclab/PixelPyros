@@ -124,7 +124,8 @@ void Arrangement::updateDebug(bool debug)
 	{
 		TriggerBase *trigger = triggers[i] ;
 		
-		trigger->drawTest = debug ;
+		trigger->showDebugData = debug ;
+		//cout << "trigger debug : " << trigger->showDebugData << endl;
 	}
 }
 

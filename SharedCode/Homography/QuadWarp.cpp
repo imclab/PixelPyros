@@ -20,7 +20,7 @@ QuadWarp :: QuadWarp (string saveLabel) {
 	pointColour = ofColor :: white;
 	dstPoints.resize(4);
 	defaultDstPoints.resize(4); 
-	visible = true;
+	visible = false;
 	pointRadius = 10;
 	curPointIndex = -1;
 	lastMousePress = 0; 

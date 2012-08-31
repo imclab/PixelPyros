@@ -32,27 +32,7 @@ class TriggerTest : public TriggerSimple {
 	bool update(float deltaTime) { 
 		// update bitmap
 		
-		
-		if((elapsedTime-lastUpdate>0.032)||(motionValues.size()==0)) { 
-		
-			motionValues.push_back(motionLevel); 
-			lastUpdate = elapsedTime; 
-		
-		} else { 
-			
-			float lastlevel = 0;
-			
-			
-			lastlevel = motionValues[motionValues.size()-1];
-			
-			motionValues[motionValues.size()-1] = (motionLevel>lastlevel) ? motionLevel : lastlevel; 
-		}
-		
-		//if(motionLevel>0) cout <<motionLevel << endl; 
-		if(motionValues.size()>motionValueCount) { 
-			motionValues.pop_front(); 
-		}
-		
+				
 		if (TriggerSimple :: update(deltaTime)){
 			return true;
 		} else { 
@@ -63,14 +43,13 @@ class TriggerTest : public TriggerSimple {
 	};
 	
 	virtual void draw() {
-		if(!active || !drawTest) return;
+		if(!active || !showDebugData) return;
 
 		//cout << "trigger test draw" << endl;
 		
 		// draw trigger and motion bitmap 
         // disabling super draw as this is now being extended byTtriggerRocket, which overrides the draw of simple
-		//TriggerRocket::draw();
-        
+		 
         
 		
 		
@@ -119,7 +98,10 @@ class TriggerTest : public TriggerSimple {
         }
 		
 		ofPopMatrix();
-		ofPopStyle(); 
+		ofPopStyle();
+		
+		TriggerSimple::draw();
+		
 		
 	};
 	
