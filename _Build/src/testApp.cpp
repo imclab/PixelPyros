@@ -86,7 +86,6 @@ void testApp::setup(){
 	oscManager.sceneManager = &sceneManager ;
 	oscManager.setup () ;
 	
-    shader.load("shaders/gamma");
     paused = false;
 
 
@@ -288,7 +287,7 @@ void testApp:: setupScenes() {
 	
 	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
-
+    
 	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
 
 	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));

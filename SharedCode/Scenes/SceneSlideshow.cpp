@@ -21,6 +21,27 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     lastUpdateTime = 0;
     defaultFontSize = 4.0;
     
+    // Shared Timer thingy
+    // N.B! Times must be in ascending order of showTime
+    // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
+    vector<string> times;
+    times.push_back("10:00");
+    times.push_back("11:00");
+    times.push_back("12:00");
+    times.push_back("13:00");
+    times.push_back("14:00");
+    times.push_back("15:00");
+    times.push_back("16:00");
+    times.push_back("17:00");
+    times.push_back("18:00");
+    times.push_back("19:00");
+    times.push_back("20:00");
+    times.push_back("21:00");
+    times.push_back("22:00");
+    times.push_back("23:00");
+    
+    SlideTimer *timer = new SlideTimer(APP_WIDTH, APP_HEIGHT, ofRectangle(0, 0, 250, 120), ofColor(128, 128, 128), defaultFontSize, times);
+                                       
     defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.jpg"));
     
 //    Do you want your box guides back to layout the text? Uncomment lines 80-82 in TextWriter.cpp and big blue boxes will return
@@ -28,10 +49,13 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     // Slide 1 -- festivaly opening!
     
     SceneSlide *slide = new SceneSlide(&defaultBackground);
+    slide->add(timer);
+    
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, -25, 700, 60),
-        ofColor(128, 128, 128), 
+//        ofRectangle(0, -25, 700, 60),
+        ofRectangle(0, 0 + 100, 700, 60),
+        ofColor(128, 128, 128),
         defaultFontSize,
         "the official launch of the 2012\nbrighton digital festival!"
     ));
@@ -52,8 +76,10 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
 //    ));
     
     // Auto-centred box, x, y are offsets from the middle
+    
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 100, 700, 60),
+//        ofRectangle(0, 100, 700, 60),
+        ofRectangle(0, 120 + 100, 700, 60),
         ofColor(128, 128, 128),
         0.7 * defaultFontSize,
         "2012.brightondigitalfestival.co.uk"
@@ -66,15 +92,19 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     // Slide 2  -- people thanks!
     
     slide = new SceneSlide(&defaultBackground);
+    slide->add(timer);
+    
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, -25, 600, 50),
-         ofColor(128, 128, 128), 
+//         ofRectangle(0, -25, 600, 50),
+         ofRectangle(0, 0 + 120, 600, 100),
+         ofColor(128, 128, 128),
          defaultFontSize,
          "thanks to:"
     ));
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, 25, 600, 50),
-         ofColor(128, 128, 128), 
+//         ofRectangle(0, 25, 600, 50),
+         ofRectangle(0, 200, 300, 100),
+         ofColor(128, 128, 128),
          0.6 * defaultFontSize,
          "one person, two person, three person, four person,\nfive person, six person, seven person,\neight person, nine person,\nten person, eleventy person, twelve person, thirteen person, \n#lightning strike# ah ha ha ha ha ha ha!"
     ));
@@ -141,7 +171,6 @@ bool SceneSlideshow::draw() {
     }
     
     float deltaTime = ofGetElapsedTimef() - lastUpdateTime;
-    
     if( deltaTime > slide->duration ) {
         currentSlide++;
         
@@ -159,5 +188,6 @@ void SceneSlideshow::initShaderParameters() {
 }
 
 bool SceneSlideshow::startArrangement(int i) {
+    currentSlide = 0;
     return true;
 }
