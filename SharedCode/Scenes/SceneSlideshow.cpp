@@ -25,6 +25,9 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     // N.B! Times must be in ascending order of showTime
     // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
     vector<string> times;
+    times.push_back("07:00");
+    times.push_back("08:00");
+    times.push_back("09:00");
     times.push_back("10:00");
     times.push_back("11:00");
     times.push_back("12:00");
@@ -117,6 +120,7 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     // Slide 3 -- biz thanks!
     
     slide = new SceneSlide(&defaultBackground);
+    slide->add(timer);
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
     	ofRectangle(0, -25, 600, 50),
     	ofColor(128, 128, 128),
