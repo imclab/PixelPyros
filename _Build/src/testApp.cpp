@@ -23,10 +23,15 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
 	
-    receiver.setup(OSC_RECEIVER_PORT);
+	settingsManager.setup () ;
+	
+   /* receiver.setup(OSC_RECEIVER_PORT);
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
-	ofBackground(0);
+    // we'll need to setup a vector of devices for this
+    sender.setup("JIP2.local", OSC_SENDER_PORT);*/
+    
+    ofBackground(0);
 
 	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
 	setupScenes(); 
@@ -69,19 +74,21 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
+	oscManager.settingsManager = &settingsManager ;
+	oscManager.sceneManager = &sceneManager ;
+	oscManager.setup () ;
+	
+    shader.load("shaders/gamma");
+    paused = false;
+
 	testImage.loadImage("img/ParticleWhite.png");
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    while( receiver.hasWaitingMessages() )
-    {
-        ofxOscMessage msg;
-        receiver.getNextMessage(&msg);
-        handleOSCMessage(msg);
-    }
 
+	oscManager.update () ;
+	
 	if(cameraManager.update()){
 		
 		ofImage image(cameraManager.getPixelsRef()); 
@@ -97,7 +104,20 @@ void testApp::update(){
 
 	lastUpdateTime = time;
 	
+	if ( settingsManager.triggerAreaUpdate )
+	{
+		sceneManager.updateTriggerArea(settingsManager.triggerarea) ;
+		settingsManager.triggerAreaUpdate = false ;
+	}
+	
+	if ( settingsManager.triggerDebugUpdate )
+	{
+		sceneManager.updateTriggerDebug(settingsManager.triggerDebug) ;
+		settingsManager.triggerDebugUpdate = false ;
+	}
+	
     if( !paused ) {
+		
         sceneManager.update(deltaTime); 
         particleSystemManager.update(deltaTime);
     }
@@ -164,42 +184,10 @@ void testApp::draw(){
 	if(useFbo) {
 		fbo.end();
         
+
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
-		sceneShader->draw(fbo, fboWarpPoints1, fboWarpPoints2);
-	        
-		//ofEnableBlendMode(OF_BLENDMODE_ADD);
-		
-//		ofMesh mesh;
-//		float hw = APP_WIDTH/2;
-//		
-//		mesh.setMode(OF_PRIMITIVE_TRIANGLES);
-//		
-//		mesh.addVertex(fboWarpPoints1[0]);
-//		mesh.addTexCoord(ofVec2f(0,0));
-//		
-//		mesh.addVertex(fboWarpPoints1[1]);
-//		mesh.addTexCoord(ofVec2f(hw,0)); 
-//		
-//		mesh.addVertex(fboWarpPoints1[2]);
-//		mesh.addTexCoord(ofVec2f(hw,APP_HEIGHT));
-//		
-//		mesh.addVertex(fboWarpPoints1[3]);
-//		mesh.addTexCoord(ofVec2f(0,APP_HEIGHT));
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		mesh.addColor(ofColor::white);
-//		
-//		mesh.addTriangle(0,1,2);
-//		mesh.addTriangle(0,2,3);
-//		
-//		fbo.getTextureReference().bind();
-//		mesh.draw();
-//		fbo.getTextureReference().unbind();
-		//fbo.draw(0,0);
-		//ofDisableBlendMode();
-        
+		sceneShader->draw(fbo, fboWarper1, fboWarper2);
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -232,78 +220,10 @@ void testApp::draw(){
 }
 
 //--------------------------------------------------------------
-void testApp::handleOSCMessage(ofxOscMessage msg) {
-    string address = msg.getAddress().substr(0, msg.getAddress().find(":"));
-    //std::cout << "OSC Message: " << address << std::endl;
-    
-    std::cout << "OSC Message: " << msg.getAddress() << std::endl;
-    if( address.compare(OSC_CMD("Present")) == 0 ) {
-        std::cout << "OscClient connected" << std::endl;
-    }
-    else if( address.compare(OSC_CMD("NotPresent")) == 0 ) {
-        std::cout << "OscClient disconnect" << std::endl;
-    } else {
-        std::vector<std::string> params = ofSplitString(address, "/");
-        int paramsLength = params.size();
-        if( paramsLength >= 2 ) {
-            string objectName = params[paramsLength-2];
-            string objectProperty = params[paramsLength-2]; 
-            float arg = msg.getArgAsFloat(0) ;
-            
-            if ( objectName == "PrevSceneButton" )
-            {
-                if ( OSC_OFF(arg) )
-                    sceneManager.prevScene();
-            }
-            else if ( objectName == "NextSceneButton" )
-            {
-                if ( OSC_OFF(arg) )
-                    sceneManager.nextScene();
-            }
-            else if ( objectName == "TriggerShift" )
-            {
-                // we're getting multiple osc messages per frame due to physics and stuff, so thought it would be better to give update flag for this, rather than a forced redraw, don't want to hurt performance
-                setTriggerUnit(arg) ;
-                sceneManager.currentScene->updateTriggerArea = true ;
-            }
-
-/*            if( (widgetType == "pushbutton") || (widgetType == "togglebutton") ) {
-                switch( widgetIndex ) {
-                    case 1:
-                        if( OSC_OFF(widgetState) ) {
-                            sceneManager.prevScene();
-                        }
-                        break;
-                    
-                    case 2:
-                        if( OSC_OFF(widgetState) ) {
-                            sceneManager.nextScene();
-                        }
-                        break;
-                        
-                    case 3:
-                        if( OSC_OFF(widgetState) ) {
-                            cameraManager.toggleWarperGui(); 
-                        }
-                        break;
-                        
-                    case 4:
-                        if( OSC_OFF(widgetState) ) {
-                            cameraManager.next(); 
-                        }
-                        break;
-                }
-            }*/
-        }
-    }
-}
-                               
-//--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
 	if(key=='w') {
 		cameraManager.toggleWarperGui();
-        
     }
 	if(!cameraManager.warper.guiVisible) {
 			
@@ -341,23 +261,24 @@ void testApp:: mousePressed(int x, int y, int button ) {
 
 void testApp:: setupScenes() { 
 	
-	triggerarea = new ofRectangle (APP_WIDTH/12*1.5 ,0,APP_WIDTH*4.5/6,10);
-	
-    setTriggerUnit( 0.5f ) ;
-	
-    sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerarea));
-	
-	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerarea));
+	// rocket inherits testtrigger, no need for test scene
+	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
 	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneRetro(particleSystemManager, triggerarea));
 	
-	sceneManager.addScene(new SceneRealistic(particleSystemManager, triggerarea));
-	sceneManager.addScene(new SceneTron(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
+
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerarea));
+	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));
+	
+	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
+	
+	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
+	
 }
 
 
@@ -425,13 +346,6 @@ void testApp::setupControlPanel() {
 	
 	ofAddListener(gui.guiEvent, this, &testApp::eventsIn);
 	
-}
-
-void testApp::setTriggerUnit ( float val )
-{
-    triggerY = val ;
-    
-    triggerarea->y = APP_HEIGHT * ( TRIGGER_Y_TOP + ( ( TRIGGER_Y_BOTTOM - TRIGGER_Y_TOP ) * triggerY ) ) ;
 }
 
 void testApp::eventsIn(guiCallbackData & data){

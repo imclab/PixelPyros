@@ -8,6 +8,7 @@
 
 #include "QuadWarp.h"
 
+#include "matrix_funcs.h"
 
 QuadWarp :: QuadWarp (vector <ofVec3f>& quadPoints) : points(quadPoints) {
 	
@@ -18,7 +19,8 @@ QuadWarp :: QuadWarp (vector <ofVec3f>& quadPoints) : points(quadPoints) {
 	pointColour = ofColor :: white;
 
 	visible = true;
-	pointRadius = 10; 
+	pointRadius = 10;
+	curPoint = NULL; 
 
 }
 
@@ -58,12 +60,66 @@ void QuadWarp :: draw() {
 	
 	
 	ofPopStyle();
+	
+}
+
+
+void QuadWarp ::apply(ofRectangle sourceRect){
+	
+	
+	// we set it to the default - 0 translation
+	// and 1.0 scale for x y z and w
+	for(int i = 0; i < 16; i++) {
+		if(i % 5 != 0) _glWarpMatrix[i] = 0.0;
+		else _glWarpMatrix[i] = 1.0;
+	}
+	
+	// source and destination points
+	double src[4][2];
+	double dest[4][2];
+	
+	// we set the warp coordinates
+	// source coordinates as the dimensions of our window
+	src[0][0] = sourceRect.x;
+	src[0][1] = sourceRect.y;
+	src[1][0] = sourceRect.width;
+	src[1][1] = sourceRect.y;
+	src[2][0] = sourceRect.width;
+	src[2][1] = sourceRect.height;
+	src[3][0] = sourceRect.x;
+	src[3][1] = sourceRect.height;
+	
+	// corners are in 0.0 - 1.0 range
+	// so we scale up so that they are at the render scale
+	for(int i = 0; i < 4; i++){
+		dest[i][0] = points[i].x;// * (float) width;
+		dest[i][1] = points[i].y;// * (float) height;
+	}
+	
+	// perform the warp calculation
+	mapQuadToQuad(src, dest, _warpMatrix);
+	
+	// copy the values
+	_glWarpMatrix[0]	= _warpMatrix[0][0];
+	_glWarpMatrix[1]	= _warpMatrix[0][1];
+	_glWarpMatrix[3]	= _warpMatrix[0][2];
+	
+	_glWarpMatrix[4]	= _warpMatrix[1][0];
+	_glWarpMatrix[5]	= _warpMatrix[1][1];
+	_glWarpMatrix[7]	= _warpMatrix[1][2];
+	
+	_glWarpMatrix[12]	= _warpMatrix[2][0];
+	_glWarpMatrix[13]	= _warpMatrix[2][1];
+	_glWarpMatrix[15]	= _warpMatrix[2][2];
+	
+	// finally lets multiply our matrix
+	glMultMatrixf(_glWarpMatrix);
 
 	
 	
 	
-	
-}
+}; 
+
 
 void QuadWarp :: mousePressed(ofMouseEventArgs &e) {
 	

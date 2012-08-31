@@ -1,7 +1,7 @@
 
 #include "SceneIntro.h"
 
-SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle* triggerarea) : Scene(psm, triggerarea) {
+SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
 
 
 	

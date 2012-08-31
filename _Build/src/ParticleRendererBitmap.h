@@ -20,7 +20,6 @@ class ParticleRendererBitmap : public ParticleRendererBase {
 	
 	ParticleRendererBitmap(ofImage* img) : ParticleRendererBase(){
 		
-		cout <<"rendererbitmap contstructor" << endl;
 		image = img;
 		
 		shape.clear();

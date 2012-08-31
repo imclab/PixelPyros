@@ -8,6 +8,8 @@
 #include "ofMain.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "SettingsManager.h"
+#include "OscManager.h"
 #include "ParticleSystemManager.h"
 #include "ParticleSystemSettings.h"
 #include "RocketSettings.h"
@@ -26,18 +28,14 @@
 #include "SceneSlideshow.h"
 
 #include "QuadWarp.h"
+//#include "ofxQuadWarper.h"
 
 #include "glut/glut.h"
 
 #include "ofxOsc.h"
 #include <string.h>
 
-#define OSC_NAMESPACE string("/mrmr")
-#define OSC_CMD(x) (OSC_NAMESPACE + x)
-#define OSC_OFF(x) (x == 0)
-#define OSC_ON(x) (x == 1.0f	)
-
-#include "SceneShader.h"
+#include "ofShader.h"
 
 #include "TextWriter.h"
 
@@ -62,12 +60,11 @@ public:
 	void setupScenes(); 
 	//bool nextScene();
 	//bool prevScene();
-    
-    void handleOSCMessage(ofxOscMessage);
     void updateGUI(SceneShader *);
-	
 	ParticleSystemManager particleSystemManager;
 	SceneManager		sceneManager; 
+	OscManager			oscManager;
+    SettingsManager     settingsManager;
 	CameraManagerWarped cameraManager; 
 	MotionManager		motionManager;
 	SoundPlayer			soundPlayer;
@@ -85,23 +82,14 @@ public:
 	ofImage testImage; 
 	vector <ofVec3f> fboWarpPoints1;
 	vector <ofVec3f> fboWarpPoints2;
+	//ofxQuadWarper warper;
 	
     
 private:
     
     // reverse top and bottom for osc slider
-    static const float TRIGGER_Y_TOP = 1.0f ;
-    static const float TRIGGER_Y_BOTTOM = 0.7f ;
-    float triggerY ;
-    
-    static const int OSC_RECEIVER_PORT = 1234;
-    ofxOscReceiver receiver;
-	
-    ofRectangle* triggerarea;
-    
+    ofShader shader;
     TextWriter textWriter;
     
     bool paused;
-    
-    void setTriggerUnit ( float val );
 };

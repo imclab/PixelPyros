@@ -91,6 +91,8 @@
 		969989B415D3BA1F00647A18 /* Warper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 969989AE15D3BA1F00647A18 /* Warper.cpp */; };
 		96CB3CC515D3B6D0004B6502 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CB3CC415D3B6D0004B6502 /* opencv.a */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		C728D7BC15EFDB06005FCE85 /* SettingsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */; };
+		C728D7C115EFEC66005FCE85 /* OscManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C728D7C015EFEC66005FCE85 /* OscManager.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -163,6 +165,7 @@
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
+		122C3A7115F007F200F81C8D /* matrix_funcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix_funcs.h; sourceTree = "<group>"; };
 		1261192B15E3989C00DD04DD /* ParticleRendererBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererBitmap.h; sourceTree = "<group>"; };
 		126119DC15E4330000DD04DD /* TriggerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TriggerBase.h; path = ../../SharedCode/Triggers/TriggerBase.h; sourceTree = "<group>"; };
 		1278BA9315E38A6E0076753F /* ParticleRendererSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleRendererSquare.h; path = ../../SharedCode/Particles/ParticleRendererSquare.h; sourceTree = "<group>"; };
@@ -378,6 +381,10 @@
 		96CB3CC115D3B561004B6502 /* OpenCV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCV.framework; path = Library/Frameworks/OpenCV.framework; sourceTree = SDKROOT; };
 		96CB3CC415D3B6D0004B6502 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = opencv.a; path = ../../../addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingsManager.cpp; sourceTree = "<group>"; };
+		C728D7BD15EFDB12005FCE85 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		C728D7BF15EFEC5B005FCE85 /* OscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscManager.h; sourceTree = "<group>"; };
+		C728D7C015EFEC66005FCE85 /* OscManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscManager.cpp; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -643,6 +650,8 @@
 		964A383315D2C210004D2BE7 /* SharedCode */ = {
 			isa = PBXGroup;
 			children = (
+				C728D7BE15EFEC3F005FCE85 /* Osc */,
+				C728D7BA15EFDAE4005FCE85 /* Settings */,
 				16252DB115EAE9910074106D /* Text */,
 				16F6B4DC15E9893C00D826B8 /* Shaders */,
 				1278BA9B15E38AB00076753F /* Sound */,
@@ -999,6 +1008,7 @@
 		969989AD15D3BA1F00647A18 /* Homography */ = {
 			isa = PBXGroup;
 			children = (
+				122C3A7115F007F200F81C8D /* matrix_funcs.h */,
 				969989AE15D3BA1F00647A18 /* Warper.cpp */,
 				969989AF15D3BA1F00647A18 /* Warper.h */,
 				12B1575F15EF67C100A457C0 /* QuadWarp.h */,
@@ -1056,6 +1066,24 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		C728D7BA15EFDAE4005FCE85 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */,
+				C728D7BD15EFDB12005FCE85 /* SettingsManager.h */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		C728D7BE15EFEC3F005FCE85 /* Osc */ = {
+			isa = PBXGroup;
+			children = (
+				C728D7C015EFEC66005FCE85 /* OscManager.cpp */,
+				C728D7BF15EFEC5B005FCE85 /* OscManager.h */,
+			);
+			name = Osc;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -1269,6 +1297,8 @@
 				12BF0D6615EB655D00417B56 /* SceneRetro.cpp in Sources */,
 				12C1236715EBD1B600440F63 /* SceneRealistic.cpp in Sources */,
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
+				C728D7BC15EFDB06005FCE85 /* SettingsManager.cpp in Sources */,
+				C728D7C115EFEC66005FCE85 /* OscManager.cpp in Sources */,
 				121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */,
 				12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */,
 				1695B00D15EFAD2A00863FF5 /* SceneSlideshow.cpp in Sources */,

@@ -23,6 +23,8 @@ public :
 	bool update(float deltaTime);
 	void draw(); 
 	void updateMotion(MotionManager& motionManager, cv::Mat homography);
+	void updateTriggerArea(ofRectangle triggerarea);
+	void updateTriggerDebug(bool debug);
 	
 	bool nextArrangement();
 	bool previousArrangement(); 

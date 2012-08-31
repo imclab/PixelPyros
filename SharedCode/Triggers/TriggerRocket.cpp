@@ -9,7 +9,7 @@
 #include "TriggerRocket.h"
 
 
-TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerSimple(psm){
+TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerTest(psm){
 	
 	typeLabel = "TriggerRocket"; 
 	
@@ -21,6 +21,8 @@ TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerSimple(psm)
 void TriggerRocket::draw() {
 	
 	if(!active) return;
+    
+    TriggerTest::draw() ;
 
 	ofPushStyle(); 
 	ofPushMatrix();
