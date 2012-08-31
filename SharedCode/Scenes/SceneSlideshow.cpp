@@ -23,12 +23,14 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     
     defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.jpg"));
     
-    // Slide 1
+//    Do you want your box guides back to layout the text? Uncomment lines 80-82 in TextWriter.cpp and big blue boxes will return
+    
+    // Slide 1 -- festivaly opening!
     
     SceneSlide *slide = new SceneSlide(&defaultBackground);
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 0, 700, 60),
+        ofRectangle(0, -25, 700, 60),
         ofColor(128, 128, 128), 
         defaultFontSize,
         "the official launch of the 2012\nbrighton digital festival!"
@@ -51,35 +53,57 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
     
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 120, 700, 60),
+        ofRectangle(0, 100, 700, 60),
         ofColor(128, 128, 128),
         0.7 * defaultFontSize,
         "2012.brightondigitalfestival.co.uk"
         ));
-
-
     
     // Duration to show, in seconds
-    slide->duration = 20;
+    slide->duration = 10;
     slides.push_back(slide);
     
-    // Slide 2
+    // Slide 2  -- people thanks!
     
     slide = new SceneSlide(&defaultBackground);
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, 0, 600, 100), 
+         ofRectangle(0, -25, 600, 50),
          ofColor(128, 128, 128), 
-         0.9 * defaultFontSize,
+         defaultFontSize,
          "thanks to:"
     ));
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-         ofRectangle(0, 200, 300, 100), 
+         ofRectangle(0, 25, 600, 50),
          ofColor(128, 128, 128), 
          0.6 * defaultFontSize,
-         "thanks to people list of people!"
+         "one person, two person, three person, four person,\nfive person, six person, seven person,\neight person, nine person,\nten person, eleventy person, twelve person, thirteen person, \n#lightning strike# ah ha ha ha ha ha ha!"
     ));
     
+    // Duration to show, in seconds
+    slide->duration = 10;
     slides.push_back(slide);
+    
+
+    // Slide 3 -- biz thanks!
+    
+    slide = new SceneSlide(&defaultBackground);
+    slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
+    	ofRectangle(0, -25, 600, 50),
+    	ofColor(128, 128, 128),
+    	defaultFontSize,
+		"thanks to:"
+));
+    slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
+		ofRectangle(0, 25, 600, 50),
+        ofColor(128, 128, 128),
+      	0.6 * defaultFontSize,
+      	"brightonart, firefly solar, pyra graphics\nJubilee library, chile pickle"
+));
+    
+    // Duration to show, in seconds
+    slide->duration = 10;
+    slides.push_back(slide);
+    
 }
 
 bool SceneSlideshow::draw() {
