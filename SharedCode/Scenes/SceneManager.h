@@ -23,8 +23,10 @@ public :
 	bool update(float deltaTime);
 	void draw(); 
 	void updateMotion(MotionManager& motionManager, cv::Mat homography);
-	void updateTriggerArea(ofRectangle triggerarea);
+	
+	void updateTriggerSettings(ofRectangle triggerarea, float triggerSpacing);
 	void updateTriggerDebug(bool debug);
+	void setTriggersDisabled(bool disabled);
 	
 	bool nextArrangement();
 	bool previousArrangement(); 
@@ -36,6 +38,10 @@ public :
 	
 	int currentSceneIndex;
 	Scene * currentScene;
+	
+	float triggerSpacing;
+	bool triggerShowDebug;
+	bool triggersDisabled;
 	
 	ParticleSystemManager & particleSystemManager;
 	

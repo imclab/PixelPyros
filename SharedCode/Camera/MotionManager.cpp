@@ -11,10 +11,13 @@
 using namespace ofxCv; 
 using namespace cv; 
 MotionManager :: MotionManager(int w, int h){ 
-
+	
+	//thresholdLevel = 20.0f;
+	
 	init(w, h);
 	
 	motionSensitivity = 1;
+	
 
 };
 
@@ -33,7 +36,6 @@ void MotionManager::init(int w, int h) {
 	width = w; 
 	height = h; 
 	
-	thresholdLevel = 20.0f; 
 	
 	cout << "reinitialising images " << w << " " << h << endl; 
 	
@@ -101,7 +103,7 @@ float MotionManager :: getMotionAtPosition(ofVec2f pos, int width){
 
 
 float MotionManager :: getMotionAtPosition(ofVec2f topleft, ofVec2f bottomright){
-			
+	
 	topleft.x = ofClamp(topleft.x, 0, diff.width);
 	topleft.y = ofClamp(topleft.y, 0, diff.height);
 	bottomright.x = ofClamp(bottomright.x, 0, diff.width);
@@ -133,7 +135,8 @@ void MotionManager:: initControlPanel(ofxAutoControlPanel &gui){
 	
 	gui.addDrawableRect("Motion", &diff, 400, 300);
 	
-	gui.addSlider("Threshold","THRESHOLD", thresholdLevel, 0,255); 
+	gui.addSlider("Threshold","THRESHOLD", thresholdLevel, 0,255);
+	gui.addSlider("Sensitivity","MOTION_SENSITIVITY", motionSensitivity, 1,5);
 	
 	ofAddListener(gui.guiEvent, this, &MotionManager::guiEventsIn);
 	
@@ -144,9 +147,15 @@ void MotionManager::guiEventsIn(guiCallbackData & data){
 	
 	if (data.getXmlName() == "THRESHOLD") {
 		
-		thresholdLevel = data.getFloat(0); 
+		//cout << "MotionManager::guiEventsIn threshold change : " << data.getFloat(0) << endl;
+		thresholdLevel = data.getFloat(0);
 		
-	} 
+	} else if (data.getXmlName() == "MOTION_SENSITIVITY") {
+		
+		//cout << "MotionManager::guiEventsIn threshold change : " << data.getFloat(0) << endl;
+		motionSensitivity = data.getFloat(0);
+		
+	}
 		
 }
 

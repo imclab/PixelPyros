@@ -37,11 +37,12 @@ class Scene {
 	
 	Arrangement& addArrangement(TriggerPattern& pattern, bool fixedPosition = false);
 	
-	//void setTriggerArea(ofRectangle rect);
-    
-    bool updateTriggerArea;
-    bool updateTriggerDebug;
+	void updateTriggerSettings(ofRectangle triggerarea, float spacing);
+	void setShowTriggerDebug(bool);
+	void  setTriggersDisabled(bool disabled);
 
+	 
+ 
 	bool next();
 	bool previous(); 
 	

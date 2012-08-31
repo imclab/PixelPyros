@@ -30,8 +30,6 @@ void Scene::init(ofRectangle triggerarea) {
 void Scene :: start() {
 	stopping = false; 
 	if (startArrangement(0)) active = true;
-	updateTriggerArea = true ;
-	updateTriggerDebug = true ;
 }
 
 void Scene::initShaderParameters() {
@@ -63,17 +61,17 @@ bool Scene :: update(float deltaTime) {
 	
 	for(int i=0; i<arrangements.size(); i++) {
 	
-        if ( updateTriggerArea ) 
-        {
-            std::cout << "updating trigger area" << std::endl;
-            arrangements[i]->updateLayout(triggerArea, arrangements[i]->minimumSpacing);
-        }
-		
-		if ( updateTriggerDebug ) 
-        {
-            std::cout << "updating trigger debug" << std::endl;
-            arrangements[i]->updateDebug(triggerDebug);
-        }
+//        if ( updateTriggerArea ) 
+//        {
+//            std::cout << "updating trigger area" << std::endl;
+//            arrangements[i]->updateLayout(triggerArea, arrangements[i]->minimumSpacing);
+//        }
+//		
+//		if ( updateTriggerDebug ) 
+//        {
+//            std::cout << "updating trigger debug" << std::endl;
+//            arrangements[i]->updateDebug(triggerDebug);
+//        }
 		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		
@@ -82,11 +80,6 @@ bool Scene :: update(float deltaTime) {
 		
 	}
 	
-	if (updateTriggerArea)
-		updateTriggerArea = false ;
-	
-	if (updateTriggerDebug)
-		updateTriggerDebug = false ;
 	
 	if((stopping) && (activeArrangements==0) ) {
 		active = false;
@@ -96,6 +89,7 @@ bool Scene :: update(float deltaTime) {
 	
 	
 }
+
 
 bool Scene:: draw() {
 
@@ -126,15 +120,31 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	}
 	
 }
-//
-//void Scene :: setTriggerArea(ofRectangle rect){
-//	
-//	triggerArea = rect;
-//	for(int i = 0; i<arrangements.size() ; i++) {
-//		arrangements[i]->setTriggerArea(rect);
-//	}
-//
-//}
+
+void Scene :: updateTriggerSettings(ofRectangle triggerarea, float spacing){
+
+	for(int i = 0; i<arrangements.size() ; i++) {
+		arrangements[i]->updateLayout(triggerarea, spacing);
+	}
+
+}
+
+void  Scene :: setShowTriggerDebug(bool showDebug) {
+	triggerDebug = showDebug;
+	
+	for(int i = 0; i<arrangements.size() ; i++) {
+		arrangements[i]->updateDebug(triggerDebug);
+	}
+	
+}
+
+void  Scene :: setTriggersDisabled(bool disabled) {
+	
+	for(int i = 0; i<arrangements.size() ; i++) {
+		arrangements[i]->setTriggersDisabled(disabled);
+	}
+	
+}
 
 
 

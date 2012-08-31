@@ -8,18 +8,19 @@
 #pragma once
 
 #include "ofxOsc.h"
-#include "SettingsManager.h"
+//#include "SettingsManager.h"
 #include "SceneManager.h"
+#include "SettingFloat.h"
+#include "SettingBool.h"
 
 #define OSC_OFF(x) (x == 0)
 #define OSC_ON(x) (x == 1.0f	)
 
 
-class OscManager
-{
+class OscManager {
 	public :
 	
-	SettingsManager *settingsManager ;
+	//SettingsManager *settingsManager ;
 	SceneManager *sceneManager ;
 	
 	void setup () ;
@@ -27,12 +28,39 @@ class OscManager
 	
 	void sendOSCMessage(string message, float arg );
     
-	private :
+	
+	bool sendNewValue(SettingFloat& settingFloat) {
+		cout << "sending new value " << settingFloat.oscLabel << " " << settingFloat.getUnitValue()<< endl;
+		sendOSCMessage(settingFloat.oscLabel, settingFloat.getUnitValue());
+		
+		
+	}
+	
+	bool sendNewValue(SettingBool& settingBool) {
+		cout << "sending new value " << settingBool.oscLabel << " " << settingBool.getValue()<< endl;
+		sendOSCMessage(settingBool.oscLabel, settingBool.getValue());
+		
+		
+	}
+
+	void addSettingFloat(SettingFloat & setting) {
+		settingFloats.push_back(&setting);
+		
+	}
+	void addSettingBool(SettingBool & setting) {
+		settingBools.push_back(&setting);
+		
+	}
+	
 	
     void handleOSCMessage(ofxOscMessage);
     static const int OSC_RECEIVER_PORT = 1234;
     static const int OSC_SENDER_PORT = 8000;
+	
     ofxOscReceiver receiver;
     ofxOscSender sender;
+	
+	vector <SettingFloat*> settingFloats;
+	vector <SettingBool*> settingBools;
 	
 } ;

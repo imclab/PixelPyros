@@ -184,6 +184,8 @@ void CameraManager:: initControlPanel(ofxAutoControlPanel &gui){
 
 void CameraManager::guiEventsIn(guiCallbackData & data){
 
+	cout << "CameraManager::guiEventsIn " << data.getXmlName() <<" "<< data.getInt(0) << endl;
+	
 	if (data.getXmlName() == "USB_SHOW_CONTROLS") {
 		
 	

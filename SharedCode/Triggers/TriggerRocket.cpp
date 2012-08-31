@@ -52,6 +52,7 @@ void TriggerRocket::draw() {
 
 bool TriggerRocket::doTrigger() { 
 	
+	if(!TriggerSimple :: doTrigger()) return false;
 	if(rocketSettings.size()==0) return false;
 	
 	RocketSettings & rs = rocketSettings[currentRocketIndex];

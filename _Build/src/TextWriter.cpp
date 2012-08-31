@@ -128,7 +128,7 @@ void TextWriter::draw(ofRectangle box, string text, bool centred) {
 	
 	
     ofPushStyle();
-    ofEnableSmoothing();
+    //ofEnableSmoothing();
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetLineWidth(glyphLineWeight);

@@ -58,9 +58,10 @@ public:
 	void setupControlPanel();
 	void eventsIn(guiCallbackData & data);
 
-	void setupScenes(); 
-	//bool nextScene();
-	//bool prevScene();
+	void setupScenes();
+	void initSounds(); 
+	
+	
     void updateGUI(SceneShader *);
 	ParticleSystemManager particleSystemManager;
 	SceneManager		sceneManager; 
@@ -82,6 +83,18 @@ public:
 	
 	//bool shiftPressed;
 	
+	ofRectangle triggerArea;
+	float triggerAreaCentreY;
+	float triggerAreaWidth;
+	float triggerAreaHeight;
+	float triggerSpacing;
+	bool triggerShowDebug;
+	bool showDiffImage;
+	bool triggersDisabled; 
+	
+	
+	
+	float testValue; 
     
 private:
     
