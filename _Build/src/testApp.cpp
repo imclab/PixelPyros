@@ -78,7 +78,6 @@ void testApp::setup(){
 	oscManager.sceneManager = &sceneManager ;
 	oscManager.setup () ;
 	
-    shader.load("shaders/gamma");
     paused = false;
 
 	testImage.loadImage("img/ParticleWhite.png");
@@ -267,8 +266,8 @@ void testApp:: setupScenes() {
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 	
-	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
 	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
 
 	
 	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));

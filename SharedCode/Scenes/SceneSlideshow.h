@@ -40,6 +40,7 @@ public:
 };
 
 
+
 class SlideText: public SlideObject {
 
 public: 
@@ -62,6 +63,8 @@ public:
     TextWriter writer;
 };
 
+
+
 class CentredSlideText: public SlideText {
 
 public:
@@ -78,6 +81,97 @@ public:
         
         ofPopStyle();
     }
+};
+
+
+
+class SlideTimer: public CentredSlideText {
+    
+public:
+    
+    SlideTimer(int screenWidth, int screenHeight, ofRectangle rect, ofColor c, float fontSize, vector<string> times): CentredSlideText(screenWidth, screenHeight, rect, c, fontSize, "") {
+        showTimes = times;
+        
+        for( int i = 0; i < showTimes.size(); i++ ) {
+            showTimeStamps.push_back(hoursMinutesToEpoch(showTimes[i]));
+        }
+    }
+    
+    time_t hoursMinutesToEpoch(string t) {
+        struct tm tm;
+        
+        string timeString = ofGetTimestampString("%Y-%m-%d") + t;
+        if( strptime(timeString.c_str(), "%Y-%m-%d %H:%M", &tm) != NULL ) {
+            time_t epoch = mktime(&tm);
+            return epoch;
+            // std::cout << "added " << epoch << std::endl;
+        }
+        
+        return 0;
+    }
+    
+     string hoursMinutesToMinutesSecondsString(string t) {
+         vector<string> parts = ofSplitString(t, ":");
+         
+         if( parts.size() != 2 ) {
+             std::cout << "Unrecognised hoursMinutes string: " << t << std::endl;
+             return 0;
+         }
+         
+         // This is horrible, but I'm rushing
+         unsigned long totalSeconds = atoi(parts[0].c_str()) * 60 + atoi(parts[1].c_str());
+         string minutes = ofToString(totalSeconds / 60);
+         if( minutes.length() < 2 ) {
+             minutes = "0" + minutes;
+         }
+         
+         string seconds = ofToString(totalSeconds % 60);
+         if( seconds.length() < 2 ) {
+             seconds = "0" + seconds;
+         }
+         return minutes + ":" + seconds;
+    }
+    
+    string hoursMinutesToSecondsInt(string t) {
+        
+    }
+    
+    string getNextShowTime(unsigned long timeStamp = 0) {
+        if( timeStamp == 0 ) {
+            timeStamp = ofGetUnixTime();
+        }
+        
+        for( int i = 0; i < showTimeStamps.size(); i++ ) {
+            if( timeStamp < showTimeStamps[i] ) {
+                return showTimes[i];
+            }
+        }
+        
+        return "";
+    }
+    
+    string getTimeToNextShow() {
+        string nextShow = getNextShowTime();
+        if( nextShow == "" ) {
+            return 0;
+        }
+        
+        std::cout << "\nNext show: " << nextShow << std::endl;
+        return hoursMinutesToMinutesSecondsString(nextShow);
+    }
+    
+    virtual void draw() {
+        ofPushStyle();
+        
+        ofSetColor(col);
+        writer.drawFixedSize(box, "Next Show: " + getTimeToNextShow(), fontSize, false);
+        
+        ofPopStyle();
+    }
+    
+    vector<string> showTimes;
+    vector<time_t> showTimeStamps;
+    TextWriter writer;
 };
 
 class SlideAutoText: public SlideText {
@@ -131,7 +225,6 @@ private:
     ofImage defaultBackground;
     vector<SceneSlide *> slides;
     float defaultFontSize;
-    
     
     int currentSlide;
     float lastUpdateTime;

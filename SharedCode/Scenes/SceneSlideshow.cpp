@@ -57,7 +57,18 @@ SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerar
         "2012.brightondigitalfestival.co.uk"
         ));
 
-
+    // N.B! Times must be in ascending order of showTime
+    // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
+    vector<string> times;
+    times.push_back("11:00");
+    times.push_back("11:30");
+    times.push_back("12:00");
+    times.push_back("18:00");
+    times.push_back("18:30");
+    times.push_back("19:00");
+    times.push_back("19:30");
+    times.push_back("20:00");
+    slide->add(new SlideTimer(APP_WIDTH, APP_HEIGHT, ofRectangle(0, 0, 100, 100), ofColor(128, 128, 128), defaultFontSize, times));
     
     // Duration to show, in seconds
     slide->duration = 20;
@@ -117,7 +128,6 @@ bool SceneSlideshow::draw() {
     }
     
     float deltaTime = ofGetElapsedTimef() - lastUpdateTime;
-    
     if( deltaTime > slide->duration ) {
         currentSlide++;
         
@@ -135,5 +145,6 @@ void SceneSlideshow::initShaderParameters() {
 }
 
 bool SceneSlideshow::startArrangement(int i) {
+    currentSlide = 0;
     return true;
 }
