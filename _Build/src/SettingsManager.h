@@ -8,52 +8,35 @@
 
 #pragma once
 
-#include "ofxOsc.h"
+#include "ofxControlPanel.h"
+#include "OscManager.h"
+
+#include "SettingFloat.h"
+#include "SettingBool.h"
 
 class SettingsManager
 {
     public:
+	
+	SettingsManager(); 
     
-    void setup () ;
+    void setup (OscManager * osc, ofxControlPanel * gui) ;
     
-    void setTriggerUnit ( float val ) ;
+	void update();
 	
-	// osc sets
-	void setBloomUnit ( float val ) ;
-	void setGammaUnit ( float val ) ;
-	void setBlackUnit ( float val ) ;
-	void setWhiteUnit ( float val ) ;
-	void setTriggerDebugUnit ( float val ) ;
+	void addSettingFloat(float * valuePointer, string xmlname, string osclabel, float min, float max);
 	
-	// normal sets
-	void setBloom ( float val ) ;
-	void setGamma ( float val ) ;
-	void setBlack ( float val ) ;
-	void setWhite ( float val ) ;
-	void setTriggerDebug ( bool val ) ;
+	void addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent = false);
+
 	
-    float bloomValue;
-    float gammaValue;
-    float blackPoint;
-    float whitePoint;
+	//SettingFloat threshold;
 	
-	bool triggerAreaUpdate;
-    ofRectangle triggerarea;
-    
-	bool triggerDebugUpdate;
-	bool triggerDebug;
+	vector <SettingFloat*> settingFloats;
+	vector <SettingBool*> settingBools;
 	
-	private:
+	OscManager * oscManager;
+	ofxControlPanel * controlPanel;
+		
 	
-	// ranges
-    static const float TRIGGER_Y_TOP = 0.98 ;
-    static const float TRIGGER_Y_BOTTOM = 0.72 ;
-   
-	static const float GAMMA_MIN = 0.5 ;
-	static const float GAMMA_MAX = 1.5 ;
-	
-	// settings vals
-	
-    float triggerY ;
 	
 };

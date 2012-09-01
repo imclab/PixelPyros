@@ -1,36 +1,3 @@
-<BG_THRESHOLD>
-    <val_0>16.5278</val_0>
-</BG_THRESHOLD>
-<GRAB_BACKGROUND>
-    <val_0>0</val_0>
-</GRAB_BACKGROUND>
-<SPAWN_TYPE>
-    <val_0>0</val_0>
-</SPAWN_TYPE>
-<FREQUENCY>
-    <val_0>10</val_0>
-</FREQUENCY>
-<SPEED>
-    <val_0>200</val_0>
-</SPEED>
-<SPEED_VAR>
-    <val_0>50</val_0>
-</SPEED_VAR>
-<DIRECTION>
-    <val_0>270</val_0>
-</DIRECTION>
-<DIRECTION_VAR>
-    <val_0>22</val_0>
-</DIRECTION_VAR>
-<POINT_IN_DIRECTION>
-    <val_0>1</val_0>
-</POINT_IN_DIRECTION>
-<GRAVITY>
-    <val_0>0</val_0>
-</GRAVITY>
-<SPAWN_MODE>
-    <val_0>1</val_0>
-</SPAWN_MODE>
 <USB_SHOW_CONTROLS>
     <val_0>0</val_0>
 </USB_SHOW_CONTROLS>
@@ -38,7 +5,7 @@
     <val_0>37.1775</val_0>
 </FW_SHUTTER>
 <FW_BRIGHTNESS>
-    <val_0>91.8</val_0>
+    <val_0>127.5</val_0>
 </FW_BRIGHTNESS>
 <FW_GAIN>
     <val_0>525.63</val_0>
@@ -52,3 +19,36 @@
 <TEST_SLIDER>
     <val_0>50</val_0>
 </TEST_SLIDER>
+<SHADER_BLACK>
+    <val_0>0</val_0>
+</SHADER_BLACK>
+<SHADER_GAMMA>
+    <val_0>1.2</val_0>
+</SHADER_GAMMA>
+<SHADER_WHITE>
+    <val_0>1</val_0>
+</SHADER_WHITE>
+<SHADER_BLOOM>
+    <val_0>0.5</val_0>
+</SHADER_BLOOM>
+<THRESHOLD>
+    <val_0>12.75</val_0>
+</THRESHOLD>
+<TEST_VALUE>
+    <val_0>7.2</val_0>
+</TEST_VALUE>
+<MOTION_SENSITIVITY>
+    <val_0>1.32298</val_0>
+</MOTION_SENSITIVITY>
+<TRIGGER_AREA_WIDTH>
+    <val_0>0.740679</val_0>
+</TRIGGER_AREA_WIDTH>
+<TRIGGER_AREA_HEIGHT>
+    <val_0>0.25</val_0>
+</TRIGGER_AREA_HEIGHT>
+<TRIGGER_AREA_Y>
+    <val_0>0.900223</val_0>
+</TRIGGER_AREA_Y>
+<TRIGGER_SPACING>
+    <val_0>59.3464</val_0>
+</TRIGGER_SPACING>

@@ -120,13 +120,22 @@ void Arrangement :: setPattern(TriggerPattern tp, ofRectangle& triggerarea, floa
 	
 }
 
-void Arrangement::updateDebug(bool debug)
-{
-	for(int i=0; i<triggerCount; i++) 
+void Arrangement::updateDebug(bool debug){
+	for(int i=0; i<triggerCount; i++)
 	{
 		TriggerBase *trigger = triggers[i] ;
 		
 		trigger->showDebugData = debug ;
+		//cout << "trigger debug : " << trigger->showDebugData << endl;
+	}
+}
+
+void Arrangement::setTriggersDisabled(bool disabled){
+	for(int i=0; i<triggerCount; i++)
+	{
+		TriggerBase *trigger = triggers[i] ;
+		
+		trigger->disabled = disabled ;
 		//cout << "trigger debug : " << trigger->showDebugData << endl;
 	}
 }
@@ -160,11 +169,11 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 			
 			xPos += 50;//triggerPattern.horizSpacings[i];
 			
-			cout << trigger->pos.x << " " << trigger->pos.y << endl;
+			//cout << trigger->pos.x << " " << trigger->pos.y << endl;
 			if(triggers.size()<=i)
 				triggers.push_back(trigger);
 			
-			trigger->start();
+			if(active) trigger->start();
 			triggerCount++; 
 		}
 		
@@ -241,13 +250,15 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 			if(i>=triggerCount)
 				triggers[i]->stop();
 			else
-				if(!triggers[i]->active) triggers[i]->start();
+				if(active) 
+					triggers[i]->start();
 			
 			
 			if(i+1>=triggerCount)
 				triggers[i+1]->stop();
 			else
-				if(!triggers[i]->active) triggers[i]->start();
+				if(active) 
+					triggers[i+1]->start();
 		}
 		
 	}

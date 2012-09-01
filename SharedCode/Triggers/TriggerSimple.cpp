@@ -43,7 +43,7 @@ TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 void TriggerSimple :: start() {
 	
 	stopping = false;
-	scale = 0;
+	//if(!)scale = 0;
 	
 	active = true;
 	motionLevel = 0;
@@ -248,7 +248,15 @@ void TriggerSimple :: draw() {
 	
 	
 	//ofPopMatrix();
-
+	
+	if(disabled) {
+		ofDisableBlendMode();
+		ofSetColor(140,0,0);
+		ofLine(-radius,-radius,radius,radius);
+		ofLine(radius,-radius,-radius,radius);
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
+		
+	}
 	
 	ofPopStyle();
 	ofPopMatrix();
@@ -324,5 +332,5 @@ void TriggerSimple :: registerMotion(float unitValue) {
 }
 
 bool TriggerSimple::doTrigger() {
-	return true;
+	return !disabled;
 }

@@ -88,7 +88,7 @@ public:
 		return false;
 	}
 	void keyPressed(ofKeyEventArgs& event) {
-		if(event.key == '\t') {
+		if(event.key == ' ') {
 			if(hidden) {
 				show();
 			} else {
