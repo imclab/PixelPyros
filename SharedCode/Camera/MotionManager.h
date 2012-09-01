@@ -37,7 +37,7 @@ class MotionManager {
 	
 	int width, height;
 	
-	float thresholdLevel; 
+	float thresholdLevel;
 		
 	ofImage current; 
 	ofImage previous; 

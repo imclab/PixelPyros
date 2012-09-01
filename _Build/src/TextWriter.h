@@ -16,7 +16,7 @@ class TextWriter {
 public:
     
     TextWriter();
-    void draw(ofRectangle, string, bool);
+    void draw(ofRectangle, string, bool centered);
     void drawFixedSize(ofRectangle, string, float, bool);
     
     float glyphSpacing, glyphLineSpacing, glyphLineWeight;

@@ -31,7 +31,9 @@ class SceneIntro : public Scene {
 
 	ofMesh letterMesh;
 
-	ofImage softWhiteImage; 
+	ofImage softWhiteImage;
+	
+	TextWriter textWriter; 
 
 
 };

@@ -7,6 +7,7 @@ void testApp::setup(){
 	fboWarper1.label = "leftScreen";
 	fboWarper2.label = "rightScreen";
 	
+	triggerArea.set(APP_WIDTH*0.15,APP_HEIGHT*0.85,APP_WIDTH*0.7,APP_HEIGHT*0.5); 
 	
 	fboWarper1.setDstPoint(0, ofVec2f(0,0));
 	fboWarper1.setDstPoint(1, ofVec2f(APP_WIDTH/2,0));
@@ -20,8 +21,10 @@ void testApp::setup(){
 	fboWarper1.loadSettings();
 	fboWarper2.loadSettings();
 	
+	initSounds();
 	
     paused = false;
+	triggerShowDebug = false;
     
     SceneShader *defaultShader = new SceneShader();
     defaultShader->load("shaders/default");
@@ -31,49 +34,19 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	lastUpdateTime = ofGetElapsedTimef();
 	
-	settingsManager.setup () ;
 	
-   /* receiver.setup(OSC_RECEIVER_PORT);
-    std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
-	
-    // we'll need to setup a vector of devices for this
-    sender.setup("JIP2.local", OSC_SENDER_PORT);*/
-    
+	    
     ofBackground(0);
 
-	//rocket.pos.set(ofGetWidth()/2, ofGetHeight()*0.8, 0);
-	setupScenes(); 
+		setupScenes(); 
 	
 	cameraManager.init();
-	//cameraManager.shutter = 35; 
-	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight()); 
-		
+	
+	motionManager.init(cameraManager.getWidth(), cameraManager.getHeight());
+	
 	setupControlPanel();
 	
-	soundPlayer.defaultPath = "../../../Sounds/";
-	
-	
-	soundPlayer.addSound("Crackle", "RocketFountain", 1, 1.2, 0.5,"mp3");
-	soundPlayer.addSound("ExplosionSynth1", "ExplosionSynth1");
-	
-	soundPlayer.addSound("mortar", "SynthThud", 1, 0.8, 0.2, "mp3");
-	soundPlayer.addSound("mortar", "mortar", 1, 0.8, 0.2, "mp3");
-	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.1, 0.8, 0.4, "aif", 0.1);
-	soundPlayer.addSound("TechnoMortar", "TechnoMortar", 0.9, 1.2, 0.5, "mp3", 0.02);
-	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
-	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.01);
-	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.2, 2, 0.2, "wav", 0.02);
-	soundPlayer.addSound("RetroLaunch", "RetroLaunch", 0.2, 1, 0.2, "wav", 0.02);
-	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
-	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
-	
-	soundPlayer.addSound("Banger", "Banger", 1.0, 0.4, 0.0, "wav", 0.2);
-	soundPlayer.addSound("Crackle", "Crackle", 0.1, 0.8, 0.3, "wav", 0.2);
-	
-	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
-	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
-	soundPlayer.addSound("SoftExplosion", "SoftExplosion", 1.0, 1.0, 0.2, "wav", 0.2);
-	soundPlayer.globalVolume = 1;
+
 	
 	gui.hide();
 	
@@ -82,11 +55,13 @@ void testApp::setup(){
 	ofClear(0,0,0);
 	fbo.end(); 
     
-	oscManager.settingsManager = &settingsManager ;
-	oscManager.sceneManager = &sceneManager ;
+	//oscManager.settingsManager = &settingsManager ;
+	//oscManager.sceneManager = &sceneManager ;
 	oscManager.setup () ;
 	
     paused = false;
+	
+
 
 
 }
@@ -97,6 +72,8 @@ void testApp::update(){
 	
 	
 	oscManager.update () ;
+	
+	settingsManager.update(); 
 	
 	if(cameraManager.update()){
 		
@@ -113,16 +90,26 @@ void testApp::update(){
 
 	lastUpdateTime = time;
 	
-	if ( settingsManager.triggerAreaUpdate )
-	{
-		sceneManager.updateTriggerArea(settingsManager.triggerarea) ;
-		settingsManager.triggerAreaUpdate = false ;
+	if (( triggerAreaWidth*APP_WIDTH!=triggerArea.width ) ||
+		(triggerAreaHeight*APP_HEIGHT != triggerArea.height) ||
+		(triggerAreaCentreY*APP_HEIGHT != triggerArea.getCenter().y) ||
+		(triggerSpacing != sceneManager.triggerSpacing ) ) {
+		triggerArea.width = triggerAreaWidth*APP_WIDTH;
+		triggerArea.x = (APP_WIDTH - triggerArea.width)/2;
+		triggerArea.height = (APP_HEIGHT * triggerAreaHeight);
+		triggerArea.y = (APP_HEIGHT * triggerAreaCentreY) - (triggerArea.height/2) ;
+		
+		sceneManager.updateTriggerSettings(triggerArea, triggerSpacing) ;
 	}
 	
-	if ( settingsManager.triggerDebugUpdate )
-	{
-		sceneManager.updateTriggerDebug(settingsManager.triggerDebug) ;
-		settingsManager.triggerDebugUpdate = false ;
+	if ( triggerShowDebug != sceneManager.triggerShowDebug ) {
+		sceneManager.updateTriggerDebug(triggerShowDebug) ;
+		
+	}
+	
+	if ( triggersDisabled != sceneManager.triggersDisabled ) {
+		sceneManager.setTriggersDisabled(triggersDisabled) ;
+		
 	}
 	
     if( !paused ) {
@@ -190,11 +177,14 @@ void testApp::draw(){
 //	textWriter.draw(ofRectangle(800, 750, 300, 50), "One Really Small Step");
 
 	ofSetColor(255);
-
+	//ofNoFill();
+	//ofRect(triggerArea);
+	
+	
 	if(useFbo) {
 		fbo.end();
         
-
+		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		SceneShader *sceneShader = sceneManager.getSceneShader();
 		updateGUI(sceneShader);
 		
@@ -285,22 +275,49 @@ void testApp:: setupScenes() {
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 	
-	sceneManager.addScene(new SceneCalibration(particleSystemManager, settingsManager.triggerarea));
-	sceneManager.addScene(new SceneSlideshow(particleSystemManager, settingsManager.triggerarea));
-    
-	sceneManager.addScene(new SceneIntro(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerArea));
 
-	sceneManager.addScene(new SceneRetro(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerArea));
+
+	sceneManager.addScene(new SceneRetro(particleSystemManager, triggerArea));
 	
-	sceneManager.addScene(new SceneRealistic(particleSystemManager, settingsManager.triggerarea));
-	sceneManager.addScene(new SceneTron(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneRealistic(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneTron(particleSystemManager, triggerArea));
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, settingsManager.triggerarea));
+	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerArea));
 	
 	sceneManager.changeScene(1);
 	
 }
 
+void testApp::initSounds() {
+	soundPlayer.defaultPath = "../../../Sounds/";
+	
+	
+	soundPlayer.addSound("Crackle", "RocketFountain", 1, 1.2, 0.5,"mp3");
+	soundPlayer.addSound("ExplosionSynth1", "ExplosionSynth1");
+	
+	soundPlayer.addSound("mortar", "SynthThud", 1, 0.8, 0.2, "mp3");
+	soundPlayer.addSound("mortar", "mortar", 1, 0.8, 0.2, "mp3");
+	soundPlayer.addSound("DirtyTechno", "DirtyTechno", 0.1, 0.8, 0.4, "aif", 0.1);
+	soundPlayer.addSound("TechnoMortar", "TechnoMortar", 0.9, 1.2, 0.5, "mp3", 0.02);
+	soundPlayer.addSound("LaunchTechno", "LaunchTechno", 0.9, 1.2, 0.5, "aif", 0.02);
+	soundPlayer.addSound("LaunchTechno", "LaunchTechnoLow", 1, 0.3, 0.2, "aif", 0.01);
+	soundPlayer.addSound("LaunchSweep", "LaunchSweep", 0.2, 2, 0.2, "wav", 0.02);
+	soundPlayer.addSound("RetroLaunch", "RetroLaunch", 0.2, 1, 0.2, "wav", 0.02);
+	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
+	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
+	
+	soundPlayer.addSound("Banger", "Banger", 1.0, 0.4, 0.0, "wav", 0.2);
+	soundPlayer.addSound("Crackle", "Crackle", 0.1, 0.8, 0.3, "wav", 0.2);
+	
+	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
+	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
+	soundPlayer.addSound("SoftExplosion", "SoftExplosion", 1.0, 1.0, 0.2, "wav", 0.2);
+	soundPlayer.globalVolume = 1;
+	
+}
 
 
 
@@ -354,17 +371,45 @@ void testApp::setupControlPanel() {
 	gui.addSlider("Gamma", "SHADER_GAMMA", 0, 0, 10.0, false)->setDimensions(400, 10);
 	gui.addSlider("White Point", "SHADER_WHITE", 0, 0, 1.0, false)->setDimensions(400, 10);
 	gui.addSlider("Bloom", "SHADER_BLOOM", 0, 0, 10.0, false)->setDimensions(400, 10);
-    
+	
+	 
 	gui.addPanel("Motion");
 	
 	motionManager.initControlPanel(gui);
+	
+	gui.addPanel("Triggers");
+	
+	gui.addSlider("Area width", "TRIGGER_AREA_WIDTH", 0, 0, 1.0, false)->setDimensions(400, 10);
+	gui.addSlider("Area height", "TRIGGER_AREA_HEIGHT", 0, 0, 0.5, false)->setDimensions(400, 10);
+	gui.addSlider("Area y pos", "TRIGGER_AREA_Y", 0, 0.5, 1, false)->setDimensions(400, 10);
+	gui.addSlider("Spacing", "TRIGGER_SPACING", 0, 0, 400, false)->setDimensions(400, 10);
+	
 
-	gui.loadSettings("controlPanelSettings.xml");
+	ofAddListener(gui.guiEvent, this, &testApp::eventsIn);
+	
+	
 	gui.setupEvents();
 	gui.enableEvents();
 
 	
-	ofAddListener(gui.guiEvent, this, &testApp::eventsIn);
+	gui.loadSettings("controlPanelSettings.xml");
+
+	
+	
+	settingsManager.setup(&oscManager, &gui) ;
+	
+	
+	settingsManager.addSettingFloat(&motionManager.thresholdLevel, "THRESHOLD", "/PixelPyros/Setup/Threshold/x", 0, 255);
+	settingsManager.addSettingFloat(&motionManager.motionSensitivity, "MOTION_SENSITIVITY", "/PixelPyros/Setup/Sensitivity/x", 1, 5);
+	
+	settingsManager.addSettingFloat(&triggerAreaWidth, "TRIGGER_AREA_WIDTH", "/PixelPyros/Setup/Width/x", 0, 1);
+	settingsManager.addSettingFloat(&triggerAreaHeight, "TRIGGER_AREA_HEIGHT", "/PixelPyros/Setup/Height/x",0, 0.5);
+	settingsManager.addSettingFloat(&triggerAreaCentreY, "TRIGGER_AREA_Y", "/PixelPyros/Setup/VPOS/x",0.5, 1);
+	settingsManager.addSettingFloat(&triggerSpacing, "TRIGGER_SPACING", "/PixelPyros/Setup/Spacing/x",0, 400);
+	settingsManager.addSettingBool(&triggerShowDebug, "*TRIGGER_DEBUG", "/PixelPyros/Setup/TriggerDebug/x", true);
+	settingsManager.addSettingBool(&showDiffImage, "*SHOW_DIFF", "/PixelPyros/Setup/ShowDiff/x", true);
+	settingsManager.addSettingBool(&triggersDisabled, "*DISABLE_MOTION", "/PixelPyros/Setup/MotionDisable/x", true);
+	
 	
 }
 
@@ -382,7 +427,18 @@ void testApp::eventsIn(guiCallbackData & data){
     }
 	else if( data.getXmlName() == "SHADER_BLOOM" ) {
         sceneShader->bloomValue = data.getFloat(0);
+    } else if( data.getXmlName() == "TRIGGER_AREA_WIDTH" ) {
+        triggerAreaWidth = data.getFloat(0);
+    } else if( data.getXmlName() == "TRIGGER_AREA_HEIGHT" ) {
+        triggerAreaHeight = data.getFloat(0);
+    } else if( data.getXmlName() == "TRIGGER_AREA_Y" ) {
+        triggerAreaCentreY = data.getFloat(0);
+    } else if( data.getXmlName() == "TRIGGER_SPACING" ) {
+        triggerSpacing = data.getFloat(0);
     }
+	
+	
+	//gui.saveSettings();
 }
 
 

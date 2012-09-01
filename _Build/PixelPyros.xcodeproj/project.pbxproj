@@ -194,6 +194,8 @@
 		12CD4AF015E6E1A100C21984 /* ParticleRendererLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleRendererLine.h; sourceTree = "<group>"; };
 		12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketTronFountain.h; sourceTree = "<group>"; };
 		12D7CD5F15DFF00E0089AA4D /* RocketFountain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocketFountain.h; sourceTree = "<group>"; };
+		12D9BDD315F13F73005B1CF6 /* SettingFloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingFloat.h; sourceTree = "<group>"; };
+		12D9BDD415F16F45005B1CF6 /* SettingBool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingBool.h; sourceTree = "<group>"; };
 		16252DB215EAE9C70074106D /* TextWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextWriter.h; sourceTree = "<group>"; };
 		16252DB315EAEE650074106D /* TextWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextWriter.cpp; sourceTree = "<group>"; };
 		16252DB515EB04400074106D /* Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Letter.h; sourceTree = "<group>"; };
@@ -1071,6 +1073,8 @@
 		C728D7BA15EFDAE4005FCE85 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				12D9BDD315F13F73005B1CF6 /* SettingFloat.h */,
+				12D9BDD415F16F45005B1CF6 /* SettingBool.h */,
 				C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */,
 				C728D7BD15EFDB12005FCE85 /* SettingsManager.h */,
 			);

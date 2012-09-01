@@ -55,8 +55,8 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 	letters.push_back(font.letters['!']);
 	
 	
-	float letterscale = 15;
-	float letterspacing = 90;
+	float letterscale = 13;
+	float letterspacing = (5*letterscale) + 13;
 	float lettercount = letters.size();
 	lettercount += (letters.size() % 2);
 	float x = APP_WIDTH/2 - (lettercount*letterspacing/2)+15;
@@ -66,6 +66,9 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 
 	float triggerSpacing = 0.1;
 	float triggerCentre = APP_WIDTH * 0.7;
+	
+	float sparklerSpacing = 10;
+	float verticalPosition = 400; 
 	
 	
 	
@@ -122,9 +125,10 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 		
 		for(int i = 0; i<letter.points.size(); i+=2) {
 		
-			ofVec3f pos = ofVec3f(x,400);
-			letterMesh.addVertex(letter.points[i]*15 +pos);
-			letterMesh.addVertex(letter.points[i+1]*15 +pos);
+			ofVec3f pos = ofVec3f(x,verticalPosition);
+			
+			letterMesh.addVertex(letter.points[i]*letterscale +pos);
+			letterMesh.addVertex(letter.points[i+1]*letterscale +pos);
 			
 			
 			ofVec3f v = letter.points[i+1] -letter.points[i];
@@ -136,7 +140,7 @@ SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : 
 			
 			
 			
-			float numPoints = floor(v.length()/10);
+			float numPoints = floor(v.length()/sparklerSpacing);
 			if(numPoints<1) numPoints = 1;
 			
 			for(float t = 0; t<=1; t+=(1.0f/numPoints)) {
@@ -203,6 +207,9 @@ bool SceneIntro :: draw() {
 	if (Scene :: draw()) {
 		// draw letters
 	
+		textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.2, APP_WIDTH *0.6, APP_HEIGHT * 0.2), "Brighton Digital Festival 2012",true);
+		
+		
 		ofSetColor(200);
 		letterMesh.setMode(OF_PRIMITIVE_POINTS);
 		

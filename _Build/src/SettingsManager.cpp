@@ -5,84 +5,81 @@
 //  Created by Jack Lang on 30/08/2012.
 //
 
-#include <iostream>
-#include "testApp.h"
+
 #include "SettingsManager.h"
 
-void SettingsManager::setup ()
-{
-	triggerarea = ofRectangle (APP_WIDTH*0.05 ,0,APP_WIDTH*0.9,10);
+SettingsManager::SettingsManager() {
 	
-    setTriggerUnit( 0.5f ) ;
+	oscManager = NULL;
+	controlPanel = NULL; 
 	
-    setBloom ( 0.5 ) ;
-    setGamma ( 1.2 ) ;
-    setBlack ( 0.0 ) ;
-    setWhite ( 1.0 ) ;
+}
+
+void SettingsManager::setup (OscManager * osc, ofxControlPanel * gui) {
+		
+	oscManager = osc;
+	controlPanel = gui; 
 	
-	setTriggerDebug(false) ;
+	
 }
 
 
-// unit setters for osc, don't transmit to osc
-void SettingsManager::setTriggerUnit ( float val )
-{
-    triggerY = val ;
-    
-    triggerarea.y = APP_HEIGHT * ( TRIGGER_Y_TOP + ( ( TRIGGER_Y_BOTTOM - TRIGGER_Y_TOP ) * triggerY ) ) ;
-	triggerAreaUpdate = true ;
+void SettingsManager::update() {
+	
+	
+	for(int i = 0; i<settingFloats.size(); i++) {
+		
+		SettingFloat* setting = settingFloats[i];
+		
+		if(setting->checkChanged()) {
+			cout << "value changed " << endl; 
+			oscManager->sendNewValue(*setting);
+			controlPanel->setValueF(setting->xmlLabel, setting->value);
+			
+			controlPanel->saveSettings();
+			
+			
+		}
+	}
+	
+	
+	for(int i = 0; i<settingBools.size(); i++) {
+		
+		SettingBool* setting = settingBools[i];
+		
+		if(setting->checkChanged()) {
+			cout << "value changed " << endl;
+			oscManager->sendNewValue(*setting);
+			controlPanel->setValueB(setting->xmlLabel, setting->value);
+			
+			controlPanel->saveSettings();
+			
+			
+		}
+	}
+	
+	
 }
 
-void SettingsManager::setBloomUnit ( float val )
-{
-	bloomValue = val ;
+
+void SettingsManager::addSettingFloat(float * valuePointer, string xmlname, string osclabel, float min, float max ) {
+	
+	SettingFloat* settingFloat = new SettingFloat(valuePointer, xmlname, osclabel, min, max);
+	
+	//threshold = SettingFloat(targetThreshold, "THRESHOLD", "/PixelPyros/Setup/Threshold/x", 0, 255);
+	oscManager->addSettingFloat(*settingFloat);
+	settingFloats.push_back(settingFloat);
+	
 }
 
-void SettingsManager::setGammaUnit ( float val )
-{
-	gammaValue = GAMMA_MIN + ( ( GAMMA_MAX - GAMMA_MIN ) * val ) ;
-}
 
-void SettingsManager::setBlackUnit ( float val )
-{
-	blackPoint = val ;
-}
-
-void SettingsManager::setWhiteUnit ( float val )
-{
-	whitePoint = val ;
-}
-
-void SettingsManager::setTriggerDebugUnit ( float val )
-{
-	triggerDebug = val == 1.0 ;
-	std::cout << "set debug " << triggerDebug << std::endl ;
-	triggerDebugUpdate = true ;
-}
-
-// setters for automated osc output
-void SettingsManager::setBloom ( float val )
-{
-	bloomValue = val ;
-}
-
-void SettingsManager::setGamma ( float val )
-{
-	gammaValue = val ;
-}
-
-void SettingsManager::setBlack ( float val )
-{
-	blackPoint = val ;
-}
-
-void SettingsManager::setWhite ( float val )
-{
-	whitePoint = val ;
-}
-
-void SettingsManager::setTriggerDebug ( bool val )
-{
-	triggerDebug = val ;
-	triggerDebugUpdate = true ;
+void SettingsManager::addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent) {
+	
+	SettingBool* setting = new SettingBool(valuePointer, xmlname, osclabel);
+	
+	//threshold = SettingFloat(targetThreshold, "THRESHOLD", "/PixelPyros/Setup/Threshold/x", 0, 255);
+	oscManager->addSettingBool(*setting);
+	settingBools.push_back(setting);
+	if(sendCurrent) setting->value = !*setting->target; 
+	
 }
