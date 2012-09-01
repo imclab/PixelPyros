@@ -43,10 +43,20 @@ public:
 		
 		//ofMatrix4x4 mat;
 		
+		
 		for(std::vector<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
 			
 			Particle& p = **it; // *(particles[i]);
+		
 			if((!p.enabled) || (p.size<pixelSize/4)) continue;
+		
+			
+			float size = round(p.size / pixelSize);
+//			float snappedPos = pos;
+//			snappedPos.x -= (size/2);
+//			snappedPos.y -= (size/2);
+//			
+			
 			
 			int vertexIndex = mesh.getNumVertices();
 			

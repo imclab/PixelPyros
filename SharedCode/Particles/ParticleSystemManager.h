@@ -37,7 +37,6 @@ public:
 			if(ps->finished) continue; 
 			
 			
-			
 			// SOMEHOW... the ParticleSystem has to report what sounds to make...
 			// maybe just pass in a reference to the soundPLayer into all ParticleSystems? 
 			ps->update(deltaTime);

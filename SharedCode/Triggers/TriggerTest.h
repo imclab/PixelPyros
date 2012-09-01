@@ -14,7 +14,7 @@ class TriggerTest : public TriggerSimple {
 	
 	public : 
 	
-	TriggerTest(ParticleSystemManager& psm): TriggerSimple (psm) {
+	TriggerTest(ParticleSystemManager& psm): TriggerSimple (psm, 5) {
 		typeLabel = "TriggerTest"; 
 		motionDecay = 100;
 		type = TRIGGER_TYPE_FIRE_ON_MOTION; 

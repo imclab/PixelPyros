@@ -20,6 +20,7 @@ class StretchyNet {
 		
 		updateCount = 0;
 		elapsedTime = 0;
+		brightness =0.5 ;
 	}
 
 	void init(ofRectangle boundsrect, float colwidth =30, int rowheight = 30) {
@@ -129,8 +130,8 @@ class StretchyNet {
 		for(std::vector<StretchyNetPoint>::iterator it = points.begin(); it != points.end(); ++it) {
 			
 			mesh.addVertex(*it);
-			float strength = ofMap(it->vel.lengthSquared(),0,10,0.3,0.8,true);
-			mesh.addColor(ofColor(strength*100,strength*140,(strength*140) + 0));
+			float strength = ofMap(it->vel.lengthSquared(),0,10,0.3,0.8,true) * brightness;
+			mesh.addColor(ofColor(strength*180,strength*255,(strength*255) + 0));
 		}
 		
 		mesh.addIndices(indices);
@@ -146,6 +147,8 @@ class StretchyNet {
 	float elapsedTime;
 	vector <StretchyNetPoint> points;
 	vector <unsigned int> indices;
-	ofRectangle bounds; 
+	ofRectangle bounds;
+	
+	float brightness; 
 					
 };

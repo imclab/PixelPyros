@@ -9,7 +9,7 @@
 #include "TriggerRocket.h"
 
 
-TriggerRocket :: TriggerRocket (ParticleSystemManager& psm) : TriggerSimple(psm){
+TriggerRocket :: TriggerRocket (ParticleSystemManager& psm, float triggerRadius) : TriggerSimple(psm, triggerRadius){
 	
 	typeLabel = "TriggerRocket"; 
 	
@@ -23,31 +23,6 @@ void TriggerRocket::draw() {
 	if(!active) return;
     
     TriggerSimple::draw() ;
-
-//	ofPushStyle(); 
-//	ofPushMatrix();
-//    
-//	ofTranslate(pos); 
-//	ofScale(scale, scale); 
-//	ofEnableSmoothing();
-//	ofDisableBlendMode();
-//        
-//    ofSetColor(ofColor::white);
-//    
-//	if((unitPower>=triggerPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
-//		
-//		ofCircle(0, 0, radius*unitPower); 
-//		ofNoFill(); 
-//		ofCircle(0, 0, radius*unitPower);
-//
-//	} else {
-//		ofNoFill();
-//		ofSetColor(100); 
-//	}
-//	
-//	ofCircle(0, 0, radius); 
-//	ofPopStyle(); 
-//	ofPopMatrix();
 }
 
 bool TriggerRocket::doTrigger() { 
@@ -55,34 +30,56 @@ bool TriggerRocket::doTrigger() {
 	if(!TriggerSimple :: doTrigger()) return false;
 	if(rocketSettings.size()==0) return false;
 	
+	PhysicsObject *rocket = makeNewRocket(); 
+	
+	return true; 
+}
+
+PhysicsObject * TriggerRocket:: makeNewRocket() {
+	
 	RocketSettings & rs = rocketSettings[currentRocketIndex];
 	currentRocketIndex++;
-	if(currentRocketIndex==rocketSettings.size()) currentRocketIndex = 0; 
+	if(currentRocketIndex==rocketSettings.size()) currentRocketIndex = 0;
+
+	PhysicsObject *rocket = particleSystemManager.getPhysicsObject();
 	
-	PhysicsObject *rocket = particleSystemManager.getPhysicsObject(); 
+	float power = ofRandom(1);
 	
-	float power = ofRandom(1); 
-	rocket->vel.set(ofMap(power, 0, 1, rs.startSpeedMin, rs.startSpeedMax),0,0);
-	rocket->vel.rotate(0,0,ofRandom(rs.direction - rs.directionVar, rs.direction+rs.directionVar)); 
-	rocket->gravity = rs.gravity; 
-	rocket->drag = rs.drag; 
+	if(rs.mode == ROCKET_MODE_PHYSICS) {
+		rocket->vel.set(ofMap(power, 0, 1, rs.startSpeedMin, rs.startSpeedMax),0,0);
+		rocket->vel.rotate(0,0,ofRandom(rs.direction - rs.directionVar, rs.direction+rs.directionVar));
+		rocket->gravity = rs.gravity;
+		rocket->drag = rs.drag;
+	} else if(rs.mode == ROCKET_MODE_TARGET) {
+		rocket->drag = 1;
+		rocket->gravity.set(0,0,0);
+		rocket->vel = (rs.targetPos - pos) / rs.targetSpeed;
+		//cout << "rocket vel " << rocket->vel.x << " " << rocket->vel.y << endl;
+		
+		
+	}
+		
+		
 	rocket->pos.set(pos);
 	rocket->lastPos.set(pos);
 	rocket->life.lifeTime = rs.lifeTime;
 	
-	for(int i = 0; i<rs.particleSystemSettings.size(); i++) { 
-		ParticleSystemSettings pss = rs.particleSystemSettings[i]; 
+	for(int i = 0; i<rs.particleSystemSettings.size(); i++) {
+		ParticleSystemSettings pss = rs.particleSystemSettings[i];
 		
-		ParticleSystem* ps = particleSystemManager.getParticleSystem(); 
+		ParticleSystem* ps = particleSystemManager.getParticleSystem();
 		
-		//pss.hueStartMin = pss.hueStartMax = ofRandom(255); 
+		//pss.hueStartMin = pss.hueStartMax = ofRandom(255);
 		ps->init(pss);
-		ps->attachedPhysicsObject = rocket; 
+		ps->attachedPhysicsObject = rocket;
 		ps->power = power;
 	}
 	
 
-	return true; 
+	
+	return rocket; 
+	
+	
 }
 
 void TriggerRocket:: addRocketSettings(RocketSettings rocket) {

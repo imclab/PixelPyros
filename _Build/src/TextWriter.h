@@ -20,6 +20,11 @@ public:
     void drawFixedSize(ofRectangle, string, float, bool);
     
     float glyphSpacing, glyphLineSpacing, glyphLineWeight;
+	ofColor colour;
+	
+	float lineRandomness;
+	float colourFlickerMin;
+	bool smooth; 
     
 	void addGlyphToMesh(Letter&, ofRectangle, ofMesh& );
 	

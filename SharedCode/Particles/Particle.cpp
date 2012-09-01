@@ -44,7 +44,7 @@ bool Particle :: update(float deltaTime) {
 	// This system is a bit sucky. 
 	if(renderDelay>0) {
 		life.resetElapsedTime();
-		size = 1;
+		size = 0;
 		renderDelay-=deltaTime;
 	} else {
 		size = ofMap(life.unitLifeProgress, 0, 1, sizeStart, sizeEnd, true);

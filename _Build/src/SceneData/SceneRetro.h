@@ -20,11 +20,11 @@ class SceneRetro : public Scene {
 	ParticleSystemSettings getPixelTrailParticles(float hue = -30, float hueChange = 40);
 	ParticleSystemSettings getPixelExplosionParticles(float hue = -30, float hueChange = 40);
 
-	RocketSettings getRetroFountain(); 
+	RocketSettings getRetroFountain(float hueOffset = 0, float hueChange = -128);
 	
-	RocketSettings getFluffyRocket();
+	RocketSettings getFatRocket(float hue = 0);
     
-	unsigned int pixelSize; 
+	unsigned int pixelSize;
     
    
 };

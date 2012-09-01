@@ -151,6 +151,7 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing, boo
 	triggerCount = 0;
 	float lastSpacing = 0;
 	
+	if(triggerPattern.triggers.size()==0) return;
 	
 	if(fixedPosition) {
 		

@@ -17,6 +17,10 @@ TextWriter::TextWriter() {
     glyphHeight = 10;
     glyphSpacing = 1.5;
     glyphLineWeight = 2;
+	colour.set(20,200,20);
+	lineRandomness = 0.05;
+	colourFlickerMin = 0.9;
+	smooth = true; 
     
     glyphRatio = glyphHeight / (float)glyphWidth;
 }
@@ -49,35 +53,41 @@ int TextWriter::calculateBlockWidth(string s, int glyphRenderWidth, int glyphRen
 }
 
 void TextWriter::addGlyphToMesh(Letter &letter, ofRectangle box, ofMesh& mesh) {
-    //ofMesh mesh;
-    //mesh.setMode(OF_PRIMITIVE_LINES);
-    
+	
+	//float randomness = 0.05;
+	
     for( int i = 0; i < letter.points.size(); i++ ) {
 		
 		ofVec3f v; 
-		v.x = box.x + ofMap(letter.points[i].x, 0, glyphWidth, 0, box.width);
-		v.y = box.y + ofMap(letter.points[i].y, 0, glyphHeight, 0, box.height);
+		v.x = box.x + ofMap(letter.points[i].x + ofRandom(-lineRandomness, lineRandomness), 0, glyphWidth, 0, box.width);
+		v.y = box.y + ofMap(letter.points[i].y + ofRandom(-lineRandomness, lineRandomness), 0, glyphHeight, 0, box.height);
        
         mesh.addVertex(v);
-        // mesh.addColor(ofColor(0, 255, 10));
+		
+		ofColor vcolor(colour);
+		vcolor.setBrightness(vcolor.getBrightness() * ofRandom(colourFlickerMin, 1));
+		mesh.addColor(vcolor); 
+       
     }
-   // mesh.draw();
+
 }
 
 void TextWriter::drawFixedSize(ofRectangle box, string text, float glyphScaleFactor, bool centred) {
-    text = trim(ofToUpper(text));
+    text = ofToUpper(text);
     
 	if(box.height<=0) box.height = 1;
 	if(box.width<=0) box.width = 1;
     
     ofPushStyle();
-    ofEnableSmoothing();
+    if(smooth) ofEnableSmoothing();
+	else ofDisableSmoothing();
+	
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetLineWidth(glyphLineWeight);
     
     ofPushStyle();
-// 	ofSetColor(10, 10, 255, 128);
+ 	//ofSetColor(colour);
 //  	ofNoFill();
 //	ofRect(box);
     ofPopStyle();
@@ -128,7 +138,8 @@ void TextWriter::draw(ofRectangle box, string text, bool centred) {
 	
 	
     ofPushStyle();
-    //ofEnableSmoothing();
+	if(smooth) ofEnableSmoothing();
+	else ofDisableSmoothing();
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetLineWidth(glyphLineWeight);
@@ -136,7 +147,7 @@ void TextWriter::draw(ofRectangle box, string text, bool centred) {
     ofPushStyle();
     ofSetColor(10, 10, 255, 128);
     ofNoFill();
-	ofRect(box);
+	//ofRect(box);
     ofPopStyle();
     
     float boxRatio = box.height / (float)box.width;
@@ -205,8 +216,12 @@ void TextWriter::draw(ofRectangle box, string text, bool centred) {
     }
 	
 	writingMesh.setMode(OF_PRIMITIVE_LINES);
-    writingMesh.draw(); 
+    writingMesh.draw();
+    writingMesh.setMode(OF_PRIMITIVE_POINTS);
+	writingMesh.draw();
     
+
+	
     ofPopStyle();
 }
 

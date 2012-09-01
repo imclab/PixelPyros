@@ -8,6 +8,13 @@
 
 #pragma once
 
+
+typedef enum {
+	ROCKET_MODE_PHYSICS,
+	ROCKET_MODE_TARGET
+} RocketMode;
+
+
 class RocketSettings { 
 
 	public:
@@ -21,8 +28,7 @@ class RocketSettings {
 		gravity.set(0,0,0); 
 		drag = 1;
 		lifeTime = 2;
-	//	renderer = NULL;
-		
+		mode = ROCKET_MODE_PHYSICS;
 		
 	};
 
@@ -50,7 +56,11 @@ class RocketSettings {
 	ofVec3f gravity; 
 	float	drag;
 	
-	//PhysicsObjectRenderer* renderer;
+	RocketMode mode; 
+	
+	
+	ofVec3f targetPos;
+	float targetSpeed;
 	
 	vector <ParticleSystemSettings> particleSystemSettings;
 

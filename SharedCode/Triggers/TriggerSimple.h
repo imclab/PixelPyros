@@ -12,7 +12,7 @@ class TriggerSimple : public TriggerBase {
 	
 	public :
 	
-	TriggerSimple(ParticleSystemManager & psm);
+	TriggerSimple(ParticleSystemManager & psm, float triggerRadius = 5);
 	virtual bool update(float deltaTime);
 	virtual void draw();
 	
@@ -29,7 +29,9 @@ class TriggerSimple : public TriggerBase {
 		return new TriggerSimple( *this );
 	}
 	
-	
+	//ofColor colour;
+	float hue;
+	float saturation; 
 	// for the debug data
 	deque <float> motionValues;
 	int motionValueCount;

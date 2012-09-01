@@ -13,7 +13,6 @@
 #include "ParticleRendererStar.h"
 #include "ParticleRendererLine.h"
 #include "ParticleRendererCircle.h"
-//#include "ParticleRendererBitmap.h"
 
 class RocketTron : public RocketSettings {
 	
@@ -74,8 +73,8 @@ class RocketTron : public RocketSettings {
 		
 		//APPEARANCE
 		
-		trails.sizeStartMin = 5;
-		trails.sizeStartMax = 10;
+		trails.sizeStartMin = 10;
+		trails.sizeStartMax = 20;
 		trails.sizeChangeRatio = 0;
 		
 		trails.hueStartMin = 110+hueStartOffset;
@@ -158,7 +157,7 @@ class RocketTron : public RocketSettings {
 
 		
 		
-		startSpeedMin = 600;
+		startSpeedMin = 650;
 		startSpeedMax = 750;
 		direction = -90;
 		directionVar = 1;
@@ -171,8 +170,8 @@ class RocketTron : public RocketSettings {
 	
 	void addParticleSystems() {
 		
-		addParticleSystemSetting(head);
-		//addParticleSystemSetting(trails);
+		//addParticleSystemSetting(head);
+		addParticleSystemSetting(trails);
 		addParticleSystemSetting(explosion);
 		
 		

@@ -7,21 +7,135 @@ SceneRetro :: SceneRetro(string scenename, ParticleSystemManager& psm, ofRectang
 
 	pixelSize = 4;
 	
-	TriggerRocket triggerRocket(psm);
-	TriggerRocket triggerFountain(psm);
 	
-	TriggerPattern pattern;
+	TriggerRocket fastTriggerTemplate(psm);
+	fastTriggerTemplate.restoreSpeed = 4;
+	fastTriggerTemplate.minTriggerInterval = 0.1;
+	fastTriggerTemplate.hue = 240;
+	fastTriggerTemplate.saturation = 200;
 	
-	triggerRocket.addRocketSettings(getRetroRocket());
-	triggerRocket.addRocketSettings(getRetroRocket(120));
+	TriggerRocket mediumTriggerTemplate(psm, 8);
+	mediumTriggerTemplate.restoreSpeed = 3;
+	mediumTriggerTemplate.minTriggerInterval = 0.2;
+	mediumTriggerTemplate.hue = 240;
+	mediumTriggerTemplate.saturation = 200;
 	
-	triggerFountain.restoreSpeed = 4;
-	triggerFountain.minTriggerInterval = 0.1; 
-	triggerFountain.addRocketSettings(getRetroFountain());
+	TriggerRocket triggerRocketRed(mediumTriggerTemplate);
+	TriggerRocket triggerRocketCyan(mediumTriggerTemplate);
+	TriggerRocket triggerFountainRed(fastTriggerTemplate);
+	TriggerRocket triggerFountainRedHigh(fastTriggerTemplate);
+	TriggerRocket triggerFountainCyan(fastTriggerTemplate);
+	TriggerRocket triggerFountainCyanHigh(fastTriggerTemplate);
 	
-	pattern.addTrigger(triggerRocket);
-	pattern.addTrigger(triggerFountain);
-	addArrangement(pattern); 
+	triggerRocketCyan.hue =
+		triggerFountainCyan.hue =
+		triggerFountainCyanHigh.hue = 120;
+	
+	
+	
+	RocketSettings redRocket = getRetroRocket();
+	RocketSettings cyanRocket = getRetroRocket(120);
+	RocketSettings redFountainLow = getRetroFountain();
+	RocketSettings cyanFountainLow = getRetroFountain(180, -70);
+	RocketSettings redFountainHigh(redFountainLow);
+	RocketSettings cyanFountainHigh(cyanFountainLow);
+	redFountainHigh.startSpeedMin = cyanFountainHigh.startSpeedMin = 1300;
+	redFountainHigh.startSpeedMax = cyanFountainHigh.startSpeedMax = 1900;
+	
+	
+	triggerRocketRed.addRocketSettings(redRocket);
+	triggerRocketCyan.addRocketSettings(cyanRocket);
+	triggerFountainRed.addRocketSettings(redFountainLow);
+	triggerFountainCyan.addRocketSettings(cyanFountainLow);
+	triggerFountainRedHigh.addRocketSettings(redFountainHigh);
+	triggerFountainCyanHigh.addRocketSettings(cyanFountainHigh);
+	
+	
+	
+	TriggerPattern emptyPattern;
+	addArrangement(emptyPattern);
+	
+	
+	
+	TriggerPattern patternCyanChevrons;
+	patternCyanChevrons.addTrigger(triggerFountainCyan);
+	//patternCyanChevrons.addTrigger(triggerFountainCyanHigh);
+	addArrangement(patternCyanChevrons);
+	
+	
+	
+	TriggerPattern fatRockets;
+	float colours [4] = {170, 0, 220, 0};
+	
+	for(int i = 0; i<4; i++) {
+		TriggerRocket triggerRocketFat(mediumTriggerTemplate);
+		
+		
+		triggerRocketFat.radius = 5;
+		triggerRocketFat.addRocketSettings(getFatRocket(colours[i]));
+		triggerRocketFat.hue = colours[i];
+		fatRockets.addTrigger(triggerRocketFat, 0,0,0.75);
+	}
+	
+	
+	addArrangement(fatRockets);
+
+	
+	
+	TriggerPattern patternRedChevrons;
+	patternRedChevrons.addTrigger(triggerFountainRed);
+	patternRedChevrons.addTrigger(triggerFountainRedHigh);
+	addArrangement(patternRedChevrons);
+
+	
+	
+	TriggerPattern fatRockets2;
+	float colours2 [4] = {220, 180, 120, 180};
+	
+	for(int i = 0; i<4; i++) {
+		TriggerRocket triggerRocketFat(mediumTriggerTemplate);
+		
+		
+		triggerRocketFat.radius = 5;
+		triggerRocketFat.addRocketSettings(getFatRocket(colours2[i]));
+		triggerRocketFat.hue = colours2[i];
+		fatRockets2.addTrigger(triggerRocketFat, 0,0,0.75);
+	}
+	
+	addArrangement(fatRockets2);
+
+	
+	TriggerPattern patternCyanMix;
+	patternCyanMix.addTrigger(triggerRocketCyan);
+	patternCyanMix.addTrigger(triggerFountainCyan);
+	patternCyanMix.addTrigger(triggerFountainCyan);
+	addArrangement(patternCyanMix);
+	
+	
+	TriggerPattern patternRedMix;
+	patternRedMix.addTrigger(triggerRocketRed);
+	patternRedMix.addTrigger(triggerFountainRed);
+	patternRedMix.addTrigger(triggerFountainRed);
+	addArrangement(patternRedMix);
+
+	
+	TriggerPattern patternCyanRockets;
+	patternCyanRockets.addTrigger(triggerRocketCyan);
+	patternCyanRockets.addTrigger(triggerRocketCyan);
+	
+	patternCyanRockets.addTrigger(triggerFountainCyan);
+	addArrangement(patternCyanRockets);
+	
+	
+	TriggerPattern patternRedRockets;
+	patternRedRockets.addTrigger(triggerRocketRed);
+	patternRedRockets.addTrigger(triggerRocketRed);
+	patternRedRockets.addTrigger(triggerFountainRed);
+	
+	addArrangement(patternRedRockets);
+	
+	
+
 	
 };
 
@@ -64,13 +178,34 @@ bool SceneRetro :: draw() {
 	
 }
 
-RocketSettings SceneRetro:: getFluffyRocket() {
+RocketSettings SceneRetro:: getFatRocket(float hue) {
 
 	RocketSettings rocketSettings;
 	ParticleSystemSettings pss;
-	pss.renderer = new ParticleRendererShape();
+	//pss.renderer = new ParticleRendererShape();
+	pss.renderer = new ParticleRendererLowRes(pixelSize,1);
+	pss.speedMin = pss.speedMax = 0;
+	pss.emitCount = 100;
+	pss.sizeStartMin = pss.sizeStartMax = pixelSize*1.5;
+	pss.sizeChangeRatio = 0;
+	pss.saturationEnd =500;
+	pss.hueStartMin = pss.hueStartMax = hue; 
+	//pss.brightnessEnd = 128;
+	pss.lifeMin = 0.4;
+	pss.lifeMax = 0.4;
+	
+	pss.emitLifeTime = 1.5;
+	
+	pss.startSound = "SynthKick";
+
 	
 	rocketSettings.addParticleSystemSetting(pss);
+	
+	rocketSettings.startSpeedMin = 1600;
+	rocketSettings.startSpeedMax= 1700;
+	rocketSettings.directionVar = 0;
+	//rocketSettings.drag = 0.98;
+	rocketSettings.gravity.set(0,1800);
 	
 	return rocketSettings;
 
@@ -100,7 +235,7 @@ RocketSettings SceneRetro::getRetroRocket(float hue, float hueChange) {
 
 
 
-RocketSettings SceneRetro:: getRetroFountain() {
+RocketSettings SceneRetro:: getRetroFountain(float hueOffset, float hueChange) {
 	
 	RocketSettings rocketSettings;
 	ParticleSystemSettings pss;
@@ -116,7 +251,7 @@ RocketSettings SceneRetro:: getRetroFountain() {
 	pss.sizeStartMax = 4;
 	pss.sizeChangeRatio = 0;
 	
-	pss.hueStartMin = pss.hueStartMax = 0;
+	pss.hueStartMin = pss.hueStartMax = hueOffset;
 	pss.brightnessEnd = 255;
 	pss.saturationMin = 0;
 	pss.saturationMax = 0;
@@ -129,7 +264,7 @@ RocketSettings SceneRetro:: getRetroFountain() {
 	
 	pss.emitCount = 100;
 	pss.emitLifeTime = 0.5;
-	pss.emitHueModifierOffset = -128;
+	pss.emitHueModifierOffset = hueChange;
 	pss.emitSpeedModifier = 0;
 	pss.emitInheritVelocity = 0.5; 
 	

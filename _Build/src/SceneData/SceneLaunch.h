@@ -13,11 +13,13 @@
 #include "ofMain.h"
 #include "TextWriter.h"
 
-class SceneIntro : public Scene {
+#include "LetterWritingPatternMaker.h"
+
+class SceneLaunch : public Scene {
 	
 	public :
 	
-	SceneIntro (string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) ;
+	SceneLaunch (string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) ;
 	
 	bool update(float deltaTime); 
 	bool draw(); 
@@ -31,7 +33,7 @@ class SceneIntro : public Scene {
 
 	ofMesh letterMesh;
 
-	ofImage softWhiteImage;
+	//ofImage softWhiteImage;
 	
 	TextWriter textWriter; 
 

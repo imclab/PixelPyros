@@ -19,11 +19,12 @@ class SceneRealistic : public Scene {
 	//bool draw();
 	
 	RocketSettings getFlowerRocket(float hue = 20, float hueChange = -5);
+	RocketSettings getSphereFlowerRocket(float hue = 20, float hueChange = -5);
 	ParticleSystemSettings getFlowerTrailParticles(float hue = 20, float hueChange = -5);
 	ParticleSystemSettings getFlowerExplosionParticles(float hue = 20, float hueChange = -5);
 	ParticleSystemSettings getLineExplosionParticles(float hue = 20, float hueChange = -5);
 	
-	RocketSettings getFountain();
+	RocketSettings getFountain(float hueStartOffset = 150, float hueChange = 0);
 	
 	RocketSettings getFluffyRocket();
 	

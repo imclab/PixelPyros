@@ -23,9 +23,10 @@ class TriggerBase {
 	
 	public :
 	
-	TriggerBase(ParticleSystemManager & psm) : particleSystemManager(psm){
+	TriggerBase(ParticleSystemManager & psm, float triggerRadius = 5) : particleSystemManager(psm){
 		typeLabel = "TriggerBase";
-		fixedPosition = false; 
+		fixedPosition = false;
+		radius = triggerRadius;
 	};
 	
 	virtual TriggerBase* clone() const=0;

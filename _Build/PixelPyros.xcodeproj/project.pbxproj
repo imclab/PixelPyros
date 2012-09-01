@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		1203A3D615E8E82A004A9E90 /* libusb-1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1203A3D515E8E82A004A9E90 /* libusb-1.0.a */; };
 		1203A3E215E97D83004A9E90 /* TriggerSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1203A3E015E97D83004A9E90 /* TriggerSimple.cpp */; };
-		121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121DB79615EEA6C800F99300 /* SceneIntro.cpp */; };
+		120A35DC15F2B8720034D629 /* SceneTron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 120A35DB15F2B8710034D629 /* SceneTron.cpp */; };
+		121DB79715EEA6C800F99300 /* SceneLaunch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121DB79615EEA6C800F99300 /* SceneLaunch.cpp */; };
 		121E540615DFA697005014DB /* MotionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 121E540415DFA697005014DB /* MotionManager.cpp */; };
 		1285CE4B15E2642200019B65 /* Arrangement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1285CE4A15E2642200019B65 /* Arrangement.cpp */; };
 		129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 129F267215EC0694005DBFAA /* SceneManager.cpp */; };
@@ -160,9 +161,10 @@
 		1209A8CE15E5018000D5E526 /* Starfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Starfield.h; path = ../Starfield.h; sourceTree = "<group>"; };
 		1209A8CF15E50B3C00D5E526 /* StretchyNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNet.h; path = ../StretchyNet.h; sourceTree = "<group>"; };
 		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNetPoint.h; path = ../StretchyNetPoint.h; sourceTree = "<group>"; };
-		120A35D015F23E790034D629 /* LetterWritingPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LetterWritingPattern.h; sourceTree = "<group>"; };
-		121DB79515EEA68100F99300 /* SceneIntro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneIntro.h; sourceTree = "<group>"; };
-		121DB79615EEA6C800F99300 /* SceneIntro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneIntro.cpp; sourceTree = "<group>"; };
+		120A35DA15F2401E0034D629 /* LetterWritingPatternMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetterWritingPatternMaker.h; sourceTree = "<group>"; };
+		120A35DB15F2B8710034D629 /* SceneTron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneTron.cpp; sourceTree = "<group>"; };
+		121DB79515EEA68100F99300 /* SceneLaunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneLaunch.h; sourceTree = "<group>"; };
+		121DB79615EEA6C800F99300 /* SceneLaunch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneLaunch.cpp; sourceTree = "<group>"; };
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
 		121E540515DFA697005014DB /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		121E540715DFA6AB005014DB /* RocketBasic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RocketBasic.h; path = ../../SharedCode/Particles/RocketBasic.h; sourceTree = "<group>"; };
@@ -450,7 +452,7 @@
 		129F266F15EBDDF7005DBFAA /* PresetParticleSystems */ = {
 			isa = PBXGroup;
 			children = (
-				120A35D015F23E790034D629 /* LetterWritingPattern.h */,
+				120A35DA15F2401E0034D629 /* LetterWritingPatternMaker.h */,
 			);
 			name = PresetParticleSystems;
 			sourceTree = "<group>";
@@ -458,8 +460,8 @@
 		129F267015EBFC3B005DBFAA /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				121DB79515EEA68100F99300 /* SceneIntro.h */,
-				121DB79615EEA6C800F99300 /* SceneIntro.cpp */,
+				121DB79515EEA68100F99300 /* SceneLaunch.h */,
+				121DB79615EEA6C800F99300 /* SceneLaunch.cpp */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -467,9 +469,10 @@
 		12BF0D6215EB64CD00417B56 /* Tron */ = {
 			isa = PBXGroup;
 			children = (
+				12CD4ADA15E6539100C21984 /* SceneTron.h */,
+				120A35DB15F2B8710034D629 /* SceneTron.cpp */,
 				1209A8CF15E50B3C00D5E526 /* StretchyNet.h */,
 				1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */,
-				12CD4ADA15E6539100C21984 /* SceneTron.h */,
 				12CD4ADD15E6A6CF00C21984 /* RocketTron.h */,
 				12CD4AF115E6E6FB00C21984 /* RocketTronFountain.h */,
 			);
@@ -1303,9 +1306,10 @@
 				129F267315EC0694005DBFAA /* SceneManager.cpp in Sources */,
 				C728D7BC15EFDB06005FCE85 /* SettingsManager.cpp in Sources */,
 				C728D7C115EFEC66005FCE85 /* OscManager.cpp in Sources */,
-				121DB79715EEA6C800F99300 /* SceneIntro.cpp in Sources */,
+				121DB79715EEA6C800F99300 /* SceneLaunch.cpp in Sources */,
 				12B1576115EF681C00A457C0 /* QuadWarp.cpp in Sources */,
 				1695B00D15EFAD2A00863FF5 /* SceneSlideshow.cpp in Sources */,
+				120A35DC15F2B8720034D629 /* SceneTron.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

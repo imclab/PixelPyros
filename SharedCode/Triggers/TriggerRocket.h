@@ -20,7 +20,7 @@ class TriggerRocket : public TriggerSimple{
 
 	public : 
 	
-	TriggerRocket(ParticleSystemManager & psm);
+	TriggerRocket(ParticleSystemManager & psm, float triggerRadius = 5);
 	//virtual bool update(float deltaTime);
 	virtual void draw(); 
 	
@@ -42,6 +42,7 @@ class TriggerRocket : public TriggerSimple{
 	bool useAllPower;
 	
 	vector <RocketSettings> rocketSettings;
+	PhysicsObject* makeNewRocket(); 
 	
 	
 };

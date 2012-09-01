@@ -7,28 +7,28 @@
     <y>245</y>
 </srcvec>
 <srcvec>
-    <x>54.9</x>
-    <y>977.4</y>
+    <x>66.3</x>
+    <y>958.5</y>
 </srcvec>
 <srcvec>
-    <x>1376.3</x>
-    <y>923.5</y>
+    <x>1375.4</x>
+    <y>882.1</y>
 </srcvec>
 <dstvec>
-    <x>0</x>
-    <y>0</y>
+    <x>129</x>
+    <y>7.5</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>0</y>
+    <x>1371.3</x>
+    <y>1.2</y>
 </dstvec>
 <dstvec>
-    <x>13.1</x>
-    <y>1020.6</y>
+    <x>119</x>
+    <y>971.1</y>
 </dstvec>
 <dstvec>
-    <x>1461.9</x>
-    <y>941.2</y>
+    <x>1354.5</x>
+    <y>864.7</y>
 </dstvec>
 <srcWidth>1024</srcWidth>
 <srcHeight>768</srcHeight>

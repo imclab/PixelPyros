@@ -23,23 +23,13 @@ class TriggerPattern  {
 		verticalPositions.push_back(verticalPos);
 		verticalVariations.push_back(verticalPosVariation);
 		horizSpacings.push_back(horizSpacing); 
-		
-		
-		
+				
 	}
-
-
-
 
 	vector <TriggerBase* > triggers;
 	vector <float> verticalPositions;
 	vector <float> verticalVariations;
 	vector <float> horizSpacings;
-
-
-
-
-
 
 
 };

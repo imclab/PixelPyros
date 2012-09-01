@@ -38,7 +38,7 @@ void testApp::setup(){
 	    
     ofBackground(0);
 
-		setupScenes(); 
+	setupScenes(); 
 	
 	cameraManager.init();
 	
@@ -274,7 +274,7 @@ void testApp:: setupScenes() {
 	sceneManager.addScene(new SceneCalibration("Calibration", particleSystemManager, triggerArea));
 	sceneManager.addScene(new SceneSlideshow("SlideShow", particleSystemManager, triggerArea));
 
-	sceneManager.addScene(new SceneIntro("Intro", particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneLaunch("Intro", particleSystemManager, triggerArea));
 
 	sceneManager.addScene(new SceneRetro("Retro", particleSystemManager, triggerArea));
 	
@@ -283,7 +283,7 @@ void testApp:: setupScenes() {
 	
 	sceneManager.addScene(new SceneSpace("Stargazer", particleSystemManager, triggerArea));
 	
-	sceneManager.changeScene(1);
+	sceneManager.changeScene(5);
 	
 }
 
@@ -304,6 +304,8 @@ void testApp::initSounds() {
 	soundPlayer.addSound("RetroLaunch", "RetroLaunch", 0.2, 1, 0.2, "wav", 0.02);
 	soundPlayer.addSound("RetroExplosion", "RetroExplosion", 0.9, 1, 0.2, "aif", 0.02);
 	soundPlayer.addSound("RetroFountain", "RetroFountain", 0.2, 1.5, 0.8, "wav", 0.02);
+
+	soundPlayer.addSound("SynthKick", "SynthKick", 0.3, 1.0, 0.1, "wav", 0.01);
 	
 	soundPlayer.addSound("Banger", "Banger", 1.0, 0.4, 0.0, "wav", 0.2);
 	soundPlayer.addSound("Crackle", "Crackle", 0.1, 0.8, 0.3, "wav", 0.2);

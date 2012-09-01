@@ -13,9 +13,10 @@ class ParticleRendererGlitchLine : public ParticleRendererBase {
 	
 public:
 	
-	ParticleRendererGlitchLine(float linewidth = 1, bool smoothline = false) : ParticleRendererBase() {
+	ParticleRendererGlitchLine(float linewidth = 1, bool smoothline = false, bool drawdisabled = false) : ParticleRendererBase() {
 		lineWidth = linewidth;
 		smooth = smoothline;
+		drawDisabled = drawdisabled;
 		
 	}
 	
@@ -42,13 +43,20 @@ public:
 		for(std::vector<Particle *>::iterator it = particles.begin(); it != particles.end(); ++it) {
 			
 			Particle& p = **it; // *(particles[i]);
-			if(!p.enabled)  continue;
+			if((!p.enabled) && (!drawDisabled))  continue;
+			if(drawDisabled && (ofRandom(1)<0.05)) continue;
 			
 			//int vertexIndex = mesh.getNumVertices();
 			
 			mesh.addVertex(p.pos);
-			mesh.addColor(p.getColour());
-			
+			if(p.enabled)
+				mesh.addColor(p.getColour());
+			else {
+				
+				ofColor colour(p.getColour());
+				colour.setBrightness(20); 
+				mesh.addColor(colour);
+			}
 					
 		}
 		
@@ -60,5 +68,6 @@ public:
     }
 	
 	float lineWidth;
-	bool smooth; 
+	bool smooth;
+	bool drawDisabled;
 };

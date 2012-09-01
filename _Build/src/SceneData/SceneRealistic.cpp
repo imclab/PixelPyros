@@ -13,31 +13,107 @@ SceneRealistic :: SceneRealistic(string scenename, ParticleSystemManager& psm, o
 	softWhiteImage.loadImage("img/ParticleWhite.png");
 	bangerFlashImage.loadImage("img/ParticleBangerFlash.png");
 	
+	TriggerPattern blank;
+	addArrangement(blank);
+	
 	TriggerRocket triggerFluffy(psm);
-	TriggerRocket triggerFlower(psm);
-	TriggerRocket triggerBanger(psm);
-
-	TriggerPattern pattern;
-	
+	triggerFluffy.restoreSpeed = 4;
 	triggerFluffy.addRocketSettings(getFluffyRocket());
-	//triggerFluffy.addRocketSettings(getFountain());
+	
+	TriggerRocket triggerFlower(psm);
 	triggerFlower.addRocketSettings(getFlowerRocket());
-	triggerFluffy.restoreSpeed = 2;
+	triggerFlower.radius = 8;
+	triggerFlower.hue = 20;
+	triggerFlower.saturation = 100; 
+		
 	
-	triggerBanger.triggerPower = 1; 
+	TriggerRocket triggerFountain(psm);
+	triggerFountain.addRocketSettings(getFountain());
+	triggerFountain.restoreSpeed = 4;
 	
 	
+	TriggerRocket triggerBanger(psm);
+	triggerBanger.triggerPower = 1;
 	triggerBanger.addRocketSettings(getBangerRocket());
+	triggerBanger.radius = 10; 
+	
+	
+	TriggerPattern patternFluffy;
+	
+	patternFluffy.addTrigger(triggerFluffy);
+	patternFluffy.addTrigger(triggerFountain);
+		
+	addArrangement(patternFluffy); 
+	
+	// fluffy with added flowers
+	patternFluffy.addTrigger(triggerFlower);
+	addArrangement(patternFluffy);
+	
+	
+	// another fountain and banger
+	patternFluffy.addTrigger(triggerFountain);
+	patternFluffy.addTrigger(triggerBanger);
+	addArrangement(patternFluffy);
+	
+	
+	TriggerRocket triggerFlowerPurple(psm);
+	triggerFlowerPurple.addRocketSettings(getFlowerRocket(220));
+	triggerFlowerPurple.radius = 8;
+	triggerFlowerPurple.hue = 255-20;
+	triggerFlowerPurple.saturation = 200;
+	
 
-	pattern.addTrigger(triggerFluffy);
-	pattern.addTrigger(triggerFluffy);
-	pattern.addTrigger(triggerFlower);
-	pattern.addTrigger(triggerFluffy);
-	pattern.addTrigger(triggerFluffy);
-	pattern.addTrigger(triggerFlower);
-	pattern.addTrigger(triggerBanger);
+	
+	TriggerPattern multiColourFountains;
+	
+	float colours [4] = {170, 0, 220, 0};
+	
+	for(int i = 0; i<4; i++) {
+		TriggerRocket triggerRocketFountain(psm);
+		
+		RocketSettings fountain = getFountain(colours[i]);
+		fountain.startSpeedMax *=2;
+		triggerRocketFountain.addRocketSettings(fountain);
+		triggerRocketFountain.restoreSpeed= 4; 
+		
+		triggerRocketFountain.hue = colours[i];
+		triggerRocketFountain.saturation = 100;
+		
+		multiColourFountains.addTrigger(triggerRocketFountain, 0,0,1);
+	}
+	addArrangement(multiColourFountains); 
+	
+	
+	TriggerPattern patternNewColour;
+	patternNewColour.addTrigger(triggerFluffy);
+	patternNewColour.addTrigger(triggerFountain);
+	patternNewColour.addTrigger(triggerFlowerPurple);
+	
+	addArrangement(patternNewColour);
+	
+	TriggerPattern endPattern;
+	RocketSettings bigFlowerRocket = getSphereFlowerRocket(140);
+	TriggerRocket triggerBigFlower(psm);
+	triggerBigFlower.hue = 140;
+	triggerBigFlower.saturation = 200;
+	triggerBigFlower.radius= 10;
+	triggerBigFlower.addRocketSettings(bigFlowerRocket);
+	
+	endPattern.addTrigger(triggerFlower);
+	endPattern.addTrigger(triggerBigFlower);
+	endPattern.addTrigger(triggerBanger);
+	endPattern.addTrigger(triggerFountain);
+	
+	addArrangement(endPattern);
 
-	addArrangement(pattern);
+	
+//	pattern.addTrigger(triggerFlower);
+//	pattern.addTrigger(triggerFluffy);
+//	pattern.addTrigger(triggerFluffy);
+//	pattern.addTrigger(triggerFlower);
+//	pattern.addTrigger(triggerBanger);
+//
+//	addArrangement(pattern);
 }
 
 
@@ -68,6 +144,61 @@ RocketSettings SceneRealistic :: getFlowerRocket(float hue , float hueChange ){
 
 	
 };
+
+
+
+
+RocketSettings SceneRealistic :: getSphereFlowerRocket(float hue , float hueChange ){
+	
+	RocketSettings rocketSettings;
+	
+	rocketSettings.startSpeedMin = 1200;
+	rocketSettings.startSpeedMax = 1500;
+	rocketSettings.directionVar = 4;
+	rocketSettings.gravity.y = 200;
+	rocketSettings.drag = 0.95;
+	
+	ParticleSystemSettings trails = getFlowerTrailParticles(hue, hueChange);
+	ParticleSystemSettings explosion = getFlowerExplosionParticles(hue, hueChange);
+	explosion.directionZ = 0;
+	explosion.directionZVar = 90;
+	explosion.directionY = 0;
+	explosion.directionYVar = 180;
+	explosion.speedMin = 900;
+	explosion.speedMax = 1000;
+	
+	ParticleSystemSettings explosionLines = getLineExplosionParticles(150, hueChange);
+	ParticleSystemSettings crackles = getBangerCrackles();
+	crackles.renderer = new ParticleRendererStar(20, 70);
+	crackles.brightnessStartMax = 150;
+	crackles.brightnessStartMin = 100;
+	crackles.sizeStartMax = 5;
+	crackles.sizeStartMin = 3;
+//	crackles.emitDelay = 0;
+//	crackles.startSound = "";
+//	crackles.emitMode = PARTICLE_EMIT_CONTINUOUS;
+//	crackles.renderDelayMin = 0.01;
+//	crackles.renderDelayMax = 0.2;
+//	crackles.speedMin = 0;
+//	crackles.speedMax = 0.5;
+	
+	
+	
+	
+	explosion.emitDelay = explosionLines.emitDelay = crackles.emitDelay = trails.emitLifeTime = 2;
+	
+	rocketSettings.addParticleSystemSetting(trails);
+	rocketSettings.addParticleSystemSetting(explosion);
+	rocketSettings.addParticleSystemSetting(explosionLines);
+	rocketSettings.addParticleSystemSetting(crackles);
+	
+	return rocketSettings;
+	
+	
+	
+};
+
+
 ParticleSystemSettings SceneRealistic :: getFlowerTrailParticles(float hue, float hueChange ){
 	
 	
@@ -170,53 +301,149 @@ ParticleSystemSettings SceneRealistic :: getLineExplosionParticles(float hue, fl
 	
 }
 
-RocketSettings SceneRealistic :: getFountain(){
+RocketSettings SceneRealistic :: getFountain(float hueStartOffset , float hueChange){
+	
+	ParticleRendererBase* renderer = new ParticleRendererShape();
+	
+	ParticleSystemSettings ps, ps2;
+	
+	// ParticleData
+	// size range
+	// size modifier
+	// velocity range
+	// life range
+	// drag
+	// gravity
+	// colour
+	// colour modifier
+	// renderer
+	
+	// EmmisionData
+	// Frequency
+	// Burst/continuous
+	// range of start sizes for particles
+	// range of colours for particles
+	
+	// optional colour modifier
+	// PHYSICS
+	ps.speedMin = 0;
+	ps.speedMax = 20;
+	ps.directionZ = 0;
+	ps.directionZVar = 90;
+	ps.directionYVar = 180;
+	ps.drag = 0.90;
+	ps.gravity.set(0,30);
+	
+	//LIFE
+	ps.lifeMin = 0.5;
+	ps.lifeMax = 2;
+	
+	//APPEARANCE
+	
+	ps.sizeStartMin = 10;
+	ps.sizeStartMax = 15;
+	ps.sizeChangeRatio = 0;
+	
+	ps.hueStartMin = 0;
+	ps.hueStartMax = 30;
+	ps.hueChange = hueChange;
+	
+	ps.brightnessStartMin = 255;
+	ps.brightnessStartMax = 255;
+	ps.brightnessEnd = 255;
+	
+	ps.saturationMin = 0;
+	ps.saturationMax = 0;
+	ps.saturationEnd = 0;
+	
+	ps.shimmerMin = 0.1;
+	
+	// but also :
+	// lifeExpectancy
+	// delay
+	
+	ps.emitMode = PARTICLE_EMIT_CONTINUOUS;
+	ps.emitCount = 200;
+	
+	ps.emitDelay = 0;
+	ps.emitLifeTime= 0.6;
+	
+	ps.emitStartSizeModifier = 0;
+	ps.emitSpeedModifier = 1;
+	ps.emitHueModifierOffset = 0;
+	
+	//ps.emitAttachedPhysicsObject = &rocket;
+	ps.emitInheritVelocity = 0.3;
+	ps.startSound = "RocketFountain";
+	
+	//psystem.init(ps);
+	
+	// optional colour modifier
+	
+	
+	// PHYSICS
+	ps2.speedMin = 15;
+	ps2.speedMax = 20;
+	ps2.directionZ = 0;
+	ps2.directionZVar = 90;
+	ps2.directionYVar = 180;
+	ps2.drag = 0.90;
+	ps2.gravity.set(0,-30);
+	
+	//LIFE
+	ps2.lifeMin = 1;
+	ps2.lifeMax = 1.5;
+	
+	//APPEARANCE
+	
+	ps2.sizeStartMin = 2;
+	ps2.sizeStartMax = 5;
+	ps2.sizeChangeRatio = 5;
+	
+	ps2.hueStartMin = 0+hueStartOffset;
+	ps2.hueStartMax = 0+hueStartOffset;
+	ps2.hueChange = 0;
+	
+	ps2.brightnessStartMin = 20;
+	ps2.brightnessStartMax = 70;
+	ps2.brightnessEnd = 0;
+	
+	ps2.saturationMin = 100;
+	ps2.saturationMax = 100;
+	ps2.saturationEnd = 100;
+	
+	//ps.shimmerMin = 0.1;
+	
+	// but also :
+	// lifeExpectancy
+	// delay
+	
+	ps2.emitStartSizeModifier = 0;
+	//ps2.emitSpeedModifier = 0;
+	
+	
+	ps2.emitMode = PARTICLE_EMIT_CONTINUOUS;
+	ps2.emitCount = 500;
+	
+	ps2.emitDelay = 0;
+	ps2.emitLifeTime= 0.5;
+	
+	ps2.renderer = ps.renderer = renderer;
+	//ps2.velocityModifierSettings = new VelocityModifierSettings(200,300);
 	
 	
 	RocketSettings rocketSettings;
-	ParticleSystemSettings pss;
-	pss.renderer = new ParticleRendererLowRes();
-	pss.speedMin = 100;
-	pss.speedMax = 100;
-	pss.drag = 0.9;
+	rocketSettings.startSpeedMin = 1000;
+	rocketSettings.startSpeedMax = 1500;
+	rocketSettings.direction = -90;
+	rocketSettings.directionVar = 5;
+	rocketSettings.gravity.y = 300;
+	rocketSettings.drag = 0.9;
+	rocketSettings.lifeTime = 1;
 	
-	pss.directionZVar = 0;
-	pss.directionZ = 0;
-	
-	pss.sizeStartMin = 4;
-	pss.sizeStartMax = 4;
-	pss.sizeChangeRatio = 0;
-	
-	pss.hueStartMin = pss.hueStartMax = 0;
-	pss.brightnessEnd = 255;
-	pss.saturationMin = 0;
-	pss.saturationMax = 0;
-	pss.saturationEnd = 700;
-	pss.shimmerMin = 1;
-	
-	pss.lifeMin= 0.2;
-	pss.lifeMax= 0.8;
-	
-	
-	pss.emitCount = 100;
-	pss.emitLifeTime = 0.5;
-	pss.emitHueModifierOffset = -128;
-	pss.emitSpeedModifier = 0;
-	pss.emitInheritVelocity = 0.5;
-	
-	ParticleSystemSettings pss2(pss);
-	pss2.directionZ = 180;
-	
-	pss2.startSound = "RocketFountain";
-	
-	rocketSettings.startSpeedMin = 700;
-	rocketSettings.startSpeedMax = 1200;
-	rocketSettings.lifeTime = 0.5;
-	rocketSettings.drag = 0.99;
-	rocketSettings.gravity.y = 1000;
-	rocketSettings.addParticleSystemSetting(pss);
-	rocketSettings.addParticleSystemSetting(pss2);
-	
+	rocketSettings.addParticleSystemSetting(ps);
+	rocketSettings.addParticleSystemSetting(ps2);
+
 	return rocketSettings;
 
 	
@@ -255,9 +482,9 @@ RocketSettings SceneRealistic :: getFluffyRocket(){
 	pss.startSound = "RocketFountain";
 
 
-	rocketSettings.startSpeedMin = 350;
-	rocketSettings.startSpeedMax = 400;
-	rocketSettings.gravity.y = 100;
+	rocketSettings.startSpeedMin = 1000;
+	rocketSettings.startSpeedMax = 1400;
+	rocketSettings.gravity.y = 1200;
 	
 	
 	

@@ -66,6 +66,8 @@ public:
 		
 		warp1.apply(ofRectangle(0,0,hw, h));
 		
+		ofSetMinMagFilters(GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_NEAREST);
+		//ofSetMinMagFilters(GL_, GL_NEAREST);
 		
 		glBegin(GL_QUADS);
 		

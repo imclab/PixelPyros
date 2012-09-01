@@ -2,7 +2,7 @@
 #include "TriggerSimple.h"
 
 
-TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
+TriggerSimple :: TriggerSimple (ParticleSystemManager& psm, float triggerRadius ) : TriggerBase(psm, triggerRadius){
 	
 	typeLabel = "TriggerSimple";
 	// the power level for the trigger
@@ -22,7 +22,7 @@ TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	stopping = false;
 	active = false;
 	scale = 0;
-	radius = 5;
+	
 	motionSensitivity = 0;
 	
 	motionDecay = 20;
@@ -36,6 +36,9 @@ TriggerSimple :: TriggerSimple (ParticleSystemManager& psm) : TriggerBase(psm){
 	vel1 = ofRandom(400,440);
 	vel2 = ofRandom(320,380);
 	vel3 = ofRandom(280,320);
+	
+	hue = 0;
+	saturation = 0; 
 	
 	
 }
@@ -82,7 +85,7 @@ bool TriggerSimple::update(float deltaTime) {
 	
 	// scale up / down on start stop
 	if(stopping) {
-		scale-=deltaTime*1;
+		scale-=deltaTime*3;
 		if(scale<=0.0) {
 			scale = 0;
 			active = false;
@@ -101,7 +104,7 @@ bool TriggerSimple::update(float deltaTime) {
 		// we need to have sensed motion,
 		// AND we need to have enough unitPower to trigger
 		if( (!stopping) &&
-		    (scale>0.99) &&
+		    //(scale>0.99) &&
 		    (motionLevel >= triggerLevel) &&
 		    (unitPower>=triggerPower) &&
 		    (elapsedTime - lastTriggerTime > minTriggerInterval) ) {
@@ -190,23 +193,39 @@ void TriggerSimple :: draw() {
 	float activeScale = ofMap(unitPower, 0, triggerPower, 0.5, 1, true);
 	ofScale(activeScale, activeScale);
 	ofEnableSmoothing();
-	//ofDisableBlendMode();
+	
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
-    ofSetColor(ofColor::white);
-    //cout << triggerPower << " " << unitPower << endl;
+	
+	ofColor dimColour = ofColor::white;
+	//dimColour.setHue(hue);
+	//dimColour.setSaturation(saturation);
+	
+  	
 	if((triggerPower<=unitPower) || (fmodf(elapsedTime,0.16) < 0.08) || (restoreSpeed==0) || (type == TRIGGER_TYPE_FIRE_ON_CHARGE)) {
 		
 		//ofCircle(0, 0, radius*0.5);
 		//ofNoFill();
-		ofSetColor(ofMap(unitPower, 0, triggerLevel, 10,200, true));
+		
+		dimColour.setHsb(hue, saturation, ofMap(unitPower, 0, triggerLevel, 10,150, true));
+		
+		ofSetColor(dimColour);
 		ofCircle(0, 0, radius*unitPower*0.5);
+		
+		ofSetColor(ofMap(unitPower, 0, triggerLevel, 10,255, true));
+		ofCircle(0, 0, radius*unitPower*0.3);
+		
+		dimColour.setHsb(hue, saturation, ofMap(unitPower, 0, triggerLevel, 10,200, true));
+		
 		//ofSetColor(200);
 		
 	} else {
-		//ofNoFill();
-		ofSetColor(50);
+		
+		dimColour.setHsb(hue, saturation, 50);
+								
+		
 	}
 	
+	ofSetColor(dimColour);
 	//ofCircle(0, 0, radius);
 	
 	
@@ -258,6 +277,9 @@ void TriggerSimple :: draw() {
 		ofDisableSmoothing();
 		ofSetLineWidth(3);
 		ofSetColor(140,0,0);
+		
+		//ofSetColor(colour);
+		
 		ofLine(-radius,-radius,radius,radius);
 		ofLine(radius,-radius,-radius,radius);
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
