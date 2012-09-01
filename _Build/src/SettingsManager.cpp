@@ -18,13 +18,23 @@ SettingsManager::SettingsManager() {
 void SettingsManager::setup (OscManager * osc, ofxControlPanel * gui) {
 		
 	oscManager = osc;
-	controlPanel = gui; 
+	controlPanel = gui;
+	updateSettingsFreq = 2;
 	
-	
+	lastUpdate = ofGetElapsedTimef();
 }
 
 
 void SettingsManager::update() {
+
+	bool resendAllValues = false;
+	
+	if(ofGetElapsedTimef() - lastUpdate > updateSettingsFreq) {
+		
+		resendAllValues = true;
+		lastUpdate = ofGetElapsedTimef(); 
+		
+	}
 	
 	
 	for(int i = 0; i<settingFloats.size(); i++) {
@@ -35,9 +45,10 @@ void SettingsManager::update() {
 			cout << "value changed " << endl; 
 			oscManager->sendNewValue(*setting);
 			controlPanel->setValueF(setting->xmlLabel, setting->value);
-			
 			controlPanel->saveSettings();
 			
+		} else if(resendAllValues) {
+			oscManager->sendNewValue(*setting);
 			
 		}
 	}
@@ -54,6 +65,9 @@ void SettingsManager::update() {
 			
 			controlPanel->saveSettings();
 			
+			
+		} else if(resendAllValues) {
+			oscManager->sendNewValue(*setting);
 			
 		}
 	}

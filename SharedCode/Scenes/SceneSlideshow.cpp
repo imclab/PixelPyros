@@ -9,7 +9,7 @@
 #include "ofMain.h"
 #include "testApp.h"
 
-SceneSlideshow::SceneSlideshow(ParticleSystemManager &psm, ofRectangle triggerarea): Scene(psm, triggerarea) {
+SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofRectangle triggerarea): Scene(scenename, psm, triggerarea) {
     /*
     slideShow.folderPath = ofToDataPath("slideshow/");
     slideShow.reloadImages();
@@ -186,12 +186,9 @@ bool SceneSlideshow::draw() {
     }
 }
  
-void SceneSlideshow::initShaderParameters() {
-    Scene::initShaderParameters();
-    shader->bloomValue = 0.0;
-}
-
-bool SceneSlideshow::startArrangement(int i) {
+bool SceneSlideshow::changeArrangement(int i) {
+	Scene::changeArrangement(i);
     currentSlide = 0;
     return true;
 }
+

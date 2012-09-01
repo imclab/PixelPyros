@@ -25,10 +25,10 @@ void testApp::setup(){
 	
     paused = false;
 	triggerShowDebug = false;
+	triggersDisabled = false;
     
-    SceneShader *defaultShader = new SceneShader();
-    defaultShader->load("shaders/default");
-    sceneManager.setDefaultShader(defaultShader);
+    
+    renderer.load("shaders/default");
     
 	ofSetFrameRate(50);
 	ofSetVerticalSync(true);
@@ -54,9 +54,7 @@ void testApp::setup(){
 	fbo.begin();
 	ofClear(0,0,0);
 	fbo.end(); 
-    
-	//oscManager.settingsManager = &settingsManager ;
-	//oscManager.sceneManager = &sceneManager ;
+
 	oscManager.setup () ;
 	
     paused = false;
@@ -185,10 +183,8 @@ void testApp::draw(){
 		fbo.end();
         
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
-		SceneShader *sceneShader = sceneManager.getSceneShader();
-		updateGUI(sceneShader);
-		
-		sceneShader->draw(fbo, fboWarper1, fboWarper2);
+			
+		renderer.draw(fbo, fboWarper1, fboWarper2);
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
@@ -275,17 +271,17 @@ void testApp:: setupScenes() {
 
 	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 	
-	sceneManager.addScene(new SceneCalibration(particleSystemManager, triggerArea));
-	sceneManager.addScene(new SceneSlideshow(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneCalibration("Calibration", particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneSlideshow("SlideShow", particleSystemManager, triggerArea));
 
-	sceneManager.addScene(new SceneIntro(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneIntro("Intro", particleSystemManager, triggerArea));
 
-	sceneManager.addScene(new SceneRetro(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneRetro("Retro", particleSystemManager, triggerArea));
 	
-	sceneManager.addScene(new SceneRealistic(particleSystemManager, triggerArea));
-	sceneManager.addScene(new SceneTron(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneRealistic("Lights", particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneTron("Vectorizer", particleSystemManager, triggerArea));
 	
-	sceneManager.addScene(new SceneSpace(particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneSpace("Stargazer", particleSystemManager, triggerArea));
 	
 	sceneManager.changeScene(1);
 	
@@ -333,7 +329,7 @@ void testApp::mouseMoved( int x, int y ){
 			for(int i = 0; i<triggers.size(); i++) { 
 				TriggerBase * trigger = triggers[i]; 
 				float distance = trigger->pos.distance(ofVec3f(x,y));
-				if(distance<20) { 
+				if(distance<20) {
 					trigger->registerMotion(1.0f-(distance/20.0f)); 
 					
 				}
@@ -343,15 +339,9 @@ void testApp::mouseMoved( int x, int y ){
 	}
 }
 
-void testApp::updateGUI(SceneShader *shader) {
-    gui.setValueF("SHADER_BLOOM", shader->bloomValue);
-    gui.setValueF("SHADER_BLACK", shader->blackPoint);
-    gui.setValueF("SHADER_WHITE", shader->whitePoint);
-    gui.setValueF("SHADER_GAMMA", shader->gammaValue);
-}
 
 void testApp::setupControlPanel() { 
-	gui.setup(900, ofGetHeight());
+	gui.setup(450, ofGetHeight());
 
 	ofxControlPanel::setBackgroundColor(simpleColor(30, 30, 60, 200));
 	ofxControlPanel::setTextColor(simpleColor(240, 50, 50, 255));
@@ -406,27 +396,44 @@ void testApp::setupControlPanel() {
 	settingsManager.addSettingFloat(&triggerAreaHeight, "TRIGGER_AREA_HEIGHT", "/PixelPyros/Setup/Height/x",0, 0.5);
 	settingsManager.addSettingFloat(&triggerAreaCentreY, "TRIGGER_AREA_Y", "/PixelPyros/Setup/VPOS/x",0.5, 1);
 	settingsManager.addSettingFloat(&triggerSpacing, "TRIGGER_SPACING", "/PixelPyros/Setup/Spacing/x",0, 400);
-	settingsManager.addSettingBool(&triggerShowDebug, "*TRIGGER_DEBUG", "/PixelPyros/Setup/TriggerDebug/x", true);
-	settingsManager.addSettingBool(&showDiffImage, "*SHOW_DIFF", "/PixelPyros/Setup/ShowDiff/x", true);
-	settingsManager.addSettingBool(&triggersDisabled, "*DISABLE_MOTION", "/PixelPyros/Setup/MotionDisable/x", true);
+	
+	//settingsManager.addSettingBool(&showDiffImage, "", "/PixelPyros/Setup/ShowDiff/x", true);
+	
+	settingsManager.addSettingBool(&triggersDisabled, "", "/PixelPyros/Setup/MotionDisable/x", true);
+	settingsManager.addSettingBool(&triggerShowDebug, "", "/PixelPyros/Setup/TriggerDebug/x", true);
+	settingsManager.addSettingBool(&triggersDisabled, "", "/PixelPyros/MotionDisable/x", true);
+	settingsManager.addSettingBool(&triggerShowDebug, "", "/PixelPyros/TriggerDebug/x", true);
+	
+	settingsManager.addSettingFloat(&renderer.blackPoint, "SHADER_BLACK", "/PixelPyros/Setup/BlackLevel/x",0, 1);
+	settingsManager.addSettingFloat(&renderer.whitePoint, "SHADER_WHITE", "/PixelPyros/Setup/WhiteLevel/x",0, 1);
+	settingsManager.addSettingFloat(&renderer.gammaValue, "SHADER_GAMMA", "/PixelPyros/Setup/GammaLevel/x",0, 10);
+	settingsManager.addSettingFloat(&renderer.bloomValue, "SHADER_BLOOM", "/PixelPyros/Setup/BloomLevel/x",0, 3);
+	
+	
+	settingsManager.addSettingBool(&renderer.resetFlag, "", "/PixelPyros/Setup/ResetDefault/x", true);
+
+	settingsManager.addSettingBool(&sceneManager.nextFlag, "", "/PixelPyros/SceneNext/x", true);
+	settingsManager.addSettingBool(&sceneManager.previousFlag, "", "/PixelPyros/ScenePrevious/x", true);
+	
+	
+	sceneManager.initSceneControls(settingsManager);
 	
 	
 }
 
 void testApp::eventsIn(guiCallbackData & data){
-    SceneShader *sceneShader = sceneManager.getSceneShader();
     
 	if( data.getXmlName() == "SHADER_BLACK" ) {
-        sceneShader->blackPoint = data.getFloat(0);
+        renderer.blackPoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_WHITE" ) {
-        sceneShader->whitePoint = data.getFloat(0);
+         renderer.whitePoint = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_GAMMA" ) {
-        sceneShader->gammaValue = data.getFloat(0);
+        renderer.gammaValue = data.getFloat(0);
     }
 	else if( data.getXmlName() == "SHADER_BLOOM" ) {
-        sceneShader->bloomValue = data.getFloat(0);
+        renderer.bloomValue = data.getFloat(0);
     } else if( data.getXmlName() == "TRIGGER_AREA_WIDTH" ) {
         triggerAreaWidth = data.getFloat(0);
     } else if( data.getXmlName() == "TRIGGER_AREA_HEIGHT" ) {

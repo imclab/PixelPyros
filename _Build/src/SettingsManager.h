@@ -37,6 +37,7 @@ class SettingsManager
 	OscManager * oscManager;
 	ofxControlPanel * controlPanel;
 		
-	
+	float updateSettingsFreq;
+	float lastUpdate; 
 	
 };

@@ -19,18 +19,6 @@
 <TEST_SLIDER>
     <val_0>50</val_0>
 </TEST_SLIDER>
-<SHADER_BLACK>
-    <val_0>0</val_0>
-</SHADER_BLACK>
-<SHADER_GAMMA>
-    <val_0>1.2</val_0>
-</SHADER_GAMMA>
-<SHADER_WHITE>
-    <val_0>1</val_0>
-</SHADER_WHITE>
-<SHADER_BLOOM>
-    <val_0>0.5</val_0>
-</SHADER_BLOOM>
 <THRESHOLD>
     <val_0>12.75</val_0>
 </THRESHOLD>
@@ -41,14 +29,26 @@
     <val_0>1.32298</val_0>
 </MOTION_SENSITIVITY>
 <TRIGGER_AREA_WIDTH>
-    <val_0>0.740679</val_0>
+    <val_0>0.687697</val_0>
 </TRIGGER_AREA_WIDTH>
 <TRIGGER_AREA_HEIGHT>
-    <val_0>0.25</val_0>
+    <val_0>0.10756</val_0>
 </TRIGGER_AREA_HEIGHT>
 <TRIGGER_AREA_Y>
-    <val_0>0.900223</val_0>
+    <val_0>0.949635</val_0>
 </TRIGGER_AREA_Y>
 <TRIGGER_SPACING>
-    <val_0>59.3464</val_0>
+    <val_0>75.5417</val_0>
 </TRIGGER_SPACING>
+<SHADER_BLACK>
+    <val_0>0</val_0>
+</SHADER_BLACK>
+<SHADER_GAMMA>
+    <val_0>1.73605</val_0>
+</SHADER_GAMMA>
+<SHADER_WHITE>
+    <val_0>1</val_0>
+</SHADER_WHITE>
+<SHADER_BLOOM>
+    <val_0>0.156313</val_0>
+</SHADER_BLOOM>

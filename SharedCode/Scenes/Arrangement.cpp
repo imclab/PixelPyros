@@ -110,10 +110,10 @@ void Arrangement :: updateMotion(MotionManager& motionManager, cv::Mat homograph
 	
 }
 
-void Arrangement :: setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing) {
+void Arrangement :: setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing, bool showDebug, bool triggersDisabled) {
 	
 	triggerPattern = tp;
-	updateLayout(triggerarea, minspacing); 
+	updateLayout(triggerarea, minspacing, showDebug, triggersDisabled);
 	
 	
 	
@@ -140,7 +140,7 @@ void Arrangement::setTriggersDisabled(bool disabled){
 	}
 }
 
-void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
+void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing, bool showDebug, bool triggersDisabled) {
 	
 	triggerArea = triggerarea;
 	minimumSpacing = minspacing;
@@ -174,6 +174,10 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 				triggers.push_back(trigger);
 			
 			if(active) trigger->start();
+			
+			trigger->disabled = triggersDisabled;
+			trigger->showDebugData = showDebug; 
+			
 			triggerCount++; 
 		}
 		
@@ -249,16 +253,22 @@ void Arrangement :: updateLayout(ofRectangle& triggerarea, float minspacing) {
 			// disable spares!
 			if(i>=triggerCount)
 				triggers[i]->stop();
-			else
+			else {
 				if(active) 
 					triggers[i]->start();
-			
+				triggers[i]->disabled = triggersDisabled;
+				triggers[i]->showDebugData = showDebug;
+			}
 			
 			if(i+1>=triggerCount)
 				triggers[i+1]->stop();
-			else
+			else {
 				if(active) 
 					triggers[i+1]->start();
+				triggers[i+1]->disabled = triggersDisabled;
+				triggers[i+1]->showDebugData = showDebug;
+			}
+			
 		}
 		
 	}

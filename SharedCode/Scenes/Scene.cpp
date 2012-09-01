@@ -9,14 +9,15 @@
 #include "Scene.h"
 
 
-Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
+Scene::Scene(string scenename, ParticleSystemManager & psm, ofRectangle triggerarea) : particleSystemManager(psm) {
     init(triggerarea);
+	
+	name = scenename; 
+	
+	triggerDebug = false;
+	triggersDisabled = false;
 }
 
-Scene::Scene(ParticleSystemManager & psm, ofRectangle triggerarea, SceneShader *sceneShader) : particleSystemManager(psm) {
-    init(triggerarea);
-    shader = sceneShader;
-}
 
 void Scene::init(ofRectangle triggerarea) {
 	active = false; 
@@ -29,18 +30,7 @@ void Scene::init(ofRectangle triggerarea) {
 
 void Scene :: start() {
 	stopping = false; 
-	if (startArrangement(0)) active = true;
-}
-
-void Scene::initShaderParameters() {
-    shader->bloomValue = 0.5;
-    shader->gammaValue = 1.2;
-    shader->blackPoint = 0.0;
-    shader->whitePoint = 1.0;
-}
-
-SceneShader *Scene::getShader() {
-    return shader;
+	if (changeArrangement(0)) active = true;
 }
 
 void Scene :: stop() { 
@@ -56,23 +46,29 @@ void Scene :: stop() {
 
 bool Scene :: update(float deltaTime) {
 
-	if(!active) return false; 
+	for(int i = 0; i<arrangementTriggers.size(); i++) {
+		
+		
+		if(*arrangementTriggers[i] && currentArrangementIndex!=i) {
+			
+			if(active) {
+				cout << "CHANGING ARRANGEMENT " << i << endl;
+				changeArrangement(i);
+				
+			} 
+			
+			
+		} 		
+		*arrangementTriggers[i] = false;
+	}
+	
+	if(!active) return false;
+	
+	
+	
 	activeArrangements = 0;
 	
 	for(int i=0; i<arrangements.size(); i++) {
-	
-//        if ( updateTriggerArea ) 
-//        {
-//            std::cout << "updating trigger area" << std::endl;
-//            arrangements[i]->updateLayout(triggerArea, arrangements[i]->minimumSpacing);
-//        }
-//		
-//		if ( updateTriggerDebug ) 
-//        {
-//            std::cout << "updating trigger debug" << std::endl;
-//            arrangements[i]->updateDebug(triggerDebug);
-//        }
-		//if(ofGetMousePressed()) arrangements[i]->updateLayout(triggerArea, max(1, min(300,ofGetMouseY())));
 		if( arrangements[i]->update(deltaTime)) activeArrangements++;
 		
 		//THIS LINE MAKES IT AUTO CONTINUE - maybe a scene flag? 
@@ -121,10 +117,11 @@ void Scene :: updateMotion(MotionManager& motionManager, cv::Mat homography){
 	
 }
 
-void Scene :: updateTriggerSettings(ofRectangle triggerarea, float spacing){
+void Scene :: updateTriggerSettings(ofRectangle triggerarea, float spacing ){
 
+	if(spacing<=0) spacing = 0.1;
 	for(int i = 0; i<arrangements.size() ; i++) {
-		arrangements[i]->updateLayout(triggerarea, spacing);
+		arrangements[i]->updateLayout(triggerarea, spacing, triggerDebug, triggersDisabled);
 	}
 
 }
@@ -139,7 +136,7 @@ void  Scene :: setShowTriggerDebug(bool showDebug) {
 }
 
 void  Scene :: setTriggersDisabled(bool disabled) {
-	
+	triggersDisabled =disabled; 
 	for(int i = 0; i<arrangements.size() ; i++) {
 		arrangements[i]->setTriggersDisabled(disabled);
 	}
@@ -151,17 +148,23 @@ void  Scene :: setTriggersDisabled(bool disabled) {
 Arrangement& Scene ::addArrangement(TriggerPattern& pattern, bool fixedPosition) {
 	arrangements.push_back(new Arrangement(particleSystemManager, triggerArea, fixedPosition));
 	//arrangements.back()->setTriggerArea(triggerArea);
-	arrangements.back()->setPattern(pattern, triggerArea, 50);
-	
+	arrangements.back()->setPattern(pattern, triggerArea, 50, triggerDebug, triggersDisabled);
+	arrangementTriggers.push_back(new bool(false));
 	
 }
 
 
-bool Scene :: startArrangement(int num) {
+bool Scene :: changeArrangement(int num) {
+	
+	//if(currentArrangementIndex == num) return false;
 	
 	if((num>=arrangements.size())|| (stopping))  return false;
-	if(currentArrangementIndex>=0) {
-		arrangements[currentArrangementIndex]->stop();
+
+	for(int i = 0; i< arrangements.size(); i++) { 
+		if(i!=num) {
+			arrangements[i]->stop();
+			*arrangementTriggers[i] = false;
+		} else *arrangementTriggers[i] = true;
 	}
 	
 	arrangements[num]->start();
@@ -172,6 +175,7 @@ bool Scene :: startArrangement(int num) {
 }
 
 
+
 bool Scene :: next() {
 	if(arrangements.size()==0) return false;
 	
@@ -179,7 +183,7 @@ bool Scene :: next() {
 	if(nextArrangement>=arrangements.size())
 		nextArrangement = 0;
 	
-	startArrangement(nextArrangement);
+	changeArrangement(nextArrangement);
 	
 	
 }
@@ -192,7 +196,7 @@ bool Scene :: previous() {
 	if(prevArrangement<0)
 		prevArrangement = arrangements.size();
 	
-	startArrangement(prevArrangement);
+	changeArrangement(prevArrangement);
 
 
 }

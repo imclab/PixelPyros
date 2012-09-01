@@ -45,6 +45,15 @@ void TriggerSimple :: start() {
 	stopping = false;
 	//if(!)scale = 0;
 	
+	if(!active) {
+		rot1 = ofRandom(360);
+		rot2 = ofRandom(360);
+		rot3 = ofRandom(360);
+		vel1 = ofRandom(400,440);
+		vel2 = ofRandom(320,380);
+		vel3 = ofRandom(280,320);
+	}
+	
 	active = true;
 	motionLevel = 0;
 	
@@ -55,12 +64,7 @@ void TriggerSimple :: start() {
 	}
 	
 	
-	rot1 = ofRandom(360);
-	rot2 = ofRandom(360);
-	rot3 = ofRandom(360);
-	vel1 = ofRandom(400,440);
-	vel2 = ofRandom(320,380);
-	vel3 = ofRandom(280,320);
+	
 
 }
 
@@ -251,6 +255,8 @@ void TriggerSimple :: draw() {
 	
 	if(disabled) {
 		ofDisableBlendMode();
+		ofDisableSmoothing();
+		ofSetLineWidth(3);
 		ofSetColor(140,0,0);
 		ofLine(-radius,-radius,radius,radius);
 		ofLine(radius,-radius,-radius,radius);

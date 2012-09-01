@@ -33,8 +33,8 @@ class Arrangement {
 	
 	
 	virtual void updateDebug(bool debug); 
-	virtual void updateLayout(ofRectangle& triggerarea, float minSpacing); 
-	virtual void setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing);
+	virtual void updateLayout(ofRectangle& triggerarea, float minSpacing, bool showDebug, bool triggersDisabled);
+	virtual void setPattern(TriggerPattern tp, ofRectangle& triggerarea, float minspacing, bool showDebug, bool triggersDisabled);
 	virtual void setTriggersDisabled(bool disabled);
 
 	//template <typename T>

@@ -1,5 +1,5 @@
 //
-//  SceneShader.h
+//  PyrosRenderer.h
 //  PixelPyros
 //
 //  Created by Paul King on 30/08/2012.
@@ -10,17 +10,30 @@
 #include "ofShader.h"
 #include "ofFbo.h"
 #include "QuadWarp.h"
-class SceneShader : public ofShader {
+class PyrosRenderer : public ofShader {
     
 public:
     
-    SceneShader() : ofShader() {
+    PyrosRenderer() : ofShader() {
+		
+		resetDefaults();
+		resetFlag = false; 
     }
     
-    SceneShader(string filename) : ofShader() {
+    PyrosRenderer(string filename) : ofShader() {
         load(filename);
     }
     
+	
+	void resetDefaults() {
+		blackPoint = 0;
+		whitePoint = 1;
+		gammaValue = 1.2;
+		bloomValue = 0.3;
+		resetFlag = false; 
+		
+	}
+	
     virtual void setShaderParameters() {
         setUniform1f("bloom", bloomValue);
         setUniform1f("gamma", gammaValue);
@@ -34,6 +47,8 @@ public:
     //void draw(ofFbo &fbo, vector<ofVec3f> & warpPoints1, vector<ofVec3f> & warpPoints2 ) {
 	void draw(ofFbo &fbo, QuadWarp& warp1, QuadWarp& warp2 ) {
 
+		
+		if(resetFlag) resetDefaults();
 		
 		float w = fbo.getWidth(), h = fbo.getHeight();
 		float hw =  w/2;
@@ -113,6 +128,8 @@ public:
 
 			
 	}
+	
+	bool resetFlag; 
     
     float bloomValue;
     float gammaValue;

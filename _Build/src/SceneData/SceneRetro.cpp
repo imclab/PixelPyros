@@ -3,7 +3,7 @@
 #include "SceneRetro.h"
 
 
-SceneRetro :: SceneRetro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
+SceneRetro :: SceneRetro(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea) {
 
 	pixelSize = 4;
 	
@@ -202,9 +202,4 @@ ParticleSystemSettings SceneRetro::  getPixelExplosionParticles(float hue, float
 	return explosion;
 	
 };
-
-void SceneRetro::initShaderParameters() {
-    Scene::initShaderParameters();
-    shader->bloomValue = 1.5;
-}
 

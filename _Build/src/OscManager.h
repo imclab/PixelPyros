@@ -8,8 +8,7 @@
 #pragma once
 
 #include "ofxOsc.h"
-//#include "SettingsManager.h"
-#include "SceneManager.h"
+
 #include "SettingFloat.h"
 #include "SettingBool.h"
 
@@ -21,7 +20,7 @@ class OscManager {
 	public :
 	
 	//SettingsManager *settingsManager ;
-	SceneManager *sceneManager ;
+	//SceneManager *sceneManager ;
 	
 	void setup () ;
 	void update () ;

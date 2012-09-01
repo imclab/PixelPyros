@@ -8,7 +8,7 @@
 
 #include "SceneRealistic.h"
 
-SceneRealistic :: SceneRealistic(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
+SceneRealistic :: SceneRealistic(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea) {
 
 	softWhiteImage.loadImage("img/ParticleWhite.png");
 	bangerFlashImage.loadImage("img/ParticleBangerFlash.png");

@@ -160,6 +160,7 @@
 		1209A8CE15E5018000D5E526 /* Starfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Starfield.h; path = ../Starfield.h; sourceTree = "<group>"; };
 		1209A8CF15E50B3C00D5E526 /* StretchyNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNet.h; path = ../StretchyNet.h; sourceTree = "<group>"; };
 		1209A8D015E50BC000D5E526 /* StretchyNetPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StretchyNetPoint.h; path = ../StretchyNetPoint.h; sourceTree = "<group>"; };
+		120A35D015F23E790034D629 /* LetterWritingPattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LetterWritingPattern.h; sourceTree = "<group>"; };
 		121DB79515EEA68100F99300 /* SceneIntro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneIntro.h; sourceTree = "<group>"; };
 		121DB79615EEA6C800F99300 /* SceneIntro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneIntro.cpp; sourceTree = "<group>"; };
 		121E540415DFA697005014DB /* MotionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MotionManager.cpp; sourceTree = "<group>"; };
@@ -232,10 +233,9 @@
 		1672DAC015E8350C00BE4372 /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
 		1672DAC215E8350C00BE4372 /* NetworkingUtilsWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtilsWin.cpp; sourceTree = "<group>"; };
 		1672DAC315E8350C00BE4372 /* UdpSocketWin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocketWin.cpp; sourceTree = "<group>"; };
-		1695AFF115EEF31B00863FF5 /* SceneShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneShader.h; sourceTree = "<group>"; };
+		1695AFF115EEF31B00863FF5 /* PyrosRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PyrosRenderer.h; sourceTree = "<group>"; };
 		1695AFF215EF06B500863FF5 /* default.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.frag; sourceTree = "<group>"; };
 		1695AFF315EF06B500863FF5 /* default.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vert; sourceTree = "<group>"; };
-		1695AFF815EF09CB00863FF5 /* RetroShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RetroShader.h; sourceTree = "<group>"; };
 		1695B00B15EFA84700863FF5 /* SceneSlideshow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneSlideshow.h; sourceTree = "<group>"; };
 		1695B00C15EFAD2A00863FF5 /* SceneSlideshow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSlideshow.cpp; sourceTree = "<group>"; };
 		1695B00E15EFB02E00863FF5 /* SlideShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlideShow.h; path = ../SlideShow.h; sourceTree = "<group>"; };
@@ -450,6 +450,7 @@
 		129F266F15EBDDF7005DBFAA /* PresetParticleSystems */ = {
 			isa = PBXGroup;
 			children = (
+				120A35D015F23E790034D629 /* LetterWritingPattern.h */,
 			);
 			name = PresetParticleSystems;
 			sourceTree = "<group>";
@@ -628,8 +629,7 @@
 			isa = PBXGroup;
 			children = (
 				1695AFF015EEF2EE00863FF5 /* GPU */,
-				1695AFF115EEF31B00863FF5 /* SceneShader.h */,
-				1695AFF815EF09CB00863FF5 /* RetroShader.h */,
+				1695AFF115EEF31B00863FF5 /* PyrosRenderer.h */,
 			);
 			name = Shaders;
 			path = bin/data/shaders;

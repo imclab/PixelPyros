@@ -22,7 +22,7 @@ class ScenePatternTest : public Scene {
 	
 	public :
 
-	ScenePatternTest(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){
+	ScenePatternTest(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea){
 	
 		RocketBasic rocketSettings(100,10, 120);
 		

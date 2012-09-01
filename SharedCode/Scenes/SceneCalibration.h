@@ -10,7 +10,7 @@ class SceneCalibration : public Scene {
 	
 	public : 
 	
-	SceneCalibration(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea){		
+	SceneCalibration(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea){
 		RocketBasic rocketSettings(100,10, 120);
 		
 		TriggerRocket trigger(psm);

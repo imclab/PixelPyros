@@ -1,7 +1,7 @@
 
 #include "SceneIntro.h"
 
-SceneIntro :: SceneIntro(ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(psm, triggerarea) {
+SceneIntro :: SceneIntro(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea) {
 
 
 	softWhiteImage.loadImage("img/ParticleWhite.png");

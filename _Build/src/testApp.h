@@ -26,9 +26,9 @@
 #include "SceneRealistic.h"
 #include "SceneCalibration.h"
 #include "SceneSlideshow.h"
+#include "PyrosRenderer.h"
 
 #include "QuadWarp.h"
-//#include "ofxQuadWarper.h"
 
 #include "glut/glut.h"
 
@@ -62,8 +62,7 @@ public:
 	void initSounds(); 
 	
 	
-    void updateGUI(SceneShader *);
-	ParticleSystemManager particleSystemManager;
+  	ParticleSystemManager particleSystemManager;
 	SceneManager		sceneManager; 
 	OscManager			oscManager;
     SettingsManager     settingsManager;
@@ -90,7 +89,9 @@ public:
 	float triggerSpacing;
 	bool triggerShowDebug;
 	bool showDiffImage;
-	bool triggersDisabled; 
+	bool triggersDisabled;
+	
+	PyrosRenderer renderer;
 	
 	
 	

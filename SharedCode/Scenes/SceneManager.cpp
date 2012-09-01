@@ -4,15 +4,12 @@
 
 
 SceneManager :: SceneManager(ParticleSystemManager& psm) : particleSystemManager(psm) {
+	nextFlag = false;
+	previousFlag = false;
 }
 
 void SceneManager::addScene(Scene *scene) {
-    addScene(scene, defaultShader);
-}
-
-void SceneManager::addScene(Scene *scene, SceneShader *shader) {
-    scene->shader = shader;
-	
+  
 	scenes.push_back(scene);
 	
 	if(scenes.size() ==1) {
@@ -23,29 +20,13 @@ void SceneManager::addScene(Scene *scene, SceneShader *shader) {
 
 
 bool SceneManager ::update(float deltaTime){
+
+	if(nextFlag) nextScene();
+	if(previousFlag) prevScene();
 	
 	for(int i = 0; i<scenes.size(); i++) {
 		scenes[i]->update(deltaTime);
 	}
-}
-
-// This should really be part of the constructor, but didn't want to change it until Seb's done
-void SceneManager::setDefaultShader(SceneShader *shader) {
-    defaultShader = shader;
-}
-
-SceneShader *SceneManager::getSceneShader() {
-    SceneShader *sceneShader = NULL;
-    
-    if( currentScene != NULL ) {
-        sceneShader = currentScene->getShader();
-    }
-    
-    if( sceneShader == NULL ) {
-        sceneShader = defaultShader;
-    }
-    
-    return sceneShader;
 }
 
 void SceneManager::draw() {
@@ -64,8 +45,9 @@ void SceneManager::draw() {
 		activeSceneArrangements += ofToString(scene->activeArrangements)+" ";
 		activeArrangementNumbers += ofToString(scene->currentArrangementIndex)+" ";
 	}
-	ofDrawBitmapString(activeSceneMap,20,85); ;
-	ofDrawBitmapString(activeSceneArrangements,20,100); ;
+	ofDrawBitmapString(ofToString(currentSceneIndex), 20,85);
+	ofDrawBitmapString(activeSceneMap,20,100); ;
+//	ofDrawBitmapString(activeSceneArrangements,20,115); ;
 	ofDrawBitmapString(activeArrangementNumbers,20,115); ;
 
 	
@@ -106,7 +88,7 @@ void SceneManager::setTriggersDisabled(bool disabled) {
 
 bool SceneManager :: changeScene(int sceneIndex) {
 
-	if(scenes.size()<=sceneIndex) return false;
+	if(sceneIndex>=scenes.size()) return false;
 	else return changeScene(scenes[sceneIndex]);
 		
 		
@@ -124,6 +106,9 @@ bool SceneManager :: changeScene (Scene* scene) {
 		if(scenes[i] == scene) {
 			newSceneIndex = i;
 			scene->start();
+			currentSceneIndex = newSceneIndex;
+			currentScene = scene;
+
 		} else {
 			scenes[i]->stop();
 		}
@@ -134,10 +119,6 @@ bool SceneManager :: changeScene (Scene* scene) {
 		currentScene = NULL;
 		currentSceneIndex = -1;
 		return false;
-	} else {
-		currentSceneIndex = newSceneIndex;
-		currentScene = scene;
-        currentScene->initShaderParameters();
 	}
 	
 	return true;
@@ -145,6 +126,8 @@ bool SceneManager :: changeScene (Scene* scene) {
 
 bool SceneManager::nextScene(){
 	
+	nextFlag = false;
+
 	if(currentSceneIndex == scenes.size()-1) {
 		return false;
 	} else {
@@ -156,6 +139,7 @@ bool SceneManager::nextScene(){
 
 bool SceneManager::prevScene(){
 	
+	previousFlag = false;
 	if(currentSceneIndex == 0) {
 		return false;
 	} else {
@@ -177,3 +161,25 @@ bool SceneManager::previousArrangement(){
 
 	
 }
+
+void SceneManager::initSceneControls(SettingsManager & settingsManager) {
+	
+	for(int i = 0; i<scenes.size(); i++) {
+
+		Scene & scene = *scenes[i];
+		
+		
+		for(int j = 0; j<scene.arrangements.size(); j++) {
+		
+			settingsManager.addSettingBool(scene.arrangementTriggers[j], "", "/PixelPyros/Scenes/"+scene.name+"Arr"+ofToString(j+1)+"/x", true);
+			cout << "adding " << "/PixelPyros/Scenes/"+scene.name+"Arr"+ofToString(j+1)+"/x control"<< endl;
+	
+		}
+		
+		
+	}
+	
+	
+}
+
+

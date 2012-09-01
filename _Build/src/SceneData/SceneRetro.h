@@ -12,7 +12,7 @@ class SceneRetro : public Scene {
 
 	public :
 
-	SceneRetro (ParticleSystemManager& psm, ofRectangle triggerarea) ;
+	SceneRetro (string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) ;
 
 	bool draw();
 	
@@ -26,5 +26,5 @@ class SceneRetro : public Scene {
     
 	unsigned int pixelSize; 
     
-    virtual void initShaderParameters();
+   
 };

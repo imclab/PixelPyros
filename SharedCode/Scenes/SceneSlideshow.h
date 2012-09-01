@@ -247,11 +247,11 @@ class SceneSlideshow : public Scene {
 
 public:
     
-    SceneSlideshow(ParticleSystemManager &, ofRectangle);
+    SceneSlideshow(string scenename, ParticleSystemManager &, ofRectangle);
     
     virtual bool draw();
-   	virtual bool startArrangement(int);
-    virtual void initShaderParameters();
+   	virtual bool changeArrangement(int);
+   
     
 private:
         
