@@ -26,6 +26,10 @@ class SceneIntro : public Scene{
 	
 	//bool draw();
 	
+	virtual bool draw();
+	
+	
+	
 	RocketSettings getBasicRocket(float hue = 20, float hueChange = -5);
 	
 	ParticleSystemSettings getFlowerTrailParticles(float hue = 20, float hueChange = -5);
@@ -41,7 +45,12 @@ class SceneIntro : public Scene{
 
 	
 	
+	bool showText;
 	
+	vector <string> texts;
+	int currentText;
+	
+	TextWriter textWriter; 
 	
 	
 	

@@ -126,8 +126,6 @@ void testApp::draw(){
 	if(!drawCameraIntoFBO)
 		cameraManager.draw(0,0);
 	
-
-	
 	if(useFbo) {
 		fbo.begin();
 		

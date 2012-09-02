@@ -12,6 +12,9 @@
 
 SceneIntro :: SceneIntro(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea) {
 	
+	
+	
+	
 	softWhiteImage.loadImage("img/ParticleWhite.png");
 	bangerFlashImage.loadImage("img/ParticleBangerFlash.png");
 	
@@ -55,14 +58,39 @@ SceneIntro :: SceneIntro(string scenename, ParticleSystemManager& psm, ofRectang
 	}
 	addArrangement(multiColourFountains);
 	
-	
-
 	// fountains with added flowers
 	patternFountain.addTrigger(triggerFountain);
 	patternFountain.addTrigger(triggerFlower);
 	addArrangement(patternFountain);
 	
+	
+	//texts.push_back("");
+	texts.push_back("Welcome to PixelPyros");
+	texts.push_back("The fireworks display that you control");
+	
+	textWriter.colour = ofColor(240,255,255);
+	
+	showText = true;
+	currentText = 0;
+	
+	
+	
+}
 
+
+bool SceneIntro:: draw() {
+	
+	if(!Scene::draw()) return false;
+
+	if(showText) {
+		
+		textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.2, APP_WIDTH*0.6,APP_HEIGHT*0.2), texts[currentText], true);
+		
+		
+	}
+	
+	
+	
 }
 
 

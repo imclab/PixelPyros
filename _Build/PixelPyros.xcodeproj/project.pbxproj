@@ -466,6 +466,8 @@
 		129F267015EBFC3B005DBFAA /* Intro */ = {
 			isa = PBXGroup;
 			children = (
+				129D612815F3393C00D818A0 /* SceneIntro.cpp */,
+				129D612715F338DB00D818A0 /* SceneIntro.h */,
 				121DB79515EEA68100F99300 /* SceneLaunch.h */,
 				121DB79615EEA6C800F99300 /* SceneLaunch.cpp */,
 			);
@@ -509,9 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				12C1236415EBCB7800440F63 /* SceneRealistic.h */,
-				129D612815F3393C00D818A0 /* SceneIntro.cpp */,
 				12C1236515EBD1B600440F63 /* SceneRealistic.cpp */,
-				129D612715F338DB00D818A0 /* SceneIntro.h */,
 			);
 			name = Realistic;
 			sourceTree = "<group>";

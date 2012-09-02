@@ -41,7 +41,7 @@ SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofR
     
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, -40, 700, 60),
+        ofRectangle(0, -70, 700, 60),
 //        ofRectangle(0, 0 + 100, 700, 60),
         textColor,
         defaultFontSize,
@@ -66,13 +66,21 @@ SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofR
     // Auto-centred box, x, y are offsets from the middle
     
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-        ofRectangle(0, 100, 700, 60),
+        ofRectangle(0, 80, 700, 60),
         //ofRectangle(0, 120 + 100, 700, 60),
         textColor,
         0.7 * defaultFontSize,
         "2012.brightondigitalfestival.co.uk"
         ));
-    
+ 
+	
+	
+    slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
+		ofRectangle(0, 150, 700, 60),
+		textColor,
+		 defaultFontSize,
+		"showtimes :  8:30  9:30  10:15"
+		));
     // Duration to show, in seconds
     slide->duration = 10;
     slides.push_back(slide);
