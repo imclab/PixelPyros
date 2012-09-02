@@ -16,9 +16,11 @@ void OscManager::setup ()
 	
 	senders.push_back(ofxOscSender());
 	senders.push_back(ofxOscSender());
+	senders.push_back(ofxOscSender());
 	
     senders[0].setup("SebsiPad.local", OSC_SENDER_PORT);
-    senders[1].setup("SebsiPhone.local", OSC_SENDER_PORT);
+    senders[1].setup("Sebs-iPhone4.local", OSC_SENDER_PORT);
+    senders[2].setup("JIP2.local", OSC_SENDER_PORT);
     
 	
 }
