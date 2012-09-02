@@ -12,7 +12,7 @@ class SettingBool {
 	
 	
 	public :
-	SettingBool(bool * targetvalue = NULL, string xmllabel = "", string osclabel = "", bool ignorefalse = true ) {
+	SettingBool(bool * targetvalue = NULL, string xmllabel = "", string osclabel = "", bool ignorefalse = false ) {
 		
 		target = targetvalue;
 		

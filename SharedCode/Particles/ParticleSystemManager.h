@@ -29,7 +29,11 @@ public:
 		
 		activePhysicsObjectCount = 0;
 		
-		
+		if ( killAllParticlesFlag )
+		{
+			killAllParticles () ;
+			killAllParticlesFlag = false ;
+		}
 		
 		for(int i = 0; i<particleSystems.size(); i++) { 
 			
@@ -101,7 +105,17 @@ public:
 		
 	}
 	
-	
+	void killAllParticles ()
+	{
+		for(int i = 0; i<particleSystems.size(); i++) { 
+			
+			ParticleSystem* ps = particleSystems[i]; 
+			if(ps->finished) continue; 
+			
+			ps->life.end () ;
+		}
+
+	}
 	
 	ParticleSystem * getParticleSystem() { 
 		
@@ -148,6 +162,8 @@ public:
 	vector <PhysicsObject *> physicsObjects; 
 	vector <PhysicsObject *> sparePhysicsObjects; 
 
+	bool killAllParticlesFlag;
+	
     int activeParticleCount;
 	int activePhysicsObjectCount;
 	

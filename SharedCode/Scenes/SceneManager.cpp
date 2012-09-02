@@ -187,7 +187,7 @@ void SceneManager::initSceneControls(SettingsManager & settingsManager) {
 		
 		for(int j = 0; j<scene.arrangements.size(); j++) {
 		
-			settingsManager.addSettingBool(scene.arrangementTriggers[j], "", "/PixelPyros/Scenes/"+scene.name+"Arr"+ofToString(j+1)+"/x", true);
+			settingsManager.addSettingBool(scene.arrangementTriggers[j], "", "/PixelPyros/Scenes/"+scene.name+"Arr"+ofToString(j+1)+"/x", true, true);
 			cout << "adding " << "/PixelPyros/Scenes/"+scene.name+"Arr"+ofToString(j+1)+"/x control"<< endl;
 	
 		}
