@@ -261,6 +261,15 @@ void testApp::keyPressed(int key){
     } else if( key == 'p' ) {
         paused = !paused;
     }
+	else if ( key == 't' )
+	{
+		triggersDisabled = !triggersDisabled ;
+	}
+	else if ( key == 'd' )
+	{
+		triggerShowDebug = !triggerShowDebug ;
+	}
+	
 }
 //
 //void testApp:keyReleased(int key){
@@ -415,6 +424,7 @@ void testApp::setupControlPanel() {
 	settingsManager.addSettingFloat(&triggerAreaHeight, "TRIGGER_AREA_HEIGHT", "/PixelPyros/Setup/Height/x",0, 0.5);
 	settingsManager.addSettingFloat(&triggerAreaCentreY, "TRIGGER_AREA_Y", "/PixelPyros/Setup/VPOS/x",0.5, 1);
 	settingsManager.addSettingFloat(&triggerSpacing, "TRIGGER_SPACING", "/PixelPyros/Setup/Spacing/x",0, 400);
+	settingsManager.addSettingFloat(&triggerSpacing, "TRIGGER_SPACING", "/PixelPyros/Spacing/x",0, 400);
 	
 	//settingsManager.addSettingBool(&showDiffImage, "", "/PixelPyros/Setup/ShowDiff/x", true);
 	
@@ -428,13 +438,14 @@ void testApp::setupControlPanel() {
 	settingsManager.addSettingFloat(&renderer.gammaValue, "SHADER_GAMMA", "/PixelPyros/Setup/GammaLevel/x",0, 10);
 	settingsManager.addSettingFloat(&renderer.bloomValue, "SHADER_BLOOM", "/PixelPyros/Setup/BloomLevel/x",0, 3);
 	
+	settingsManager.addSettingBool(&particleSystemManager.killAllParticlesFlag, "", "/PixelPyros/KillParticles/x", false );
 	
 	settingsManager.addSettingBool(&renderer.resetFlag, "", "/PixelPyros/Setup/ResetDefault/x", true);
 
-	settingsManager.addSettingBool(&sceneManager.nextFlag, "", "/PixelPyros/SceneNext/x", true);
-	settingsManager.addSettingBool(&sceneManager.previousFlag, "", "/PixelPyros/ScenePrevious/x", true);
-	settingsManager.addSettingBool(&sceneManager.nextArrangementFlag, "", "/PixelPyros/ArrNext/x", true);
-	settingsManager.addSettingBool(&sceneManager.previousArrangementFlag, "", "/PixelPyros/ArrPrevious/x", true);
+	settingsManager.addSettingBool(&sceneManager.nextFlag, "", "/PixelPyros/SceneNext/x", true, true);
+	settingsManager.addSettingBool(&sceneManager.previousFlag, "", "/PixelPyros/ScenePrevious/x", true, true);
+	settingsManager.addSettingBool(&sceneManager.nextArrangementFlag, "", "/PixelPyros/ArrNext/x", true, true);
+	settingsManager.addSettingBool(&sceneManager.previousArrangementFlag, "", "/PixelPyros/ArrPrevious/x", true, true);
 	
 	
 	sceneManager.initSceneControls(settingsManager);

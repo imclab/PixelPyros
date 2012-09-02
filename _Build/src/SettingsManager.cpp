@@ -33,7 +33,7 @@ void SettingsManager::update() {
 		
 		resendAllValues = true;
 		lastUpdate = ofGetElapsedTimef(); 
-		
+		oscManager->sendOSCMessage("/PixelPyros/Monitor/value", ofGetFrameRate() ) ;
 	}
 	
 	
@@ -99,9 +99,9 @@ void SettingsManager::addSettingFloat(float * valuePointer, string xmlname, stri
 }
 
 
-void SettingsManager::addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent) {
+void SettingsManager::addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent, bool ignorefalse) {
 	
-	SettingBool* setting = new SettingBool(valuePointer, xmlname, osclabel);
+	SettingBool* setting = new SettingBool(valuePointer, xmlname, osclabel, ignorefalse);
 	
 	//threshold = SettingFloat(targetThreshold, "THRESHOLD", "/PixelPyros/Setup/Threshold/x", 0, 255);
 	oscManager->addSettingBool(*setting);

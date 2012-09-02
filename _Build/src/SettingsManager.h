@@ -27,7 +27,7 @@ class SettingsManager
 	
 	void addSettingFloat(float * valuePointer, string xmlname, string osclabel, float min, float max);
 	
-	void addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent = false);
+	void addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent = false, bool ignorefalse = false);
 
 	void addSettingString(string * valuePointer, string osclabel );
 	

@@ -12,13 +12,13 @@ class SettingBool {
 	
 	
 	public :
-	SettingBool(bool * targetvalue = NULL, string xmllabel = "", string osclabel = "") {
+	SettingBool(bool * targetvalue = NULL, string xmllabel = "", string osclabel = "", bool ignorefalse = false ) {
 		
 		target = targetvalue;
 		
 		xmlLabel = xmllabel;
 		oscLabel = osclabel;
-		
+		ignoreFalse = ignorefalse;
 		value = false;
 		
 	}
@@ -35,6 +35,9 @@ class SettingBool {
 	}
 	
 	float set(bool value) {
+		if ( !value && ignoreFalse )
+			return !value ;
+		
 		*target = value;
 		return *target;
 		
@@ -47,6 +50,7 @@ class SettingBool {
 	
 	bool * target;
 	bool value;
+	bool ignoreFalse;
 	string oscLabel;
 	string xmlLabel;
 	

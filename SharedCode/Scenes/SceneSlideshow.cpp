@@ -31,7 +31,7 @@ SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofR
     
                                        
     defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.png"));
-    
+
 //    Do you want your box guides back to layout the text? Uncomment lines 80-82 in TextWriter.cpp and big blue boxes will return
     
     // Slide 1 -- festivaly opening!
@@ -162,8 +162,8 @@ bool SceneSlideshow::draw() {
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofTranslate(APP_WIDTH / 2, APP_HEIGHT / 2);
     
-    float xScale = ofGetWidth() / slide->background->getWidth();
-    float yScale = ofGetHeight() / slide->background->getHeight();
+    float xScale = APP_WIDTH / slide->background->getWidth();
+    float yScale = APP_HEIGHT / slide->background->getHeight();
     float scale = min(xScale, yScale);
     
     if( scale < 1.0 ) {
