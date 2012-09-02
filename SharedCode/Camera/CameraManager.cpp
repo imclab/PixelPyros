@@ -77,6 +77,7 @@ bool CameraManager::update() {
 
 void CameraManager::draw(float x, float y) { 
 	camera->draw(x, y);
+	
 }
 
 void CameraManager::captureFrame() {

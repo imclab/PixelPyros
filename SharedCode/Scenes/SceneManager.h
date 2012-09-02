@@ -44,6 +44,8 @@ public :
 	
 	bool nextFlag;
 	bool previousFlag; 
+	bool nextArrangementFlag;
+	bool previousArrangementFlag;
 	
 	ParticleSystemManager & particleSystemManager;
 	

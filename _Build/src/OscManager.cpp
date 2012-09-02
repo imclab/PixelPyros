@@ -13,10 +13,13 @@ void OscManager::setup ()
 	receiver.setup(OSC_RECEIVER_PORT);
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
-    // we'll need to setup a vector of devices for this
-    sender.setup("SebsiPad.local", OSC_SENDER_PORT);
+	
+	senders.push_back(ofxOscSender());
+	senders.push_back(ofxOscSender());
+	
+    senders[0].setup("SebsiPad.local", OSC_SENDER_PORT);
+    senders[1].setup("SebsiPhone.local", OSC_SENDER_PORT);
     
-	sendOSCMessage("/setTriggerHeight", 0.1);
 	
 }
 
@@ -76,5 +79,10 @@ void OscManager::sendOSCMessage(string address, float arg )
     ofxOscMessage message ;
     message.setAddress(address) ;
     message.addFloatArg(arg) ;
-    sender.sendMessage(message) ;
+	
+	
+	for (int i = 0; i<senders.size(); i++) {
+		senders[i].sendMessage(message) ;
+	}
+
 }

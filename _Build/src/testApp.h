@@ -20,6 +20,7 @@
 #include "SceneSpace.h"
 #include "SceneTron.h"
 #include "SceneLaunch.h"
+#include "SceneIntro.h"
 #include "SceneFountains.h"
 #include "SceneRetro.h"
 #include "ScenePatternTest.h"
@@ -90,6 +91,7 @@ public:
 	bool triggerShowDebug;
 	bool showDiffImage;
 	bool triggersDisabled;
+	bool drawCameraIntoFBO;
 	
 	PyrosRenderer renderer;
 	

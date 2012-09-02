@@ -29,14 +29,14 @@ class OscManager {
     
 	
 	bool sendNewValue(SettingFloat& settingFloat) {
-		cout << "sending new value " << settingFloat.oscLabel << " " << settingFloat.getUnitValue()<< endl;
+		//cout << "sending new value " << settingFloat.oscLabel << " " << settingFloat.getUnitValue()<< endl;
 		sendOSCMessage(settingFloat.oscLabel, settingFloat.getUnitValue());
 		
 		
 	}
 	
 	bool sendNewValue(SettingBool& settingBool) {
-		cout << "sending new value " << settingBool.oscLabel << " " << settingBool.getValue()<< endl;
+		//cout << "sending new value " << settingBool.oscLabel << " " << settingBool.getValue()<< endl;
 		sendOSCMessage(settingBool.oscLabel, settingBool.getValue());
 		
 		
@@ -57,9 +57,11 @@ class OscManager {
     static const int OSC_SENDER_PORT = 8000;
 	
     ofxOscReceiver receiver;
-    ofxOscSender sender;
+    //ofxOscSender sender;
 	
 	vector <SettingFloat*> settingFloats;
 	vector <SettingBool*> settingBools;
+	
+	vector<ofxOscSender> senders; 
 	
 } ;

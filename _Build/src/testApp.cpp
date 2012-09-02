@@ -27,7 +27,7 @@ void testApp::setup(){
 	triggerShowDebug = false;
 	triggersDisabled = false;
     
-    
+    drawCameraIntoFBO = true;
     renderer.load("shaders/default");
     
 	ofSetFrameRate(50);
@@ -121,9 +121,11 @@ void testApp::update(){
 void testApp::draw(){
 
 	ofBackground(0);
-	ofSetColor(255); 
-	cameraManager.draw(0,0);
-	motionManager.draw();
+	ofSetColor(255);
+	
+	if(!drawCameraIntoFBO)
+		cameraManager.draw(0,0);
+	
 
 	
 	if(useFbo) {
@@ -140,6 +142,11 @@ void testApp::draw(){
 		//ofSetColor(255);
         
 	}
+	
+	if(drawCameraIntoFBO)
+		cameraManager.draw(0,0);
+	
+
 	ofPushMatrix();
 	
 	// change perspective so we're looking up
@@ -188,14 +195,14 @@ void testApp::draw(){
 	}
 	
 	ofDrawBitmapString(ofToString(ofGetFrameRate()),20,20);
-	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
-	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
-	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
+//	ofDrawBitmapString(ofToString(particleSystemManager.particleSystems.size()),20,35);
+//	ofDrawBitmapString(ofToString(particleSystemManager.activeParticleCount),20,50);
+//	ofDrawBitmapString(ofToString(particleSystemManager.activePhysicsObjectCount),20,65);
     
-	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
-	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
-	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
-	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
+//	ofDrawBitmapString("L: " + ofToString(gui.getValueF("SHADER_BLACK")),20,150);
+//	ofDrawBitmapString("H: " + ofToString(gui.getValueF("SHADER_WHITE")),20,165);
+//	ofDrawBitmapString("G: " + ofToString(gui.getValueF("SHADER_GAMMA")),20,180);
+//	ofDrawBitmapString("Bloom: " + ofToString(gui.getValueF("SHADER_BLOOM")),20,195);
     
 	// DEBUG DATA FOR SCENES / ARRANGEMENTS / TRIGGERS.
 	// Should probably put this in a GUI or something... :) 
@@ -222,6 +229,8 @@ void testApp::keyPressed(int key){
 	
 	if(key=='w') {
 		cameraManager.toggleWarperGui();
+    }else if(key=='e') {
+		drawCameraIntoFBO = !drawCameraIntoFBO;
     } else if (key=='1') {
 		fboWarper1.visible = !fboWarper1.visible;
 	} else if (key=='2') {
@@ -246,7 +255,10 @@ void testApp::keyPressed(int key){
 	if(key=='c') {
 		cameraManager.next(); 
 	} else if( key == 'R' ) {
-        cameraManager.beginCapture();
+		if(!cameraManager.capturing)
+			cameraManager.beginCapture();
+		else
+			cameraManager.endCapture();
 
     } else if( key == 'p' ) {
         paused = !paused;
@@ -273,9 +285,10 @@ void testApp:: setupScenes() {
 	
 	sceneManager.addScene(new SceneCalibration("Calibration", particleSystemManager, triggerArea));
 	sceneManager.addScene(new SceneSlideshow("SlideShow", particleSystemManager, triggerArea));
+	sceneManager.addScene(new SceneLaunch("Launch", particleSystemManager, triggerArea));
 
-	sceneManager.addScene(new SceneLaunch("Intro", particleSystemManager, triggerArea));
-
+	sceneManager.addScene(new SceneIntro("Intro", particleSystemManager, triggerArea));
+	
 	sceneManager.addScene(new SceneRetro("Retro", particleSystemManager, triggerArea));
 	
 	sceneManager.addScene(new SceneRealistic("Lights", particleSystemManager, triggerArea));
@@ -422,6 +435,8 @@ void testApp::setupControlPanel() {
 
 	settingsManager.addSettingBool(&sceneManager.nextFlag, "", "/PixelPyros/SceneNext/x", true);
 	settingsManager.addSettingBool(&sceneManager.previousFlag, "", "/PixelPyros/ScenePrevious/x", true);
+	settingsManager.addSettingBool(&sceneManager.nextArrangementFlag, "", "/PixelPyros/ArrNext/x", true);
+	settingsManager.addSettingBool(&sceneManager.previousArrangementFlag, "", "/PixelPyros/ArrPrevious/x", true);
 	
 	
 	sceneManager.initSceneControls(settingsManager);

@@ -5,7 +5,7 @@
 <WINDOW class="Tab" text="Setup" x="0" y="0" width="1008" height="676" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Container" text="Setup" x="0" y="0" width="989" height="680" id="6" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" label="1" tabbar="1" meta="1">
 <WINDOW class="Tab" text="Camera" x="0" y="0" width="973" height="632" id="1" state="0" group="0" font="tahoma,11,0" >
-<WINDOW class="Fader" text="GainFW" x="693" y="43" width="70" height="540" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8352884" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="0" zoom="0.000000">
+<WINDOW class="Fader" text="GainFW" x="693" y="43" width="70" height="540" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8352884" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="0" zoom="1.000000">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/GainFW/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/GainFW/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="value=x" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/GainFW/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -34,7 +34,7 @@
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/ShowCamera/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="Tab" text="Motion" x="0" y="0" width="973" height="632" id="3" state="1" group="0" font="tahoma,11,0" >
+<WINDOW class="Tab" text="Motion" x="0" y="0" width="973" height="632" id="3" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="CustomButton" text="MotionDisable" x="0" y="0" width="154" height="88" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="0" bitmap="0,0" capture="1" color="8355711,8328968" label_off="DISABLE" label_on="ENABLE" outline="1">
 <PARAM name="x=" value="1.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/MotionDisable/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/MotionDisable/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -96,7 +96,7 @@
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/VPOS/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="Tab" text="Levels" x="0" y="0" width="973" height="632" id="2" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="Tab" text="Levels" x="0" y="0" width="973" height="632" id="2" state="1" group="0" font="tahoma,11,0" >
 <WINDOW class="Fader" text="GammaLevel" x="775" y="27" width="70" height="574" id="2" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8352884" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="0" zoom="1.000000">
 <PARAM name="x=" value="0.173605" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/GammaLevel/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Setup/GammaLevel/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -137,10 +137,10 @@
 </WINDOW>
 </WINDOW>
 <WINDOW class="Tab" text="Scenes" x="0" y="0" width="1008" height="676" id="1" state="1" group="0" font="tahoma,11,0" >
-<WINDOW class="Container" text="Scenes" x="79" y="0" width="848" height="612" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" label="1" tabbar="1" meta="1">
-<WINDOW class="Tab" text="Intro" x="0" y="0" width="832" height="564" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="Container" text="Scenes" x="0" y="0" width="1008" height="676" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" label="1" tabbar="1" meta="1">
+<WINDOW class="Tab" text="Intro" x="0" y="0" width="992" height="628" state="0" group="0" font="tahoma,11,0" >
 </WINDOW>
-<WINDOW class="Tab" text="Retro" x="0" y="0" width="832" height="564" id="1" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="Tab" text="Retro" x="0" y="0" width="992" height="628" id="1" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Pads" text="RetroArr1" x="144" y="136" width="114" height="94" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1339648,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/RetroArr1/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/RetroArr1/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -214,7 +214,7 @@
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/RetroArr8/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="Tab" text="Lights" x="0" y="0" width="832" height="564" id="2" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="Tab" text="Lights" x="0" y="0" width="992" height="628" id="2" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Pads" text="LightsArr1" x="156" y="135" width="114" height="94" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="4140415,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/LightsArr1/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/LightsArr1/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -288,16 +288,8 @@
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/LightsArr8/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="Tab" text="Vectorizer" x="0" y="0" width="832" height="564" id="3" state="1" group="0" font="tahoma,11,0" >
-<WINDOW class="Leds" text="VectorizerArrLed1" x="109" y="153" width="65" height="64" id="12" state="5" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bargraph="1" color="3145728,8328968" column="1" label="0" multicolor="0" row="1">
-<VARIABLE name="value=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArrLed1/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArrLed1/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-</WINDOW>
-<WINDOW class="Leds" text="VectorizerArrLed2" x="249" y="153" width="65" height="64" id="13" state="5" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bargraph="1" color="3145728,8328968" column="1" label="0" multicolor="0" row="1">
-<VARIABLE name="value=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArrLed2/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArrLed2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-</WINDOW>
-<WINDOW class="Pads" text="VectorizerArr1" x="174" y="246" width="106" height="90" id="14" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
+<WINDOW class="Tab" text="Vectorizer" x="0" y="0" width="992" height="628" id="3" state="1" group="0" font="tahoma,11,0" >
+<WINDOW class="Pads" text="VectorizerArr1" x="13" y="11" width="106" height="90" id="14" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr1/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr1/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="decay=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr1/decay" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -306,7 +298,7 @@
 <VARIABLE name="hold=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr1/hold" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr1/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Pads" text="VectorizerArr2" x="304" y="246" width="106" height="90" id="15" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
+<WINDOW class="Pads" text="VectorizerArr2" x="13" y="109" width="106" height="90" id="15" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr2/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr2/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="decay=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr2/decay" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -315,7 +307,7 @@
 <VARIABLE name="hold=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr2/hold" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Pads" text="VectorizerArr3" x="432" y="246" width="106" height="90" id="16" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
+<WINDOW class="Pads" text="VectorizerArr3" x="13" y="208" width="106" height="90" id="16" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8355711,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr3/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr3/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="decay=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr3/decay" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -325,7 +317,7 @@
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/VectorizerArr3/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="Tab" text="Stargazer" x="0" y="0" width="832" height="564" id="4" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="Tab" text="Stargazer" x="0" y="0" width="992" height="628" id="4" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Pads" text="StargazerArr" x="146" y="151" width="114" height="94" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8339981,8328968" column="1" label="1" multicolor="0" multilabel="0" row="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/StargazerArr/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attack=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Scenes/StargazerArr/attack" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -400,35 +392,43 @@
 </WINDOW>
 </WINDOW>
 </WINDOW>
-<WINDOW class="CustomButton" text="SceneNext" x="940" y="8" width="62" height="83" id="1" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="9,9" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
+<WINDOW class="CustomButton" text="SceneNext" x="586" y="55" width="62" height="48" id="1" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="9,9" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/SceneNext/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/SceneNext/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="ScenePrevious" x="6" y="8" width="62" height="76" id="2" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="10,10" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
+<WINDOW class="CustomButton" text="ScenePrevious" x="345" y="55" width="62" height="48" id="2" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="10,10" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ScenePrevious/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ScenePrevious/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="ArrNext" x="938" y="410" width="62" height="106" id="3" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="6,6" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
+<WINDOW class="CustomButton" text="ArrNext" x="883" y="569" width="107" height="79" id="3" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="6,6" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ArrNext/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ArrNext/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="ArrPrevious" x="6" y="410" width="62" height="106" id="4" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="5,5" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
+<WINDOW class="CustomButton" text="ArrPrevious" x="16" y="569" width="109" height="79" id="4" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="5,5" capture="1" color="8355711,8328968" label_off="" label_on="" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ArrPrevious/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/ArrPrevious/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Monitor" text="Monitor" x="0" y="636" width="42" height="40" id="5" state="245" group="0" font="tahoma,15,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8388608" label="0" precision="3" unit="" value="1">
+<WINDOW class="Monitor" text="Monitor" x="281" y="55" width="42" height="40" id="5" state="245" group="0" font="tahoma,15,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8388608" label="0" precision="3" unit="" value="1">
 <VARIABLE name="value=50" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/Monitor/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Text" text="SceneData" x="154" y="622" width="250" height="48" id="6" state="149" group="0" font="tahoma,14,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="SceneData">
+<WINDOW class="Text" text="SceneData" x="488" y="103" width="250" height="48" id="6" state="149" group="0" font="tahoma,14,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="SceneData">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/SceneData/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="MotionDisable" x="401" y="621" width="72" height="48" id="7" state="241" group="0" font="tahoma,11,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="0" bitmap="0,0" capture="1" color="8355711,8328968" label_off="DISABLE" label_on="ENABLE" outline="1">
+<WINDOW class="CustomButton" text="MotionDisable" x="416" y="55" width="72" height="48" id="7" state="241" group="0" font="tahoma,11,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="0" bitmap="0,0" capture="1" color="8355711,8328968" label_off="DISABLE" label_on="ENABLE" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/MotionDisable/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/MotionDisable/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="TriggerDebug" x="495" y="621" width="67" height="48" id="8" state="241" group="0" font="tahoma,11,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="0" bitmap="0,0" capture="1" color="8355711,8328968" label_off="DEBUG" label_on="DEBUG" outline="1">
+<WINDOW class="CustomButton" text="TriggerDebug" x="510" y="55" width="67" height="48" id="8" state="241" group="0" font="tahoma,11,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="0" bitmap="0,0" capture="1" color="8355711,8328968" label_off="DEBUG" label_on="DEBUG" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/TriggerDebug/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/TriggerDebug/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="Fader" text="BloomLevel" x="668" y="55" width="70" height="334" id="9" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="8352884" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="0" zoom="1.000000">
+<PARAM name="x=" value="0.052104" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="value=x" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="attraction=1" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/attraction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/PixelPyros/BloomLevel/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
 </WINDOW>

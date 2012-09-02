@@ -52,8 +52,14 @@ class CameraManagerWarped : public CameraManager {
 	}
 	
 	void draw(float x,float y)  { 
-		if(!warper.guiVisible) ;//CameraManager::draw(x,y);
-		else warper.draw(camera->getPixelsRef()); 
+		if(warper.guiVisible) warper.draw(camera->getPixelsRef());
+		
+		if(capturing) {
+			ofPushStyle();
+			ofSetColor(ofColor::red);
+			ofCircle(10, 10, 10);
+			ofPopStyle();
+		}
 		
 	};
 

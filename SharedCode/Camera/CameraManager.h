@@ -17,7 +17,7 @@
 
 #include "ofxAutoControlPanel.h"
 
-#define CAPTURE_FPS 1
+#define CAPTURE_FPS 30
 
 class CameraManager : public ofBaseDraws{ 
 	public : 

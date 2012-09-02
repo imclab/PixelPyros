@@ -42,7 +42,7 @@ void SettingsManager::update() {
 		SettingFloat* setting = settingFloats[i];
 		
 		if(setting->checkChanged()) {
-			cout << "value changed " << endl; 
+			//cout << "value changed " << endl;
 			oscManager->sendNewValue(*setting);
 			controlPanel->setValueF(setting->xmlLabel, setting->value);
 			controlPanel->saveSettings();
@@ -59,7 +59,7 @@ void SettingsManager::update() {
 		SettingBool* setting = settingBools[i];
 		
 		if(setting->checkChanged()) {
-			cout << "value changed " << endl;
+			//cout << "value changed " << endl;
 			oscManager->sendNewValue(*setting);
 			controlPanel->setValueB(setting->xmlLabel, setting->value);
 			

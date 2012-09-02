@@ -6,6 +6,11 @@
 SceneManager :: SceneManager(ParticleSystemManager& psm) : particleSystemManager(psm) {
 	nextFlag = false;
 	previousFlag = false;
+
+	nextArrangementFlag = false;
+	previousArrangementFlag = false;
+	
+
 }
 
 void SceneManager::addScene(Scene *scene) {
@@ -23,6 +28,12 @@ bool SceneManager ::update(float deltaTime){
 
 	if(nextFlag) nextScene();
 	if(previousFlag) prevScene();
+	
+	if(currentScene!=NULL) {
+		if(nextArrangementFlag) nextArrangement();
+		if(previousArrangementFlag) previousArrangement();
+	}
+	nextArrangementFlag = previousArrangementFlag = false;
 	
 	for(int i = 0; i<scenes.size(); i++) {
 		scenes[i]->update(deltaTime);
@@ -45,10 +56,9 @@ void SceneManager::draw() {
 		activeSceneArrangements += ofToString(scene->activeArrangements)+" ";
 		activeArrangementNumbers += ofToString(scene->currentArrangementIndex)+" ";
 	}
-	ofDrawBitmapString(ofToString(currentSceneIndex), 20,85);
-	ofDrawBitmapString(activeSceneMap,20,100); ;
-//	ofDrawBitmapString(activeSceneArrangements,20,115); ;
-	ofDrawBitmapString(activeArrangementNumbers,20,115); ;
+//	ofDrawBitmapString(ofToString(currentSceneIndex), 20,85);
+//	ofDrawBitmapString(activeSceneMap,20,100);
+//	ofDrawBitmapString(activeArrangementNumbers,20,115); ;
 
 	
 	
