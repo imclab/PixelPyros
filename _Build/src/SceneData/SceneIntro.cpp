@@ -64,32 +64,65 @@ SceneIntro :: SceneIntro(string scenename, ParticleSystemManager& psm, ofRectang
 	addArrangement(patternFountain);
 	
 	
-	//texts.push_back("");
 	texts.push_back("Welcome to PixelPyros");
 	texts.push_back("The fireworks display that you control");
+	texts.push_back("Move your hand across the orbs of light to trigger fireworks");
+	texts.push_back("Larger orbs make bigger fireworks");
+	texts.push_back("");
 	
 	textWriter.colour = ofColor(240,255,255);
-	
+	textWriter.colourFlickerMin = 0.6;
 	showText = true;
 	currentText = 0;
-	
+	timePerText = 10;
 	
 	
 }
 
+bool SceneIntro:: update(float deltaTime){
+	
+	if(!Scene::update(deltaTime)) return false;
+	
+	elapsedTime+=deltaTime; 
+	
+	
+}
+
+void SceneIntro :: start() {
+	
+	Scene::start();
+	
+	
+	elapsedTime = 0; 
+	
+}
 
 bool SceneIntro:: draw() {
 	
 	if(!Scene::draw()) return false;
 
 	if(showText) {
+		currentText = floor(elapsedTime/timePerText);
+		if(currentText>=texts.size()) {
+			elapsedTime = 0;
+			currentText = 0;
+		
+		}
+		float brightness = 1;
+		float fadeTime = 0.5; 
+		
+		if(fmod(elapsedTime,timePerText) < fadeTime) {
+			brightness = ofMap (fmod(elapsedTime, timePerText), 0,fadeTime,0,1);
+		} else if(fmod(elapsedTime, timePerText) > timePerText-fadeTime) {
+			brightness = ofMap (fmod(elapsedTime, timePerText), timePerText-fadeTime,timePerText,1,0);
+		}
+		textWriter.colour = ofColor(240,255,255);		
+		textWriter.colour.setBrightness(brightness*255);
 		
 		textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.2, APP_WIDTH*0.6,APP_HEIGHT*0.2), texts[currentText], true);
 		
-		
+		cout << currentText << brightness << endl;
 	}
-	
-	
 	
 }
 

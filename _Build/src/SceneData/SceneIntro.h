@@ -24,9 +24,10 @@ class SceneIntro : public Scene{
 	
 	SceneIntro (string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) ;
 	
-	//bool draw();
 	
+	virtual bool update(float deltaTime); 
 	virtual bool draw();
+	virtual void start();
 	
 	
 	
@@ -50,7 +51,11 @@ class SceneIntro : public Scene{
 	vector <string> texts;
 	int currentText;
 	
-	TextWriter textWriter; 
+	TextWriter textWriter;
+	
+	float timePerText;
+	float lastChangeTime;
+	float elapsedTime;
 	
 	
 	
