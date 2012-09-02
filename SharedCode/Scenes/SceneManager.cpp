@@ -29,6 +29,12 @@ bool SceneManager ::update(float deltaTime){
 	if(nextFlag) nextScene();
 	if(previousFlag) prevScene();
 	
+	if(showSlideShow)
+	{
+		changeScene(1);
+		showSlideShow = false;
+	}
+	
 	if(currentScene!=NULL) {
 		if(nextArrangementFlag) nextArrangement();
 		if(previousArrangementFlag) previousArrangement();
@@ -179,6 +185,8 @@ void SceneManager::initSceneControls(SettingsManager & settingsManager) {
 	
 	settingsManager.addSettingString(&currentSceneName, "/PixelPyros/SceneData/content" );
 	settingsManager.addSettingString(&currentSceneArrangement, "/PixelPyros/SceneArrangement/content" );
+	
+	settingsManager.addSettingBool(&showSlideShow, "", "/PixelPyros/Scenes/Restart/x", true, true);
 	
 	for(int i = 0; i<scenes.size(); i++) {
 
