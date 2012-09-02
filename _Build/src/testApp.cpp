@@ -269,6 +269,14 @@ void testApp::keyPressed(int key){
 	{
 		triggerShowDebug = !triggerShowDebug ;
 	}
+	else if ( key == 'k' )
+	{
+		particleSystemManager.killAllParticlesFlag = true ;
+	}
+	else if ( key == 'r' )
+	{
+		sceneManager.showSlideShow = true ;
+	}
 	
 }
 //

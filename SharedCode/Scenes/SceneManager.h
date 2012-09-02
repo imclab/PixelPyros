@@ -49,6 +49,8 @@ public :
 	bool nextArrangementFlag;
 	bool previousArrangementFlag;
 	
+	bool showSlideShow;
+	
 	ParticleSystemManager & particleSystemManager;
 	
     
