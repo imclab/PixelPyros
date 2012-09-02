@@ -38,6 +38,7 @@ public :
 	int currentSceneIndex;
 	Scene * currentScene;
 	string currentSceneName;
+	string currentSceneArrangement;
 	
 	float triggerSpacing;
 	bool triggerShowDebug;

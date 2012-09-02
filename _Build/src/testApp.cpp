@@ -263,6 +263,15 @@ void testApp::keyPressed(int key){
     } else if( key == 'p' ) {
         paused = !paused;
     }
+	else if ( key == 't' )
+	{
+		triggersDisabled = !triggersDisabled ;
+	}
+	else if ( key == 'd' )
+	{
+		triggerShowDebug = !triggerShowDebug ;
+	}
+	
 }
 //
 //void testApp:keyReleased(int key){

@@ -32,6 +32,8 @@ bool SceneManager ::update(float deltaTime){
 	if(currentScene!=NULL) {
 		if(nextArrangementFlag) nextArrangement();
 		if(previousArrangementFlag) previousArrangement();
+		
+		currentSceneArrangement = ofToString ( currentScene->currentArrangementIndex + 1 ) ;
 	}
 	nextArrangementFlag = previousArrangementFlag = false;
 	
@@ -175,7 +177,8 @@ bool SceneManager::previousArrangement(){
 
 void SceneManager::initSceneControls(SettingsManager & settingsManager) {
 	
-	settingsManager.addSettingString(&currentSceneName, "/PixelPyros/SceneData/light" );
+	settingsManager.addSettingString(&currentSceneName, "/PixelPyros/SceneData/content" );
+	settingsManager.addSettingString(&currentSceneArrangement, "/PixelPyros/SceneArrangement/content" );
 	
 	for(int i = 0; i<scenes.size(); i++) {
 
