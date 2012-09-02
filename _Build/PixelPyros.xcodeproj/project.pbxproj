@@ -390,6 +390,7 @@
 		96CB3CC115D3B561004B6502 /* OpenCV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCV.framework; path = Library/Frameworks/OpenCV.framework; sourceTree = SDKROOT; };
 		96CB3CC415D3B6D0004B6502 /* opencv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = opencv.a; path = ../../../addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		C7087C9615F3806F0094E822 /* SettingString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingString.h; sourceTree = "<group>"; };
 		C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingsManager.cpp; sourceTree = "<group>"; };
 		C728D7BD15EFDB12005FCE85 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		C728D7BF15EFEC5B005FCE85 /* OscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscManager.h; sourceTree = "<group>"; };
@@ -1086,6 +1087,7 @@
 			children = (
 				12D9BDD315F13F73005B1CF6 /* SettingFloat.h */,
 				12D9BDD415F16F45005B1CF6 /* SettingBool.h */,
+				C7087C9615F3806F0094E822 /* SettingString.h */,
 				C728D7BB15EFDB06005FCE85 /* SettingsManager.cpp */,
 				C728D7BD15EFDB12005FCE85 /* SettingsManager.h */,
 			);

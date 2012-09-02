@@ -11,6 +11,7 @@
 
 #include "SettingFloat.h"
 #include "SettingBool.h"
+#include "SettingString.h"
 
 #define OSC_OFF(x) (x == 0)
 #define OSC_ON(x) (x == 1.0f	)
@@ -26,7 +27,7 @@ class OscManager {
 	void update () ;
 	
 	void sendOSCMessage(string message, float arg );
-    
+    void sendOSCMessage(string address, string arg );
 	
 	bool sendNewValue(SettingFloat& settingFloat) {
 		//cout << "sending new value " << settingFloat.oscLabel << " " << settingFloat.getUnitValue()<< endl;
@@ -41,6 +42,13 @@ class OscManager {
 		
 		
 	}
+	
+	bool sendNewValue(SettingString& settingString) {
+		//cout << "sending new value " << settingBool.oscLabel << " " << settingBool.getValue()<< endl;
+		sendOSCMessage(settingString.oscLabel, settingString.value);
+		
+		
+	}
 
 	void addSettingFloat(SettingFloat & setting) {
 		settingFloats.push_back(&setting);
@@ -49,6 +57,9 @@ class OscManager {
 	void addSettingBool(SettingBool & setting) {
 		settingBools.push_back(&setting);
 		
+	}
+	void addSettingString(SettingString & setting) {
+		settingStrings.push_back(&setting);
 	}
 	
 	
@@ -61,6 +72,7 @@ class OscManager {
 	
 	vector <SettingFloat*> settingFloats;
 	vector <SettingBool*> settingBools;
+	vector <SettingString*> settingStrings;
 	
 	vector<ofxOscSender> senders; 
 	

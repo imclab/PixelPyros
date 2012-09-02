@@ -13,6 +13,7 @@
 
 #include "SettingFloat.h"
 #include "SettingBool.h"
+#include "SettingString.h"
 
 class SettingsManager
 {
@@ -28,11 +29,13 @@ class SettingsManager
 	
 	void addSettingBool(bool * valuePointer, string xmlname, string osclabel, bool sendCurrent = false);
 
+	void addSettingString(string * valuePointer, string osclabel );
 	
 	//SettingFloat threshold;
 	
 	vector <SettingFloat*> settingFloats;
 	vector <SettingBool*> settingBools;
+	vector <SettingString*> settingString;
 	
 	OscManager * oscManager;
 	ofxControlPanel * controlPanel;

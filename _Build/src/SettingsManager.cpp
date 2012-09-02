@@ -72,7 +72,19 @@ void SettingsManager::update() {
 		}
 	}
 	
-	
+	for(int i = 0; i<settingString.size(); i++) {
+		
+		SettingString* setting = settingString[i];
+		
+		if(setting->checkChanged()) {
+			//cout << "value changed " << endl;
+			oscManager->sendNewValue(*setting);
+			
+		} else if(resendAllValues) {
+			oscManager->sendNewValue(*setting);
+			
+		}
+	}
 }
 
 
@@ -95,5 +107,15 @@ void SettingsManager::addSettingBool(bool * valuePointer, string xmlname, string
 	oscManager->addSettingBool(*setting);
 	settingBools.push_back(setting);
 	if(sendCurrent) setting->value = !*setting->target; 
+	
+}
+
+void SettingsManager::addSettingString(string * valuePointer, string osclabel ) {
+	
+	SettingString* setting = new SettingString(valuePointer, osclabel);
+	
+	//threshold = SettingFloat(targetThreshold, "THRESHOLD", "/PixelPyros/Setup/Threshold/x", 0, 255);
+	oscManager->addSettingString(*setting);
+	settingString.push_back(setting);
 	
 }

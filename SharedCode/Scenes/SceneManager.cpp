@@ -118,6 +118,7 @@ bool SceneManager :: changeScene (Scene* scene) {
 			scene->start();
 			currentSceneIndex = newSceneIndex;
 			currentScene = scene;
+			currentSceneName = scene->name ;
 
 		} else {
 			scenes[i]->stop();
@@ -173,6 +174,8 @@ bool SceneManager::previousArrangement(){
 }
 
 void SceneManager::initSceneControls(SettingsManager & settingsManager) {
+	
+	settingsManager.addSettingString(&currentSceneName, "/PixelPyros/SceneData/light" );
 	
 	for(int i = 0; i<scenes.size(); i++) {
 

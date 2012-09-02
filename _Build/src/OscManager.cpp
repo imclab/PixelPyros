@@ -19,7 +19,7 @@ void OscManager::setup ()
 	senders.push_back(ofxOscSender());
 	
     senders[0].setup("SebsiPad.local", OSC_SENDER_PORT);
-    senders[1].setup("Sebs-iPhone4.local", OSC_SENDER_PORT);
+    senders[1].setup("SebsiPhone.local", OSC_SENDER_PORT);
     senders[2].setup("JIP2.local", OSC_SENDER_PORT);
     
 	
@@ -82,9 +82,23 @@ void OscManager::sendOSCMessage(string address, float arg )
     message.setAddress(address) ;
     message.addFloatArg(arg) ;
 	
-	
 	for (int i = 0; i<senders.size(); i++) {
 		senders[i].sendMessage(message) ;
 	}
 
+}
+
+
+void OscManager::sendOSCMessage(string address, string arg )
+{
+    ofxOscMessage message ;
+    message.setAddress(address) ;
+    message.addStringArg(arg) ;
+	
+	std::cout << "sending string message " << address << arg << std::endl ;
+	
+	for (int i = 0; i<senders.size(); i++) {
+		senders[i].sendMessage(message) ;
+	}
+	
 }
