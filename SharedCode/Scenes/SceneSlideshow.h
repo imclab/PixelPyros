@@ -7,10 +7,11 @@
 
 #pragma once
 
+#include "testApp.h"
 #include "Scene.h"
 #include "SlideShow.h"
 #include "TextWriter.h"
-#include <vector>
+//nclude "Starfield.h"
 
 #define DEFAULT_SLIDE_DURATION 5.0
 #define NON_CURRENT_SLOTS_TO_SHOW 2
@@ -74,7 +75,8 @@ public:
     virtual void draw() {
         ofPushStyle();
         
-        ofSetColor(col);
+        //ofSetColor(col);
+		writer.colour = col;
         writer.drawFixedSize(box, text, fontSize, true);
         
         ofPopStyle();
@@ -243,6 +245,7 @@ public:
     float duration;
 };
 
+
 class SceneSlideshow : public Scene {
 
 public:
@@ -250,11 +253,12 @@ public:
     SceneSlideshow(string scenename, ParticleSystemManager &, ofRectangle);
     
     virtual bool draw();
-   	virtual bool changeArrangement(int);
+	virtual bool update(float deltaTime);
+
+	virtual bool changeArrangement(int);
+	//Starfield starfield;
    
-    
-private:
-        
+            
     SlideShow slideShow;
     
     ofImage defaultBackground;

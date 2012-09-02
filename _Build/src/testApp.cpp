@@ -283,7 +283,7 @@ void testApp:: setupScenes() {
 	
 	sceneManager.addScene(new SceneSpace("Stargazer", particleSystemManager, triggerArea));
 	
-	sceneManager.changeScene(5);
+	sceneManager.changeScene(1);
 	
 }
 
@@ -313,6 +313,12 @@ void testApp::initSounds() {
 	soundPlayer.addSound("Launch", "Launch", 0.8, 1.0, 0.1, "wav", 0.2);
 	soundPlayer.addSound("LaunchRocketSharp", "LaunchRocketSharp", 0.6, 1.0, 0.05, "wav", 0.2);
 	soundPlayer.addSound("SoftExplosion", "SoftExplosion", 1.0, 1.0, 0.2, "wav", 0.2);
+	soundPlayer.addSound("Fuse", "Fuse", 0.2, 1.0, 0.2, "aif", 0.2);
+	soundPlayer.addSound("Sparkler", "Sparkler", 1.0, 1.0, 0.2, "aif", 0.2);
+	soundPlayer.addSound("Woosh", "Woosh", 0.15, 0.9, 0.2, "wav", 0.2);
+
+	
+	
 	soundPlayer.globalVolume = 1;
 	
 }

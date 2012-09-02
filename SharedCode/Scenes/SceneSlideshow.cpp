@@ -6,61 +6,46 @@
 //
 
 #include "SceneSlideshow.h"
-#include "ofMain.h"
-#include "testApp.h"
+
 
 SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofRectangle triggerarea): Scene(scenename, psm, triggerarea) {
-    /*
-    slideShow.folderPath = ofToDataPath("slideshow/");
-    slideShow.reloadImages();
     
-    lastUpdateTime = 0;
-    */
-    
+	
+	
+	
+	TriggerSimple trigger(psm);
+	TriggerPattern pattern;
+	//pattern.addTrigger(trigger);
+	addArrangement(pattern);
+	pattern.addTrigger(trigger);
+	addArrangement(pattern);
+	
+	//starfield = Starfield(500);
+	//starfield.speed = 50;
+  
     currentSlide = 0;
     lastUpdateTime = 0;
     defaultFontSize = 4.0;
+	
+	ofColor textColor(128,180,150);
     
-    // Shared Timer thingy
-    // N.B! Times must be in ascending order of showTime
-    // Assumes all 'today'. You'll need to modify the SlideTimer if you need times that go past midnight
-    vector<string> times;
-    times.push_back("07:00");
-    times.push_back("08:00");
-    times.push_back("09:00");
-    times.push_back("10:00");
-    times.push_back("11:00");
-    times.push_back("12:00");
-    times.push_back("13:00");
-    times.push_back("14:00");
-    times.push_back("15:00");
-    times.push_back("16:00");
-    times.push_back("17:00");
-    times.push_back("18:00");
-    times.push_back("19:00");
-    times.push_back("20:00");
-    times.push_back("21:00");
-    times.push_back("22:00");
-    times.push_back("23:00");
-    
-    SlideTimer *timer = new SlideTimer(APP_WIDTH, APP_HEIGHT, ofRectangle(0, 0, 250, 120), ofColor(128, 128, 128), defaultFontSize, times);
                                        
-    defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.jpg"));
+    defaultBackground.loadImage(ofToDataPath("slideshow/pixelpyros-slide-background.png"));
     
 //    Do you want your box guides back to layout the text? Uncomment lines 80-82 in TextWriter.cpp and big blue boxes will return
     
     // Slide 1 -- festivaly opening!
     
     SceneSlide *slide = new SceneSlide(&defaultBackground);
-    slide->add(timer);
+   // slide->add(timer);
     
     // Auto-centred box, x, y are offsets from the middle
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-//        ofRectangle(0, -25, 700, 60),
-        ofRectangle(0, 0 + 100, 700, 60),
-        ofColor(128, 128, 128),
+        ofRectangle(0, -40, 700, 60),
+//        ofRectangle(0, 0 + 100, 700, 60),
+        textColor,
         defaultFontSize,
-        "the official launch of the 2012\nbrighton digital festival!"
+        "the official launch of the 2012 \nbrighton digital festival!"
     ));
     
     // Absolute x,y coordinates for top left of box
@@ -81,9 +66,9 @@ SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofR
     // Auto-centred box, x, y are offsets from the middle
     
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-//        ofRectangle(0, 100, 700, 60),
-        ofRectangle(0, 120 + 100, 700, 60),
-        ofColor(128, 128, 128),
+        ofRectangle(0, 100, 700, 60),
+        //ofRectangle(0, 120 + 100, 700, 60),
+        textColor,
         0.7 * defaultFontSize,
         "2012.brightondigitalfestival.co.uk"
         ));
@@ -95,53 +80,63 @@ SceneSlideshow::SceneSlideshow(string scenename, ParticleSystemManager &psm, ofR
     // Slide 2  -- people thanks!
     
     slide = new SceneSlide(&defaultBackground);
-    slide->add(timer);
+    //slide->add(timer);
     
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-//         ofRectangle(0, -25, 600, 50),
-         ofRectangle(0, 0 + 120, 600, 100),
+         ofRectangle(0, -25, 600, 50),
+         //ofRectangle(0, 0 + 120, 600, 100),
          ofColor(128, 128, 128),
          defaultFontSize,
          "thanks to:"
     ));
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
-//         ofRectangle(0, 25, 600, 50),
-         ofRectangle(0, 200, 300, 100),
+         ofRectangle(0, 25, 600, 50),
+         //ofRectangle(0, 200, 300, 100),
          ofColor(128, 128, 128),
          0.6 * defaultFontSize,
-         "one person, two person, three person, four person,\nfive person, six person, seven person,\neight person, nine person,\nten person, eleventy person, twelve person, thirteen person, \n#lightning strike# ah ha ha ha ha ha ha!"
+         "Jubilee Library, Chilli Pickle, Pizza Express, The Basement,\n, Jonathan Orrell at HOP, Honor Harger,\nLaurence Hill, Jamie Wyld, Jon Pratty,\nPhil Jones, Devi Lozdan, Julie Sharp, Kyle McDonald, \nVal Head, Paul King, John Davey"
     ));
     
     // Duration to show, in seconds
     slide->duration = 10;
-    slides.push_back(slide);
+    //slides.push_back(slide);
     
 
     // Slide 3 -- biz thanks!
     
     slide = new SceneSlide(&defaultBackground);
-    slide->add(timer);
+    //slide->add(timer);
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
     	ofRectangle(0, -25, 600, 50),
     	ofColor(128, 128, 128),
     	defaultFontSize,
-		"thanks to:"
+		"Production :"
 ));
     slide->add(new CentredSlideText(APP_WIDTH, APP_HEIGHT,
 		ofRectangle(0, 25, 600, 50),
         ofColor(128, 128, 128),
       	0.6 * defaultFontSize,
-      	"brightonart, firefly solar, pyra graphics\nJubilee library, chile pickle"
+      	"Becky Stevens, Mark Scarratt, Firefly Solar, Facelift, Jack Lang  "
 ));
     
     // Duration to show, in seconds
     slide->duration = 10;
-    slides.push_back(slide);
+   // slides.push_back(slide);
     
 }
 
+
+bool SceneSlideshow::update(float deltaTime) {
+	if(Scene::update(deltaTime)) {
+		//starfield.update(deltaTime);
+		return true;
+	} else {
+		return false;
+	}
+}
+
 bool SceneSlideshow::draw() {
-    if( !active ) {
+    if( !Scene::draw() ) {
         return false;
     }
     
@@ -149,6 +144,8 @@ bool SceneSlideshow::draw() {
         return false;
     }
     
+	//starfield.draw();
+	
     SceneSlide *slide = slides[currentSlide];
     
     ofPushMatrix();
@@ -184,8 +181,10 @@ bool SceneSlideshow::draw() {
     
         lastUpdateTime += deltaTime;
     }
+	
+	
 }
- 
+
 bool SceneSlideshow::changeArrangement(int i) {
 	Scene::changeArrangement(i);
     currentSlide = 0;

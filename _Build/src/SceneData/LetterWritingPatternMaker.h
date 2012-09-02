@@ -256,6 +256,7 @@ class LetterWritingPatternMaker {
 		
 		ps.gravity.y = 200;
 		
+		ps.startSound = "Sparkler";
 		
 		return ps;
 		
@@ -288,6 +289,7 @@ class LetterWritingPatternMaker {
 		ps.speedMin = 100;
 		ps.speedMax = 500;
 		ps.gravity.y = 500;
+		ps.startSound = "Fuse";
 		
 		
 		return ps;

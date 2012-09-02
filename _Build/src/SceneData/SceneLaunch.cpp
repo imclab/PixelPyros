@@ -3,13 +3,18 @@
 
 SceneLaunch :: SceneLaunch(string scenename, ParticleSystemManager& psm, ofRectangle triggerarea) : Scene(scenename, psm, triggerarea) {
 
-	textWriter.glyphLineWeight = 1.2;
+	
+	
+	TriggerPattern empty;
+	addArrangement(empty);
+	
+	textWriter.glyphLineWeight = 1;
 	textWriter.colour.set(80,240,250);
 	
 	LetterWritingPatternMaker patternMaker; 
-	TriggerPattern textPattern = patternMaker.getPattern(psm, "Initialized!", 13, 0.2, 400, APP_WIDTH/2, 15, 5, 20, 0.2, APP_WIDTH*0.7, letterMesh);
+	TriggerPattern textPattern = patternMaker.getPattern(psm, "Initialized!", 13, 0.2, 400, APP_WIDTH/2, 15, 5, 48, 0.2, APP_WIDTH*0.7, letterMesh);
 
-	TriggerPattern textPattern2 = patternMaker.getPattern(psm, "#BDF12", 20, 0.2, 300, APP_WIDTH/2, 15, 5, 20, 0.2, APP_WIDTH*0.7, letterMesh);
+	//TriggerPattern textPattern2 = patternMaker.getPattern(psm, "#BDF12", 20, 0.2, 300, APP_WIDTH/2, 15, 5, 52, 0.2, APP_WIDTH*0.7, letterMesh);
 
 	addArrangement(textPattern, true );
 	

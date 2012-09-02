@@ -7,21 +7,21 @@
 //
 
 #pragma once
+
 #include "testApp.h"
-#include "ofMain.h"
 
 class Starfield {
 	public : 
 	
-	Starfield() {
+	Starfield(int numStars = 5000) {
 	
-		for(int i = 0; i<5000; i++) {
+		for(int i = 0; i<numStars; i++) {
 			stars.push_back(ofVec3f(ofRandom(-200,APP_WIDTH+200), ofRandom(-200,APP_HEIGHT+200), ofRandom(-2000,3000)));
 			
 			
 			
 		}
-		
+		speed = 300; 
 		elapsedTime = 0; 
 	}
 	
@@ -31,7 +31,7 @@ class Starfield {
 			ofVec3f& s = *it;
 			//mesh.addVertex(s);
 			//mesh.addColor(ofColor(ofRandom(200,255)));
-			s.z+=deltaTime*100;
+			s.z+=deltaTime*speed;
 			if(s.z>3000) s.z-=5000;
 			//s.y+=deltaTime*100;
 			if(s.y>200+APP_HEIGHT) s.y-=APP_HEIGHT+400;
@@ -92,7 +92,8 @@ class Starfield {
 	
 	vector <ofVec3f> stars;
 	
-				 float elapsedTime; 
+	float elapsedTime;
+	float speed; 
 	
 	
 	
