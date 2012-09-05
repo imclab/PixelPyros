@@ -1,7 +1,6 @@
 
 #pragma once 
 
-#include "testApp.h"
 #include "Scene.h"
 #include "ParticleRendererGlitchLine.h"
 

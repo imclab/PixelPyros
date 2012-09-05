@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "testApp.h"
 #include "Scene.h"
 #include "SlideShow.h"
 #include "TextWriter.h"

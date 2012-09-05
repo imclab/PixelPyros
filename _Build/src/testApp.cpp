@@ -1,4 +1,7 @@
+
+
 #include "testApp.h"
+
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -291,12 +294,6 @@ void testApp:: mousePressed(int x, int y, int button ) {
 }
 
 void testApp:: setupScenes() { 
-	
-	// rocket inherits testtrigger, no need for test scene
-	//sceneManager.addScene(new SceneTest(particleSystemManager, triggerarea));
-	//scenes.push_back(new ScenePatternTest(particleSystemManager,  triggerarea));
-
-	//scenes.push_back(new SceneFountains(particleSystemManager, triggerarea));
 	
 	sceneManager.addScene(new SceneCalibration("Calibration", particleSystemManager, triggerArea));
 	sceneManager.addScene(new SceneSlideshow("SlideShow", particleSystemManager, triggerArea));

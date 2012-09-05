@@ -12,6 +12,8 @@
 #include "TriggerRocket.h"
 #include "RocketThinFountain.h"
 #include "ParticleRendererStar.h"
+#include "ParticleRendererBitmap.h"
+#include "ParticleRendererCircle.h"
 #include "RocketFountain.h"
 
 #include "LetterWritingPatternMaker.h"

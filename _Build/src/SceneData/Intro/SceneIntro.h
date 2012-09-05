@@ -11,9 +11,9 @@
 #include "ParticleRendererShape.h"
 #include "ParticleRendererLowRes.h"
 #include "ParticleRendererBitmap.h"
+#include "ParticleRendererLine.h"
 #include "RocketSettings.h"
-#include "ParticleSystemSettings.h"
-#include "testApp.h"
+#include "TextWriter.h"
 
 class SceneIntro : public Scene{
 	

@@ -7,6 +7,7 @@
 //
 
 #pragma once
+#include "ParticleRendererShape.h"
 
 class ParticleRendererSquare : public ParticleRendererShape {
 

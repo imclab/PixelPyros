@@ -8,7 +8,6 @@
 #pragma once
 
 #include "Scene.h"
-#include "testApp.h"
 #include "RocketTron.h"
 
 #include "RocketTronFountain.h"

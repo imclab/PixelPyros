@@ -5,9 +5,12 @@
 #include "ParticleRendererShape.h"
 #include "ParticleRendererLowRes.h"
 #include "ParticleRendererBitmap.h"
+#include "ParticleRendererStar.h"
+#include "ParticleRendererLine.h"
+#include "ParticleRendererCircle.h"
 #include "RocketSettings.h"
 #include "ParticleSystemSettings.h"
-#include "testApp.h"
+
 
 
 class SceneRealistic : public Scene {

@@ -14,13 +14,13 @@ void OscManager::setup ()
     std::cout << "listening on port " << OSC_RECEIVER_PORT << std::endl;
 	
 	
-	senders.push_back(ofxOscSender());
-	senders.push_back(ofxOscSender());
-	senders.push_back(ofxOscSender());
+	//senders.push_back(ofxOscSender());
+	//senders.push_back(ofxOscSender());
+	//senders.push_back(ofxOscSender());
 	
-    senders[0].setup("SebsiPad.local", OSC_SENDER_PORT);
-    senders[1].setup("SebsiPhone.local", OSC_SENDER_PORT);
-    senders[2].setup("JIP2.local", OSC_SENDER_PORT);
+    //senders[0].setup("SebsiPad.local", OSC_SENDER_PORT);
+    //senders[1].setup("SebsiPhone.local", OSC_SENDER_PORT);
+    //senders[2].setup("JIP2.local", OSC_SENDER_PORT);
     
 	
 }

@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "TriggerTest.h"
+#include "RocketBasic.h"
 
 #include "ofMain.h"
 
