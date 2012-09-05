@@ -39,9 +39,9 @@ class SceneCalibration : public Scene {
 		ofEnableBlendMode(OF_BLENDMODE_ADD);
 		ofSetColor(255,0,0);
 		ofFill();
-		ofRect(0,0,(APP_WIDTH/2), APP_HEIGHT);
+		//ofRect(0,0,(APP_WIDTH/2), APP_HEIGHT);
 		ofSetColor(0,255,0);
-		ofRect(APP_WIDTH/2,0,APP_WIDTH/2, APP_HEIGHT);
+		//ofRect(APP_WIDTH/2,0,APP_WIDTH/2, APP_HEIGHT);
 		
 		int numCols = APP_WIDTH/128;
 		int numRows = APP_HEIGHT/128;
@@ -52,6 +52,9 @@ class SceneCalibration : public Scene {
 			for(int y = 0; y<numRows; y++) {
 				int xpos = x + round((float)x/(float)numCols);
 				if((xpos+y)%2==0)
+					ofNoFill();
+					ofSetColor(255);
+				ofSetLineWidth(10);
 					ofRect(x*128, y*128, 128, 128);
 			
 			

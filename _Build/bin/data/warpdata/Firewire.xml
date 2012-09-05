@@ -1,34 +1,34 @@
 <srcvec>
-    <x>0</x>
-    <y>0</y>
+    <x>74.4</x>
+    <y>36</y>
 </srcvec>
 <srcvec>
-    <x>1536</x>
-    <y>0</y>
+    <x>1379.4</x>
+    <y>28.2</y>
 </srcvec>
 <srcvec>
-    <x>0</x>
-    <y>1024</y>
+    <x>147.9</x>
+    <y>704.2</y>
 </srcvec>
 <srcvec>
-    <x>1536</x>
-    <y>1024</y>
+    <x>1405.2</x>
+    <y>739.3</y>
 </srcvec>
 <dstvec>
-    <x>0</x>
-    <y>0</y>
+    <x>71.7</x>
+    <y>289.8</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>0</y>
+    <x>1391.1</x>
+    <y>343.8</y>
 </dstvec>
 <dstvec>
-    <x>0</x>
-    <y>1024</y>
+    <x>164.4</x>
+    <y>938.8</y>
 </dstvec>
 <dstvec>
-    <x>1536</x>
-    <y>1024</y>
+    <x>1373.1</x>
+    <y>941.5</y>
 </dstvec>
 <srcWidth>1024</srcWidth>
 <srcHeight>768</srcHeight>

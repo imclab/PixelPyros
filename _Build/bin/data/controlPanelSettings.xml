@@ -2,16 +2,16 @@
     <val_0>0</val_0>
 </USB_SHOW_CONTROLS>
 <FW_SHUTTER>
-    <val_0>37.1775</val_0>
+    <val_0>70.86</val_0>
 </FW_SHUTTER>
 <FW_BRIGHTNESS>
-    <val_0>127.5</val_0>
+    <val_0>59.925</val_0>
 </FW_BRIGHTNESS>
 <FW_GAIN>
-    <val_0>525.63</val_0>
+    <val_0>662.617</val_0>
 </FW_GAIN>
 <FW_GAMMA>
-    <val_0>12.2222</val_0>
+    <val_0>15.19</val_0>
 </FW_GAMMA>
 <TEST_TOGGLE>
     <val_0>0</val_0>
@@ -20,35 +20,35 @@
     <val_0>50</val_0>
 </TEST_SLIDER>
 <THRESHOLD>
-    <val_0>12.75</val_0>
+    <val_0>8.90062</val_0>
 </THRESHOLD>
 <TEST_VALUE>
     <val_0>7.2</val_0>
 </TEST_VALUE>
 <MOTION_SENSITIVITY>
-    <val_0>1.90418</val_0>
+    <val_0>4.93034</val_0>
 </MOTION_SENSITIVITY>
 <TRIGGER_AREA_WIDTH>
-    <val_0>0.687697</val_0>
+    <val_0>0.612593</val_0>
 </TRIGGER_AREA_WIDTH>
 <TRIGGER_AREA_HEIGHT>
-    <val_0>0.10756</val_0>
+    <val_0>0.205536</val_0>
 </TRIGGER_AREA_HEIGHT>
 <TRIGGER_AREA_Y>
-    <val_0>0.877683</val_0>
+    <val_0>0.918132</val_0>
 </TRIGGER_AREA_Y>
 <TRIGGER_SPACING>
-    <val_0>57.0499</val_0>
+    <val_0>49.5937</val_0>
 </TRIGGER_SPACING>
 <SHADER_BLACK>
     <val_0>0</val_0>
 </SHADER_BLACK>
 <SHADER_GAMMA>
-    <val_0>1.26601</val_0>
+    <val_0>2.86673</val_0>
 </SHADER_GAMMA>
 <SHADER_WHITE>
-    <val_0>1</val_0>
+    <val_0>0.831382</val_0>
 </SHADER_WHITE>
 <SHADER_BLOOM>
-    <val_0>0.449322</val_0>
+    <val_0>2.59717</val_0>
 </SHADER_BLOOM>

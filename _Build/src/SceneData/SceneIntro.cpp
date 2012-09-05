@@ -68,6 +68,7 @@ SceneIntro :: SceneIntro(string scenename, ParticleSystemManager& psm, ofRectang
 	texts.push_back("The fireworks display that you control");
 	texts.push_back("Move your hand across the orbs of light to trigger fireworks");
 	texts.push_back("Larger orbs make bigger fireworks");
+	texts.push_back("If the orbs stop spinning, wait a while for them to recharge");
 	texts.push_back("");
 	
 	textWriter.colour = ofColor(240,255,255);
@@ -121,7 +122,7 @@ bool SceneIntro:: draw() {
 		
 		textWriter.draw(ofRectangle(APP_WIDTH*0.2, APP_HEIGHT*0.2, APP_WIDTH*0.6,APP_HEIGHT*0.2), texts[currentText], true);
 		
-		cout << currentText << brightness << endl;
+		//cout << currentText << brightness << endl;
 	}
 	
 }
