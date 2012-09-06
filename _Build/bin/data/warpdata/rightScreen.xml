@@ -1,7 +1,7 @@
 <quad>
     <upperLeft>
-        <x>770</x>
-        <y>-0.1</y>
+        <x>769</x>
+        <y>0</y>
     </upperLeft>
     <upperRight>
         <x>1536</x>
@@ -12,7 +12,7 @@
         <y>1024</y>
     </lowerRight>
     <lowerLeft>
-        <x>770.2</x>
-        <y>1020.4</y>
+        <x>769</x>
+        <y>1024</y>
     </lowerLeft>
 </quad>

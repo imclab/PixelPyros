@@ -44,11 +44,11 @@
     <val_0>0</val_0>
 </SHADER_BLACK>
 <SHADER_GAMMA>
-    <val_0>1.25</val_0>
+    <val_0>2.16433</val_0>
 </SHADER_GAMMA>
 <SHADER_WHITE>
     <val_0>1</val_0>
 </SHADER_WHITE>
 <SHADER_BLOOM>
-    <val_0>0.7</val_0>
+    <val_0>0.47495</val_0>
 </SHADER_BLOOM>
